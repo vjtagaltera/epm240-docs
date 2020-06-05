@@ -1,0 +1,19 @@
+
+search: altera quartus 16.1 timing analysis
+
+https://coertvonk.com/hw/logic/quartus-cycloneiv-de0nano-15932
+Getting started with FPGA design using Altera Quartus Prime 16.1
+COERT VONK 2016-10-13
+
+
+search: quartus was determined to be a clock but was found without an associated clock assignment
+
+https://electronics.stackexchange.com/questions/398825/how-to-properly-constrain-generated-clock-and-synchronizer-in-altera-quartus
+https://www.eevblog.com/forum/microcontrollers/quartus-ii-clocks/
+
+
+search: create_generated_clock target
+
+https://www.intel.com/content/www/us/en/programmable/quartushelp/13.0/mergedProjects/tafs/tafs/tcl_pkg_sdc_ver_1.5_cmd_create_generated_clock.htm
+
+
