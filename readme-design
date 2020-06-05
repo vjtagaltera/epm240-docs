@@ -1,0 +1,10 @@
+
+sample design:
+  in quartus prime lite 16.1
+
+    in clk:   PIN_12   3.3-v lvttl  16ma
+    out led:  PIN_77   3.3-v lvttl  16ma
+
+  note: pin-77 connects through a jumper to a LED.
+
+
