@@ -1,0 +1,23 @@
+
+
+search de0-nano nios tutorial
+2020-6-20
+
+ftp://ftp.intel.com/pub/fpgaup/pub/Intel_Material/17.0/Tutorials/DE0-Nano/Using_DE0-Nano_Flash.pdf
+ftp://ftp.intel.com/pub/fpgaup/pub/Intel_Material/17.0/Tutorials/Verilog/DE0-Nano/Using_the_SDRAM.pdf
+
+
+ls -lrt
+
+-rwx------   1653239 Sep 28  2019 Introduction_to_the_Qsys_Tool.pdf
+-rwx------    802208 Sep 28  2019 Using_the_SDRAM.pdf
+-rwx------    434151 Dec 26 17:05 matroska.pdf
+-rwx------  12367506 Jan 21 20:40 kubernetes-in-action.pdf
+-rwx------   6482968 Mar 13 08:43 ustc-edu-cn-SteveRackley-WirelessNetworkingTechnology.pdf
+-rwx------  11496097 Mar 13 08:47 paginas-fe-up-pt-ieee80211.pdf
+-rwx------    817606 Jun  1 13:20 DDI0194H_ssp_pl022_trm.pdf
+-rwx------    433014 Jun  6 18:20 DE0-Nano_Basic_Computer.pdf
+-rwx------    604980 Jun 20 20:12 Using_DE0-Nano_Flash.pdf
+-rw-rw-r--       248 Jun 20 20:24 readme-links
+
+
