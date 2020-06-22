@@ -1,0 +1,27 @@
+
+ls -lrt
+
+-rwx------   374925 Dec 14  2016 DE0-Nano_Basic_Computer.pdf
+-rwx------  1877130 Jun 21 12:24 n2cpu_nii5v1.pdf
+-rwxrwxr-x   607601 Jun 22 07:08 Using_DE0-Nano_Flash.pdf
+-rwxrwxr-x      673 Jun 22 07:08 Using_DE0-Nano_Flash.zip
+-rwxrwxr-x     1496 Jun 22 07:08 Using_DE0-Nano_ADC.zip
+-rwxrwxr-x   654145 Jun 22 07:08 Using_DE0-Nano_ADC.pdf
+-rwxrwxr-x   802208 Jun 22 07:40 Using_the_SDRAM.pdf
+-rwxrwxr-x   849242 Jun 22 07:42 Timequest.pdf
+-rwxrwxr-x    63991 Jun 22 07:42 Timequest.zip
+-rwxrwxr-x   681448 Jun 22 07:43 SignalTap.pdf
+-rwxrwxr-x   928207 Jun 22 07:44 Using_Library_Modules.pdf
+-rwxrwxr-x   435132 Jun 22 07:45 HAL_tutorial.pdf
+-rwxrwxr-x   244703 Jun 22 08:35 Debugging_software.pdf
+-rwxrwxr-x  1743395 Jun 22 08:37 Intel_FPGA_Monitor_Program_NiosII.pdf
+-rwxrwxr-x  1423447 Jun 22 08:41 Making_Qsys_Components.pdf
+-rwxrwxr-x   518650 Jun 22 08:41 Nios2_introduction.pdf
+-rwxrwxr-x   346896 Jun 22 08:43 Using_Terminals.pdf
+-rwxrwxr-x  1165482 Jun 22 08:50 Debugging_Hardware.pdf
+-rwxrwxr-x  3207114 Jun 22 12:25 n2sw_nii5v2gen2.pdf
+-rwxrwxr-x  2739715 Jun 22 12:40 n2sw_nii5v2.pdf
+-rw-rw-r--     2366 Jun 22 12:41 readme-links
+-rw-rw-r--        0 Jun 22 12:41 readme-list-files
+
+
