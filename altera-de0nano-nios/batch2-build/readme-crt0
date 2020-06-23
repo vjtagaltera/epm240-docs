@@ -1,0 +1,77 @@
+
+$ find . -name 'crt0.*'
+./16.1/ip/altera/nios2_ip/altera_nios2/HAL/src/crt0.S
+./16.1/ip/altera/nios2_ip/altera_nios2_gen2/HAL/src/crt0.S
+./16.1/ip/altera/sopc_builder_ip/altera_mp32/HAL/src/crt0.S
+
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/fstack-limit-register-et/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/fstack-limit-register-et/pg/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/mhw-mulx/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/mhw-mulx/fstack-limit-register-et/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/mhw-mulx/fstack-limit-register-et/pg/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/mhw-mulx/pg/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/mno-hw-mul/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/mno-hw-mul/fstack-limit-register-et/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/mno-hw-mul/fstack-limit-register-et/pg/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/mno-hw-mul/pg/crt0.o
+./16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib/pg/crt0.o
+
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/libgloss/aarch64/crt0.S
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/libgloss/arm/crt0.S
+....
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/libgloss/nios2/crt0.s
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/libgloss/or1k/crt0.S
+....
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/newlib/libc/sys/a29khif/crt0.S
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/newlib/libc/sys/arc/crt0.S
+....
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/newlib/libc/sys/sysvi386/crt0.c
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/newlib/libc/sys/sysvnecv70/crt0.S
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/newlib/libc/sys/tic80/crt0.c
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/newlib/libc/sys/w65/crt0.c
+./16.1/nios2eds/bin/gnu/src/newlib-2.2/newlib/libc/sys/z8ksim/crt0.c
+
+./16.1/nios2eds/components/altera_nios2/HAL/src/crt0.S
+./16.1/nios2eds/components/altera_nios2_gen2/HAL/src/crt0.S
+./16.1/quartus/bin64/cygwin/lib/crt0.o
+
+
+$ cp -a ..././16.1/nios2eds/bin/gnu/src/newlib-2.2/libgloss/nios2/crt0.s ./
+$ cp -a crt0.s crt0_mod.s
+
+
+replace with modified: 
+
+    ~/16.1/nios2eds/bin/gnu/src/newlib-2.2/libgloss/nios2
+    $ ls -l crt0*
+    -rwxrwx---  1686 Oct 24  2016 crt0.s
+
+    ~/apps
+    $ ls -l *.s
+    -rwx------  1686 Oct 24  2016 crt0.s
+    -rwx------  1873 Jun 22 19:13 crt0_mod.s
+
+    ~/16.1/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/lib
+    $ ls -l
+    -rwxrwxr-x      1628 Jun 22 19:59 crt0.o
+    drwxrwx---         0 Nov  1  2017 fstack-limit-register-et
+    drwxrwx---         0 Nov  1  2017 ldscripts
+    -rwxrwx---   5437052 Oct 24  2016 libc.a
+    -rwxrwx---   5437052 Oct 24  2016 libg.a
+    -rwxrwx---   1806240 Oct 24  2016 libm.a
+    -rwxrwx---     89698 Oct 24  2016 libnosys.a
+    -rwxrwx---   3074052 Oct 24  2016 libsmallc.a
+    -rwxrwx---   3074052 Oct 24  2016 libsmallg.a
+    -rwxrwx---       628 Oct 24  2016 libstack.a
+    -rwxrwx---  18373890 Oct 24  2016 libstdc++.a
+    -rwxrwx---      2501 Oct 24  2016 libstdc++.a-gdb.py
+    -rwxrwx---       961 Oct 24  2016 libstdc++.la
+    -rwxrwx---    851870 Oct 24  2016 libsupc++.a
+    -rwxrwx---       960 Oct 24  2016 libsupc++.la
+    drwxrwx---         0 Nov  1  2017 mhw-mulx
+    drwxrwx---         0 Nov  1  2017 mno-hw-mul
+    -rwxrwx---       760 Oct 24  2016 original-crt0.o-original
+    drwxrwx---         0 Nov  1  2017 pg
+
+

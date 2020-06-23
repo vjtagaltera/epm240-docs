@@ -1,0 +1,13 @@
+
+ls -lrt
+
+-rwx------  1686 Oct 24  2016 crt0.s
+-rwx------  5626 Dec 14  2016 nios_cpp_build.ld
+-rw-rw-r--   729 Jun 22 18:06 lightsapp.c
+-rw-rw-r--  2195 Jun 22 18:41 readme-crt0
+-rwx------  1873 Jun 22 19:13 crt0_mod.s
+-rw-rw-r--   999 Jun 22 18:46 build1.bash
+-rwxrwxr-x  1362 Jun 22 19:17 build2
+-rw-rw-r--     0 Jun 22 20:06 readme-list-files
+
+

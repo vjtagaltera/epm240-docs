@@ -1,0 +1,28 @@
+#!/bin/bash
+# build2
+
+
+prefix='/cygdrive/..././16.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin'
+
+${prefix}/nios2-elf-gcc.exe \
+    -g -O0 -ffunction-sections -fverbose-asm -fno-inline -mno-cache-volatile \
+    -mhw-mul -mno-hw-div \
+    -I "..././16.1/nios2eds/components/altera_nios2/HAL/inc" \
+    -I "C:/Users/altera/nios2/apps" \
+    -DSYSTEM_BUS_WIDTH=32 -DALT_SINGLE_THREADED -D_JTAG_UART_BASE=8224u \
+    -Wl,-Map -Wl,output.map \
+    -Wl,--defsym -Wl,nasys_stack_top=0x1000 \
+    -Wl,--defsym -Wl,nasys_program_mem=0x0 -Wl,--defsym -Wl,nasys_data_mem=0x0 \
+    -Wl,--section-start -Wl,.exceptions=0x20 \
+    -Wl,--section-start -Wl,.reset=0x0 \
+    -Wl,--script="..././16.1/University_Program/Monitor_Program/build/nios_cpp_build.ld" \
+    -o "C:/Users/altera/nios2/apps/lightsapp.elf" \
+    -nostdlib \
+    crt0_mod.s  \
+    "C:/Users/altera/nios2/apps/lightsapp.c" \
+    "..././16.1/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-elf/5.3.0/../../../../../H-x86_64-mingw32/nios2-elf/lib\libnosys.a" \
+    "..././16.1/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-elf/5.3.0/../../../../../H-x86_64-mingw32/nios2-elf/lib\libc.a" \
+    "..././16.1/nios2eds/bin/gnu/h-x86_64-mingw32/bin/../lib/gcc/nios2-elf/5.3.0/../../../../../H-x86_64-mingw32/nios2-elf/lib\libnosys.a" \
+    "..././16.1/University_Program/Monitor_Program/lib/jtag_uart.c" 
+
+
