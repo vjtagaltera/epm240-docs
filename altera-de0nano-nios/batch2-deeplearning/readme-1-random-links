@@ -1,0 +1,46 @@
+
+
+search nvidia xavier nx clock rate
+
+https://developer.nvidia.com/blog/jetson-xavier-nx-the-worlds-smallest-ai-supercomputer/
+  benchmarks:
+      MLPerf Inference 0.5
+      classification:     Inception-V4 299x299, ResNet-50 224x224, 
+      object detection:   SSD Mobilenet-V1 300x300, Tiny YOLO-V3 416x416, 
+      classification:     VGG-19 224x224
+      segmentation:       U-Net 256x256
+      image processing:   Super Resolution 481x321
+      pose estimation:    OpenPose 256x456
+
+
+
+search mtcnn
+
+https://towardsdatascience.com/a-guide-to-face-detection-in-python-3eab0f6b9fc1
+
+
+
+p-net computation: 
+https://kpzhang93.github.io/MTCNN_face_detection_alignment/paper/spl.pdf
+
+  input image 12x12x3 
+    conv 3x3, mp 2x2
+    output 5x5 x10
+        3x3 = 9
+        sliding one side 10
+
+        9 * 10 * 10 * 10 = 9k/s
+
+
+
+search neuro network acceleration chip
+https://medium.com/@shan.tang.g/a-list-of-chip-ip-for-deep-learning-48d05f1759ae
+https://github.com/basicmi/AI-Chip
+https://github.com/nvdla/
+
+
+
+fabless nvdla
+https://towardsdatascience.com/how-to-make-your-own-deep-learning-accelerator-chip-1ff69b78ece4
+
+
