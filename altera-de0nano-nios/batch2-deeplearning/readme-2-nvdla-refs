@@ -1,0 +1,115 @@
+
+2020-6-27
+search stackexchange nvdla 
+
+
+first link: 
+title: nvdla epython code generator analysis
+by XtreamDV on 2018-12-14
+https://blog.csdn.net/zhajio/article/details/85002802
+
+
+linked to by the page on first link: 
+title: AI chip: nvidia nvdla structure analysis
+by evolone on 2018-11-28
+https://blog.csdn.net/evolone/article/details/84571747
+
+convolution core: 
+
+    the top contains 2 cores. 
+    each core consists of 8 mac. 
+    a mac contains 64 mul, generates 4 result outputs. or 16 mul gets 1 result. 
+
+                       NV_NVDLA (top)
+                             |
+                             |---------- NV_NVDLA_partition_m (mB) ------  ....
+                             |
+                 NV_NVDLA_partition_m (mA) 
+                             |
+                       NV_NVDLA_cmac 
+                             |
+                    NV_NVDLA_CMAC_core
+                             |
+                             |-----------------------------------------------------\
+                             |                                                     |
+               NV_NVDLA_CMAC_CORE_mac (mac0)       ..total 8..       NV_NVDLA_CMAC_CORE_mac (mac7)
+                             |
+                             |-----------------------------------------------------\
+                             |                                                     |
+             NV_NVDLA_CMAC_CORE_MAC_mul (mac0)      ..total 64..   NV_NVDLA_CMAC_CORE_MAC_mul (mul63)
+
+  the core supports int8, int16, fp16. 
+  convolution supports: [1] direct convolution. [2] image input for the first layer with only 3 channels. 
+                        [3] winograd, use its F(2x2, 3x3) parameter. use least mul device.
+                        [4] batching. compute multiple inference, reuse weight parameter, save bandwidth and storage. 
+
+  in a core, it does not use existing muler/adder/mul_adder IP. instead it implemented the logic in code. 
+  core gets 2x 1024-bit data, one weight, another data. 
+  in a core it's divided into 8 copies, issued to 8 mac. every mac gets 2x1024 data. 
+
+  mac maps 1024 bits to 64 muler, each muler gets 16 bits. if computation is 8bit, 16bit represets 2 data. 
+
+  in a mac: 
+
+          mul0(a0, b0) ==> (m00, m01) , mul1(a1, b1) ==> (m10, m11) , ..2.. , mul3(a3, b3) ==> (m30, m31) 
+          ...
+          mul60() ==> (m600, m601), ... mul63() ==> (m630, m631)
+
+    64-to-16 compression:
+          (m00, ... , m31)     compressed into (n00, n01) this becomes   A0
+          ...
+          (m600, ... ,  m631)  compressed into (n150, n151) this becomes A15
+
+    if normal convolution:
+          (A0, A1, A2, A3)       compressed into   SOP0
+          ...
+          (A12, A13, A14, A15)   compressed into   SOP3
+        output: SOP0..3
+
+    if winograd convolution, the parameter is F(2x2, 3x3)
+
+                                                                       B0    B1
+                                                                      ----  ----
+                                   /  A0   A1   A2   A3  \         /   1     0   \
+          /  1  1  1    0  \       |  A4   A5   A6   A7  |         |   1     1   |
+          \  0  1  -1  -1  /   x   |  A8   A9   A10  A11 |    x    |   1     -1  |
+                                   \  A12  A13  A14  A15 /         \   0     -1  /
+          ------------------       -----------------------         ---------------
+                 BT                           A                           B
+
+        first compute A x B = C , A x B0 , is called first-half
+                                  A x B1 , is called second-half
+        then compute  BT x C = D, to get the 4 result of winogard convolution. 
+
+  in a mul: 
+          first take a 16-bit data, based on 3-bit boothcode algorithm form 8 boothcode
+                 then code the other data to form 8 partial-sum
+                 then add a carry-bit to each to form 10 partial-sums. keep it in two groups. 
+          then the 10 partial-sums pass through 3-2CSA compression, form 2 partial-sums, output this.
+
+  in this way, a mac gets 64 partial-sums. 
+  follow a certain order, continue the 3-2CSA algorithm, compress 64 partial-sums to form 16 partial-sums, i.e. 
+                  64 (128) -> 16 (32) . 
+
+  at this point: 
+      for normal convolution, go through the first-half. 
+      for a winogard, go through the second-half too. 
+      fp16 exponential has its own logic. 
+
+      first-half, continue 3-2CSA compression the 16 partial-sums, till it forms 4 groups (8) partial-sums. 
+                  then every two-corresponding partial-sums and the sign, three add together, to form the convolution result. 
+      second-half, using F(2x2,3x3) special parameter, process 8 partial-sums using a special 3-2CSA compression, 
+                  till forms 2 groups partial-sums. at this point, a special winograd logic controls the result formation. 
+
+  eventually it forms the 4 outputs from a mac. 
+
+  a note: nvdla supports winograd algorithm in F(2x2,3x3) format. however, this is only to reuse mul in mac. practically 
+                  this does not fully utilize the full theoratical capability of 4 neurons computed by every 16 mac. 
+                  in theory 16 mul computes to get 4 neurons. then 64 mul gets 16 neurons. but actually a mac gets 
+                   4 outputs only. 
+          my guess, the so-called winograd support, its actual performance is less than ideal. it might just 
+                    be to claim that this is supported. 
+
+  after all, because this is only by reading the static code, it is unclear what relations are among the inputs to 8 macs. 
+
+
