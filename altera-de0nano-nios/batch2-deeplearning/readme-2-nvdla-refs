@@ -3,13 +3,15 @@
 search stackexchange nvdla 
 
 
+
 first link: 
 title: nvdla epython code generator analysis
 by XtreamDV on 2018-12-14
 https://blog.csdn.net/zhajio/article/details/85002802
 
 
-linked to by the page on first link: 
+
+link2, linked to by the page on first link: 
 title: AI chip: nvidia nvdla structure analysis
 by evolone on 2018-11-28
 https://blog.csdn.net/evolone/article/details/84571747
@@ -111,5 +113,22 @@ convolution core:
                     be to claim that this is supported. 
 
   after all, because this is only by reading the static code, it is unclear what relations are among the inputs to 8 macs. 
+
+
+
+link3, on the page on the first link
+title: nvdla hardware simulation environment build
+by chipdesign on 2019-8-10
+https://blog.csdn.net/sinat_33705291/article/details/99078486
+
+ubuntu16.04, vcs-2016.6, verdi-2016-6
+
+
+
+link4, 
+title: ubuntu 16.04 nvidia environment build
+by XtremeDV on 2018-12-10
+https://blog.csdn.net/zhajio/article/details/84946783
+
 
 
