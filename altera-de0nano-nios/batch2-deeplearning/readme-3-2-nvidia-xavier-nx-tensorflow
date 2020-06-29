@@ -1,0 +1,61 @@
+
+
+Jetson_Xavier_NX_Developer_Kit_User_Guide.pdf
+
+  the installed image on sd-card should be "JP 4.4 DP" released on "2020/05/14" according to this page: 
+  https://developer.nvidia.com/embedded/downloads
+
+  This SD card image works for the Jetson Xavier NX Developer Kit and is built with JetPack 4.4 DP. 
+  Download and write it to your microSD card and use it to boot the developer kit.
+
+  md5sum: 4b24e23867ed3d4b651934d0ac40c92c
+
+
+https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#python_topics
+https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#import_tf_python
+
+  tensorrt using python to import model
+
+
+https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
+install tensorrt
+
+  install tensor flow: pre-req: 
+    apt-get install libhdf5-serial-dev hdf5-tools libhdf5-dev zlib1g-dev zip libjpeg8-dev liblapack-dev libblas-dev gfortran
+
+  install tensor flow: first upgrade pip, setuptools. install wheel, testresources.
+    pip install --upgrade pip
+    pip install --upgrade setuptools
+    pip install wheel
+    pip install testresources
+
+  install tensor flow: pre-reqs
+    pip install -U numpy==1.16.1 future==0.17.1 mock==3.0.5 h5py==2.9.0 keras_preprocessing==1.0.5 keras_applications==1.0.8 gast==0.2.2 futures protobuf pybind11
+
+    pip install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v44 -r requirements.txt
+
+  install tensorflow packages for the end-to-end mnist sample: 
+    ~/tensorrt/samples/python/end_to_end_tensorflow_mnist$ 
+    pip install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v44 -r requirements.txt
+
+
+the last step above depends on cuda. to install cuda: 
+https://docs.nvidia.com/cuda/cuda-samples/index.html#building-samples
+https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=sbsa&compilation=compilation_native&target_distro=Ubuntu&target_version=1804&target_type=deblocal
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/sbsa/cuda-ubuntu1804.pin
+ mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget http://developer.download.nvidia.com/compute/cuda/11.0.1/local_installers/cuda-repo-ubuntu1804-11-0-local_11.0.1-450.36.06-1_arm64.deb
+ dpkg -i cuda-repo-ubuntu1804-11-0-local_11.0.1-450.36.06-1_arm64.deb
+ apt-key add /var/cuda-repo-ubuntu1804-11-0-local/7fa2af80.pub
+ apt-get update
+ apt-get -y install cuda
+
+or set proper CUDA_ROOT and PATH for nvcc if it is already installed
+
+
+the sample at /usr/src/tensorrt/samples/python/end_to_end_tensorflow_mnist/ suggests: 
+https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#installing
+
+
