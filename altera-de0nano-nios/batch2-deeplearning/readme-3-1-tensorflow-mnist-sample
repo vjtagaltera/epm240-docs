@@ -7,6 +7,7 @@ toc
     example 2
     example 2 results
     example 3 lenet-5 and result
+    example 4 nx lenet5 network
 
 =====================================================================
 example 1
@@ -310,5 +311,23 @@ nx 10w tf 1.15.2.  x_test x_train init to np.float32: run the prediction() on mo
   60k  .270  ==> sample time 337us   104us
 
 =====================================================================
+example 4 nx lenet5 network
+
+ref: tut-tf-2-lenet5-2-nx.py
+new: tut-tf-2-lenet5-3-nx.py
+calculation: tut-tf-nx-calc.xlsx
+
+win10 pc: initial -2-nx 
+       cost      sample time us   cpu    cuda
+  10k   .781                      78
+  60k  4.378                      72
+
+win10 pc: initial -3-nx 
+       cost      sample time us   cpu    cuda
+  10k   .920                      92
+  60k  5.487                      91
+nx
+  10k  4.630                      463     159
+  60k  27.27                      454     163
 
 
