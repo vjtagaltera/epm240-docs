@@ -69,6 +69,8 @@ print("   %s" % str(test_results))
 =====================================================================
 example 2
 
+updated file: tut-tf-1-weights-save-2.py
+
 $ cat tut-tf-1-weights-save.py
 #!/usr/bin/env python3
 #
@@ -195,8 +197,28 @@ i7-7700hq 2.8g , ubuntu 18.04 , tf 2.2.0 , phthon 3.8.0
 nx , ubuntu 18.04 , tf 1.15.2+nv20.4 , python 3.6.9 
 159 or 160. when using cuda it is much slower. 
 
+
+updated -2.py file: 
+               time    sample time    cpu us       GOPS
+win10:  10k    .395                     39.5
+        60k   3.582                     59.7       16.8
+        10k    .452                     45.2
+        60k   3.660                     61.0       16.4
+
+nx:     10k    .571                     57.2
+        60k   3.390                     56.5       17.671
+        10k    .594                     59.4
+        60k   3.702                     61.7       16.263
+
+  w cuda 60k  4.128                     68.8       14.584
+
 =====================================================================
 example 3 lenet-5 and result
+
+updated file: tut-tf-2-lenet5-1.py and -2-nx.py
+
+https://github.com/NVIDIA/DIGITS/blob/master/docs/GettingStarted.md
+dataset used by the nx tensorrt sample sampleMNIST 
 
 $ diff -u tut-tf-1-weights-save.py tut-tf-2-lenet5-1.py
 --- tut-tf-1-weights-save.py    2020-06-28 08:03:52.175928200 -0700
@@ -283,7 +305,7 @@ result i7-6700hq win10 tf2.2.0:
   60k samples cost  3.520 seconds. 
 
 nx 10w tf 1.15.2.  x_test x_train init to np.float32: run the prediction() on model
-                              cpu    cuda
+       cost                   cpu    cuda
   10k  .113  ==> sample time 341us   108us
   60k  .270  ==> sample time 337us   104us
 
