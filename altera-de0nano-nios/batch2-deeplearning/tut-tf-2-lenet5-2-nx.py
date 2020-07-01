@@ -54,12 +54,12 @@ else:
 #print("   %s" % str(predictions))
 
 # pre-process data to fit the model input requirements
-x_test_x2 = np.zeros( (x_test.shape[0], 32, 32) )
+x_test_x2 = np.zeros( (x_test.shape[0], 32, 32), np.float32 )
 for i in range(x_test.shape[0]):
     x_test_x2[i][2:30, 2:30] = x_test[i][:][:]
 x_test = np.expand_dims(x_test_x2, axis=3)
 
-x_train_x2 = np.zeros( (x_train.shape[0], 32, 32) )
+x_train_x2 = np.zeros( (x_train.shape[0], 32, 32), np.float32 )
 for i in range(x_train.shape[0]):
     x_train_x2[i][2:30, 2:30] = x_train[i][:][:]
 x_train = np.expand_dims(x_train_x2, axis=3)
@@ -115,8 +115,8 @@ def print_ref(test_results, test_ref_results):
         if i >= test_results.shape[0] or i >= len(test_ref_results): break
         rv1 = test_results[i]
         rv2 = rv1[test_ref_results[i]]
-        rv3 = " %.3f" % float(rv2) # this won't work on tf 1.15.2+nv20.4
-        retv += rv3
+        ##rv3 = " %.3f" % float(rv2) # this won't work on tf 1.15.2+nv20.4
+        ##retv += rv3
     return retv
 print(" probability ref comparison : %s " % print_ref(test_results, test_ref_results))
 

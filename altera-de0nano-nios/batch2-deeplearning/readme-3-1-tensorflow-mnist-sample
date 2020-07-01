@@ -282,9 +282,9 @@ result i7-6700hq win10 tf2.2.0:
   10k samples cost  0.580 seconds. each sample costs 58us. 
   60k samples cost  3.520 seconds. 
 
-nx 10w tf 1.15.  x_test x_train init to np.float32:
-  10k  .113
-  60k  .270  == 4.4 
+nx 10w tf 1.15.2.  x_test x_train init to np.float32: no prediction results shown
+  10k  .113  ==> sample time 11us
+  60k  .270  ==> sample time 4.4us 
 
 =====================================================================
 
