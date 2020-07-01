@@ -6,6 +6,7 @@ toc
     example 1
     example 2
     example 2 results
+    example 3 lenet-5 and result
 
 =====================================================================
 example 1
@@ -182,6 +183,9 @@ example 2 results
 i7-6700hq 2.6g , win10 , tf 2.2.0 on python 3.8.2 , GOPS: 
 442 450 288 458 456 445
 
+  when the GOPS is 480, 10k sample cost is 20ms, 60k is 125ms.
+  each sample cost about 2.1us. 
+
 i7-7700hq 2.8g , ubuntu 18.04 , tf 2.0.2 on python 3.6.9 , or tf 2.2.0
 224 221 223 225 223 225
 
@@ -192,4 +196,96 @@ nx , ubuntu 18.04 , tf 1.15.2+nv20.4 , python 3.6.9
 159 or 160. when using cuda it is much slower. 
 
 =====================================================================
+example 3 lenet-5 and result
+
+$ diff -u tut-tf-1-weights-save.py tut-tf-2-lenet5-1.py
+--- tut-tf-1-weights-save.py    2020-06-28 08:03:52.175928200 -0700
++++ tut-tf-2-lenet5-1.py        2020-06-30 15:43:35.395463700 -0700
+@@ -7,6 +7,7 @@
+ import os
+ import tensorflow as tf
+ import time
++import numpy as np
+
+ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
+@@ -18,25 +19,58 @@
+ print(" load_data cost %.3f " % (tm02 - tm01))
+
+ print(" model ... ")
+-model = tf.keras.models.Sequential([
+-  tf.keras.layers.Flatten(input_shape=(28,28)),
+-  tf.keras.layers.Dense(128,activation='relu'),
+-  tf.keras.layers.Dropout(0.2),
+-  tf.keras.layers.Dense(10)
+-])
++if True:
++    #https://medium.com/@mgazar/lenet-5-in-9-lines-of-code-using-keras-ac99294c8086
++    model = tf.keras.Sequential()
++    model.add(tf.keras.layers.Conv2D(filters=6, kernel_size=(3, 3), activation='relu', input_shape=(32, 32, 1)))
++    model.add(tf.keras.layers.AveragePooling2D())
++    model.add(tf.keras.layers.Conv2D(filters=16, kernel_size=(3, 3), activation='relu'))
++    model.add(tf.keras.layers.AveragePooling2D())
++    model.add(tf.keras.layers.Flatten())
++    model.add(tf.keras.layers.Dense(units=120, activation='relu'))
++    model.add(tf.keras.layers.Dense(units=84, activation='relu'))
++    ##model.add(tf.keras.layers.Dense(units=10, activation='softmax'))
++    model.add(tf.keras.layers.Dense(units=10))
++else:
++    model = tf.keras.models.Sequential([
++      tf.keras.layers.Flatten(input_shape=(28,28)),
++      tf.keras.layers.Dense(128,activation='relu'),
++      tf.keras.layers.Dropout(0.2),
++      tf.keras.layers.Dense(10)
++    ])
+
+ #print(" predictions ... ")
+-#predictions = model(x_train[:1]).numpy()
++# https://stackoverflow.com/questions/35751306/python-how-to-pad-numpy-array-with-zeros
++#x_test_predict = np.ndarray( (1, 28, 28) )
++#x_test_predict = np.zeros(x_test_predict.shape)
++#x_test_predict = np.expand_dims(x_test_predict, axis=3)
++#predictions = model(x_test_predict[:1]).numpy()
++#
++#x_test_x2 = np.zeros( (x_test.shape[0], 32, 32) )
++#for i in range(x_test.shape[0]):
++#    x_test_x2[i][2:30, 2:30] = x_test[i][:][:]
++#predictions = model(x_test_x2[:1]).numpy()
+ #print(" predictions result ")
+ #print("   %s" % str(predictions))
+
++# pre-process data to fit the model input requirements
++x_test_x2 = np.zeros( (x_test.shape[0], 32, 32) )
++for i in range(x_test.shape[0]):
++    x_test_x2[i][2:30, 2:30] = x_test[i][:][:]
++x_test = np.expand_dims(x_test_x2, axis=3)
++
++x_train_x2 = np.zeros( (x_train.shape[0], 32, 32) )
++for i in range(x_train.shape[0]):
++    x_train_x2[i][2:30, 2:30] = x_train[i][:][:]
++x_train = np.expand_dims(x_train_x2, axis=3)
++
+ loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+ #loss = loss_fn(y_train[:1], predictions).numpy()
+ #print(" loss %.3f " % loss)
+
+ model.compile(optimizer='adam', loss=loss_fn, metrics=['accuracy'])
+
+-checkpoint_path = "training_2/cp-{epoch:04d}.ckpt"
++checkpoint_path = "training_3/cp-{epoch:04d}.ckpt"
+ checkpoint_dir = os.path.dirname(checkpoint_path)
+ if False:
+     model.fit(x_train, y_train, epochs=2)
+
+
+result i7-6700hq win10 tf2.2.0: 
+  10k samples cost  0.580 seconds. each sample costs 58us. 
+  60k samples cost  3.520 seconds. 
+
+nx 10w tf 1.15.  x_test x_train init to np.float32:
+  10k  .113
+  60k  .270  == 4.4 
+
+=====================================================================
+
 
