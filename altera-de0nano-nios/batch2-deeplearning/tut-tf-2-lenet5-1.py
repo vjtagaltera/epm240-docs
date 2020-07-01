@@ -64,6 +64,9 @@ for i in range(x_train.shape[0]):
     x_train_x2[i][2:30, 2:30] = x_train[i][:][:]
 x_train = np.expand_dims(x_train_x2, axis=3)
 
+#rp1 = model.predict(x_train[:1])
+#print("      rp1 type %s  rp1 %s" % (str(type(rp1)), str(rp1)))
+
 loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 #loss = loss_fn(y_train[:1], predictions).numpy()
 #print(" loss %.3f " % loss)
@@ -96,6 +99,7 @@ def prof_test(the_end=None):
     if the_end is None: the_end = 5
     if the_end < 5: the_end = 5
     if the_end > 10000: the_end = 10000
+    #return prob_model(x_test[:the_end]).numpy()
     return prob_model(x_test[:the_end])
 tm21 = time.time()
 test_results = prof_test(5)
