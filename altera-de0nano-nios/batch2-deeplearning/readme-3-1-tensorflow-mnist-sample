@@ -330,4 +330,8 @@ nx
   10k  4.630                      463     159
   60k  27.27                      454     163
 
+nx trt repeat 1000 batch 1 or batch 32
+                                                single  batch32
+                                                 1178     72
+
 
