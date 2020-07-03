@@ -1,0 +1,62 @@
+
+
+search tensorrt live stream
+
+https://medium.com/better-programming/real-time-object-detection-on-gpus-in-10-minutes-6e8c9b857bb3
+a webcam example
+
+
+
+search tensorrt porting to new hardware
+
+https://discuss.pytorch.org/t/pytorch-c-deployment-story-2019/58199/2
+PyTorch C++ Deployment Story: 2019
+
+  The PyTorch team is betting heavily on TorchScript/libtorch as the path for going from research 
+  to production. Our ideal workflow is for the user to prototype in Python/PyTorch eager, convert 
+  to TorchScript, then use our compiler infrastructure to optimize and potentially lower your model 
+  to specialized hardware.
+
+  You can check out our tutorials on [TorchScript]() 30 and [exporting your model to C++]() 53 
+  and our [TorchScript reference]() 13 for more information on using TorchScript to deploy 
+  your PyTorch models to production.
+      ref : https://pytorch.org/tutorials/beginner/Intro_to_TorchScript_tutorial.html
+            https://pytorch.org/tutorials/advanced/cpp_export.html
+            https://pytorch.org/docs/stable/jit.html
+
+  Today, the basic building blocks of that workflow are in place, but the extension point for hardware 
+  backends is the thing that we need to work on the most.
+
+  The (as of today) best approach to add hardware or compiler backends to our JIT is to replicate 
+  what we have in the [pytorch/tvm]() 37 repo. @bwasti has also written up [a tutorial]() 30 
+  for the same integration strategy. It registers certain PyTorch operators as TVM-accelerated 
+  and the JIT offloads subgraphs with these operators to the TVM backend. Happy to answer any questions 
+  about that.
+      ref : https://github.com/pytorch/tvm
+            https://jott.live/markdown/Writing%20a%20Toy%20Backend%20Compiler%20for%20PyTorch
+
+  If you don’t need graphs to be built at runtime (say, you have a ResNet-ish trunk to your model 
+  that is highly stable and you want to guarantee it is compiled), you can compile 
+  in TVM/TensoRT/Glow/etc. directly, then just call that as a custom op in your model. For example, 
+  there is the [Torch2TRT]() 33 Converter that can convert ResNet-ish trunks into TRT, and your network 
+  will be partly the Python function that calls the TRT model, and the rest be the PyTorch-native model.
+      ref : https://github.com/NVIDIA-AI-IOT/torch2trt
+
+  Going forward, we are looking at two directions:
+
+      Improvements to the optimization and code generation capabilities of PyTorch’s native JIT runtime. 
+      We haven’t focused much here to date (busy writing TorchScript itself) but we are investing 
+      in this much more as TorchScript matures.
+
+      A simple way to to say “export this `nn.Module` to X graph compiler”, with a similar interface 
+      to `.to()`, but works only on nn.Modules and not tensors, as well as the ability to use 
+      such compiled modules in TorchScript.
+
+  Combined, these two things will make the performance story a lot clearer for PyTorch. If you are 
+  just hoping for performance improvements without doing any work, the native JIT runtime should 
+  be “good enough”. If you are really trying to squeeze performance by tuning your model work well 
+  with a graph compiler (say TensorRT), you should be able to imperatively tell TorchScript 
+  “convert this module to a TensorRT graph or fail” and backend vendors can implement the conversions 
+  as they see fit.
+
+
