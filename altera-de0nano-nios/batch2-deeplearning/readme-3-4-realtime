@@ -60,3 +60,13 @@ PyTorch C++ Deployment Story: 2019
   as they see fit.
 
 
+https://discuss.pytorch.org/t/how-to-write-a-custom-cpu-kernel/85103
+
+  For a cuda kernel [reference](https://pytorch.org/tutorials/advanced/cpp_extension.html) uses 
+  `tensor.packed_accessor<...>()` and `AT_DISPATCH_FLOATING_TYPES`. 
+
+  For a CPU tensor, use `Tensor.accessor<...>` or `Tensor.data_ptr<...>`. 
+  Use `at::parallel_for` to enable OpenMP or other multi-threading libraries, as in [reference](
+  https://discuss.pytorch.org/t/using-at-parallel-for-in-a-custom-operator/82747).
+
+
