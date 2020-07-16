@@ -18,3 +18,224 @@ other benchmarks
 mobilenet v2 and other networks
 
 
+
+http://opensource.rock-chips.com/wiki_Linux_SDK
+
+
+http://opensource.rock-chips.com/wiki_Linux_user_guide
+
+ install dependencies: 
+    apt-get install repo git u-boot-tools device-tree-compiler mtools parted \
+                    libudev-dev libusb-1.0-0-dev lib32gcc-7-dev \
+                    python-linaro-image-tools linaro-image-tools \
+                    gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu \
+                    libstdc++-7-dev autoconf autotools-dev libsigsegv2 m4 intltool \
+                    libdrm-dev curl sed make binutils build-essential gcc g++ \
+                    bash patch gzip bzip2 perl tar cpio python unzip rsync file bc \
+                    wget libncurses5 libqt4-dev libglib2.0-dev libgtk2.0-dev libglade2-dev \
+                    cvs mercurial rsync openssh-client subversion asciidoc w3m dblatex \
+                    graphviz python-matplotlib libssl-dev pv e2fsprogs fakeroot devscripts \
+                    libi2c-dev libncurses5-dev texinfo liblz4-tool genext2fs
+
+ build all image: 
+  enter the root directory of sdk, run
+    ./build.sh all
+
+ pack image
+  for debian:
+    ./mkfirmware.sh debian
+  for buildroot: 
+    ./mkfirmware.sh buildroot
+
+  it will generate all the images in the rockimg directory
+    rockdev/
+    ├── boot.img
+    ├── MiniLoaderAll.bin
+    ├── misc.img
+    ├── oem.img
+    ├── parameter.txt
+    ├── recovery.img
+    ├── rootfs.img
+    ├── trust.img
+    ├── uboot.img
+    └── userdata.img 
+
+ flash image: 
+  on linux use upgradetool example rk3399:
+    chmod 777 ./tools/linux/Linux_Upgrade_Tool/upgrade_tool
+    cd rockimg
+    sudo ../tools/linux/Linux_Upgrade_Tool/upgrade_tool ul rk3399_loader_v1.09.112.bin
+    sudo ../tools/linux/Linux_Upgrade_Tool/upgrade_tool di -p parameter.txt
+    sudo ../tools/linux/Linux_Upgrade_Tool/upgrade_tool di -u uboot.img
+    sudo ../tools/linux/Linux_Upgrade_Tool/upgrade_tool di -t trust.img
+    sudo ../tools/linux/Linux_Upgrade_Tool/upgrade_tool di -re resource.img
+    sudo ../tools/linux/Linux_Upgrade_Tool/upgrade_tool di -k kernel.img
+    sudo ../tools/linux/Linux_Upgrade_Tool/upgrade_tool di -rootfs rootfs.img
+    sudo ../tools/linux/Linux_Upgrade_Tool/upgrade_tool rd
+
+
+http://opensource.rock-chips.com/wiki_Source
+
+git clone https://github.com/rockchip-linux/repo
+mkdir linux
+cd linux
+
+../repo/repo init --repo-url=https://github.com/rockchip-linux/repo -u https://github.com/rockchip-linux/manifests -b master -m rk1808_linux_release.xml
+../repo/repo sync
+
+
+
+building test sample for the buildroot from github.com/96boards-tb-96aiot/ ...
+
+~/linux/deviceio_release/build$ git remote -v
+origin  https://github.com/rockchip-linux/deviceio_release (fetch)
+origin  https://github.com/rockchip-linux/deviceio_release (push)
+
+~/linux/deviceio_release/build$ git diff
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 520a41c..b5976cf 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -5,6 +5,16 @@ cmake_minimum_required(VERSION 2.8.0 FATAL_ERROR)
+ message(${PROJECT_SOURCE_DIR})
+ message(${PROJECT_BINARY_DIR})
+
++include_directories(${PROJECT_SOURCE_DIR}/DeviceIO/include)
++set(CMAKE_INSTALL_STAGING ${PROJECT_BINARY_DIR}/bin-inst)
++set(CPU_ARCH aarch64)
++set(CMAKE_C_COMPILER ${PROJECT_SOURCE_DIR}/../prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc CACHE PATH "" FORCE)
++set(CMAKE_CXX_COMPILER ${PROJECT_SOURCE_DIR}/../prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-g++ CACHE PATH "" FORCE)
++## prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
++## prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-g++
++LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/DeviceIO/lib64/bluez)
++
++
+ add_definitions("-Wall -g")
+
+ add_subdirectory("DeviceIO")
+diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+index a0523ec..9918eee 100644
+--- a/test/CMakeLists.txt
++++ b/test/CMakeLists.txt
+@@ -19,6 +19,7 @@ add_definitions("-fpermissive")
+ add_executable(deviceio_test ${SRC_FILES})
+ target_include_directories(deviceio_test PUBLIC
+         "${deviceio_test_SOURCE_DIR}/DeviceIO/include" )
+-target_link_libraries(deviceio_test pthread DeviceIo asound)
++##target_link_libraries(deviceio_test pthread DeviceIo asound)
++target_link_libraries(deviceio_test pthread DeviceIo)
+
+ install(TARGETS deviceio_test DESTINATION bin)
+diff --git a/test/bt_test.cpp b/test/bt_test.cpp
+index 8137342..0acdcf8 100644
+--- a/test/bt_test.cpp
++++ b/test/bt_test.cpp
+@@ -2,7 +2,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <errno.h>
+-#include <alsa/asoundlib.h>
++///#include <alsa/asoundlib.h>
+ #include <pthread.h>
+
+ #include <DeviceIo/DeviceIo.h>
+@@ -46,6 +46,9 @@ static const char *alsa_capture_device = "6mic_loopback"; //"2mic_loopback";
+ static const char *bt_playback_device = "hw:1,0";
+ static const char *bt_capture_device = "hw:1,0";
+
++typedef unsigned long snd_pcm_uframes_t;
++typedef unsigned long snd_pcm_t;
++typedef unsigned long snd_pcm_sw_params_t;
+ typedef struct {
+        unsigned int channels;
+        unsigned int sample_rate;
+@@ -1297,6 +1300,7 @@ void bt_test_spp_status(char *data)
+ static int hfp_set_sw_params(snd_pcm_t *pcm, snd_pcm_uframes_t buffer_size,
+                                snd_pcm_uframes_t period_size, char **msg)
+ {
++#if 0
+        int err;
+        snd_pcm_sw_params_t *params;
+
+@@ -1326,6 +1330,7 @@ static int hfp_set_sw_params(snd_pcm_t *pcm, snd_pcm_uframes_t buffer_size,
+
+        if(params)
+                snd_pcm_sw_params_free(params);
++#endif
+
+        return 0;
+ }
+@@ -1333,6 +1338,7 @@ static int hfp_set_sw_params(snd_pcm_t *pcm, snd_pcm_uframes_t buffer_size,
+ static int hfp_playback_device_open(snd_pcm_t** playback_handle,
+                const char* device_name, alsa_config_t alsa_config)
+ {
++#if 0
+        int err;
+        snd_pcm_hw_params_t *hw_params;
+        unsigned int rate = alsa_config.sample_rate;
+@@ -1411,6 +1417,7 @@ static int hfp_playback_device_open(snd_pcm_t** playback_handle,
+        hfp_set_sw_params(*playback_handle, buffer_size, period_size, NULL);
+        if (hw_params)
+                snd_pcm_hw_params_free(hw_params);
++#endif
+
+        return 0;
+ }
+@@ -1418,6 +1425,7 @@ static int hfp_playback_device_open(snd_pcm_t** playback_handle,
+ static int hfp_capture_device_open(snd_pcm_t** capture_handle,
+                const char* device_name, alsa_config_t alsa_config)
+ {
++#if 0
+        int err;
+        snd_pcm_hw_params_t *hw_params;
+        unsigned int rate = alsa_config.sample_rate;
+@@ -1494,14 +1502,17 @@ static int hfp_capture_device_open(snd_pcm_t** capture_handle,
+        printf("Open capture device is successful: %s\n", device_name);
+        if (hw_params)
+                snd_pcm_hw_params_free(hw_params);
++#endif
+
+        return 0;
+ }
+
+ static void hfp_pcm_close(snd_pcm_t *handle)
+ {
++#if 0
+        if(handle)
+                snd_pcm_close(handle);
++#endif
+ }
+
+ static void hfp_tinymix_set(int group, int volume)
+@@ -1520,6 +1531,7 @@ static void hfp_tinymix_set(int group, int volume)
+
+ static void *hfp_alsa_playback(void *arg)
+ {
++#if 0
+        int err, ret = -1;
+        snd_pcm_t *capture_handle = NULL;
+        snd_pcm_t *playbcak_handle = NULL;
+@@ -1617,11 +1629,13 @@ exit:
+        free(buffer);
+
+        printf("Exit app hs alsa playback thread\n");
++#endif
+        pthread_exit(0);
+ }
+
+ static void *hfp_bt_playback(void *arg)
+ {
++#if 0
+        int err, ret = -1;
+        snd_pcm_t *capture_handle = NULL;
+        snd_pcm_t *playbcak_handle = NULL;
+@@ -1712,6 +1726,7 @@ exit:
+        hfp_pcm_close(playbcak_handle);
+
+        printf("Exit app hs bt pcm playback thread\n");
++#endif
+        pthread_exit(0);
+ }
+
+
+
