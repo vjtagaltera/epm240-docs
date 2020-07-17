@@ -18,6 +18,9 @@ other benchmarks
 mobilenet v2 and other networks
 
 
+----------------------------------------------------------------------
+SDK 
+
 
 http://opensource.rock-chips.com/wiki_Linux_SDK
 
@@ -108,6 +111,7 @@ index 520a41c..b5976cf 100644
 +## prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
 +## prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-g++
 +LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/DeviceIO/lib64/bluez)
++link_directories(${PROJECT_SOURCE_DIR}/../buildroot/output/rockchip_rk1808/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib)
 +
 +
  add_definitions("-Wall -g")
@@ -121,9 +125,9 @@ index a0523ec..9918eee 100644
  add_executable(deviceio_test ${SRC_FILES})
  target_include_directories(deviceio_test PUBLIC
          "${deviceio_test_SOURCE_DIR}/DeviceIO/include" )
--target_link_libraries(deviceio_test pthread DeviceIo asound)
-+##target_link_libraries(deviceio_test pthread DeviceIo asound)
-+target_link_libraries(deviceio_test pthread DeviceIo)
+target_link_libraries(deviceio_test pthread DeviceIo asound)
++
++set_target_properties(deviceio_test PROPERTIES LINK_FLAGS "--sysroot ${PROJECT_SOURCE_DIR}/../buildroot/output/rockchip_rk1808/host/aarch64-buildroot-linux-gnu/sysroot")
 
  install(TARGETS deviceio_test DESTINATION bin)
 diff --git a/test/bt_test.cpp b/test/bt_test.cpp
@@ -236,6 +240,30 @@ index 8137342..0acdcf8 100644
 +#endif
         pthread_exit(0);
  }
+
+
+----------------------------------------------------------------------
+bluez
+
+search linux bluetooth architecture
+https://docs.ubuntu.com/core/en/stacks/bluetooth/bluez/docs/troubleshoot/faq
+
+
+search libbluez example
+https://stackoverflow.com/questions/26716796/how-to-perform-a-bluetooth-low-energy-scan-via-bluez-c-library
+https://github.com/labapart/gattlib
+
+
+search linux enable bluetooth
+https://wiki.debian.org/BluetoothUser
+
+
+search  ?? cannot open hci0 ??
+hciconfig hci0 up
+
+
+search cmake link libraries
+https://stackoverflow.com/questions/24532853/how-to-add-linker-flag-for-libraries-with-cmake
 
 
 
