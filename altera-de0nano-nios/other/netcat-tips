@@ -1,0 +1,23 @@
+
+
+~$ ls -l
+-rw-rw-r--      7 Jul 14 05:03 logcnt
+prwxrwxrwx      0 Jul 14 05:03 mypipe
+-rwxrwxr-x     94 Feb 29 07:27 s.sh
+-rwxrwxr-x    144 Feb 29 06:16 t.sh
+
+
+~$ cat s.sh
+#!/bin/bash
+
+while true; do (cat logcnt | nc -l -p 29998 > /dev/null 2>&1 ); sleep 1; done &
+
+
+~$ cat t.sh
+#!/bin/bash
+
+cnt=0
+while true; do cnt=$(( $cnt + 1 )); (cat mypipe | nc -l -p 29999 > mypipe 2>&1 ); (echo cnt $cnt > logcnt); sleep 1; done &
+
+
+
