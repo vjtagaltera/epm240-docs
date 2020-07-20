@@ -1,0 +1,84 @@
+
+
+
+$ cat ssh-aws-svr
+#!/bin/bash
+
+logconf="log-aws-svr"
+
+cnt=0
+while true; do
+  cnt=$(( $cnt + 1 ))
+  echo >> $logconf
+  echo cnt $cnt >> $logconf
+  echo -n date start '  ' >> $logconf
+
+  # ssh-aws-ec2-cmd-conn forwards port from the server to local host: 
+  bash ssh-aws-ec2-cmd-conn
+
+  echo -n date finish ' ' >> $logconf
+  sleep 10
+done
+
+
+
+$ cat ssh-aws-mon
+#!/bin/bash
+
+logmonf="log-aws-mon"
+
+cnt=0
+kcnt=0
+
+while true; do
+  cnt=$(( $cnt + 1 ))
+  echo >> $logmonf
+  echo    cnt $cnt kcnt $kcnt >> $logmonf
+  echo -n date '  ' >> $logmonf
+  date >> $logmonf
+
+  # ssh-aws-ec2-cmd-check runs on the server: "netstat -an"
+  # port 12345 on remote server is forwarded
+  bash ssh-aws-ec2-cmd-check | egrep 'tcp.*127\.0\.0\.1:12345.*LISTEN' >> $logmonf
+  rc=$?
+
+  echo -n date '  ' >> $logmonf
+  date >> $logmonf
+
+  if [ $rc -ne 0 ]; then
+    kcnt=$(( $kcnt + 1 ))
+    echo rc $rc at cnt $cnt kcnt $kcnt >> $logmonf
+    echo rc $rc at cnt $cnt kcnt $kcnt
+
+    rcnt=0
+    while true; do
+      sshpid=$(ps | grep ssh | xargs echo | cut -d' ' -f1)
+      if [ ! -z "$sshpid" ]; then
+        if [ $sshpid -gt 1 ]; then
+          kill $sshpid
+          echo kill sshpid $sshpid at cnt $cnt >> $logmonf
+          echo ; echo kill sshpid $sshpid at cnt $cnt
+        else
+          echo failed to kill sshpid $sshpid at cnt $cnt >> $logmonf
+          echo ; echo failed to kill sshpid $sshpid at cnt $cnt
+          break
+        fi
+      else
+          echo failed to kill sshpid empty at cnt $cnt >> $logmonf
+          echo ; echo failed to kill sshpid empty at cnt $cnt
+          break
+      fi
+      rcnt=$(( $rcnt + 1 ))
+      if [ $rcnt -gt 10 ]; then
+          echo failed kill loop for sshpid $sshpid at cnt $cnt >> $logmonf
+          echo
+          echo failed kill loop for sshpid $sshpid at cnt $cnt
+          break
+      fi
+    done
+    sleep 20
+  fi
+  sleep 30
+done
+
+
