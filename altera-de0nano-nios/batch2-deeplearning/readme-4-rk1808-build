@@ -1,0 +1,28 @@
+
+docker container: 
+
+
+[1] non-interactive tzdata: 
+    (https://serverfault.com/questions/949991/how-to-install-tzdata-on-a-ubuntu-docker-image)
+
+    RUN DEBIAN_FRONTEND="noninteractive" TZ="America/Los_Angeles" apt-get -y install tzdata
+
+
+[2] remove repo package. add gawk package for uboot. 
+
+
+[3] use repo from: 
+
+    git clone https://github.com/rockchip-linux/repo
+
+    ../repo/repo init --repo-url http://github.com/aosp-mirror/tools_repo.git \
+        -u https://github.com/96boards-tb-96aiot/manifest.git
+
+  replace the above aosp-mirror link with a local cloned directory. 
+
+  before running repo init, configure a git global user name and email: 
+
+    git config --global user.name rk1808user
+    git config --global user.email rk1808user@build
+
+

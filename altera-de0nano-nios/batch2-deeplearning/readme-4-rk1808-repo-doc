@@ -1,0 +1,65 @@
+
+
+repo mirror tool
+
+
+-----------------------------------------------------------------------
+rockchip doc:
+
+https://github.com/96boards-tb-96aiot/docs/blob/master/RKTools%20manuals/REPO%E9%95%9C%E5%83%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86_V2.2_20131231.pdf
+
+  REPO Mirror Server Construction and Management V2.2 20131231 .pdf
+
+  saved as: 
+  repo-mirror-server-construct-v2.2-20131231.pdf
+
+
+-----------------------------------------------------------------------
+bitbucket script
+
+
+search bitbucket script repo creation
+https://stackoverflow.com/questions/13788485/create-new-repo-on-bitbucket-from-git-bash-terminal
+
+curl --user login:pass https://api.bitbucket.org/1.0/repositories/ \
+--data name=REPO_NAME
+
+$ curl -X POST -v -u username:password -H "Content-Type: application/json" \
+  https://api.bitbucket.org/2.0/repositories/teamsinspace/new-repository4 \
+  -d '{"scm": "git", "is_private": "true", "fork_policy": "no_public_forks" }'
+
+
+search bitbucket 2.0 api post a new repository
+https://community.atlassian.com/t5/Bitbucket-articles/Create-and-configure-a-Bitbucket-Server-repository-using-the/ba-p/828364
+
+curl --user <user>:<password> -H "Content-Type: application/json" 
+  --data @input.json -X POST <Bitbucket URL>/rest/api/1.0/projects/<projectKey>/repos
+
+minimum data: 
+{
+ "name": "My Repository"
+}
+
+public repo add: 
+ "public": true
+
+
+eventually use: 
+
+$ cat ../bitbucket-create
+#!/bin/bash
+prj_name=$( echo -n ${REPO_PROJECT} | tr '[:upper:]' '[:lower:]' )
+echo '{ "name": "'${REPO_PROJECT}'", "public": true }' > input.json
+
+curl -X POST -v -u <user>:<pass> -H "Content-Type: application/json" \
+  https://api.bitbucket.org/2.0/repositories/altumview-rk1808/${prj_name} \
+  -d @input.json
+
+$ repo forall -c "$(pwd)/../bitbucket-create
+
+
+push: using (https://stackoverflow.com/questions/29776439/username-and-password-in-command-for-git-push) 
+
+  git push --all https://<user>:<pass>@bitbucket.org/team/reponame.git
+
+
