@@ -1,0 +1,80 @@
+
+
+search debian minimal debootstrap installation
+2020-7-25
+
+
+https://www.aguslr.com/blog/2019/03/24/lightweight-debian.html
+
+  initial install:
+    apt update && apt upgrade --no-install-recommends
+    apt install --no-install-recommends locales && dpkg-reconfigure locales
+    dpkg-reconfigure tzdata
+
+  configure apt:
+    cat <<- 'EOF' >> /etc/apt/apt.conf.d/99local
+    APT::Install-Suggests "0";
+    APT::Install-Recommends "0";
+    EOF
+
+  remove:
+    find /usr/share/locale -mindepth 1 -maxdepth 1 ! -name 'en*' -exec rm -r {} \;
+
+  configure: 
+    cat <<- 'EOF' > /etc/dpkg/dpkg.cfg.d/01_nolocales
+    path-exclude /usr/share/locale/*
+    path-include /usr/share/locale/en*
+    EOF
+
+  remove:
+    find /usr/share/doc -depth -type f ! -name copyright -delete
+    find /usr/share/doc -empty -delete
+    rm -rf /usr/share/man /usr/share/groff /usr/share/info /usr/share/lintian /usr/share/linda /var/cache/man
+
+  configure:
+    cat <<- 'EOF' > /etc/dpkg/dpkg.cfg.d/01_nodocs
+    path-exclude /usr/share/doc/*
+    path-include /usr/share/doc/*/copyright
+    path-exclude /usr/share/man/*
+    path-exclude /usr/share/groff/*
+    path-exclude /usr/share/info/*
+    path-exclude /usr/share/lintian/*
+    path-exclude /usr/share/linda/*
+    EOF
+
+  remove: 
+    apt purge --auto-remove apt-listchanges aptitude aspell* at avahi-autoipd avahi-daemon \
+          bc bluetooth debconf-i18n debian-faq* doc-debian eject exim4-base groff \
+          iamerican ibritish info installation-report ispell* krb5-locales logrotate \
+          manpages modemmanager nano os-prober pcscd ppp popularity-contest reportbug \
+          rsyslog util-linux-locales wamerican
+
+  remove older logs: 
+    find /var/log -type f -cmin +10 -delete
+
+ replace systemd with sysv: 
+
+  remvoe systemd: 
+    apt install --purge --auto-remove --no-install-recommends sysvinit-core
+    cp /usr/share/sysvinit/inittab /etc/inittab
+   reboot. 
+    apt purge --auto-remove systemd libpam-systemd
+
+  configure: 
+    cat <<- 'EOF' >> /etc/apt/preferences.d/nosystemd
+    Package: libsystemd0
+    Pin: release *
+    Pin-Priority: 500
+    
+    Package: *systemd*
+    Pin: release *
+    Pin-Priority: -1
+    EOF
+
+ using dropbear
+
+    apt install --no-install-recommends dropbear-run
+    sed -i 's,^NO_START=1,NO_START=0,' /etc/default/dropbear
+    apt purge --auto-remove ssh
+
+
