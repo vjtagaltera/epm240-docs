@@ -77,4 +77,17 @@ https://www.aguslr.com/blog/2019/03/24/lightweight-debian.html
     sed -i 's,^NO_START=1,NO_START=0,' /etc/default/dropbear
     apt purge --auto-remove ssh
 
+ really small: 
+
+    debootstrap --arch amd64 --variant=minbase stretch /mnt/debian http://deb.debian.org/debian
+
+    apt install --no-install-recommends ifupdown iproute2 isc-dhcp-client netbase
+
+ references: 
+    https://www.debian.org/releases/stretch/i386/apds03.html
+    https://www.debian.org/doc/manuals/debian-reference/ch05
+    https://wiki.debian.org/ReduceDebian
+    https://wiki.ubuntu.com/ReducingDiskFootprint
+    https://without-systemd.org/wiki/index.php/How_to_remove_systemd_from_a_Debian_Stretch_installation
+
 
