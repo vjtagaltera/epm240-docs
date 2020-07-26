@@ -1,0 +1,2 @@
+/usr/libexec/bluetooth/bluetoothd -C -n -d -E 
+

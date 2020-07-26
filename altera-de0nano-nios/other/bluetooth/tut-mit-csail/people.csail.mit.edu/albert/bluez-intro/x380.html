@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Alternatives</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth programming with Python - PyBluez"
+HREF="c212.html"><LINK
+REL="PREVIOUS"
+TITLE="Advanced usage"
+HREF="x339.html"><LINK
+REL="NEXT"
+TITLE="Bluetooth programming in C with BlueZ"
+HREF="c404.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x339.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Bluetooth programming with Python - PyBluez</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c404.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="pbz-alternatives"
+>3.6. Alternatives</A
+></H1
+><P
+>&#13;The main purpose of PyBluez is to allow Bluetooth programmers to quickly and
+easily develop and deploy Bluetooth applications.  By providing high level
+objects and methods, PyBluez allows the programmer to focus on designing the
+algorithm and structure of the program instead having to worry about syntactic
+details, memory management, and parsing complex data structures and byte
+strings.  PyBluez is not the only, or first, high level Bluetooth
+implementation with this goal.
+</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="pbz-java"
+>3.6.1. Java</A
+></H2
+><P
+>&#13;There are a number of Java bindings for Bluetooth programming currently
+available.  The Java community has the advantage of having standardized on an
+API for Bluetooth development, called JSR-82.  Almost all Java Bluetooth
+implementations adhere to this specification.  This makes porting Bluetooth
+applications from one device to another much simpler.  Current implementations
+of JSR-82 for the GNU/Linux operating system include Rocosoft
+Impronto <A
+NAME="AEN386"
+HREF="#FTN.AEN386"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>,
+Avetana <A
+NAME="AEN389"
+HREF="#FTN.AEN389"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>,
+and JavaBluetooth <A
+NAME="AEN392"
+HREF="#FTN.AEN392"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>.
+</P
+><P
+>&#13;A disadvantage of using Java is that JSR-82 is very limited, providing
+virtually no control over the device discovery process or established data
+connections.  For example, JSR-82 provides no method for adjusting delivery
+semantics, flushing a cache of previously detected devices during a device
+discovery, or obtaining signal strength information <A
+NAME="AEN396"
+HREF="#FTN.AEN396"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+>.  While JSR-82 is acceptable for creating
+simple Bluetooth applications, it is not well suited for research and academic
+purposes.  Furthermore, Java and many JSR-82 implementations are not available
+on a number of platforms.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="pbz-pyaffix"
+>3.6.2. PyAffix</A
+></H2
+><P
+>&#13;PyAffix <A
+NAME="AEN401"
+HREF="#FTN.AEN401"
+><SPAN
+CLASS="footnote"
+>[5]</SPAN
+></A
+> is also a
+Python extension module for GNU/Linux that provides access to system Bluetooth
+resources.  Unlike PyBluez, PyAffix is written for the Affix Bluetooth
+protocol stack, which is an alternative Bluetooth implementation for
+GNU/Linux.  BlueZ is the official Bluetooth protocol stack for GNU/Linux, and
+almost all Linux distributions are shipped with BlueZ.  In order to use
+PyAffix, the user must first remove BlueZ and install Affix - a complex and
+laborious process requiring a high level of expertise.  PyBluez originated as
+a port of PyAffix for BlueZ, and grew to provide functionality not present in
+PyAffix.
+</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN386"
+HREF="x380.html#AEN386"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.rococosoft.com"
+TARGET="_top"
+>http://www.rocosoft.com</A
+></P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN389"
+HREF="x380.html#AEN389"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.avetana-gmbh.de/avetana-gmbh/produkte/jsr82.eng.xm"
+TARGET="_top"
+>&#13;http://www.avetana-gmbh.de/avetana-gmbh/produkte/jsr82.eng.xm</A
+></P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN392"
+HREF="x380.html#AEN392"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.javabluetooth.org"
+TARGET="_top"
+>http://www.javabluetooth.org</A
+></P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN396"
+HREF="x380.html#AEN396"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>Cache flushing
+and signal strength were not covered in this chapter, but are described in the
+PyBluez documentation and examples</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN401"
+HREF="x380.html#AEN401"
+><SPAN
+CLASS="footnote"
+>[5]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://affix.sourceforge.net/pyaffix.shtml"
+TARGET="_top"
+>http://affix.sourceforge.net/pyaffix.shtml</A
+></P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x339.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c404.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Advanced usage</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c212.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Bluetooth programming in C with BlueZ</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

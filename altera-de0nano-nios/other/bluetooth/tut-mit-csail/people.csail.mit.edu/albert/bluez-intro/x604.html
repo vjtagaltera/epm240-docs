@@ -1,0 +1,689 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Service Discovery Protocol</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth programming in C with BlueZ"
+HREF="c404.html"><LINK
+REL="PREVIOUS"
+TITLE="L2CAP sockets"
+HREF="x559.html"><LINK
+REL="NEXT"
+TITLE="Advanced BlueZ programming"
+HREF="x682.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x559.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Bluetooth programming in C with BlueZ</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x682.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="bzi-sdp"
+>4.4. Service Discovery Protocol</A
+></H1
+><P
+>&#13;The process of searching for services involves two steps - detecting all
+nearby devices with a device inquiry, and connecting to each of those devices
+in turn to search for the desired service.  Despite Bluetooth's piconet
+abilities, the early versions don't support multicasting queries, so this must
+be done the slow way.  Since detecting nearby devices was covered in <A
+HREF="c404.html#bzi-choosing"
+>Section 4.1</A
+>, only the second step is described here.
+</P
+><P
+>&#13;Searching a specific device for a service also involves two steps.  The first
+part, shown in <A
+HREF="x604.html#sdpsearch1"
+>Example 4-7</A
+>, requires connecting to the device and
+sending the search request.  The second part, shown in in 
+<A
+HREF="x604.html#sdpsearch2"
+>Example 4-8</A
+>, involves parsing and interpreting the search results.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="sdpsearch1"
+></A
+><P
+><B
+>Example 4-7. Step one of searching a device for a service with UUID 0xABCD</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;
+#include &#60;bluetooth/bluetooth.h&#62;
+#include &#60;bluetooth/sdp.h&#62;
+#include &#60;bluetooth/sdp_lib.h&#62;
+
+int main(int argc, char **argv)
+{
+    uint8_t svc_uuid_int[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        0, 0, 0xab, 0xcd };
+    uuid_t svc_uuid;
+    int err;
+    bdaddr_t target;
+    sdp_list_t *response_list = NULL, *search_list, *attrid_list;
+    sdp_session_t *session = 0;
+
+    str2ba( "01:23:45:67:89:AB", &#38;target );
+
+    // connect to the SDP server running on the remote machine
+    session = sdp_connect( BDADDR_ANY, &#38;target, SDP_RETRY_IF_BUSY );
+
+    // specify the UUID of the application we're searching for
+    sdp_uuid128_create( &#38;svc_uuid, &#38;svc_uuid_int );
+    search_list = sdp_list_append( NULL, &#38;svc_uuid );
+
+    // specify that we want a list of all the matching applications' attributes
+    uint32_t range = 0x0000ffff;
+    attrid_list = sdp_list_append( NULL, &#38;range );
+
+    // get a list of service records that have UUID 0xabcd
+    err = sdp_service_search_attr_req( session, search_list, \
+            SDP_ATTR_REQ_RANGE, attrid_list, &#38;response_list);
+    .
+    .
+
+</PRE
+></DIV
+><P
+>&#13;The <TT
+CLASS="literal"
+>uuid_t</TT
+> data type is used to represent the 128-bit UUID
+that identifies the desired service.  To obtain a valid
+<TT
+CLASS="literal"
+>uuid_t</TT
+>, create an array of 16 8-bit integers and use the
+<TT
+CLASS="literal"
+>sdp_uuid128_create</TT
+> function, which is similar to the
+<TT
+CLASS="literal"
+>str2ba</TT
+> function for converting strings to
+<TT
+CLASS="literal"
+>bdaddr_t</TT
+> types.  <TT
+CLASS="literal"
+>sdp_connect</TT
+>
+synchronously connects to the SDP server running on the target device.
+<TT
+CLASS="literal"
+>sdp_service_search_attr_req</TT
+> searches the connected device
+for the desired service and requests a list of attributes specified by
+<TT
+CLASS="literal"
+>attrid_list</TT
+>.  It's easiest to use the magic number
+<TT
+CLASS="literal"
+>0x0000ffff</TT
+> to request a list of all the attributes
+describing the service, although it is possible, for example, to request only
+the name of a matching service and not its protocol information.
+</P
+><P
+>&#13;Continuing our example, we now get to the tricky part - parsing and
+interpreting the results of a search.  Unfortunately, there isn't an
+easy way to do this.  Taking the result of our search above, 
+<A
+HREF="x604.html#sdpsearch2"
+>Example 4-8</A
+> shows how to 
+extract the RFCOMM channel of a matching result.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="sdpsearch2"
+></A
+><P
+><B
+>Example 4-8. parsing and interpreting an SDP search result</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;
+    sdp_list_t *r = response_list;
+
+    // go through each of the service records
+    for (; r; r = r-&#62;next ) {
+        sdp_record_t *rec = (sdp_record_t*) r-&#62;data;
+        sdp_list_t *proto_list;
+        
+        // get a list of the protocol sequences
+        if( sdp_get_access_protos( rec, &#38;proto_list ) == 0 ) {
+        sdp_list_t *p = proto_list;
+
+        // go through each protocol sequence
+        for( ; p ; p = p-&#62;next ) {
+            sdp_list_t *pds = (sdp_list_t*)p-&#62;data;
+
+            // go through each protocol list of the protocol sequence
+            for( ; pds ; pds = pds-&#62;next ) {
+
+                // check the protocol attributes
+                sdp_data_t *d = (sdp_data_t*)pds-&#62;data;
+                int proto = 0;
+                for( ; d; d = d-&#62;next ) {
+                    switch( d-&#62;dtd ) { 
+                        case SDP_UUID16:
+                        case SDP_UUID32:
+                        case SDP_UUID128:
+                            proto = sdp_uuid_to_proto( &#38;d-&#62;val.uuid );
+                            break;
+                        case SDP_UINT8:
+                            if( proto == RFCOMM_UUID ) {
+                                printf("rfcomm channel: %d\n",d-&#62;val.int8);
+                            }
+                            break;
+                    }
+                }
+            }
+            sdp_list_free( (sdp_list_t*)p-&#62;data, 0 );
+        }
+        sdp_list_free( proto_list, 0 );
+
+        }
+
+        printf("found service record 0x%x\n", rec-&#62;handle);
+        sdp_record_free( rec );
+    }
+
+    sdp_close(session);
+}
+
+</PRE
+></DIV
+><P
+>&#13;Getting the protocol information requires digging deep into the search results.
+Since it's possible for multiple application services to match a single search
+request, a list of <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>service records</I
+></SPAN
+> is used to describe each matching
+service.  For each service that's running, it's (theoretically,
+but not usually done in practice) possible to have different ways of
+connecting to the service.  So each service record has a list of
+<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>protocol sequences</I
+></SPAN
+> that each describe a different way to
+connect.  Furthermore, since
+protocols can be built on top of other protocols (e.g. RFCOMM uses L2CAP as a
+transport), each protocol sequence has a list of <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>protocols</I
+></SPAN
+> that the
+application uses, only one of which actually matters.  Finally, each
+protocol entry will have a list of <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>attributes</I
+></SPAN
+>, like the protocol type
+and the port number it's running on.  Thus, obtaining the port number for an
+application that uses RFCOMM requires finding the port number protocol
+attribute in the RFCOMM protocol entry.
+</P
+><P
+>&#13;In this example, several new data structures have been introduced that we
+haven't seen before.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;typedef struct _sdp_list_t {
+    struct _sdp_list_t *next;
+    void *data;
+} sdp_list_t;
+
+typedef void(*sdp_free_func_t)(void *)
+
+sdp_list_t *sdp_list_append(sdp_list_t *list, void *d);
+sdp_list_t *sdp_list_free(sdp_list_t *list, sdp_list_func_t f);
+</PRE
+><P
+>&#13;Since C does not have a built in linked-list data structure, and SDP search
+criteria and search results are essentially nothing but lists of data, the
+BlueZ developers wrote their own linked list data structure and called it
+<TT
+CLASS="literal"
+>sdp_list_t</TT
+>.  For now, it suffices to know that appending to a
+<TT
+CLASS="literal"
+>NULL</TT
+> list creates a new linked list, and that a list must be
+deallocated with <TT
+CLASS="literal"
+>sdp_list_free</TT
+> when it is no longer needed.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;typedef struct {
+	uint32_t handle;
+	sdp_list_t *pattern;
+	sdp_list_t *attrlist;
+} sdp_record_t;
+</PRE
+><P
+>&#13;The <TT
+CLASS="literal"
+>sdp_record_t</TT
+> data structure represents a single service record
+being advertised by another device.  Its inner details aren't important, as
+there are a number of helper functions available to get
+information in and out of it.  In this example, 
+<TT
+CLASS="literal"
+>sdp_get_access_protos</TT
+> is used to extract a list of the protocols
+for the service record.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;typedef struct sdp_data_struct sdp_data_t;
+struct sdp_data_struct {
+	uint8_t dtd;
+	uint16_t attrId;
+	union {
+		int8_t    int8;
+		int16_t   int16;
+		int32_t   int32;
+		int64_t   int64;
+		uint128_t int128;
+		uint8_t   uint8;
+		uint16_t  uint16;
+		uint32_t  uint32;
+		uint64_t  uint64;
+		uint128_t uint128;
+		uuid_t    uuid;
+		char     *str;
+		sdp_data_t *dataseq;
+	} val;
+	sdp_data_t *next;
+	int unitSize;
+};
+</PRE
+><P
+>&#13;Finally, there is the <TT
+CLASS="literal"
+>sdp_data_t</TT
+> structure, which is ultimately
+used to store each element of information in a service record.  At a high
+level, it is a node of a linked list that carries a piece of data (the
+<TT
+CLASS="literal"
+>val</TT
+> field).  As a variable type data structure, it can be used in
+different ways, depending on the context.  For now, it's sufficient to know
+that each protocol stack in the list of protocol sequences is represented as a
+singly linked list of <TT
+CLASS="literal"
+>sdp_data_t</TT
+> structures, and 
+extracting the protocol and port information requires iterating through this
+list until the proper elements are found.  The type of a
+<TT
+CLASS="literal"
+>sdp_data_t</TT
+> is specified by the <TT
+CLASS="literal"
+>dtd</TT
+> field, which is
+what we use to search the list.
+</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="bzi-sdpd"
+>4.4.1. <TT
+CLASS="literal"
+>sdpd</TT
+> - The SDP daemon</A
+></H2
+><P
+>&#13;Every Bluetooth device typically runs an SDP server that answers queries from
+other Bluetooth devices.  In BlueZ, the implementation of the SDP server is
+called <TT
+CLASS="literal"
+>sdpd</TT
+>, and is usually started by the system boot scripts.
+<TT
+CLASS="literal"
+>sdpd</TT
+> handles all incoming SDP search requests.  Applications that
+need to advertise a Bluetooth service must use inter-process communication
+(IPC) methods to tell <TT
+CLASS="literal"
+>sdpd</TT
+> what to advertise.  Currently, this is
+done with the named pipe <TT
+CLASS="literal"
+>/var/run/sdp</TT
+>.  BlueZ provides convenience
+functions written to make this process a little easier.  
+</P
+><P
+>&#13;Registering a service with <TT
+CLASS="literal"
+>sdpd</TT
+> involves describing the service to
+advertise, connected to <TT
+CLASS="literal"
+>sdpd</TT
+>, instructing <TT
+CLASS="literal"
+>sdpd</TT
+> on what
+to advertise, and then disconnecting.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="bzi-desc-sdp"
+>4.4.2. Describing a service</A
+></H2
+><P
+>&#13;Describing a service is essentially building the service record that was
+parsed in the previous examples.  This involves creating several lists and
+populating them with data attributes.  <A
+HREF="x604.html#sdpdesc"
+>Example 4-9</A
+> shows
+how to describe a service application with UUID <TT
+CLASS="literal"
+>0xABCD</TT
+> that
+runs on
+RFCOMM channel 11, is named ``Roto-Rooter Data Router", provided by
+``Roto-Rooter", and has the description ``An experimental plumbing router"
+</P
+><DIV
+CLASS="example"
+><A
+NAME="sdpdesc"
+></A
+><P
+><B
+>Example 4-9. Describing a service</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;
+#include &#60;bluetooth/bluetooth.h&#62;
+#include &#60;bluetooth/sdp.h&#62;
+#include &#60;bluetooth/sdp_lib.h&#62;
+
+sdp_session_t *register_service()
+{
+    uint32_t service_uuid_int[] = { 0, 0, 0, 0xABCD };
+    uint8_t rfcomm_channel = 11;
+    const char *service_name = "Roto-Rooter Data Router";
+    const char *service_dsc = "An experimental plumbing router";
+    const char *service_prov = "Roto-Rooter";
+
+    uuid_t root_uuid, l2cap_uuid, rfcomm_uuid, svc_uuid;
+    sdp_list_t *l2cap_list = 0, 
+               *rfcomm_list = 0,
+               *root_list = 0,
+               *proto_list = 0, 
+               *access_proto_list = 0;
+    sdp_data_t *channel = 0, *psm = 0;
+
+    sdp_record_t *record = sdp_record_alloc();
+
+    // set the general service ID
+    sdp_uuid128_create( &#38;svc_uuid, &#38;service_uuid_int );
+    sdp_set_service_id( record, svc_uuid );
+
+    // make the service record publicly browsable
+    sdp_uuid16_create(&#38;root_uuid, PUBLIC_BROWSE_GROUP);
+    root_list = sdp_list_append(0, &#38;root_uuid);
+    sdp_set_browse_groups( record, root_list );
+
+    // set l2cap information
+    sdp_uuid16_create(&#38;l2cap_uuid, L2CAP_UUID);
+    l2cap_list = sdp_list_append( 0, &#38;l2cap_uuid );
+    proto_list = sdp_list_append( 0, l2cap_list );
+
+    // set rfcomm information
+    sdp_uuid16_create(&#38;rfcomm_uuid, RFCOMM_UUID);
+    channel = sdp_data_alloc(SDP_UINT8, &#38;rfcomm_channel);
+    rfcomm_list = sdp_list_append( 0, &#38;rfcomm_uuid );
+    sdp_list_append( rfcomm_list, channel );
+    sdp_list_append( proto_list, rfcomm_list );
+
+    // attach protocol information to service record
+    access_proto_list = sdp_list_append( 0, proto_list );
+    sdp_set_access_protos( record, access_proto_list );
+
+    // set the name, provider, and description
+    sdp_set_info_attr(record, service_name, service_prov, service_dsc);
+    .
+    .
+
+</PRE
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="bzi-sdp-register"
+>4.4.3. Registering a service</A
+></H2
+><P
+>&#13;Building the description is quite straightforward, and consists of taking
+those five fields and packing them into data structures.  Most of the work is
+just putting lists together.  Once the service record is complete, the
+application connects to the local SDP server and registers a new service,
+taking care afterwards to free the data structures allocated earlier.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;
+    .
+    .
+    int err = 0;
+    sdp_session_t *session = 0;
+
+    // connect to the local SDP server, register the service record, and 
+    // disconnect
+    session = sdp_connect( BDADDR_ANY, BDADDR_LOCAL, SDP_RETRY_IF_BUSY );
+    err = sdp_record_register(session, record, 0);
+
+    // cleanup
+    sdp_data_free( channel );
+    sdp_list_free( l2cap_list, 0 );
+    sdp_list_free( rfcomm_list, 0 );
+    sdp_list_free( root_list, 0 );
+    sdp_list_free( access_proto_list, 0 );
+
+    return session;
+}
+
+</PRE
+><P
+>&#13;The special argument <TT
+CLASS="literal"
+>BDADDR_LOCAL</TT
+> causes
+<TT
+CLASS="literal"
+>sdp_connect</TT
+> to connect to the local SDP server (via the
+named pipe <TT
+CLASS="literal"
+>/var/run/sdp</TT
+>) instead of a remote device.  Once
+an active session is established with the local SDP server,
+<TT
+CLASS="literal"
+>sdp_record_register</TT
+> advertises a service record.  The
+service will be advertised for as long as the session with the SDP server is
+kept open.  As soon as the SDP server detects that the socket connection is
+closed, it will stop advertising the service.  <TT
+CLASS="literal"
+>sdp_close</TT
+>
+terminates a session with the SDP server.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;sdp_session_t *sdp_connect( const bdaddr_t *src, const bdaddr_t *dst, uint32_t
+        flags );
+int sdp_close( sdp_session_t *session );
+
+int sdp_record_register(sdp_session_t *sess, sdp_record_t *rec, uint8_t flags);
+</PRE
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x559.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x682.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>L2CAP sockets</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c404.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Advanced BlueZ programming</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

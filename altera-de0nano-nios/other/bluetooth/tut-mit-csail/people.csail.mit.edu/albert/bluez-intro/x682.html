@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Advanced BlueZ programming</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth programming in C with BlueZ"
+HREF="c404.html"><LINK
+REL="PREVIOUS"
+TITLE="Service Discovery Protocol"
+HREF="x604.html"><LINK
+REL="NEXT"
+TITLE="Chapter Summary"
+HREF="x701.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x604.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Bluetooth programming in C with BlueZ</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x701.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="bzi-advanced-bluez"
+>4.5. Advanced BlueZ programming</A
+></H1
+><P
+>&#13;In addition to the L2CAP and RFCOMM sockets described in this chapter, BlueZ
+provides a number of other socket types.  The most useful of these is the Host
+Controller Interface (HCI) socket, which provides a direct connection to the
+microcontroller on the local Bluetooth adapter.  This socket type, introduced
+in section <A
+HREF="c404.html#bzi-choosing"
+>Section 4.1</A
+>, can be used to issue arbitrary commands to
+the Bluetooth adapter.  Programmers requiring precise control over the
+Bluetooth controller to perform tasks such as asynchronous device discovery or
+reading signal strength information should use HCI sockets.
+</P
+><P
+>&#13;The Bluetooth Core Specification describes
+communication with a Bluetooth microcontroller in great detail, which we
+summarize here.  The host computer can send commands to the microcontroller,
+and the microcontroller generates events to indicate command responses and
+other status changes.  A command consists of a Opcode Group Field that
+specifies the general category the command falls into, an Opcode Command Field
+that specifies the actual command, and a series of command parameters.
+In BlueZ, <TT
+CLASS="literal"
+>hci_send_cmd</TT
+> is used to transmit a command to the
+microcontroller.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;int hci_send_cmd(int sock, uint16_t ogf, uint16_t ocf, uint8_t plen, 
+                 void *param);
+</PRE
+><P
+>&#13;Here, <TT
+CLASS="literal"
+>sock</TT
+> is an open HCI socket, <TT
+CLASS="literal"
+>ogf</TT
+> is the Opcode
+Group Field, <TT
+CLASS="literal"
+>ocf</TT
+> is the Opcode Command Field, and <TT
+CLASS="literal"
+>plen</TT
+>
+specifies the length of the command parameters <TT
+CLASS="literal"
+>param</TT
+>.  
+</P
+><P
+>&#13;Calling <TT
+CLASS="literal"
+>read</TT
+> on an open HCI socket waits for and receives
+the next event from the microcontroller.  An event consists of a header field
+specifying the event type, and the event parameters.  A program that requires
+asynchronous device detection would, for example, send a command with
+<TT
+CLASS="literal"
+>ocf</TT
+> of <TT
+CLASS="literal"
+>OCF_INQUIRY</TT
+> and wait for events of
+type <TT
+CLASS="literal"
+>EVT_INQUIRY_RESULT</TT
+> and
+<TT
+CLASS="literal"
+>EVT_INQUIRY_COMPLETE</TT
+>.  The
+specific codes to use for each command and event are defined in the
+specifications and in the BlueZ source code.
+</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x604.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x701.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Service Discovery Protocol</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c404.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Chapter Summary</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

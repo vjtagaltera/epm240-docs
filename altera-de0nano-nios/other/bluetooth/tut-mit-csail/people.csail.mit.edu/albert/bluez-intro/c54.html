@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Bluetooth Programming Introduced</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Obtaining BlueZ and PyBluez"
+HREF="x45.html"><LINK
+REL="NEXT"
+TITLE="Choosing a communication partner"
+HREF="x79.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x45.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x79.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="btprogramming"
+></A
+>Chapter 2. Bluetooth Programming Introduced</H1
+><P
+>&#13;This chapter presents an overview of Bluetooth, with a special emphasis on the
+parts that concern a software developer.  Bluetooth programming is explained in
+the context of TCP/IP and Internet programming, as the vast majority of network
+programmers are already familiar and comfortable with this framework.  It is
+our belief that the concepts and terminology introduced by Bluetooth are easier
+to understand when presented side by side with the Internet programming
+concepts most similar to Bluetooth.
+</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="Overview"
+>2.1. Overview</A
+></H1
+><P
+>&#13;Hovering at over 1,000 pages <A
+NAME="AEN60"
+HREF="#FTN.AEN60"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>,
+the Bluetooth specification is quite large and daunting to the novice
+developer.  But upon closer inspection, it turns out that although the
+specification is immense, the typical application programmer is only concerned
+with a small fraction of it.  A significant part of the specification is
+dedicated to lower level tasks such as specifying the different radio
+frequencies to transmit on, the timing and signalling protocols, and the
+intricacies needed to establish communication.  Interspersed with all of this
+are the portions that are relevant to the application developer.  Although
+Bluetooth has its own terminology and ways of describing its various concepts,
+we find that explaining Bluetooth programming in the context of Internet
+programming is easy to understand since almost all network programmers are
+already familiar with those techniques.  We do not try to explain in great
+detail the actual Bluetooth specification, except where it aids in
+understanding how it fits in with Internet programming.
+</P
+><P
+>&#13;Although Bluetooth was designed from the ground up, independently of the
+Ethernet and TCP/IP protocols, it is quite reasonable to think of Bluetooth
+programming in the same way as Internet programming.  Fundamentally, they have
+the same principles of one device communicating and exchanging data with
+another device.  
+</P
+><P
+>&#13;The different parts of network programming can be separated into several
+components
+</P
+><P
+></P
+><UL
+><LI
+><P
+>Choosing a device with which to communicate </P
+></LI
+><LI
+><P
+>Figuring out how to communicate with it </P
+></LI
+><LI
+><P
+>Making an outgoing connection </P
+></LI
+><LI
+><P
+>Accepting an incoming connection </P
+></LI
+><LI
+><P
+>Sending data </P
+></LI
+><LI
+><P
+>Receiving data </P
+></LI
+></UL
+><P
+>&#13;Some of these components do not apply to all models of network programming.
+In a connectionless model, for example, there is no notion of establishing
+a connection.  Some parts can be trivial in certain scenarios and quite
+complex in another.  If the numerical IP address of a server is hard-coded into
+a client program, for example, then choosing a device is no choice at all.  In
+other cases, the program may need to consult numerous lookup tables and perform
+several queries before it knows its final communication endpoint.
+</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN60"
+HREF="c54.html#AEN60"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.bluetooth.org/spec"
+TARGET="_top"
+>http://www.bluetooth.org/spec</A
+></P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x45.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x79.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Obtaining BlueZ and PyBluez</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Choosing a communication partner</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

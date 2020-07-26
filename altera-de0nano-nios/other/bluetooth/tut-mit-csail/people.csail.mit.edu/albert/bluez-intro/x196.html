@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Bluetooth Profiles + RFCs</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth Programming Introduced"
+HREF="c54.html"><LINK
+REL="PREVIOUS"
+TITLE="Establishing connections and transferring data"
+HREF="x192.html"><LINK
+REL="NEXT"
+TITLE="Bluetooth programming with Python - PyBluez"
+HREF="c212.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x192.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Bluetooth Programming Introduced</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c212.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="profiles-and-rfcs"
+>2.6. Bluetooth Profiles + RFCs</A
+></H1
+><P
+>&#13;Along with the simple TCP, IP, and UDP transport protocols used in Internet
+programming, there are a host of other protocols to specify, in great detail,
+methods to route data packets, exchange electronic mail, transfer files, load
+web pages, and more.  Once standardized by the Internet Engineering Task Force
+in the form of Request For Comments (RFCs) <A
+NAME="AEN199"
+HREF="#FTN.AEN199"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>,
+these protocols are generally adopted by the wider Internet community.
+Similarly, Bluetooth also has a method for proposing, ratifying, and
+standardizing protocols and specifications that are eventually adopted by the
+Bluetooth community.  The Bluetooth equivalent of an RFC is a Bluetooth
+Profile.  
+</P
+><P
+>&#13;Due to the short-range nature of Bluetooth, the Bluetooth Profiles tend to be
+complementary to the Internet RFCs, with emphasis on tasks that can assume
+physical proximity.  For example, there is a profile for exchanging
+physical location information <A
+NAME="AEN203"
+HREF="#FTN.AEN203"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>, a
+profile for printing to nearby printers <A
+NAME="AEN205"
+HREF="#FTN.AEN205"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>, and
+a profile for using nearby modems <A
+NAME="AEN207"
+HREF="#FTN.AEN207"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+>
+to make phone calls.  There is even a specification for encapsulating TCP/IP
+traffic in a Bluetooth connection, which really does reduce Bluetooth
+programming to Internet programming.  An overview of all the profiles
+available is beyond the scope of this chapter, but they are freely available
+for download at the Bluetooth website <A
+NAME="AEN209"
+HREF="#FTN.AEN209"
+><SPAN
+CLASS="footnote"
+>[5]</SPAN
+></A
+>
+</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN199"
+HREF="x196.html#AEN199"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.ietf.org/rfc.html"
+TARGET="_top"
+>http://www.ietf.org/rfc.html</A
+></P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN203"
+HREF="x196.html#AEN203"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>Local Positioning Profile</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN205"
+HREF="x196.html#AEN205"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>Basic Printing Profile</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN207"
+HREF="x196.html#AEN207"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>Dial Up Networking Profile</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN209"
+HREF="x196.html#AEN209"
+><SPAN
+CLASS="footnote"
+>[5]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.bluetooth.org/spec"
+TARGET="_top"
+>http://www.bluetooth.org/spec</A
+></P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x192.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c212.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Establishing connections and transferring data</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c54.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Bluetooth programming with Python - PyBluez</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

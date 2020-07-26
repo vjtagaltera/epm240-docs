@@ -1,0 +1,399 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Service Discovery Protocol</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth programming with Python - PyBluez"
+HREF="c212.html"><LINK
+REL="PREVIOUS"
+TITLE="Communicating with L2CAP"
+HREF="x264.html"><LINK
+REL="NEXT"
+TITLE="Advanced usage"
+HREF="x339.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x264.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Bluetooth programming with Python - PyBluez</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x339.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="pbz-sdp"
+>3.4. Service Discovery Protocol</A
+></H1
+><P
+>&#13;So far this chapter has shown how to detect nearby Bluetooth device and
+establish the two main types of data transport connections, all using fixed
+Bluetooth address and port numbers that were determined at design time.  As
+mentioned in <A
+HREF="x290.html"
+>Section 3.4</A
+>, this is not a recommended practice in general.
+</P
+><P
+>&#13;Dynamically allocating port numbers and using the Service Discovery Protocol
+(SDP) to search for and advertise services is a simple process in PyBluez.
+The <TT
+CLASS="literal"
+>get_available_port</TT
+> method finds available L2CAP and RFCOMM
+ports, <TT
+CLASS="literal"
+>advertise_service</TT
+> advertises a service with the local SDP
+server, and <TT
+CLASS="literal"
+>find_service</TT
+> searches Bluetooth devices for a specific
+service.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;bluetooth.get_available_port( protocol )
+</PRE
+><P
+>&#13;<TT
+CLASS="literal"
+>get_available_port</TT
+> returns the first available port number for the
+specified protocol.  Currently, only the RFCOMM and L2CAP protocols are
+supported.  <TT
+CLASS="literal"
+>get_available_port</TT
+> only returns a port number, and
+does not actually reserve any resources, so it is possible that the
+availability changes between the time we call <TT
+CLASS="literal"
+>get_available_port</TT
+>
+and <TT
+CLASS="literal"
+>bind</TT
+>.  If this happens, <TT
+CLASS="literal"
+>bind</TT
+> will simply raise a
+<TT
+CLASS="literal"
+>BluetoothException</TT
+>.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;bluetooth.advertise_service( sock, name, uuid )
+bluetooth.stop_advertising( sock )
+bluetooth.find_service( name = None, uuid = None, bdaddr = None )
+</PRE
+><P
+>&#13;These three methods provide a way to advertise services on the local Bluetooth
+device and search for them on one or many remote devices.
+<TT
+CLASS="literal"
+>advertise_service</TT
+> takes a socket that is bound and listening, a
+service name, and a UUID as input parameters.  PyBluez requires the socket to
+be bound and listening because there is no point in advertising a service that
+does not exist yet.  The UUID must always be a string of the form
+``xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" or ``xxxxxxxx" or ``xxxx", where each
+'x' is a hexadecimal digit.
+The service
+will be advertised as long as the socket is open, or until a call is made to
+<TT
+CLASS="literal"
+>stop_advertising</TT
+>, specifying the advertised socket.
+</P
+><P
+>&#13;<TT
+CLASS="literal"
+>find_service</TT
+> can search either a single device or all nearby
+devices for a specific service.  It looks for a service with name and UUID
+that match <TT
+CLASS="literal"
+>name</TT
+> and <TT
+CLASS="literal"
+>uuid</TT
+>,
+at least one of which must be specified..  If <TT
+CLASS="literal"
+>bdaddr</TT
+>  is
+<TT
+CLASS="literal"
+>None</TT
+>, then all nearby devices will be searched.  In the special
+case that <TT
+CLASS="literal"
+>``localhost"</TT
+> is used for <TT
+CLASS="literal"
+>bdaddr</TT
+>, then the
+locally advertised SDP services will be searched.  Otherwise, the function
+search the services provided by the Bluetooth device with address
+<TT
+CLASS="literal"
+>bdaddr</TT
+>.
+</P
+><P
+>&#13;On return, <TT
+CLASS="literal"
+>find_service</TT
+> returns a list of dictionaries.  Each
+dictionary contains information about a matching service and has the entries
+``host", ``name", ``protocol", and ``port".  <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>host</I
+></SPAN
+> indicates the address
+of the device advertising the service, <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>name</I
+></SPAN
+> is the name of the service
+advertised, <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>protocol</I
+></SPAN
+> will be either ``L2CAP", ``RFCOMM", or ``UNKNOWN",
+and <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>port</I
+></SPAN
+> will be the port number that the service is operating on.
+Typically, only the protocol and port number are needed to connect.
+<A
+HREF="x290.html#py-rfcomm-server-sdp"
+>Example 3-6</A
+> and <A
+HREF="x290.html#py-rfcomm-client-sdp"
+>Example 3-7</A
+> show the
+RFCOMM client and server from the previous section modified to use dynamic
+port assignment and SDP to advertise and discover services.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="py-rfcomm-server-sdp"
+></A
+><P
+><B
+>Example 3-6. rfcomm-server-sdp.py</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;import bluetooth
+
+server_sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+
+port = bluetooth.get_available_port( bluetooth.RFCOMM )
+server_sock.bind(("",port))
+server_sock.listen(1)
+print "listening on port %d" % port
+
+uuid = "1e0ca4ea-299d-4335-93eb-27fcfe7fa848"
+bluetooth.advertise_service( server_sock, "FooBar Service", uuid )
+
+client_sock,address = server_sock.accept()
+print "Accepted connection from ",address
+
+data = client_sock.recv(1024)
+print "received [%s]" % data
+
+client_sock.close()
+server_sock.close()
+</PRE
+></DIV
+><P
+>&#13;Here, the server from <A
+HREF="x232.html#rfcomm-server.py"
+>Example 3-2</A
+> is modified to
+use <TT
+CLASS="literal"
+>get_available_port</TT
+> and
+<TT
+CLASS="literal"
+>advertise_service</TT
+>.  The
+UUID ``1e0ca4ea-299d-4335-93eb-27fcfe7fa848" is used to identify the ``FooBar
+service".  The client from <A
+HREF="x232.html#rfcomm-client.py"
+>Example 3-3</A
+> is modified
+to use <TT
+CLASS="literal"
+>find_service</TT
+> to search for the the server, and
+connects to the
+first server found.  The client makes an implicit assumption that the
+transport protocol used by the server is RFCOMM.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="py-rfcomm-client-sdp"
+></A
+><P
+><B
+>Example 3-7. rfcomm-client-sdp.py</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;import sys
+import bluetooth
+
+uuid = "1e0ca4ea-299d-4335-93eb-27fcfe7fa848"
+service_matches = bluetooth.find_service( uuid = uuid )
+
+if len(service_matches) == 0:
+    print "couldn't find the FooBar service"
+    sys.exit(0)
+
+first_match = service_matches[0]
+port = first_match["port"]
+name = first_match["name"]
+host = first_match["host"]
+
+print "connecting to \"%s\" on %s" % (name, host)
+
+sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+sock.connect((host, port))
+sock.send("hello!!")
+sock.close()
+</PRE
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x264.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x339.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Communicating with L2CAP</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c212.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Advanced usage</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

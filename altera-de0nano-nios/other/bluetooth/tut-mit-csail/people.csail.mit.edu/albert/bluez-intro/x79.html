@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Choosing a communication partner</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth Programming Introduced"
+HREF="c54.html"><LINK
+REL="PREVIOUS"
+TITLE="Bluetooth Programming Introduced"
+HREF="c54.html"><LINK
+REL="NEXT"
+TITLE="Choosing a transport protocol"
+HREF="x95.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c54.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Bluetooth Programming Introduced</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x95.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="comm-partner"
+>2.2. Choosing a communication partner</A
+></H1
+><P
+>&#13;Every Bluetooth chip ever manufactured is imprinted with a globally unique
+48-bit address, which we will refer to as the <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Bluetooth address</I
+></SPAN
+> or <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>&#13;device address</I
+></SPAN
+>.  This is identical in nature to the MAC
+addresses of Ethernet <A
+NAME="AEN84"
+HREF="#FTN.AEN84"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>, and both address spaces are actually
+managed by the same organization - the IEEE Registration Authority.  These
+addresses are assigned at manufacture time and are intended to be unique and
+remain static for the lifetime of the chip.  It conveniently serves as the
+basic addressing unit in all of Bluetooth programming.  
+</P
+><P
+>&#13;For one Bluetooth device to communicate with another, it must have some way of
+determining the other device's Bluetooth address.  This address is used at all
+layers of the Bluetooth communication process, from the low-level radio
+protocols to the higher-level application protocols.  In contrast, TCP/IP
+network devices that use Ethernet as their data link layer discard
+the 48-bit MAC address at higher layers of the communication process and
+switch to using IP addresses.  The principle remains the same, however, in
+that the unique identifying address of the target device must be known to
+communicate with it.
+</P
+><P
+>&#13;In both cases, the client program will often not have advance knowledge of
+these target addresses.  In Internet programming, the user will typically
+supply a host name, such as <TT
+CLASS="literal"
+>csail.mit.edu</TT
+>, which the client must
+translate to a physical IP address using the Domain Name System (DNS).  In
+Bluetooth, the user will typically supply some user-friendly name, such as ``My
+Phone", and the client translates this to a numerical address by searching
+nearby Bluetooth devices.
+</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="device-name"
+>2.2.1. Device Name</A
+></H2
+><P
+>&#13;Since humans do not deal well with 48-bit numbers like <TT
+CLASS="literal"
+>0x000EED3D1829</TT
+> (in much the same way we do not deal well with numerical IP
+addresses like 64.233.161.104), Bluetooth devices will almost always have a
+user-friendly name.  This name is usually shown to the user in lieu of the
+Bluetooth address to identify a device, but ultimately it is the Bluetooth
+address that is used in actual communication.  For many machines, such as cell
+phones and desktop computers, this name is configurable and the user can
+choose an arbitrary word or phrase.  There is no requirement for the user to
+choose a unique name, which can sometimes cause confusion when many nearby
+devices have the same name.  When sending a file to someone's phone, for
+example, the user may be faced with the task of choosing from 5 different
+phones, each of which is named "My Phone".
+</P
+><P
+>&#13;Although names in Bluetooth differ from Internet names in that there is no
+central naming authority and names can sometimes be the same, the client
+program still has to translate from the user-friendly names presented by the
+user to the
+underlying numerical addresses.  In TCP/IP, this involves contacting a local
+nameserver, issuing a query, and waiting for a result.  In Bluetooth, where
+there are no nameservers, a client will instead broadcast inquiries to see
+what other devices are nearby and query each detected device for its
+user-friendly name.  The client then chooses whichever device has a name that
+matches the one supplied by the user.
+</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN84"
+HREF="x79.html#AEN84"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.ietf.org/rfc/rfc0826.txt"
+TARGET="_top"
+>http://www.ietf.org/rfc/rfc0826.txt</A
+></P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c54.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x95.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Bluetooth Programming Introduced</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c54.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Choosing a transport protocol</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

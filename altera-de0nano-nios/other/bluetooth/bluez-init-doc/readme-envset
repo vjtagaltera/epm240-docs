@@ -1,0 +1,34 @@
+
+
+brcm_patchram_plus linux stuck at proc_reset
+
+29051 root      1764 S    brcm_patchram_plus1 --bd_addr_rand --enable_hci --no
+29457 root      4636 S    /usr/libexec/bluetooth/bluetoothd -C -n -d -E
+
+
+search linux bluez initialization
+https://stackoverflow.com/questions/27245227/how-to-initialize-bluetooth-in-a-startup-script-with-yocto-poky-linux
+
+
+search hciattach bcm4356a2
+https://discuss.96boards.org/t/updated-preliminary-support-for-bluetooth-in-debian-rock960/5588/2
+https://android.googlesource.com/platform/system/bluetooth/+/android-cts-4.1_r4/brcm_patchram_plus/brcm_patchram_plus.c
+https://github.com/openwetek/wlan-firmware-aml/blob/master/bcm_ampak/config/4356/bcm4356a2.hcd
+
+
+search brcm_patchram_plus linux stuck at proc_reset
+https://linux-sunxi.org/Cubietruck/Bluetooth
+
+wake set to 1
+reset toggle 0 then 1
+
+
+search bluetooth.btcommon.BluetoothError: [Errno 111] Connection refused
+https://raspberrypi.stackexchange.com/questions/106690/problems-connecting-to-bluetooth-devices-through-python
+
+
+search hcitool rssi not connected
+https://www.raspberrypi.org/forums/viewtopic.php?t=47466
+Bluetooth distance sensing - phone etc without pairing
+
+

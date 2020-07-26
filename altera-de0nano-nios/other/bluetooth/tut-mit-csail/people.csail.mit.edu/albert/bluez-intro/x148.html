@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Port numbers and the Service Discovery Protocol</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth Programming Introduced"
+HREF="c54.html"><LINK
+REL="PREVIOUS"
+TITLE="Choosing a transport protocol"
+HREF="x95.html"><LINK
+REL="NEXT"
+TITLE="Establishing connections and transferring data"
+HREF="x192.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x95.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Bluetooth Programming Introduced</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x192.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="port-nums-and-sdp"
+>2.4. Port numbers and the Service Discovery Protocol</A
+></H1
+><P
+>&#13;The second part of figuring out how to communicate with a remote machine, once
+a numerical address and transport protocol are known,
+ is to choose
+the port number.  Almost all Internet transport protocols in common usage are
+designed with the notion of port numbers, so that multiple applications on the
+same host may simultaneously utilize a transport protocol.  Bluetooth is no
+exception, but uses slightly different terminology.  In L2CAP, ports are
+called <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Protocol Service Multiplexers</I
+></SPAN
+>, and can take on odd-numbered
+values between 1 and 32767.  In RFCOMM, <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>channels</I
+></SPAN
+> 1-30 are available for
+use.  These differences aside, both protocol service multiplexers and channels
+serve the exact same purpose that ports do in TCP/IP.  L2CAP, unlike RFCOMM,
+has a range of reserved port numbers (1-1023) that are not to be used for
+custom applications and protocols.  This information is summarized in <A
+HREF="x148.html#port-numbers"
+>Table 2-2</A
+>.  Through the rest of this document, the word
+<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>port</I
+></SPAN
+> is
+use in place of protocol service multiplexer and channel for clarity.
+</P
+><DIV
+CLASS="table"
+><A
+NAME="port-numbers"
+></A
+><P
+><B
+>Table 2-2. Port numbers and their terminology for various protocols</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><COL><COL><THEAD
+><TR
+><TH
+>protocol </TH
+><TH
+> terminology </TH
+><TH
+> reserved/well-known ports </TH
+><TH
+> dynamically assigned ports </TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>TCP </TD
+><TD
+> port </TD
+><TD
+> 1-1024 </TD
+><TD
+> 1025-65535 </TD
+></TR
+><TR
+><TD
+>UDP </TD
+><TD
+> port </TD
+><TD
+> 1-1024 </TD
+><TD
+> 1025-65535 </TD
+></TR
+><TR
+><TD
+>RFCOMM </TD
+><TD
+> channel </TD
+><TD
+> none </TD
+><TD
+> 1-30 </TD
+></TR
+><TR
+><TD
+>L2CAP </TD
+><TD
+> PSM </TD
+><TD
+> odd numbered 1-4095 </TD
+><TD
+> odd numbered 4097 - 32765 </TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>&#13;In Internet programming, server applications traditionally make use of well
+known port numbers that are chosen and agreed upon at design time.  Client
+applications will use the same well known port number to connect to a server.
+The main disadvantage to this approach is that it is not possible to run two
+server applications which both use the same port number.  Due to the relative
+youth of TCP/IP and the large number of available port numbers to choose from,
+this has not yet become a serious issue.  
+</P
+><P
+>&#13;The Bluetooth transport protocols, however, were designed with many fewer
+available port numbers, which means we cannot choose an arbitrary port number
+at design time.  Although this problem is not as significant for L2CAP, which
+has around 15,000 unreserved port numbers, RFCOMM has only 30 different port
+numbers.  A consequence of this is that there is a greater than 50% chance of
+port number collision with just 7 server applications.  In this case, the
+application designer 
+clearly should not arbitrarily choose port numbers.  The Bluetooth answer to
+this problem is the Service Discovery Protocol (SDP).
+</P
+><P
+>&#13;Instead of agreeing upon a port to use at application design time, the
+Bluetooth approach is to assign ports at runtime and follow a
+publish-subscribe model. 
+The host machine operates a server application, called the SDP server, that
+uses one of the few L2CAP reserved port numbers.  
+Other server applications are dynamically assigned port numbers at runtime and
+register a description of themselves and the services they provide (along with
+the port numbers they are assigned) with the SDP server.  
+Client applications will then query the SDP server (using the well defined
+port number) on a particular machine to obtain the information they need.
+</P
+><P
+>&#13;This raises the question of how do clients know which description is the one
+they are looking for.  The standard way of doing this in Bluetooth is to
+assign a 128-bit number, called the Universally Unique Identifier (UUID), at
+design time.  Following a standard method <A
+NAME="AEN189"
+HREF="#FTN.AEN189"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+> of choosing this
+number guarantees choosing a UUID unique from those chosen by anyone else
+following the same method.
+Thus, a client and server application both designed with the same UUID can
+provide this number to the SDP server as a search term.
+</P
+><P
+>&#13;As with RFCOMM and L2CAP, only a small portion of SDP has been described here
+- those parts most relevant to a network programmer.  Among
+the other ways SDP can be used are to describe which transport protocols a
+server is using, to give information such as a human-readable
+description of the service provided and who is providing it, and to search on
+fields other than the UUID such as the service name.  Another point worth
+mentioning is that SDP is not even required to create a Bluetooth application.
+It is perfectly possible to revert to the TCP/IP way of assigning port numbers
+at design time and hoping to avoid port conflicts, and this might often be
+done to save some time.
+In controlled settings such as the computer science laboratory, this is quite
+reasonable.  Ultimately, however, to create a portable application that will
+run in the greatest number of scenarios, the application should use dynamically
+assigned ports and SDP.
+</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN189"
+HREF="x148.html#AEN189"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>RFC
+4122</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x95.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x192.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Choosing a transport protocol</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c54.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Establishing connections and transferring data</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

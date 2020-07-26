@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Choosing a transport protocol</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth Programming Introduced"
+HREF="c54.html"><LINK
+REL="PREVIOUS"
+TITLE="Choosing a communication partner"
+HREF="x79.html"><LINK
+REL="NEXT"
+TITLE="Port numbers and the Service Discovery Protocol"
+HREF="x148.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x79.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Bluetooth Programming Introduced</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x148.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="trans-protocol"
+>2.3. Choosing a transport protocol</A
+></H1
+><P
+>&#13;Once our client application has determined the address of the host machine it
+wants to connect to, it must determine which transport protocol to use.  This
+section describes
+the Bluetooth transport protocols closest in nature to the most
+commonly used Internet protocols.  Consideration is also given to how
+the programmer might choose which protocol to use based on the application
+requirements.
+</P
+><P
+>&#13;Both Bluetooth and Internet programming involve using numerous different
+transport protocols, some of which are stacked on top of others.  In
+TCP/IP, many applications use either TCP or UDP, both of which rely on IP as
+an underlying transport.  TCP provides a connection-oriented method of
+reliably sending data in streams, and UDP provides a thin wrapper around IP
+that unreliably sends individual datagrams of fixed maximum length.  There are
+also protocols like RTP for applications such as voice and video communications
+that have strict timing and latency requirements.
+</P
+><P
+>&#13;While Bluetooth does not have exactly equivalent protocols, it does provide
+protocols which can often be used in the same contexts as some of the Internet
+protocols.  
+</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="rfcomm-and-tcp"
+>2.3.1. RFCOMM + TCP</A
+></H2
+><P
+>&#13;The RFCOMM protocol provides roughly the same service and reliability
+guarantees as TCP.  Although the specification explicitly states that it was
+designed to emulate RS-232 serial ports (to make it easier for manufacturers
+to add Bluetooth capabilities to their existing serial port devices), it is
+quite simple to use it in many of the same scenarios as TCP.
+</P
+><P
+>&#13;In general, applications that use TCP are concerned with having a
+point-to-point connection over which they can reliably exchange streams of
+data.  If a portion of that data cannot be delivered within a fixed time
+limit, then the connection is terminated and an error is delivered.  Along
+with its various serial port emulation properties that, for the most part, do
+not concern network programmers, RFCOMM provides the same major attributes of
+TCP.
+</P
+><P
+>&#13;The biggest difference between TCP and RFCOMM from a network programmer's
+perspective is the choice of port number.  Whereas TCP supports up to 65535
+open ports on a single machine, RFCOMM only allows for 30.  This has a
+significant impact on how to choose port numbers for server applications, and
+is discussed shortly.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="l2cap-and-udp"
+>2.3.2. L2CAP + UDP</A
+></H2
+><P
+>&#13;UDP is often used in situations where reliable delivery of every packet is not
+crucial, and sometimes to avoid the additional overhead incurred by TCP.
+Specifically, UDP is chosen for its best-effort, simple datagram semantics.
+These are the same criteria that L2CAP satisfies as a communications protocol.
+</P
+><P
+>&#13;L2CAP, by default, provides a connection-oriented <A
+NAME="AEN109"
+HREF="#FTN.AEN109"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+protocol that reliably sends individual datagrams of fixed maximum
+length <A
+NAME="AEN111"
+HREF="#FTN.AEN111"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>.  Being fairly customizable, L2CAP can be
+configured for varying levels of reliability.  To provide this service, the
+transport protocol that L2CAP is built on <A
+NAME="AEN113"
+HREF="#FTN.AEN113"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>  employs an transmit/acknowledgement
+scheme, where unacknowledged packets are retransmitted.  There are three policies an application can use:
+</P
+><P
+></P
+><UL
+><LI
+><P
+>never retransmit </P
+></LI
+><LI
+><P
+>retransmit until total connection failure (the default) </P
+></LI
+><LI
+><P
+>drop a packet and move on to queued data if a packet hasn't been
+acknowledged after a specified time limit (0-1279 milliseconds).  
+This is useful when data must be transmitted in a timely manner. </P
+></LI
+></UL
+><P
+>&#13;Although Bluetooth does allow the application to use best-effort communication
+instead of reliable communication, several caveats are in order.
+The reason for this is that adjusting the
+delivery semantics for a single L2CAP connection to another device affects <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>&#13;all</I
+></SPAN
+> L2CAP connections to that device.  
+If a program adjusts the delivery semantics for an
+L2CAP connection to another device, it should take care to ensure that there
+are no other
+L2CAP connections to that device.  
+Additionally, since
+RFCOMM uses L2CAP as a transport, all RFCOMM connections to that device are
+also affected.  While this is not a problem if only one
+Bluetooth connection to that device is expected, it is possible to adversely
+affect other Bluetooth applications that also have open connections.  
+</P
+><P
+>&#13;The limitations on relaxing the delivery semantics for L2CAP aside, it serves
+as a suitable transport protocol when the application doesn't need the
+overhead and streams-based nature of RFCOMM, and can be used in many of the
+same situations that UDP is used in.
+</P
+><P
+>&#13;Given this suite of protocols and different ways of having one device
+communicate with another, an application developer is faced with the choice of
+choosing which one to use.  In doing so, we will typically consider the
+delivery reliability required and the manner in which the data is to be sent.
+As shown above and illustrated in <A
+HREF="x95.html#protocol-table"
+>Table 2-1</A
+>, we
+will usually
+choose RFCOMM in situations where we would choose TCP, and L2CAP when we would
+choose UDP.
+</P
+><DIV
+CLASS="table"
+><A
+NAME="protocol-table"
+></A
+><P
+><B
+>Table 2-1. A comparison of the requirements that would lead us to choose certain
+protocols.  Best-effort streams communication is not shown because it
+reduces to best-effort datagram communication.
+</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><COL><THEAD
+><TR
+><TH
+>Requirement</TH
+><TH
+>Internet</TH
+><TH
+>Bluetooth</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>Reliable, streams-based </TD
+><TD
+> TCP </TD
+><TD
+> RFCOMM </TD
+></TR
+><TR
+><TD
+>Reliable, datagram      </TD
+><TD
+> TCP </TD
+><TD
+> RFCOMM or L2CAP with infinite retransmit </TD
+></TR
+><TR
+><TD
+>Best-effort, datagram   </TD
+><TD
+> UDP </TD
+><TD
+> L2CAP (0-1279 ms retransmit) </TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN109"
+HREF="x95.html#AEN109"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>The L2CAP
+    specification actually allows for both connectionless and connection-based
+    channels, but connectionless channels are rarely used in practice.
+    Since sending ``connectionless" data to a device requires joining its
+    piconet, a time consuming process that is merely establishing a connection
+    at a lower level, connectionless L2CAP channels afford no advantages over
+    connection-oriented channels.</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN111"
+HREF="x95.html#AEN111"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>The default maximum length is 672 bytes, but this can be
+negotiated up to 65535 bytes</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN113"
+HREF="x95.html#AEN113"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>Asynchronous
+Connection-Less logical transport</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x79.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x148.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Choosing a communication partner</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c54.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Port numbers and the Service Discovery Protocol</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Advanced usage</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth programming with Python - PyBluez"
+HREF="c212.html"><LINK
+REL="PREVIOUS"
+TITLE="Service Discovery Protocol"
+HREF="x290.html"><LINK
+REL="NEXT"
+TITLE="Alternatives"
+HREF="x380.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x290.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Bluetooth programming with Python - PyBluez</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x380.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="pbz-advanced"
+>3.5. Advanced usage</A
+></H1
+><P
+>&#13;Although the techniques described in this chapter so far should be sufficient
+for most Bluetooth applications with simple and straightforward requirements,
+some applications may require more advanced functionality or finer control
+over the Bluetooth system resources.  This section describes asynchronous
+device detection and the <TT
+CLASS="literal"
+>_bluetooth</TT
+> module.
+</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="pbz-adv-async"
+>3.5.1. Asynchronous device discovery</A
+></H2
+><P
+>&#13;The device discovery and remote name request methods described earlier are
+both synchronous methods in that they don't return until the requests are
+complete, which can often taken a long time.  During this time, the
+controlling thread blocks and can't do anything else, such as responding to
+user input or displaying other information.  To avoid this, PyBluez provides
+the <TT
+CLASS="literal"
+>DeviceDiscoverer</TT
+> class for asynchronous device discovery and
+name lookup.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="AEN347"
+></A
+><P
+><B
+>Example 3-8. asynchronous-inquiry.py</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;import bluetooth
+import select
+
+class MyDiscoverer(bluetooth.DeviceDiscoverer):
+    
+    def pre_inquiry(self):
+        self.done = False
+    
+    def device_discovered(self, address, device_class, name):
+        print "%s - %s" % (address, name)
+
+    def inquiry_complete(self):
+        self.done = True
+
+d = MyDiscoverer()
+d.find_devices(lookup_names = True)
+
+readfiles = [ d, ]
+
+while True:
+    rfds = select.select( readfiles, [], [] )[0]
+
+    if d in rfds:
+        d.process_event()
+
+    if d.done: break
+</PRE
+></DIV
+><P
+>&#13;To asynchronously detect nearby bluetooth devices, create a subclass of
+<TT
+CLASS="literal"
+>DeviceDiscoverer</TT
+> and override the <TT
+CLASS="literal"
+>pre_inquiry</TT
+>,
+<TT
+CLASS="literal"
+>device_discovered</TT
+>, and <TT
+CLASS="literal"
+>inquiry_complete</TT
+> methods.  To
+start the discovery process, invoke <TT
+CLASS="literal"
+>find_devices</TT
+>, which returns
+immediately.  <TT
+CLASS="literal"
+>pre_inquiry</TT
+> is called immediately before the
+actual inquiry process begins, and <TT
+CLASS="literal"
+>inquiry_complete</TT
+> is called as
+soon as the process completes.
+</P
+><P
+>&#13;<TT
+CLASS="literal"
+>MyDiscoverer</TT
+> exposes a <TT
+CLASS="literal"
+>fileno</TT
+> method, which allows it
+to be used with the <TT
+CLASS="literal"
+>select</TT
+> module.  This provides a way for a
+single thread of control to wait for events on many open files at once, and
+greatly simplifies event-driven programs.
+</P
+><P
+>&#13;Call <TT
+CLASS="literal"
+>process_event</TT
+> to have the <TT
+CLASS="literal"
+>DeviceDiscoverer</TT
+>
+process pending events, which can be either a discovered device or the inquiry
+completion.  When a nearby device is detected, <TT
+CLASS="literal"
+>device_discovered</TT
+>
+is invoked, with the address and device class of the detected device.  If
+<TT
+CLASS="literal"
+>lookup_names</TT
+> was set in the call to <TT
+CLASS="literal"
+>find_devices</TT
+>, then
+<TT
+CLASS="literal"
+>name</TT
+> will also be set to the user-friendly name of the device.
+For more information about device classes, see <A
+HREF="https://www.bluetooth.org/foundry/assignnumb/document/baseband"
+TARGET="_top"
+>https://www.bluetooth.org/foundry/assignnumb/document/baseband</A
+>.
+The <TT
+CLASS="literal"
+>DeviceDiscoverer</TT
+> class can be used directly with the
+<TT
+CLASS="literal"
+>select</TT
+> module, and can easily be integrated into event loops of
+existing applications.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="pbz-adv-rawbt"
+>3.5.2. The <TT
+CLASS="literal"
+>_bluetooth</TT
+> module</A
+></H2
+><P
+>&#13;The <TT
+CLASS="literal"
+>bluetooth</TT
+> module provides classes and utility functions useful
+for the most common Bluetooth programming tasks.  More advanced functionality
+can be found in the <TT
+CLASS="literal"
+>_bluetooth</TT
+> extension module, which is little
+more than a thin wrapper around the BlueZ C API described in the next chapter.
+Lower level Bluetooth operations, such as establishing a connection with the
+actual Bluetooth microcontroller on the local machine and reading signal
+strength information, can be performed with the <TT
+CLASS="literal"
+>_bluetooth</TT
+> module
+in most cases without having to resort to the C API.  An overview of the
+classes and methods available in <TT
+CLASS="literal"
+>_bluetooth</TT
+> is beyond the scope of
+this chapter, but the module documentation and examples are provided with the
+PyBluez distribution.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x290.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x380.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Service Discovery Protocol</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c212.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Alternatives</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

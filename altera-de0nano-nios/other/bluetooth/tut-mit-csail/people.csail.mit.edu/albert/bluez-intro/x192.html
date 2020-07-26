@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Establishing connections and transferring data</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth Programming Introduced"
+HREF="c54.html"><LINK
+REL="PREVIOUS"
+TITLE="Port numbers and the Service Discovery Protocol"
+HREF="x148.html"><LINK
+REL="NEXT"
+TITLE="Bluetooth Profiles + RFCs"
+HREF="x196.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x148.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Bluetooth Programming Introduced</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x196.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="conn-data"
+>2.5. Establishing connections and transferring data</A
+></H1
+><P
+>&#13;It turns out that choosing which machine to connect to and how to connect are
+the most difficult parts of Bluetooth programming.  In writing a server
+application, once the transport protocol and port number to listen on are
+chosen, building the rest of the application is essentially the same type of
+programming most network programmers are already accustomed to.  A server
+application waiting for an incoming Bluetooth connection is conceptually the
+same as a server application waiting for an incoming Internet connection, and
+a client application attempting to establish an outbound connection appears
+the same whether it is using RFCOMM, L2CAP, TCP, or UDP.
+</P
+><P
+>&#13;Furthermore, once the connection has been established, the application is
+operating with the same guarantees, constraints, and error conditions as are
+encountered in Internet programming.  Depending on the transport protocol
+chosen, packets may be dropped or delayed.  Connections may be severed due to
+host or link failures.  External factors such as congestion and interference
+may result in decreased quality of service.  Due to these conceptual
+similarities, it is perfectly reasonable to treat Bluetooth programming of an
+established connection in exactly the same manner that as an established
+connections in Internet programming.  
+</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x148.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x196.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Port numbers and the Service Discovery Protocol</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c54.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Bluetooth Profiles + RFCs</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

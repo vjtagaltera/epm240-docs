@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Communicating with L2CAP</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth programming with Python - PyBluez"
+HREF="c212.html"><LINK
+REL="PREVIOUS"
+TITLE="Communicating with RFCOMM"
+HREF="x232.html"><LINK
+REL="NEXT"
+TITLE="Service Discovery Protocol"
+HREF="x290.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x232.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Bluetooth programming with Python - PyBluez</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x290.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="pbz-l2cap"
+>3.3. Communicating with L2CAP</A
+></H1
+><P
+>&#13;<A
+HREF="x264.html#py-l2cap-server"
+>Example 3-4</A
+> and <A
+HREF="x264.html#py-l2cap-client"
+>Example 3-5</A
+> demonstrate the basics of using L2CAP as a
+transport protocol.  As should be fairly obvious,
+using L2CAP sockets is almost identical to using RFCOMM sockets.  The only
+difference is passing <TT
+CLASS="literal"
+>L2CAP</TT
+> to the <TT
+CLASS="literal"
+>BluetoothSocket</TT
+>
+constructor, and choosing an odd port number between 0x1001 and 0x8FFF instead
+of 1-30.  The default connection settings provide a connection for sending
+reliably sequenced datagrams up to 672 bytes in size.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="py-l2cap-server"
+></A
+><P
+><B
+>Example 3-4. l2cap-server.py</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;import bluetooth
+
+server_sock=bluetooth.BluetoothSocket( bluetooth.L2CAP )
+
+port = 0x1001
+server_sock.bind(("",port))
+server_sock.listen(1)
+
+client_sock,address = server_sock.accept()
+print "Accepted connection from ",address
+
+data = client_sock.recv(1024)
+print "received [%s]" % data
+
+client_sock.close()
+server_sock.close()
+</PRE
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="py-l2cap-client"
+></A
+><P
+><B
+>Example 3-5. l2cap-client.py</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;import bluetooth
+
+sock=bluetooth.BluetoothSocket(bluetooth.L2CAP)
+
+bd_addr = "01:23:45:67:89:AB"
+port = 0x1001
+
+sock.connect((bd_addr, port))
+
+sock.send("hello!!")
+
+sock.close()
+</PRE
+></DIV
+><P
+>&#13;As a maximum-length datagram protocol, packets sent on L2CAP connections have
+an upper size limit.  Both devices at the endpoints of a connection maintain
+an <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>incoming maximum transmission unit (MTU)</I
+></SPAN
+>, which specifies the maximum
+size packet can receive. If both parties adjust their incoming MTU, then it is
+possible to raise the MTU of the entire connection beyond the 672 byte default
+up to 65535 bytes.  It is also possible, but uncommon, for the two devices to
+have different MTU values.  In PyBluez, the <TT
+CLASS="literal"
+>set_l2cap_mtu</TT
+> method
+is used to adjust this value.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;l2cap_sock = bluetooth.BluetoothSocket( bluetooth.L2CAP )
+    .
+    . # connect the socket
+    .
+bluetooth.set_l2cap_mtu( l2cap_sock, 65535 )
+</PRE
+><P
+>&#13;This method is fairly straightforward, and takes an L2CAP
+<TT
+CLASS="literal"
+>BluetoothSocket</TT
+> and a desired MTU as input.  The incoming MTU is
+adjusted for the specified socket, and no other sockets are affected.  As with
+all the other PyBluez methods, a failure is indicated by raising a
+<TT
+CLASS="literal"
+>BluetoothException</TT
+>.  
+</P
+><P
+>&#13;Although we expressed reservations about using unreliable L2CAP channels in
+<A
+HREF="x264.html"
+>Section 3.3</A
+>, there are cases in which an unreliable connection may be
+desired.  Adjusting the reliability semantics of a connection in PyBluez is
+also a simple task, and can be done with the 
+<TT
+CLASS="literal"
+>set_packet_timeout</TT
+> method
+</P
+><PRE
+CLASS="programlisting"
+>&#13;bluetooth.set_packet_timeout( bdaddr, timeout )
+</PRE
+><P
+>&#13;<TT
+CLASS="literal"
+>set_packet_timeout</TT
+> takes a Bluetooth address and a timeout,
+specified in milliseconds, as input and tries to adjust the packet timeout for
+any L2CAP and RFCOMM connections to that device.  The process must have
+superuser privileges, and there must be an active connection to the specified
+address.  The effects of adjusting this parameter will last as long as any
+active connections are open, including those which outlive the Python program.
+</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x232.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x290.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Communicating with RFCOMM</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c212.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Service Discovery Protocol</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

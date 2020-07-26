@@ -1,0 +1,552 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>L2CAP sockets</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth programming in C with BlueZ"
+HREF="c404.html"><LINK
+REL="PREVIOUS"
+TITLE="RFCOMM sockets"
+HREF="x502.html"><LINK
+REL="NEXT"
+TITLE="Service Discovery Protocol"
+HREF="x604.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x502.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Bluetooth programming in C with BlueZ</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x604.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="bzi-l2cap"
+>4.3. L2CAP sockets</A
+></H1
+><P
+>&#13;As with RFCOMM, L2CAP communications are structured around socket programming.
+<A
+HREF="x559.html#l2cap-server.c"
+>Example 4-4</A
+> and <A
+HREF="x559.html#l2cap-client.c"
+>Example 4-5</A
+> demonstrate how to establish an L2CAP channel
+and transmit a short string of data.  For simplicity, the client is hard-coded
+to connect to ``01:23:45:67:89:AB".
+</P
+><DIV
+CLASS="example"
+><A
+NAME="l2cap-server.c"
+></A
+><P
+><B
+>Example 4-4. l2cap-server.c</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;
+#include &#60;stdio.h&#62;
+#include &#60;string.h&#62;
+#include &#60;sys/socket.h&#62;
+#include &#60;bluetooth/bluetooth.h&#62;
+#include &#60;bluetooth/l2cap.h&#62;
+
+int main(int argc, char **argv)
+{
+    struct sockaddr_l2 loc_addr = { 0 }, rem_addr = { 0 };
+    char buf[1024] = { 0 };
+    int s, client, bytes_read;
+    socklen_t opt = sizeof(rem_addr);
+
+    // allocate socket
+    s = socket(AF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
+
+    // bind socket to port 0x1001 of the first available 
+    // bluetooth adapter
+    loc_addr.l2_family = AF_BLUETOOTH;
+    loc_addr.l2_bdaddr = *BDADDR_ANY;
+    loc_addr.l2_psm = htobs(0x1001);
+
+    bind(s, (struct sockaddr *)&#38;loc_addr, sizeof(loc_addr));
+
+    // put socket into listening mode
+    listen(s, 1);
+
+    // accept one connection
+    client = accept(s, (struct sockaddr *)&#38;rem_addr, &#38;opt);
+
+    ba2str( &#38;rem_addr.l2_bdaddr, buf );
+    fprintf(stderr, "accepted connection from %s\n", buf);
+
+    memset(buf, 0, sizeof(buf));
+
+    // read data from the client
+    bytes_read = read(client, buf, sizeof(buf));
+    if( bytes_read &#62; 0 ) {
+        printf("received [%s]\n", buf);
+    }
+
+    // close connection
+    close(client);
+    close(s);
+}
+
+</PRE
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="l2cap-client.c"
+></A
+><P
+><B
+>Example 4-5. l2cap-client.c</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;
+#include &#60;stdio.h&#62;
+#include &#60;string.h&#62;
+#include &#60;sys/socket.h&#62;
+#include &#60;bluetooth/bluetooth.h&#62;
+#include &#60;bluetooth/l2cap.h&#62;
+
+int main(int argc, char **argv)
+{
+    struct sockaddr_l2 addr = { 0 };
+    int s, status;
+    char *message = "hello!";
+    char dest[18] = "01:23:45:67:89:AB";
+
+    if(argc &#60; 2)
+    {
+        fprintf(stderr, "usage: %s &#60;bt_addr&#62;\n", argv[0]);
+        exit(2);
+    }
+
+    strncpy(dest, argv[1], 18);
+
+    // allocate a socket
+    s = socket(AF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
+
+    // set the connection parameters (who to connect to)
+    addr.l2_family = AF_BLUETOOTH;
+    addr.l2_psm = htobs(0x1001);
+    str2ba( dest, &#38;addr.l2_bdaddr );
+
+    // connect to server
+    status = connect(s, (struct sockaddr *)&#38;addr, sizeof(addr));
+
+    // send a message
+    if( status == 0 ) {
+        status = write(s, "hello!", 6);
+    }
+
+    if( status &#60; 0 ) perror("uh oh");
+
+    close(s);
+}
+
+</PRE
+></DIV
+><P
+>&#13;For simple usage scenarios, the only differences are the socket type specified,
+the protocol family, and the addressing structure.  By default, L2CAP
+connections provide reliable datagram-oriented connections with packets
+delivered in order, so the socket type is <TT
+CLASS="literal"
+>SOCK_SEQPACKET</TT
+>,
+and the protocol is <TT
+CLASS="literal"
+>BTPROTO_L2CAP</TT
+>.  The addressing structure
+<TT
+CLASS="literal"
+>struct sockaddr_l2</TT
+>  differs slightly from the RFCOMM
+addressing structure.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;struct sockaddr_l2 {
+    sa_family_t     l2_family;
+    unsigned short  l2_psm;
+    bdaddr_t        l2_bdaddr;
+};
+</PRE
+><P
+>&#13;The <TT
+CLASS="literal"
+>l2_psm</TT
+> field specifies the L2CAP port number to use.  Since it
+is a multibyte unsigned integer, byte ordering is significant.  The 
+<TT
+CLASS="literal"
+>htobs</TT
+> function, described earlier, is used here to convert numbers
+to Bluetooth byte order.
+</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="bzi-l2cap-mtu"
+>4.3.1. Maximum Transmission Unit</A
+></H2
+><P
+>&#13;Occasionally, an application may need to adjust the maximum transmission unit
+(MTU) for an L2CAP connection and set it to something other than the default of
+672 bytes.  In BlueZ, this is done with the <TT
+CLASS="literal"
+>getsockopt</TT
+> and
+<TT
+CLASS="literal"
+>setsockopt</TT
+> functions.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;
+struct l2cap_options {
+    uint16_t    omtu;
+    uint16_t    imtu;
+    uint16_t    flush_to;
+    uint8_t     mode;
+};
+
+int set_l2cap_mtu( int sock, uint16_t mtu ) {
+	struct l2cap_options opts;
+    int optlen = sizeof(opts), err;
+    err = getsockopt( s, SOL_L2CAP, L2CAP_OPTIONS, &#38;opts, &#38;optlen );
+    if( ! err ) {
+        opts.omtu = opts.imtu = mtu;
+        err = setsockopt( s, SOL_L2CAP, L2CAP_OPTIONS, &#38;opts, optlen );
+    }
+    return err;
+};
+
+</PRE
+><P
+>&#13;The <TT
+CLASS="literal"
+>omtu</TT
+> and <TT
+CLASS="literal"
+>imtu</TT
+> fields of the 
+<TT
+CLASS="literal"
+>struct l2cap_options</TT
+>  are used to specify the <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>outgoing MTU</I
+></SPAN
+>
+and <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>incoming MTU</I
+></SPAN
+>, respectively.  The other two fields are currently
+unused and reserved
+for future use.  To adjust the connection-wide MTU, both clients must adjust
+their outgoing and incoming MTUs.  Bluetooth allows the MTU to range from a
+minimum of 48 bytes to a maximum of 65,535 bytes.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="bzi-l2cap-unreliable"
+>4.3.2. Unreliable sockets</A
+></H2
+><P
+>&#13;It is slightly misleading to say that L2CAP sockets are reliable by default.
+Multiple L2CAP and RFCOMM connections between two devices are actually logical
+connections multiplexed on a single, lower level connection <A
+NAME="AEN593"
+HREF="#FTN.AEN593"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+> established
+between them.  The only way to adjust delivery semantics is to adjust them for
+the lower level connection, which in turn affects <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>all</I
+></SPAN
+> L2CAP and RFCOMM
+connections between the two devices.
+</P
+><P
+>&#13;As we delve deeper into the more complex aspects of Bluetooth programming, the
+interface becomes a little harder to manage.  Unfortunately, BlueZ does not
+provide an easy way to change the packet timeout for a connection.  A handle
+to the underlying connection is first needed to make this change, but the only
+way to obtain a handle to the underlying connection is to query the
+microcontroller on the local Bluetooth adapter.  Once the connection handle
+has been determined, a command can be issued to the microcontroller
+instructing it to make the appropriate adjustments.  <A
+HREF="x559.html#set-flush-to.c"
+>Example 4-6</A
+> shows how to do this.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="set-flush-to.c"
+></A
+><P
+><B
+>Example 4-6. set-flush-to.c</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;
+#include &#60;unistd.h&#62;
+#include &#60;errno.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;sys/socket.h&#62;
+#include &#60;sys/ioctl.h&#62;
+#include &#60;bluetooth/bluetooth.h&#62;
+#include &#60;bluetooth/hci.h&#62;
+#include &#60;bluetooth/hci_lib.h&#62;
+
+int set_flush_timeout(bdaddr_t *ba, int timeout)
+{
+    int err = 0, dd;
+    struct hci_conn_info_req *cr = 0;
+    struct hci_request rq = { 0 };
+
+    struct {
+        uint16_t handle;
+        uint16_t flush_timeout;
+    } cmd_param;
+
+    struct {
+        uint8_t  status;
+        uint16_t handle;
+    } cmd_response;
+
+    // find the connection handle to the specified bluetooth device
+    cr = (struct hci_conn_info_req*) malloc(
+            sizeof(struct hci_conn_info_req) + 
+            sizeof(struct hci_conn_info));
+    bacpy( &#38;cr-&#62;bdaddr, ba );
+    cr-&#62;type = ACL_LINK;
+    dd = hci_open_dev( hci_get_route( &#38;cr-&#62;bdaddr ) );
+    if( dd &#60; 0 ) {
+        err = dd;
+        goto cleanup;
+    }
+    err = ioctl(dd, HCIGETCONNINFO, (unsigned long) cr );
+    if( err ) goto cleanup;
+
+    // build a command packet to send to the bluetooth microcontroller
+    cmd_param.handle = cr-&#62;conn_info-&#62;handle;
+    cmd_param.flush_timeout = htobs(timeout);
+    rq.ogf = OGF_HOST_CTL;
+    rq.ocf = 0x28;
+    rq.cparam = &#38;cmd_param;
+    rq.clen = sizeof(cmd_param);
+    rq.rparam = &#38;cmd_response;
+    rq.rlen = sizeof(cmd_response);
+    rq.event = EVT_CMD_COMPLETE;
+
+    // send the command and wait for the response
+    err = hci_send_req( dd, &#38;rq, 0 );
+    if( err ) goto cleanup;
+
+    if( cmd_response.status ) {
+        err = -1;
+        errno = bt_error(cmd_response.status);
+    }
+
+cleanup:
+    free(cr);
+    if( dd &#62;= 0) close(dd);
+    return err;
+}
+
+</PRE
+></DIV
+><P
+>&#13;On success, the packet timeout for the low level connection to the specified
+device is set to <TT
+CLASS="literal"
+>timeout * 0.625</TT
+> milliseconds.  A timeout of 0 is
+used to indicate infinity, and is how to revert back to a reliable connection.
+The bulk of this function is comprised of code to construct the command
+packets and response packets used in communicating with the Bluetooth
+controller.  The Bluetooth Specification defines the structure of these
+packets and the magic number <TT
+CLASS="literal"
+>0x28</TT
+>.  In most cases, BlueZ provides
+convenience functions to construct the packets, send them, and wait for the
+response.  Setting the packet timeout, however, seems to be so rarely used
+that no convenience function for it currently exists.
+</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN593"
+HREF="x559.html#AEN593"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>&#13;Bluetooth terminology refers to this as the ACL connection</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x502.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x604.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>RFCOMM sockets</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c404.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Service Discovery Protocol</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

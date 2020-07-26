@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Communicating with RFCOMM</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Bluetooth programming with Python - PyBluez"
+HREF="c212.html"><LINK
+REL="PREVIOUS"
+TITLE="Bluetooth programming with Python - PyBluez"
+HREF="c212.html"><LINK
+REL="NEXT"
+TITLE="Communicating with L2CAP"
+HREF="x264.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c212.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Bluetooth programming with Python - PyBluez</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x264.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="pbz-rfcomm"
+>3.2. Communicating with RFCOMM</A
+></H1
+><P
+>&#13;Bluetooth programming in Python follows the socket programming model.  This is
+a concept that should be familiar to almost all network programmers, and makes
+the transition from Internet programming to Bluetooth programming much
+simpler.
+<A
+HREF="x232.html#rfcomm-server.py"
+>Example 3-2</A
+> and <A
+HREF="x232.html#rfcomm-client.py"
+>Example 3-3</A
+> show how to establish a connection using an
+RFCOMM socket, transfer some data, and disconnect.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="rfcomm-server.py"
+></A
+><P
+><B
+>Example 3-2. rfcomm-server.py</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;import bluetooth
+
+server_sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+
+port = 1
+server_sock.bind(("",port))
+server_sock.listen(1)
+
+client_sock,address = server_sock.accept()
+print "Accepted connection from ",address
+
+data = client_sock.recv(1024)
+print "received [%s]" % data
+
+client_sock.close()
+server_sock.close()
+</PRE
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="rfcomm-client.py"
+></A
+><P
+><B
+>Example 3-3. rfcomm-client.py</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;import bluetooth
+
+bd_addr = "01:23:45:67:89:AB"
+
+port = 1
+
+sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+sock.connect((bd_addr, port))
+
+sock.send("hello!!")
+
+sock.close()
+</PRE
+></DIV
+><P
+>&#13;In the socket programming model, a socket represents an endpoint of a
+communication channel.  Sockets are not connected when they are first created,
+and are useless until a call to either <TT
+CLASS="literal"
+>connect</TT
+>  (client
+application) or <TT
+CLASS="literal"
+>accept</TT
+>  (server application) completes
+successfully.  Once a socket is connected, it can be used to send and receive
+data until the connection fails due to link error or user termination.
+</P
+><P
+>&#13;PyBluez currently supports two types of <TT
+CLASS="literal"
+>BluetoothSocket</TT
+> objects:
+RFCOMM and L2CAP.  The RFCOMM socket, shown above, is created by passing
+<TT
+CLASS="literal"
+>RFCOMM</TT
+> as an argument to the <TT
+CLASS="literal"
+>BluetoothSocket</TT
+>
+constructor.  As the name suggests, it allocates resources for an RFCOMM based
+communication channel.  The second type of <TT
+CLASS="literal"
+>BluetoothSocket</TT
+>, the
+L2CAP socket, is described in the next section.  
+</P
+><P
+>&#13;An RFCOMM <TT
+CLASS="literal"
+>BluetoothSocket</TT
+> used to accept incoming connections must
+be attached to operating system resources with the <TT
+CLASS="literal"
+>bind</TT
+> method.
+<TT
+CLASS="literal"
+>bind</TT
+> takes in a tuple specifying the address of the
+local Bluetooth adapter to use and a port number to listen on.  Usually, there
+is only one local Bluetooth adapter or it doesn't matter which one to use, so
+the empty string indicates that any local Bluetooth adapter is acceptable.
+Once a socket is bound, a call to <TT
+CLASS="literal"
+>listen</TT
+> puts the socket into
+listening mode and it is then ready to accept incoming connections.
+</P
+><P
+>&#13;The RFCOMM <TT
+CLASS="literal"
+>BluetoothSocket</TT
+> used to establish an outgoing connection 
+connects to its target with the <TT
+CLASS="literal"
+>connect</TT
+> method, which also takes a
+tuple specifying an address and port number.  In <A
+HREF="x232.html#rfcomm-client.py"
+>Example 3-3</A
+> , the client tries to connect to the
+Bluetooth device
+with address ``01:23:45:67:89:AB" on port 1.  This example, and <A
+HREF="x232.html#rfcomm-server.py"
+>Example 3-2</A
+>
+, assumes that all communication happens on RFCOMM
+port 1.  <A
+HREF="x290.html"
+>Section 3.4</A
+> shows how to dynamically choose ports
+and use SDP to search for which port a server is operating on.
+</P
+><P
+>&#13;Error handling code has been omitted for clarity in the examples, but is
+fairly straightforward.  If any of the Bluetooth operations fail for some
+reason (e.g. connection timeout, no local bluetooth resources are available,
+etc.) then a <TT
+CLASS="literal"
+>BluetoothError</TT
+> is raised with an error message
+indicating the reason for failure.
+</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c212.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x264.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Bluetooth programming with Python - PyBluez</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c212.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Communicating with L2CAP</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

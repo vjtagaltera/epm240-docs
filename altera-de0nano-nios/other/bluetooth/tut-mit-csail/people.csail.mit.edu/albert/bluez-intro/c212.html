@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Bluetooth programming with Python - PyBluez</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Bluetooth Profiles + RFCs"
+HREF="x196.html"><LINK
+REL="NEXT"
+TITLE="Communicating with RFCOMM"
+HREF="x232.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x196.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x232.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="pybluez"
+></A
+>Chapter 3. Bluetooth programming with Python - PyBluez</H1
+><P
+>&#13;Chapter 2 introduced the high level concepts needed to apply standard network
+programming techniques to Bluetooth programming.  This chapter describes a
+Python extension module that allows these concepts to be easily and
+quickly implemented in just a few lines of code.  
+</P
+><P
+>&#13;Python is a versatile and powerful dynamically typed object oriented language,
+providing syntactic clarity along with built-in memory management so that the
+programmer can focus on the algorithm at hand without worrying about memory
+leaks or matching braces.  Although Python has a large and comprehensive
+standard library, Bluetooth support is not yet part of the standard
+distribution.  A well documented C API allows software
+developers to create third-party extension modules that extend the language
+capabilities and provide access to operating system resources not otherwise
+exposed in Python.
+</P
+><P
+>&#13;PyBluez is a Python extension module written in C that provides access to
+system Bluetooth resources in an object oriented, modular manner.  It is
+written for the Windows XP (Microsoft Bluetooth stack) and GNU/Linux (BlueZ
+stack).
+</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="pbz-choosing-device"
+>3.1. Choosing a communication partner</A
+></H1
+><P
+>&#13;<A
+HREF="c212.html#findmyphone.py"
+>Example 3-1</A
+> shows a Python program that looks for a
+nearby device with the user-friendly name ``My Phone".  An explanation of the
+program
+follows.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="findmyphone.py"
+></A
+><P
+><B
+>Example 3-1. findmyphone.py</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;import bluetooth
+
+target_name = "My Phone"
+target_address = None
+
+nearby_devices = bluetooth.discover_devices()
+
+for bdaddr in nearby_devices:
+    if target_name == bluetooth.lookup_name( bdaddr ):
+        target_address = bdaddr
+        break
+
+if target_address is not None:
+    print "found target bluetooth device with address ", target_address
+else:
+    print "could not find target bluetooth device nearby"
+</PRE
+></DIV
+><P
+>&#13;PyBluez represents a bluetooth address as a string of the form
+``xx:xx:xx:xx:xx", where each x is a hexadecimal character representing one
+octet of the 48-bit address, with most significant octets listed first.
+Bluetooth devices in PyBluez will always be identified using an address string
+of this form.
+</P
+><P
+>&#13;Choosing a device really means choosing a bluetooth address.
+If only the user-friendly name of the target device is known, then two steps
+must be taken to find the correct address.  First, the program must scan for
+nearby Bluetooth devices.  The routine <TT
+CLASS="literal"
+>discover_devices()</TT
+> scans for
+approximately 10 seconds and returns a list of addresses of detected devices.
+Next, the program uses the routine <TT
+CLASS="literal"
+>lookup_name()</TT
+> to connect to each
+detected device, requests its user-friendly name, and compares the result to
+the target
+name.  
+</P
+><P
+>&#13;Since both the Bluetooth detection and name lookup process are probabilistic,
+<TT
+CLASS="literal"
+>discover_devices()</TT
+> will sometimes fail to detect devices that are
+in range, and <TT
+CLASS="literal"
+>lookup_name()</TT
+> will sometimes return <TT
+CLASS="literal"
+>None</TT
+>
+to indicate that it couldn't determine the user-friendly name of the detected
+device.  In these cases, it may be a good idea to try again once or twice
+before giving up.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x196.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x232.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Bluetooth Profiles + RFCs</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Communicating with RFCOMM</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

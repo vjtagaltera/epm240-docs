@@ -1,0 +1,4 @@
+brcm_patchram_plus1 -d --bd_addr_rand --enable_hci --no2bytes --use_baudrate_for_download --tosleep 200000 --baudrate 1500000 --patchram /system/etc/firmware/BCM4356A2.hcd /dev/ttyS4 
+ brcm_patchram_plus -d                --enable_hci --no2bytes --use_baudrate_for_download --tosleep 200000 --baudrate 1500000 --patchram /system/vendor/firmware/bcm4356a2.hcd /dev/ttyS0
+
+

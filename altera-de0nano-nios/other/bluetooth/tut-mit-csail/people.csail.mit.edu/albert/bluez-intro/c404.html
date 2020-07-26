@@ -1,0 +1,714 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Bluetooth programming in C with BlueZ</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="An Introduction to Bluetooth Programming"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Alternatives"
+HREF="x380.html"><LINK
+REL="NEXT"
+TITLE="RFCOMM sockets"
+HREF="x502.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>An Introduction to Bluetooth Programming</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x380.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x502.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="bluez-c"
+></A
+>Chapter 4. Bluetooth programming in C with BlueZ</H1
+><P
+>&#13;There are reasons to prefer developing Bluetooth applications
+in C instead of in a high level language such as Python.  The Python
+environment might not be available or might not fit on the target device;
+strict application requirements on program size, speed, and memory usage may
+preclude the use of an interpreted language like Python; the programmer may
+desire finer control over the local Bluetooth adapter than PyBluez provides;
+or the project may be to create a shared library for other applications to
+link against instead of a standalone application.
+As of this writing, BlueZ is a powerful Bluetooth communications stack with
+extensive APIs that allows a user to fully exploit all local Bluetooth
+resources, but it has no official documentation.  Furthermore, there is very
+little unofficial documentation as well.  Novice developers requesting
+documentation on the official mailing lists <A
+NAME="AEN407"
+HREF="#FTN.AEN407"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+> are typically
+rebuffed and told to figure out the API by reading through the BlueZ source
+code.  This is a time consuming process that can only reveal small pieces of
+information at a time, and is quite often enough of an obstacle to deter many
+potential developers.
+</P
+><P
+>&#13;This chapter presents a short introduction to developing Bluetooth
+applications in C with BlueZ.  The tasks covered in chapter 2 are now
+explained in greater detail here for C programmers.
+</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="bzi-choosing"
+>4.1. Choosing a communication partner</A
+></H1
+><P
+>&#13;A simple program that detects nearby Bluetooth devices is shown in <A
+HREF="c404.html#simplescan.c"
+>Example 4-1</A
+>.  The program reserves system Bluetooth
+resources, scans for nearby Bluetooth devices, and then looks up the user
+friendly name for each detected device.  A more detailed explanation of the
+data structures and functions used follows.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="simplescan.c"
+></A
+><P
+><B
+>Example 4-1. simplescan.c</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;unistd.h&#62;
+#include &#60;sys/socket.h&#62;
+#include &#60;bluetooth/bluetooth.h&#62;
+#include &#60;bluetooth/hci.h&#62;
+#include &#60;bluetooth/hci_lib.h&#62;
+
+int main(int argc, char **argv)
+{
+    inquiry_info *ii = NULL;
+    int max_rsp, num_rsp;
+    int dev_id, sock, len, flags;
+    int i;
+    char addr[19] = { 0 };
+    char name[248] = { 0 };
+
+    dev_id = hci_get_route(NULL);
+    sock = hci_open_dev( dev_id );
+    if (dev_id &#60; 0 || sock &#60; 0) {
+        perror("opening socket");
+        exit(1);
+    }
+
+    len  = 8;
+    max_rsp = 255;
+    flags = IREQ_CACHE_FLUSH;
+    ii = (inquiry_info*)malloc(max_rsp * sizeof(inquiry_info));
+    
+    num_rsp = hci_inquiry(dev_id, len, max_rsp, NULL, &#38;ii, flags);
+    if( num_rsp &#60; 0 ) perror("hci_inquiry");
+
+    for (i = 0; i &#60; num_rsp; i++) {
+        ba2str(&#38;(ii+i)-&#62;bdaddr, addr);
+        memset(name, 0, sizeof(name));
+        if (hci_read_remote_name(sock, &#38;(ii+i)-&#62;bdaddr, sizeof(name), 
+            name, 0) &#60; 0)
+        strcpy(name, "[unknown]");
+        printf("%s  %s\n", addr, name);
+    }
+
+    free( ii );
+    close( sock );
+    return 0;
+}
+
+</PRE
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="bzi-compilation"
+>4.1.1. Compilation</A
+></H2
+><P
+>&#13;To compile our program, invoke <TT
+CLASS="literal"
+>gcc</TT
+> and link against
+<TT
+CLASS="literal"
+>libbluetooth</TT
+>
+</P
+><P
+>&#13;<TT
+CLASS="literal"
+># gcc -o simplescan simplescan.c -lbluetooth</TT
+>
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="bzi-explanation"
+>4.1.2. Explanation</A
+></H2
+><P
+>&#13;<PRE
+CLASS="programlisting"
+>&#13;typedef struct {
+	uint8_t b[6];
+} __attribute__((packed)) bdaddr_t;
+</PRE
+>
+</P
+><P
+>&#13;The basic data structure used to specify a Bluetooth device address is the
+<TT
+CLASS="literal"
+>bdaddr_t</TT
+>.  All Bluetooth addresses in BlueZ will be stored
+and manipulated as <TT
+CLASS="literal"
+>bdaddr_t</TT
+> structures.  BlueZ provides two
+convenience functions to convert between strings and
+<TT
+CLASS="literal"
+>bdaddr_t</TT
+> structures.
+</P
+><P
+>&#13;<PRE
+CLASS="programlisting"
+>&#13;int str2ba( const char *str, bdaddr_t *ba );
+int ba2str( const bdaddr_t *ba, char *str );
+</PRE
+>
+</P
+><P
+>&#13;<TT
+CLASS="literal"
+>str2ba</TT
+> takes an string of the form ``XX:XX:XX:XX:XX:XX",
+where each XX is a hexadecimal number specifying an octet of the 48-bit
+address, and packs it into a 6-byte <TT
+CLASS="literal"
+>bdaddr_t</TT
+>.
+<TT
+CLASS="literal"
+>ba2str</TT
+> does exactly the opposite.  
+</P
+><P
+>&#13;Local Bluetooth adapters are assigned identifying numbers starting with 0, and
+a program must specify which adapter to use when allocating system resources.
+Usually, there is only one adapter or it doesn't matter which one is used, so
+passing <TT
+CLASS="literal"
+>NULL</TT
+> to <TT
+CLASS="literal"
+>hci_get_route</TT
+> will
+retrieve the resource number of the first available Bluetooth adapter.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;int hci_get_route( bdaddr_t *bdaddr );
+int hci_open_dev( int dev_id );
+</PRE
+><DIV
+CLASS="note"
+><P
+></P
+><TABLE
+CLASS="note"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="../images/note.gif"
+HSPACE="5"
+ALT="Note"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>&#13;It is <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>not</I
+></SPAN
+> a good idea to hard-code the device
+number 0, because that is not always the id of the first adapter.  For example,
+if there were two adapters on the system and the first adapter (id 0) is
+disabled, then the first <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>available</I
+></SPAN
+> adapter is the one with
+id 1.
+</P
+></TD
+></TR
+></TABLE
+></DIV
+><P
+>&#13;If there are multiple Bluetooth adapters present, then to choose the adapter
+with address ``01:23:45:67:89:AB", pass the <TT
+CLASS="literal"
+>char *</TT
+> 
+representation of the address to <TT
+CLASS="literal"
+>hci_devid</TT
+> and use that in
+place of <TT
+CLASS="literal"
+>hci_get_route</TT
+>.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;int dev_id = hci_devid( "01:23:45:67:89:AB" );
+</PRE
+><P
+>&#13;Most Bluetooth operations require the use of an open socket.
+<TT
+CLASS="literal"
+>hci_open_dev</TT
+> is a convenience function that opens a
+Bluetooth socket with the specified resource number <A
+NAME="AEN454"
+HREF="#FTN.AEN454"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>.  To be clear, the socket opened
+by <TT
+CLASS="literal"
+>hci_open_dev</TT
+> represents a connection to the
+microcontroller on the specified local Bluetooth adapter, and not a connection
+to a remote Bluetooth device.  Performing low level Bluetooth operations
+involves sending commands directly to the microcontroller with this socket, and
+<A
+HREF="x682.html"
+>Section 4.5</A
+> discusses this in greater detail.
+</P
+><P
+>&#13;After choosing the local Bluetooth adapter to use and allocating system
+resources, the program is ready to scan for nearby Bluetooth devices.  In the
+example, <TT
+CLASS="literal"
+>hci_inquiry</TT
+> performs a Bluetooth device discovery
+and returns a list of detected devices and some basic information about them in
+the variable <TT
+CLASS="literal"
+>ii</TT
+>.  On error, it returns -1 and sets
+<TT
+CLASS="literal"
+>errno</TT
+>  accordingly.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;int hci_inquiry(int dev_id, int len, int max_rsp, const uint8_t *lap, 
+                inquiry_info **ii, long flags);
+</PRE
+><P
+>&#13;<TT
+CLASS="literal"
+>hci_inquiry</TT
+> is one of the few functions that requires the
+use of a resource number instead of an open socket, so we use the
+<TT
+CLASS="literal"
+>dev_id</TT
+> returned by <TT
+CLASS="literal"
+>hci_get_route</TT
+>.  The
+inquiry lasts for at most 1.28 * <TT
+CLASS="literal"
+>len</TT
+> seconds, and at most
+<TT
+CLASS="literal"
+>max_rsp</TT
+> devices will be returned in the output parameter
+<TT
+CLASS="literal"
+>ii</TT
+>, which must be large enough to accommodate
+<TT
+CLASS="literal"
+>max_rsp</TT
+> results.  We suggest using a
+<TT
+CLASS="literal"
+>max_rsp</TT
+> of 255 for a standard 10.24 second inquiry.
+</P
+><P
+>&#13;If <TT
+CLASS="literal"
+>flags</TT
+> is set to <TT
+CLASS="literal"
+>IREQ_CACHE_FLUSH</TT
+>, then
+the cache of previously detected devices is flushed before performing the
+current inquiry.  Otherwise, if <TT
+CLASS="literal"
+>flags</TT
+> is set to 0, then the
+results of previous inquiries may be returned, even if the devices aren't in
+range anymore.
+</P
+><P
+>&#13;The <TT
+CLASS="literal"
+>inquiry_info</TT
+> structure is defined as
+<PRE
+CLASS="programlisting"
+>&#13;typedef struct {
+    bdaddr_t    bdaddr;
+    uint8_t     pscan_rep_mode;
+    uint8_t     pscan_period_mode;
+    uint8_t     pscan_mode;
+    uint8_t     dev_class[3];
+    uint16_t    clock_offset;
+} __attribute__ ((packed)) inquiry_info;
+</PRE
+>
+</P
+><P
+>&#13;For the most part, only the first entry - the <TT
+CLASS="literal"
+>bdaddr</TT
+> field,
+which gives the address of the detected device - is of any use.  Occasionally,
+there may be a use for the <TT
+CLASS="literal"
+>dev_class</TT
+> field, which gives
+information about the type of device detected (i.e. if it's a printer, phone,
+desktop computer, etc.) and is described in the Bluetooth Assigned
+Numbers <A
+NAME="AEN484"
+HREF="#FTN.AEN484"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>.  The rest of the fields are used for low
+level communication, and are not useful for most purposes.  The interested
+reader can see the Bluetooth Core Specification <A
+NAME="AEN487"
+HREF="#FTN.AEN487"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+> for more details.
+</P
+><P
+>&#13;Once a list of nearby Bluetooth devices and their addresses has been found,
+the program determines the user-friendly names associated with those
+addresses and presents them to the user.  The
+<TT
+CLASS="literal"
+>hci_read_remote_name</TT
+> function is used for this purpose.
+</P
+><PRE
+CLASS="programlisting"
+>&#13;int hci_read_remote_name(int sock, const bdaddr_t *ba, int len, 
+                         char *name, int timeout)
+</PRE
+><P
+>&#13;<TT
+CLASS="literal"
+>hci_read_remote_name</TT
+> tries for at most
+<TT
+CLASS="literal"
+>timeout</TT
+> milliseconds to use the socket
+<TT
+CLASS="literal"
+>sock</TT
+> to query the user-friendly name of the device with
+Bluetooth address <TT
+CLASS="literal"
+>ba</TT
+>.  On success,
+<TT
+CLASS="literal"
+>hci_read_remote_name</TT
+> returns 0 and copies at most the first
+<TT
+CLASS="literal"
+>len</TT
+> bytes of the device's user-friendly name into
+<TT
+CLASS="literal"
+>name</TT
+>.  On failure, it returns -1 and sets
+<TT
+CLASS="literal"
+>errno</TT
+> accordingly.
+</P
+></DIV
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN407"
+HREF="c404.html#AEN407"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.bluez.org/lists.html"
+TARGET="_top"
+>&#13;http://www.bluez.org/lists.html</A
+></P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN454"
+HREF="c404.html#AEN454"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>for the
+curious, it makes a call to <TT
+CLASS="literal"
+>socket(AF_BLUETOOTH, SOCK_RAW,
+BTPROTO_HCI)</TT
+>, followed by a call to <TT
+CLASS="literal"
+>bind</TT
+> with the
+specified resource number.</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN484"
+HREF="c404.html#AEN484"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="https://www.bluetooth.org/foundry/assignnumb/document/baseband"
+TARGET="_top"
+>https://www.bluetooth.org/foundry/assignnumb/document/baseband</A
+></P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN487"
+HREF="c404.html#AEN487"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+><A
+HREF="http://www.bluetooth.org/spec"
+TARGET="_top"
+>http://www.bluetooth.org/spec</A
+></P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x380.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x502.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Alternatives</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>RFCOMM sockets</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
