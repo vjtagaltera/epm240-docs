@@ -6,7 +6,7 @@ set(SRC_FILES
 )
 
 set(SVR_FILES
-	rfcomm-server.c
+	rfcomm-server-sdp.c
 	secondsrc.c
 )
 
