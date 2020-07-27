@@ -1,0 +1,68 @@
+
+
+search  bluez spp profile
+
+https://connectivity-staging.s3.us-east-2.amazonaws.com/s3fs-public/2018-10/Legacy%20BT%20Profile%20Integration%20with%20BlueZ%20Stack.pdf
+Legacy_BT_Profile_Integration_with_BlueZ_Stack.pdf
+
+  configure and compile bluez-5.4.1
+
+    sudo./configure --disable-systemd --enable-tools
+    sudo makesudo make install
+    sudo mv /usr/local/sbin/hciconfig /usr/sbin
+    sudo mv /usr/local/bin/gatttool /usr/sbin
+
+  init 
+
+    <load bt firmware>
+    hciattach /dev/ttyUSB0 bcsp 921600
+    hciconfig hci1 up
+
+  spp profile
+
+    rfcomm connect /dev/rcfomm0 00:16:A4:00:E3:36
+
+
+
+search  rfcomm device
+
+https://unix.stackexchange.com/questions/128531/rfcomm-device-seems-to-be-missing-dev-rfcomm0
+
+    rfcomm bind 0 <bdaddr> [channel]
+
+https://www.amd.e-technik.uni-rostock.de/ma/gol/lectures/wirlec/bluetooth_info/rfcomm.html
+
+
+
+search  Can't create RFCOMM TTY: Address already in use
+https://www.raspberrypi.org/forums/viewtopic.php?t=168521
+
+search  getty setsid operation not permitted
+https://unix.stackexchange.com/questions/196704/getty-start-from-command-line
+
+  eventually here is the operations sequence: 
+
+  server terminal 1: rfcomm watch hci0
+  client terminal 1: rfcomm connect /dev/rfcomm0 <server bt bdaddr>
+  server terminal 2: su root -c "/sbin/getty -L rfcomm0 0 vt100"
+  client terminal 2: screen /dev/rfcomm0 9600
+
+  or on server
+
+    # rfcomm watch hci0 1 ./ivk.sh {}
+    # cat ivk.sh
+    #!/bin/sh
+    
+    cmd="/sbin/getty -L $1 0 vt100"
+    echo cmd "$cmd" >> /dev/pts/0
+    
+    su root -c "$cmd" > /dev/null 2>&1 &
+
+
+
+search  bluez pair
+https://stackoverflow.com/questions/14820004/bluetooth-pairing-in-c-bluez-on-linux
+
+
+
+
