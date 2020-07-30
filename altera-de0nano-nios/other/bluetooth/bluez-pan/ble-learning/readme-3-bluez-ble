@@ -1,0 +1,33 @@
+
+
+search  bluez ble
+
+https://unix.stackexchange.com/questions/203504/using-bluez-to-access-bluetooth-low-energy-devices
+
+    timeout -s SIGINT 5s hcitool -i hci0 lescan --passive
+    gatttool -i hci0 -b BC:6A:29:AC:2E:B4 -I
+
+ https://www.jaredwolff.com/get-started-with-bluetooth-low-energy/
+
+    connect
+    primary
+    char-desc
+    char-read-hnd <handle>
+    char-write-req <handle> <data>
+
+https://elinux.org/images/3/32/Doing_Bluetooth_Low_Energy_on_Linux.pdf
+Doing Bluetooth Low Energy on Linux
+
+
+
+search  gatttool connection refused
+
+https://esf.eurotech.com/docs/how-to-use-bluetooth-le
+
+    btmgmt le on
+
+https://stackoverflow.com/questions/32947807/cannot-connect-to-ble-device-on-raspberry-pi
+
+    gatttool -t random -b DD:9D:0B:43:A1:77 -I
+
+
