@@ -21,4 +21,111 @@ https://github.com/mooshim/Mooshimeter-PythonAPI
 
 
 
+code diff to capture service uuid in advertisment and scan-request-response:
+
+~/bglib/Python/Examples
+$ git remote -v
+origin  https://github.com/jrowberg/bglib (fetch)
+origin  https://github.com/jrowberg/bglib (push)
+
+~/bglib/Python/Examples
+$ git diff
+diff --git a/Python/Examples/bglib_test_hr_collector.py b/Python/Examples/bglib_test_hr_collector.py
+old mode 100644
+new mode 100755
+index bd76cce..f620887
+--- a/Python/Examples/bglib_test_hr_collector.py
++++ b/Python/Examples/bglib_test_hr_collector.py
+@@ -146,6 +146,11 @@ STATE_FINDING_ATTRIBUTES = 3
+ STATE_LISTENING_MEASUREMENTS = 4
+ state = STATE_STANDBY
+
++g_senders = [ ] # [ mac, mac, ... ]
++g_uuids = { } # { mac:uuid, ... }
++g_init_adv_count = 0 # adv received before init_ok
++g_init_ok = False
++
+ # handler to notify of an API parser timeout condition
+ def my_timeout(sender, args):
+     # might want to try the following lines to reset, though it probably
+@@ -180,6 +185,40 @@ def my_ble_evt_gap_scan_response(sender, args):
+                     for i in xrange((len(this_field) - 1) / 16):
+                         ad_services.append(this_field[-1 - i*16 : -17 - i*16 : -1])
+
++    if not g_init_ok:
++        global g_init_adv_count
++        g_init_adv_count += 1
++
++    ## sender bdaddr
++    sdr = args["sender"]
++    senderstr = "%02X:%02X:%02X:%02X:%02X:%02X" % (sdr[5], sdr[4], sdr[3],
++                                                   sdr[2], sdr[1], sdr[0] )
++    ## keep sender bdaddr
++    if not senderstr in g_senders and g_init_ok:
++        g_senders.append(senderstr)
++        print(" len %d sender %s" % (len(g_senders), senderstr))
++
++    for i,s in enumerate(ad_services):
++        sz = len(s)
++        if sz != 2 and sz != 4 and sz != 16:
++            print("  Error: uuid size not 2, 4, or 16")
++        uuid_prt = ""
++        for idx,v in enumerate(s):
++            if idx == 4 or idx == 6 or idx == 8 or idx == 10:
++                uuid_prt += "-"
++            uuid_prt += "%02X" % v
++        older = g_uuids.get(senderstr, "")
++        if older != uuid_prt:
++            if g_init_ok:
++                g_uuids[senderstr] = uuid_prt
++                print("  %s %d adv %s service %s" % (" " * 32, i+1, senderstr, uuid_prt))
++            else:
++                print("  %s %d adv %s service %s dropped %d" % (
++                        " " * 32, i+1, senderstr, uuid_prt, g_init_adv_count))
++
++    if not g_init_ok:
++        return
++
+     # check for 0x180A (official heart rate service UUID)
+     if uuid_hr_service in ad_services:
+         if not args['sender'] in peripheral_list:
+@@ -334,6 +373,8 @@ def main():
+
+     # start scanning now
+     print "Scanning for BLE peripherals..."
++    global g_init_ok
++    g_init_ok = True
+     ble.send_command(ser, ble.ble_cmd_gap_discover(1))
+     ble.check_activity(ser, 1)
+
+diff --git a/Python/Examples/bglib_test_scanner.py b/Python/Examples/bglib_test_scanner.py
+old mode 100644
+new mode 100755
+index aadb0f7..669da88
+--- a/Python/Examples/bglib_test_scanner.py
++++ b/Python/Examples/bglib_test_scanner.py
+@@ -67,8 +67,8 @@ def my_ble_evt_gap_scan_response(sender, args):
+
+ def main():
+     # NOTE: CHANGE THESE TO FIT YOUR TEST SYSTEM
+-    port_name = "com5"
+-    baud_rate = 38400
++    port_name = "com4" #"com5"
++    baud_rate = 115200 #38400
+     packet_mode = True
+
+     # create BGLib object
+@@ -98,6 +98,10 @@ def main():
+     ble.send_command(ser, ble.ble_cmd_gap_end_procedure())
+     ble.check_activity(ser, 1)
+
++    # get system address
++    ble.send_command(ser, ble.ble_cmd_system_address_get())
++    ble.check_activity(ser, 1)
++
+     # set scan parameters
+     ble.send_command(ser, ble.ble_cmd_gap_set_scan_parameters(0xC8, 0xC8, 1))
+     ble.check_activity(ser, 1)
+
+
 
