@@ -1,0 +1,32 @@
+
+
+ref: 
+ ../bluez-pan/ble-learning/readme-4-uuid-service
+   tutorial: 
+        https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-characteristics-a-beginners-tutorial
+   code: 
+        https://github.com/NordicSemiconductor/nrf5-ble-tutorial-characteristic
+        https://github.com/NordicPlayground/nrf5-ble-tutorial-characteristic
+
+
+features: 
+  [1] 
+
+
+code diff:
+
+diff --git a/pca10040/s132/config/sdk_config.h b/pca10040/s132/config/sdk_config.h
+index 35469a0..ff3a923 100644
+--- a/pca10040/s132/config/sdk_config.h
++++ b/pca10040/s132/config/sdk_config.h
+@@ -7245,7 +7245,7 @@
+ // <e> NRF_LOG_ENABLED - Logging module for nRF5 SDK
+ //==========================================================
+ #ifndef NRF_LOG_ENABLED
+-#define NRF_LOG_ENABLED 0
++#define NRF_LOG_ENABLED 1
+ #endif
+ // <e> NRF_LOG_USES_COLORS - If enabled then ANSI escape code for colors is prefixed to every string
+ //==========================================================
+
+

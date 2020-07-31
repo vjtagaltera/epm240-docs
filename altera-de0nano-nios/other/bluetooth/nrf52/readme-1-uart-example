@@ -1,0 +1,89 @@
+
+
+versions: ses 3.4.0, nrf5 sdk 15.0.0
+
+
+
+search  nrf52 uart example error 0x80 gatt no resources
+
+https://devzone.nordicsemi.com/f/nordic-q-a/37275/what-causes-error-0x80-gatt-no-resources
+
+  reason: too many open connections, data in buffer queued ...
+
+
+
+diff to get ble uart example to echo: 
+
+--- a/main.c
++++ b/main.c
+@@ -184,6 +184,38 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
+     APP_ERROR_HANDLER(nrf_error);
+ }
+
++static int handle_echo(int data_in)^M
++{^M
++    static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];^M
++    static uint8_t index = 0;^M
++    uint32_t       err_code = NRF_SUCCESS;^M
++^M
++            data_array[index] = (uint8_t)( data_in & 0xff );^M
++            index++;^M
++^M
++            if ((data_array[index - 1] == '\n') || (index >= (m_ble_nus_max_data_len)) || ^M
++                    (data_array[index - 1] == '\0') )^M
++            {^M
++                NRF_LOG_INFO("Ready to send data over BLE NUS");^M
++                NRF_LOG_HEXDUMP_INFO(data_array, index);^M
++^M
++                do^M
++                {^M
++                    uint16_t length = (uint16_t)index;^M
++                    err_code = ble_nus_data_send(&m_nus, data_array, &length, m_conn_handle);^M
++                    if ( (err_code != NRF_ERROR_INVALID_STATE) && (err_code != NRF_ERROR_BUSY) &&^M
++                         (err_code != NRF_ERROR_NOT_FOUND) )^M
++                    {^M
++                        if ( err_code != NRF_SUCCESS) {^M
++                            break;^M
++                        }^M
++                    }^M
++                } while (err_code == NRF_ERROR_BUSY);^M
++^M
++                index = 0;^M
++            }^M
++    return err_code;^M
++}^M
+
+ /**@brief Function for handling the data from the Nordic UART Service.
+  *
+@@ -202,9 +234,12 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
+
+         NRF_LOG_DEBUG("Received data from BLE NUS. Writing data on UART.");
+         NRF_LOG_HEXDUMP_DEBUG(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
++        NRF_LOG_INFO("Received data from BLE NUS. Writing data on UART.");^M
++        NRF_LOG_HEXDUMP_INFO(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);^M
+
+         for (uint32_t i = 0; i < p_evt->params.rx_data.length; i++)
+         {
++            handle_echo(p_evt->params.rx_data.p_data[i]);^M
+             do
+             {
+                 err_code = app_uart_put(p_evt->params.rx_data.p_data[i]);
+@@ -217,8 +252,14 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
+         }
+         if (p_evt->params.rx_data.p_data[p_evt->params.rx_data.length - 1] == '\r')
+         {
++            handle_echo('\n');^M
++            NRF_LOG_INFO("  haneld_echo(\'\\n\')");^M
+             while (app_uart_put('\n') == NRF_ERROR_BUSY);
+         }
++        else{^M
++            handle_echo(0);^M
++            NRF_LOG_INFO("  haneld_echo(0)");^M
++        }^M
+     }
+
+ }
+
+
+
+

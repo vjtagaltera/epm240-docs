@@ -1,0 +1,122 @@
+
+
+ref: 
+ ../bluez-pan/ble-learning/readme-4-uuid-service
+   tutorial: https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-services-a-beginners-tutorial
+   code: https://github.com/NordicPlayground/nrf51-ble-tutorial-service
+   code directory: 'SDK 15.0.0/nrf5-ble-tutorial-service'
+
+
+features: 
+  [1] service uuid
+  [2] connection handle
+  [3] adv the service
+
+
+code diff:
+diff --git a/main.c b/main.c
+index 3ee19fa..025a330 100644
+--- a/main.c
++++ b/main.c
+@@ -126,9 +126,16 @@ BLE_ADVERTISING_DEF(m_advertising);
+ static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID;                        /**< Handle of the current connection. */
+
+ // STEP 1: Declare a ble_os_t service structure for our application
++static ble_os_t m_our_service;
+
+ // STEP 5: Declare variable holding our service UUID
+-
++static ble_uuid_t m_adv_uuids[] =
++{
++    {
++        BLE_UUID_OUR_SERVICE,
++        BLE_UUID_TYPE_VENDOR_BEGIN
++    }
++};
+
+ static void advertising_start(bool erase_bonds);
+
+@@ -359,6 +366,8 @@ static void services_init(void)
+     APP_ERROR_CHECK(err_code);
+
+        // STEP 2: Add code to initialize the services used by the application.
++        memset(&m_our_service, 0, sizeof(m_our_service));
++        our_service_init(&m_our_service);
+
+ }
+
+@@ -470,6 +479,7 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
+             break;
+
+         case BLE_ADV_EVT_IDLE:
++            NRF_LOG_INFO("Idle advertising.");
+             sleep_mode_enter();
+             break;
+
+@@ -502,6 +512,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
+             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+             err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
+             APP_ERROR_CHECK(err_code);
++            NRF_LOG_INFO("Connection handle %u.", m_conn_handle);
+             break;
+
+         case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
+@@ -665,7 +676,8 @@ static void advertising_init(void)
+     init.advdata.flags                   = BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE;
+
+        // STEP 6: Declare and instantiate the scan response
+-
++       init.srdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
++        init.srdata.uuids_complete.p_uuids  = m_adv_uuids;
+
+     init.config.ble_adv_fast_enabled  = true;
+     init.config.ble_adv_fast_interval = APP_ADV_INTERVAL;
+diff --git a/our_service.c b/our_service.c
+index edb6e6e..9e3d28a 100644
+--- a/our_service.c
++++ b/our_service.c
+@@ -54,13 +54,23 @@ void our_service_init(ble_os_t * p_our_service)
+ {
+
+     // STEP 3: Declare 16 bit service and 128 bit base UUIDs and add them to BLE stack table
++    uint32_t   err_code;
++    ble_uuid_t        service_uuid;
++    ble_uuid128_t     base_uuid = BLE_UUID_OUR_BASE_UUID;
++    service_uuid.uuid = BLE_UUID_OUR_SERVICE;
++    err_code = sd_ble_uuid_vs_add(&base_uuid, &service_uuid.type);
++    APP_ERROR_CHECK(err_code);
+
+        // STEP 4: Add our service
++        err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY,
++                                    &service_uuid,
++                                    &p_our_service->service_handle);
++        APP_ERROR_CHECK(err_code);
+
+     // Print messages to Segger Real Time Terminal
+     // UNCOMMENT THE FOUR LINES BELOW AFTER INITIALIZING THE SERVICE OR THE EXAMPLE WILL NOT COMPILE.
+-//    SEGGER_RTT_WriteString(0, "Executing our_service_init().\n"); // Print message to RTT to the application flow
+-//    SEGGER_RTT_printf(0, "Service UUID: 0x%#04x\n", service_uuid.uuid); // Print service UUID should match definition BLE_UUID_OUR_SERVICE
+-//    SEGGER_RTT_printf(0, "Service UUID type: 0x%#02x\n", service_uuid.type); // Print UUID type. Should match BLE_UUID_TYPE_VENDOR_BEGIN. Search for BLE_UUID_TYPES in ble_types.h for more info
+-//    SEGGER_RTT_printf(0, "Service handle: 0x%#04x\n", p_our_service->service_handle); // Print out the service handle. Should match service handle shown in MCP under Attribute values
++    SEGGER_RTT_WriteString(0, "Executing our_service_init().\n"); // Print message to RTT to the application flow
++    SEGGER_RTT_printf(0, "Service UUID: 0x%#04x\n", service_uuid.uuid); // Print service UUID should match definition BLE_UUID_OUR_SERVICE
++    SEGGER_RTT_printf(0, "Service UUID type: 0x%#02x\n", service_uuid.type); // Print UUID type. Should match BLE_UUID_TYPE_VENDOR_BEGIN. Search for BLE_UUID_TYPES in ble_types.h for more info
++    SEGGER_RTT_printf(0, "Service handle: 0x%#04x\n", p_our_service->service_handle); // Print out the service handle. Should match service handle shown in MCP under Attribute values
+ }
+diff --git a/pca10040/s132/config/sdk_config.h b/pca10040/s132/config/sdk_config.h
+index 22d0d6e..ff3a923 100644
+--- a/pca10040/s132/config/sdk_config.h
++++ b/pca10040/s132/config/sdk_config.h
+@@ -7157,7 +7157,7 @@
+ // <e> NRF_LOG_BACKEND_RTT_ENABLED - nrf_log_backend_rtt - Log RTT backend
+ //==========================================================
+ #ifndef NRF_LOG_BACKEND_RTT_ENABLED
+-#define NRF_LOG_BACKEND_RTT_ENABLED 0
++#define NRF_LOG_BACKEND_RTT_ENABLED 1
+ #endif
+ // <o> NRF_LOG_BACKEND_RTT_TEMP_BUFFER_SIZE - Size of buffer for partially processed strings.
+ // <i> Size of the buffer is a trade-off between RAM usage and processing.
+
+
+
+

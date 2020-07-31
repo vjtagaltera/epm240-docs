@@ -1,0 +1,85 @@
+
+
+ref: 
+ ../bluez-pan/ble-learning/readme-4-uuid-service
+   tutorial: https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-advertising-a-beginners-tutorial
+   code: https://github.com/NordicPlayground/nrf51-ble-tutorial-advertising
+   code directory: nrf52-ble-tutorial-advertising
+
+
+
+diff --git a/main.c b/main.c
+index 59197df..b2038ce 100644
+--- a/main.c
++++ b/main.c
+@@ -82,7 +82,7 @@
+ #include "nrf_log_default_backends.h"
+
+
+-#define DEVICE_NAME                     "HelloWorld"                       /**< Name of device. Will be included in the advertising data. */
++#define DEVICE_NAME                     "HelloWorld-Long-Long-23456789!"                       /**< Name of device. Will be included in the advertising data. */^M
+ #define APP_ADV_INTERVAL                300                                     /**< The advertising interval (in units of 0.625 ms. This value corresponds to 187.5 ms). */
+
+ #define APP_ADV_DURATION                18000                                   /**< The advertising duration (180 seconds) in units of 10 milliseconds. */
+@@ -276,6 +276,10 @@ static void gap_params_init(void)
+
+        /*err_code = sd_ble_gap_appearance_set(BLE_APPEARANCE_);
+        APP_ERROR_CHECK(err_code); */
++       #if 01^M
++       err_code = sd_ble_gap_appearance_set(BLE_APPEARANCE_GENERIC_EYE_GLASSES);^M
++       APP_ERROR_CHECK(err_code); ^M
++       #endif^M
+
+     memset(&gap_conn_params, 0, sizeof(gap_conn_params));
+
+@@ -425,6 +429,7 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
+             break;
+
+         case BLE_ADV_EVT_IDLE:
++            NRF_LOG_INFO("Idle advertising.");^M
+             sleep_mode_enter();
+             break;
+
+@@ -616,7 +621,26 @@ static void advertising_init(void)
+
+     memset(&init, 0, sizeof(init));
+
+-    init.advdata.name_type               = BLE_ADVDATA_FULL_NAME;
++    #if 01^M
++    ble_advdata_manuf_data_t                  manuf_data; //Variable to hold manufacturer specific data^M
++    uint8_t data[]                            = "Somea!"; //Our data to advertise^M
++    manuf_data.company_identifier             =  0x0059; //Nordics company ID^M
++    manuf_data.data.p_data                    = data;^M
++    manuf_data.data.size                      = sizeof(data);^M
++    init.advdata.p_manuf_specific_data = &manuf_data;^M
++    #endif^M
++    #if 01^M
++    ble_advdata_manuf_data_t                  manuf_data_r; //Variable to hold manufacturer specific data^M
++    uint8_t data_r[]                            = "Somealotdata!"; //Our data to advertise^M
++    manuf_data_r.company_identifier             =  0x0059; //Nordics company ID^M
++    manuf_data_r.data.p_data                    = data;^M
++    manuf_data_r.data.size                      = sizeof(data);^M
++    init.srdata.p_manuf_specific_data = &manuf_data_r;^M
++    init.srdata.name_type               = BLE_ADVDATA_NO_NAME;^M
++    #endif^M
++^M
++    init.advdata.name_type               = BLE_ADVDATA_SHORT_NAME;//BLE_ADVDATA_FULL_NAME;^M
++    init.advdata.short_name_len = 6;^M
+     init.advdata.include_appearance      = true;
+     init.advdata.flags                   = BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE;
+     init.advdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
+diff --git a/pca10040/s132/config/sdk_config.h b/pca10040/s132/config/sdk_config.h
+index bd4a73b..09b60b8 100644
+--- a/pca10040/s132/config/sdk_config.h
++++ b/pca10040/s132/config/sdk_config.h
+@@ -7157,7 +7157,7 @@
+ // <e> NRF_LOG_BACKEND_RTT_ENABLED - nrf_log_backend_rtt - Log RTT backend
+ //==========================================================
+ #ifndef NRF_LOG_BACKEND_RTT_ENABLED
+-#define NRF_LOG_BACKEND_RTT_ENABLED 0
++#define NRF_LOG_BACKEND_RTT_ENABLED 1^M
+ #endif
+ // <o> NRF_LOG_BACKEND_RTT_TEMP_BUFFER_SIZE - Size of buffer for partially processed strings.
+ // <i> Size of the buffer is a trade-off between RAM usage and processing.
+
+
