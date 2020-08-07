@@ -1,0 +1,841 @@
+Script started on 2020-08-06 12:29:32-0700
+
+[root@rk1808:~]# 
+[root@rk1808:~]# ls -l
+total 0
+
+
+[root@rk1808:~]# 
+[root@rk1808:~]# pwd
+/root
+
+
+[root@rk1808:~]# cd ..
+[root@rk1808:/]# ls -l
+total 106
+drwxr-xr-x   2 root root  4096 Jul 22 05:52 bin
+-rw-r--r--   1 root root 30195 Jul 21 21:58 busybox.config
+lrwxrwxrwx   1 root root     8 Jul 22 05:42 data -> userdata
+drwxr-xr-x  13 root root  2840 Aug  5 23:41 dev
+drwxr-xr-x  20 root root  4096 Aug  5 23:41 etc
+-rwxr-xr-x   1 root root   178 Jul 22 05:52 init
+drwxr-xr-x   9 root root  4096 Jul 21 21:58 lib
+lrwxrwxrwx   1 root root     3 Jul 22 04:02 lib64 -> lib
+lrwxrwxrwx   1 root root    11 Jul 22 04:16 linuxrc -> bin/busybox
+drwx------   2 root root 16384 Jul 22 05:53 lost+found
+drwxr-xr-x  10 root root  4096 Jul 22 05:45 media
+lrwxrwxrwx   1 root root    23 Jul 21 21:58 misc -> /dev/block/by-name/misc
+drwxr-xr-x   3 root root  4096 Jul 22 05:42 mnt
+drwxr-xr-x   4 root root  1024 Jul 22 23:10 oem
+drwxr-xr-x   2 root root  4096 Jul 21 21:58 opt
+dr-xr-xr-x 122 root root     0 Jan  1  1970 proc
+drwxr-xr-x  16 root root  4096 Jul 22 05:52 rockchip_test
+drwx------   2 root root  4096 Jul 25 00:06 root
+drwxr-xr-x   6 root root   340 Aug  5 23:41 run
+drwxr-xr-x   2 root root  4096 Jul 21 21:58 sbin
+lrwxrwxrwx   1 root root    10 Jul 22 05:42 sdcard -> mnt/sdcard
+dr-xr-xr-x  15 root root     0 Aug  5 23:41 sys
+drwxr-xr-x   4 root root  4096 Jul 22 05:42 system
+-rw-r--r--   1 root root    59 Jul 22 05:52 timestamp
+drwxrwxrwt   5 root root   260 Aug  5 23:41 tmp
+lrwxrwxrwx   1 root root    10 Jul 22 05:42 udisk -> media/usb0
+drwxr-xr-x   9 root root  1024 Jul 25 02:36 userdata
+drwxr-xr-x  10 root root  4096 Jul 21 21:58 usr
+drwxr-xr-x   6 root root  4096 Jul 22 05:52 var
+
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# ifconfig
+eth0      Link encap:Ethernet  HWaddr 34:BA:9A:6F:26:ED  
+          inet addr:192.168.168.168  Bcast:0.0.0.0  Mask:255.255.255.0
+          inet6 addr: fe80::5ac8:c1fb:17aa:b9b4/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:1703 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:164 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:128899 (125.8 KiB)  TX bytes:24319 (23.7 KiB)
+          Interrupt:35 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:68 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:68 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1 
+          RX bytes:4976 (4.8 KiB)  TX bytes:4976 (4.8 KiB)
+
+wlan0     Link encap:Ethernet  HWaddr C0:84:7D:95:A2:90  
+          inet addr:169.254.193.234  Bcast:169.254.255.255  Mask:255.255.0.0
+          inet6 addr: fe80::31ae:a98a:72ee:9f6e/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:1131 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:385176 (376.1 KiB)
+
+[root@rk1808:/]# 
+[root@rk1808:/]# ip addr show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+    link/ether 34:ba:9a:6f:26:ed brd ff:ff:ff:ff:ff:ff
+    inet 192.168.168.168/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet 192.168.17.104/24 brd 192.168.17.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5ac8:c1fb:17aa:b9b4/64 scope link 
+       valid_lft forever preferred_lft forever
+3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+    link/ether c0:84:7d:95:a2:90 brd ff:ff:ff:ff:ff:ff
+    inet 169.254.193.234/16 brd 169.254.255.255 scope global wlan0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::31ae:a98a:72ee:9f6e/64 scope link 
+       valid_lft forever preferred_lft forever
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# cd /etc
+[root@rk1808:/etc]# ls -l
+total 340
+-rw-r--r-- 1 root root  9100 Jul 21 21:59 MiniGUI.cfg
+drwxr-xr-x 2 root root  4096 Jul 22 05:45 UPower
+drwxr-xr-x 2 root root  4096 Jul 22 05:52 bash_completion.d
+drwxr-xr-x 3 root root  4096 Jul 22 04:27 dbus-1
+-rw-r--r-- 1 root root  1182 Jul 22 04:36 dhcpcd.conf
+-rw-r--r-- 1 root root    42 Jul 22 23:03 dhcpcd.duid
+-r-------- 1 root root   192 Jul 22 23:03 dhcpcd.secret
+-rwxr-xr-x 1 root root   101 Jul 21 21:58 dnsmasq.conf
+-rw-r--r-- 1 root root 12474 Jul 22 04:33 drirc
+drwxr-xr-x 3 root root  4096 Jul 22 04:27 fonts
+-rw-r--r-- 1 root root   618 Jul 22 05:42 fstab
+-rw-r--r-- 1 root root   351 Jul 22 05:53 group
+-rw-r--r-- 1 root root 82358 Jul 22 04:45 hostapd.conf
+-rw-r--r-- 1 root root     7 Jul 22 05:52 hostname
+-rw-r--r-- 1 root root    37 Jul 22 05:52 hosts
+drwxr-xr-x 2 root root  4096 Jul 21 21:58 init.d
+-rw-r--r-- 1 root root  1061 Jul 21 21:58 inittab
+-rw-r--r-- 1 root root   240 Jul 21 21:58 input-event-daemon.conf
+-rw-r--r-- 1 root root  1180 Jul 22 04:17 inputrc
+drwxr-xr-x 2 root root  4096 Jul 22 05:36 iqfiles
+-rw-r--r-- 1 root root    28 Jul 22 05:52 issue
+-rw-r--r-- 1 root root 28409 Jul 22 05:52 ld.so.cache
+drwxr-xr-x 2 root root  4096 Jul 22 04:45 libnl
+lrwxrwxrwx 1 root root    29 Jul 22 05:45 localtime -> ../usr/share/zoneinfo/Etc/UTC
+-rw-r--r-- 1 root root   808 Jul 22 04:36 mke2fs.conf
+lrwxrwxrwx 1 root root    19 Jul 21 21:58 mtab -> ../proc/self/mounts
+drwxr-xr-x 6 root root  4096 Jul 21 21:58 network
+-rw-r--r-- 1 root root   230 Jul 22 05:52 nsswitch.conf
+-rw-r--r-- 1 root root   317 Jul 22 04:57 ntp.conf
+lrwxrwxrwx 1 root root    21 Jul 22 05:52 os-release -> ../usr/lib/os-release
+-rw-r--r-- 1 root root   452 Jul 22 05:53 passwd
+drwxr-xr-x 5 root root  4096 Jul 22 05:04 pm
+-rwxr-xr-x 1 root root   522 Jul 21 21:58 power-key.sh
+drwxr-xr-x 5 root root  4096 Jul 21 21:58 ppp
+-rw-r--r-- 1 root root   344 Jul 21 21:58 profile
+drwxr-xr-x 2 root root  4096 Jul 21 21:58 profile.d
+-rw-r--r-- 1 root root  2744 Jul 21 21:58 protocols
+-rw------- 1 root root   512 Aug  5 23:41 random-seed
+drwxr-xr-x 2 root root  4096 Jul 22 04:43 rc_keymaps
+-rw-r--r-- 1 root root  7013 Jul 22 04:43 rc_maps.cfg
+lrwxrwxrwx 1 root root    18 Jul 21 21:58 resolv.conf -> ../tmp/resolv.conf
+drwxr-xr-x 4 root root  4096 Jul 21 21:58 resolvconf
+-rw-r--r-- 1 root root 10873 Jul 21 21:58 services
+-rw------- 1 root root   305 Jul 22 05:53 shadow
+-rw-r--r-- 1 root root    10 Jul 22 04:17 shells
+drwxr-xr-x 2 root root  4096 Jul 22 05:52 ssh
+drwxr-xr-x 6 root root  4096 Jul 22 04:16 ssl
+-rw-r--r-- 1 root root     8 Jul 22 05:45 timezone
+-rwxr-xr-x 1 root root   656 Jul 22 05:43 toybrick.conf
+-rwxr-xr-x 1 root root   656 Jul 27 01:16 toybrick.conf.backup
+drwxr-xr-x 4 root root  4096 Jul 22 04:26 udev
+drwxr-xr-x 4 root root  4096 Jul 22 05:45 usbmount
+-rw-r--r-- 1 root root    93 Jul 22 05:52 version
+-rw-r--r-- 1 root root    66 Jul 21 21:58 wpa_supplicant.conf
+drwxr-xr-x 3 root root  4096 Jul 21 21:58 xdg
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# cat os-release
+NAME=Buildroot
+VERSION=2018.02-rc3-g716f9866f6
+ID=buildroot
+VERSION_ID=2018.02-rc3
+PRETTY_NAME="Buildroot 2018.02-rc3"
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# cat hosts
+127.0.0.1	localhost
+127.0.1.1	rk1808
+[root@rk1808:/etc]# cat hostname
+rk1808
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# cat fstab
+# <file system>			<mount pt>		<type>		<options>		<dump>	<pass>
+/dev/root			/			ext2		rw,noauto		0	1
+proc				/proc			proc		defaults		0	0
+devpts				/dev/pts		devpts		defaults,gid=5,mode=620	0	0
+tmpfs				/dev/shm		tmpfs		mode=0777		0	0
+tmpfs				/tmp			tmpfs		mode=1777		0	0
+tmpfs				/run			tmpfs		mode=0755,nosuid,nodev	0	0
+sysfs				/sys			sysfs		defaults		0	0
+debug				/sys/kernel/debug	debugfs		defaults		0	0
+pstore				/sys/fs/pstore		pstore		defaults		0	0
+/dev/block/by-name/misc		/misc			emmc		defaults		0	0
+/dev/block/by-name/oem		/oem			ext2		defaults		0	2
+/dev/block/by-name/userdata	/userdata		ext2		rw,auto		0	2
+[root@rk1808:/etc]# ls -l fstab
+-rw-r--r-- 1 root root 618 Jul 22 05:42 fstab
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# ls -l inittab
+-rw-r--r-- 1 root root 1061 Jul 21 21:58 inittab
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# cat inittab
+# /etc/inittab
+#
+# Copyright (C) 2001 Erik Andersen <andersen@codepoet.org>
+#
+# Note: BusyBox init doesn't support runlevels.  The runlevels field is
+# completely ignored by BusyBox init. If you want runlevels, use
+# sysvinit.
+#
+# Format for each entry: <id>:<runlevels>:<action>:<process>
+#
+# id        == tty to run on, or empty for /dev/console
+# runlevels == ignored
+# action    == one of sysinit, respawn, askfirst, wait, and once
+# process   == program to run
+
+# Startup the system
+::sysinit:/bin/mount -t proc proc /proc
+::sysinit:/bin/mount -o remount,rw /
+::sysinit:/bin/mkdir -p /dev/pts
+::sysinit:/bin/mkdir -p /dev/shm
+::sysinit:/bin/mount -a 2>/dev/null
+::sysinit:/bin/hostname -F /etc/hostname
+# now run any rc scripts
+::respawn:-/bin/sh
+::sysinit:/etc/init.d/rcS
+
+# Put a getty on the serial port
+#ttyFIQ0::respawn:/sbin/getty -L  ttyFIQ0 0 vt100 # GENERIC_SERIAL
+
+# Stuff to do for the 3-finger salute
+#::ctrlaltdel:/sbin/reboot
+
+# Stuff to do before rebooting
+::shutdown:/etc/init.d/rcK
+::shutdown:/sbin/swapoff -a
+::shutdown:/bin/umount -a -r
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# 
+[root@rk1808:/etc]# cd init.d
+[root@rk1808:/etc/init.d]# ls -l
+total 100
+-rwxr-xr-x 1 root root   670 Jul 22 04:16 S01logging
+-rwxr-xr-x 1 root root   390 Jul 21 21:58 S10init
+-rwxr-xr-x 1 root root  1594 Jul 22 04:26 S10udev
+-rwxr-xr-x 1 root root  1272 Jul 22 04:46 S20urandom
+-rwxr-xr-x 1 root root 10275 Jul 22 05:42 S21mountall.sh
+-rwxr-xr-x 1 root root  1691 Jul 22 04:18 S30dbus
+-rwxr-xr-x 1 root root   494 Jul 22 04:46 S40network
+-rwxr-xr-x 1 root root   479 Jul 22 05:36 S40rkisp_3A
+-rwxr-xr-x 1 root root   750 Jul 22 04:36 S41dhcpcd
+-rwxr-xr-x 1 root root   499 Jul 22 05:43 S43webserver
+-rwxr-xr-x 1 root root   763 Jul 22 04:57 S49ntp
+-rwxr-xr-x 1 root root   840 Jul 21 21:58 S50launcher
+-rwxr-xr-x 1 root root   532 Jul 22 05:03 S50sshd
+-rwxr-xr-x 1 root root  7678 Jul 22 05:42 S50usbdevice
+-rwxr-xr-x 1 root root   494 Jul 22 05:37 S60NPU_init
+-rwxr-xr-x 1 root root   777 Jul 22 05:42 S66load_wifi_modules
+-rwxr-xr-x 1 root root   462 Jul 22 04:36 S80dnsmasq
+-rwxr-xr-x 1 root root  1585 Jul 21 21:58 S90pppd
+-rwxr-xr-x 1 root root   383 Jul 22 05:42 S99_auto_reboot
+-rwxr-xr-x 1 root root   468 Jul 22 04:46 S99input-event-daemon
+-rwxr-xr-x 1 root root   423 Jul 22 04:46 rcK
+-rwxr-xr-x 1 root root   475 Jul 25 04:42 rcS
+[root@rk1808:/etc/init.d]# 
+[root@rk1808:/etc/init.d]# cat S10init
+#!/bin/sh
+#
+# Do some initialzation for Rockchip Linux SDK....
+#
+
+judge_date_err()
+{
+    year=`date +%Y`
+    if [ $year -lt 2020 ]; then
+        echo "date [$year] error! temporarily set to 20200301!"
+        date -s 20200301
+    fi
+}
+
+hwclock -s
+judge_date_err
+
+case "$1" in
+start)
+	echo "Welcome to Rockchip Linux SDK"
+	;;
+stop)
+	;;
+*)
+	echo "Usage: $0 {start|stop}"
+	exit 1
+esac
+
+exit 0
+[root@rk1808:/etc/init.d]# 
+[root@rk1808:/etc/init.d]# 
+[root@rk1808:/etc/init.d]# ls /usr/bin/rk_wifi_init
+ls: cannot access '/usr/bin/rk_wifi_init': No such file or directory
+[root@rk1808:/etc/init.d]# cat S66load_wifi_modules
+#!/bin/sh
+
+case "$1" in
+	start)
+		if [ ! -d "/userdata/" ];then
+			echo "userdata is not mounted!!!"
+			exit 1
+		fi
+
+		mkdir -p /userdata/cfg
+		mkdir -p /userdata/bin
+
+		if [ ! -f "/userdata/cfg/wpa_supplicant.conf" ];then
+			echo "wpa_supplicant.conf init"
+			cp /etc/wpa_supplicant.conf /userdata/cfg/
+			sync
+		fi
+
+		if [ ! -f "/userdata/bin/dnsmasq.conf" ];then
+			echo "wpa_supplicant.conf init"
+			cp /etc/dnsmasq.conf /userdata/bin/
+			sync
+		fi
+
+		printf "load wifi modules: "
+     insmod /system/lib/modules/bcmdhd.ko
+		rk_wifi_init BT_TTY_DEV
+		[ $? = 0 ] && echo "OK" || echo "FAIL"
+
+		wl PM 0
+
+		;;
+	stop)
+
+		echo 0 > /sys/class/rfkill/rfkill0/state
+
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart}"
+		exit 1
+esac
+
+exit 0
+[root@rk1808:/etc/init.d]# which rk_wifi_init
+[root@rk1808:/etc/init.d]# 
+[root@rk1808:/etc/init.d]# find / -name rk_wifi_init
+find: /proc/5341: No such file or directory
+[root@rk1808:/etc/init.d]# 
+[root@rk1808:/etc/init.d]# 
+[root@rk1808:/etc/init.d]# cd /bin
+[root@rk1808:/bin]# ls
+ash	 clockdiff	dumpkmap  gzip	    ls		mv	       rm	  stty	       uname
+base64	 cp		echo	  hostname  lsattr	netstat        rmdir	  su	       usleep
+bash	 cpio		egrep	  join	    mkdir	nice	       run-parts  sync	       vdir
+busybox  date		false	  kill	    mknod	pidof	       sed	  tar	       vi
+cat	 dd		fdflush   link	    mktemp	ping	       setarch	  touch        watch
+chattr	 df		fgrep	  linux32   more	pipe_progress  setpriv	  tracepath    zcat
+chgrp	 dir		getopt	  linux64   mount	printenv       setserial  traceroute6
+chmod	 dmesg		grep	  ln	    mountpoint	ps	       sh	  true
+chown	 dnsdomainname	gunzip	  login     mt		pwd	       sleep	  umount
+[root@rk1808:/bin]# ls -1 | wc
+     78      78     477
+[root@rk1808:/bin]# cd ../sbin
+[root@rk1808:/sbin]# ls
+arp	    e4crypt	 hdparm    iproute   losetup	 mkfs.vfat     resolvconf	  sysctl
+arping	    fdisk	 hwclock   iprule    lsmod	 mklost+found  resolvconf-org	  syslogd
+badblocks   filefrag	 ifconfig  iptunnel  makedevs	 mkswap        rmmod		  tune2fs
+blkid	    freeramdisk  ifdown    iwconfig  mdev	 modprobe      route		  udevadm
+devmem	    fsck	 ifup	   iwgetid   mkdosfs	 nameif        runlevel		  udevd
+dhcpcd	    fsck.ext2	 init	   iwlist    mke2fs	 pivot_root    setconsole	  udhcpc
+dumpe2fs    fsck.ext3	 insmod    iwpriv    mkfs.ext2	 poweroff      start-stop-daemon  uevent
+e2freefrag  fsck.ext4	 ip	   iwspy     mkfs.ext3	 rarpd	       sulogin		  vconfig
+e2fsck	    fstrim	 ipaddr    klogd     mkfs.ext4	 rdisc	       swapoff		  watchdog
+e2label     getty	 iplink    loadkmap  mkfs.fat	 reboot        swapon
+e2undo	    halt	 ipneigh   logsave   mkfs.msdos  resize2fs     switch_root
+[root@rk1808:/sbin]# ls -1 | wc
+     86      86     695
+[root@rk1808:/sbin]# cd ../usr/bin
+[root@rk1808:/usr/bin]# ls
+ CMakeFiles			      hex2hcd		      runcon
+ MPEG2TransportStreamIndexer	      hexdump		      rz
+ QLauncher			      hostapd_cli	      sapWatch
+'['				      hostid		      sbcdec
+'[['				      id		      sbcenc
+ adbd				      input-event-daemon      sbcinfo
+ alsamixer			      install		      scp
+ amixer				      io		      sdpscanner
+ aplay				      ipcrm		      sdptool
+ ar				      ipcs		      seq
+ arecord			      iperf		      setkeycodes
+ aserver			      ir-ctl		      setsid
+ awk				      ir-keytable	      sftp
+ b2sum				      ivtv-ctl		      sha1sum
+ base32				      killall		      sha224sum
+ basename			      kms-steal-crtc	      sha256sum
+ bccmd				      kms-universal-planes    sha384sum
+ bluealsa			      kmstest		      sha3sum
+ bluealsa-aplay			      l2ping		      sha512sum
+ bluealsa-rfcomm		      l2test		      shred
+ bluemoon			      last		      shuf
+ bluetooth-player		      less		      sort
+ bluetooth-reconnect		      libevdev-tweak-device   sox
+ bluetoothctl			      libinput		      soxi
+ bluez5_utils_wifi_config.sh	      libinput-debug-events   split
+ brcm_patchram_plus1		      libinput-list-devices   sqlite3
+ bt_init.sh			      live555MediaServer      ssh
+ bt_load_broadcom_firmware	      live555ProxyServer      ssh-add
+ bt_pcba_test			      lockfile-check	      ssh-agent
+ btattach			      lockfile-create	      ssh-keygen
+ btmon				      lockfile-remove	      ssh-keyscan
+ bunzip2			      lockfile-touch	      ssl_client
+ bzcat				      logger		      start_rknn.sh
+ camera_cap_test		      logname		      start_usb.sh
+ cec-compliance			      lrz		      stat
+ cec-ctl			      lsof		      stdbuf
+ cec-follower			      lspci		      strace
+ chcon				      lsscsi		      strace-log-merge
+ chrt				      lsusb		      stressapptest
+ chvt				      lsz		      strings
+ ciptool			      lzcat		      sum
+ cksum				      lzma		      svc
+ clear				      mail-lock		      sz
+ cmp				      mail-touchlock	      tac
+ comm				      mail-unlock	      tail
+ coreutils			      md5sum		      taskset
+ crontab			      media-ctl		      tee
+ csplit				      memtester		      telnet
+ cut				      mesg		      test
+ cx18-ctl			      microcom		      testAMRAudioStreamer
+ dbus-cleanup-sockets		      minimad		      testDVVideoStreamer
+ dbus-daemon			      mkfifo		      testH264VideoStreamer
+ dbus-launch			      modeprint		      testH264VideoToTransportStream
+ dbus-monitor			      modetest		      testH265VideoStreamer
+ dbus-run-session		      mouse-dpi-tool	      testH265VideoToTransportStream
+ dbus-send			      mp3play.sh	      testMKVStreamer
+ dbus-test-tool			      mpg123		      testMP3Receiver
+ dbus-update-activation-environment   mpg123-id3dump	      testMP3Streamer
+ dbus-uuidgen			      mpg123-strip	      testMPEG1or2AudioVideoStreamer
+ dc				      mpi_dec_mt_test	      testMPEG1or2ProgramToTransportStream
+ ddcmon				      mpi_dec_multi_test      testMPEG1or2Splitter
+ deallocvt			      mpi_dec_test	      testMPEG1or2VideoReceiver
+ decode-dimms			      mpi_enc_multi_test      testMPEG1or2VideoStreamer
+ decode-edid			      mpi_enc_test	      testMPEG2TransportReceiver
+ decode-vaio			      mpi_rc2_test	      testMPEG2TransportStreamTrickPlay
+ decode_tm6000			      mpi_rc_test	      testMPEG2TransportStreamer
+ dhd				      mpi_test		      testMPEG4VideoStreamer
+ dhd_priv			      mpp_info_test	      testOggStreamer
+ dhrystone			      mpris-proxy	      testOnDemandRTSPServer
+ diff				      mtdev-test	      testRTSPClient
+ dircolors			      nl		      testRelay
+ dirname			      nohup		      testReplicator
+ dos2unix			      nproc		      testWAVAudioStreamer
+ du				      npu_uvc_device.sh       tftp
+ dvb-fe-tool			      nslookup		      time
+ dvb-format-convert		      numfmt		      timeout
+ dvbv5-daemon			      od		      top
+ dvbv5-scan			      on_ac_power	      touchpad-edge-detector
+ dvbv5-zap			      openRTSP		      tr
+ eject				      openvt		      trace
+ env				      out123		      traceroute
+ event_rpcgen.py		      passwd		      truncate
+ evtest				      paste		      tsort
+ expand				      patch		      tty
+ expr				      pathchk		      udevadm
+ f2py				      pcre2grep		      unexpand
+ faad				      pcre2test		      uniq
+ factor				      pcregrep		      unix2dos
+ fallocate			      pcretest		      unlink
+ fc-cache			      perf		      unlzma
+ fc-cat				      pinky		      unxz
+ fc-conflist			      play		      unzip
+ fc-list			      playSIP		      upower
+ fc-match			      pm-is-supported	      uptime
+ fc-pattern			      poff		      usbdevice
+ fc-query			      pon		      users
+ fc-scan			      pr		      uudecode
+ fc-validate			      printf		      uuencode
+ find				      procrank		      uvc
+ flock				      proptest		      uvc_MJPEG.sh
+ fmt				      ptx		      uvc_app
+ fold				      python		      v4l2-compliance
+ free				      python2		      v4l2-ctl
+ fuser				      python2.7		      v4l2-sysfs-path
+ gapplication			      qcamera		      vbltest
+ gatt-service			      qfm		      vendor_storage
+ gatttool			      qml		      vobStreamer
+ gdbus				      qmlpreview	      vpu_api_test
+ gio				      qmlscene		      w
+ gio-querymodules		      qmltestrunner	      watch_ntpd.sh
+ glmarktest.sh			      qplayer		      wayland-scanner
+ gresource			      rctest		      waylandtest.sh
+ groups				      rds-ctl		      wc
+ gsettings			      readlink		      wcap-decode
+ gst-device-monitor-1.0		      realpath		      weston
+ gst-discoverer-1.0		      rec		      weston-info
+ gst-inspect-1.0		      registerRTSPStream      weston-terminal
+ gst-launch-1.0			      renice		      wget
+ gst-play-1.0			      reset		      which
+ gst-stats-1.0			      resize		      who
+ gst-typefind-1.0		      resize-helper	      whoami
+ gstaudiotest.sh		      restart_rknn.sh	      wifi_start.sh
+ gstmp3play.sh			      rfcomm		      wl
+ gstmp4play.sh			      rk_airkiss	      xargs
+ gstvideoplay.sh		      rk_npu_uvc_device       xmlcatalog
+ gstvideotest.sh		      rkisp_3A_server	      xmllint
+ gstwavplay.sh			      rkisp_demo	      xmlwf
+ hciattach			      rkmpp_dec_test	      xxd
+ hciconfig			      rkmpp_enc_test	      xz
+ hcidump			      rknn_demo		      xzcat
+ hcitool			      rknn_server	      yes
+ hcitop				      rtlbtmp
+ head				      rtwpriv
+[root@rk1808:/usr/bin]# ls -1 | wc
+    397     397    4086
+[root@rk1808:/usr/bin]# cd ../sbin
+[root@rk1808:/usr/sbin]# ls 
+alsaconf  dnsmasq     i2c-stub-from-dump  inetd		pm-powersave	   rdate	wpa_passphrase
+alsactl   eeprog      i2cdetect		  iw		pm-suspend	   readprofile	wpa_supplicant
+arping	  ether-wake  i2cdump		  killall5	pm-suspend-hybrid  setlogcons
+chat	  fbset       i2cget		  loadfont	pppd		   sshd
+chroot	  fdformat    i2cset		  ntpd		pppdump		   ubirename
+crond	  fsfreeze    i2ctransfer	  partprobe	pppoe-discovery    v4l2-dbg
+dnsd	  hostapd     in.tftpd		  pm-hibernate	pppstats	   wpa_cli
+[root@rk1808:/usr/sbin]# ls -1 | wc
+     44      44     403
+[root@rk1808:/usr/sbin]# cd ..
+[root@rk1808:/usr]# ls -l
+total 60
+drwxr-xr-x  4 root root  8192 Jul 21 21:58 bin
+drwxr-xr-x  2 root root  4096 Jul 22 05:41 etc
+drwxr-xr-x 22 root root 24576 Jul 21 21:58 lib
+lrwxrwxrwx  1 root root     3 Jul 22 04:02 lib64 -> lib
+drwxr-xr-x  7 root root  4096 Jul 22 05:52 libexec
+drwxr-xr-x  3 root root  4096 Jul 22 05:41 local
+drwxr-xr-x  9 root root  4096 Jul 22 05:31 qml
+drwxr-xr-x  2 root root  4096 Jul 22 05:52 sbin
+drwxr-xr-x 27 root root  4096 Jul 22 05:52 share
+[root@rk1808:/usr]# ls share
+OpenCV	      bash-completion  gettext		 icon	  npu	     usbmount	       zoneinfo
+X11	      dbus-1	       glib-2.0		 libdrm   rknn_demo  wayland-sessions
+alsa	      dhcpcd	       gst-plugins-base  locale   terminfo   weston
+applications  fontconfig       gstreamer-1.0	 minigui  udhcpc     xml
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# ls -ld ../lib
+drwxr-xr-x 9 root root 4096 Jul 21 21:58 ../lib
+[root@rk1808:/usr]# ls -l ../lib
+total 3100
+drwxr-xr-x 2 root root    4096 Jul 22 05:52 bash
+drwxr-xr-x 4 root root    4096 Jul 22 05:52 dhcpcd
+-rwxr-xr-x 1 root root  145688 Jul 22 05:52 ld-2.29.so
+lrwxrwxrwx 1 root root      10 Jul 22 04:08 ld-linux-aarch64.so.1 -> ld-2.29.so
+-rwxr-xr-x 1 root root   14616 Jul 22 05:52 libanl-2.29.so
+lrwxrwxrwx 1 root root      14 Jul 22 04:08 libanl.so.1 -> libanl-2.29.so
+lrwxrwxrwx 1 root root      18 Jul 22 04:14 libatomic.so -> libatomic.so.1.2.0
+lrwxrwxrwx 1 root root      18 Jul 22 04:14 libatomic.so.1 -> libatomic.so.1.2.0
+-rwxr-xr-x 1 root root   18176 Jul 22 05:52 libatomic.so.1.2.0
+lrwxrwxrwx 1 root root      17 Jul 22 04:20 libblkid.so.1 -> libblkid.so.1.1.0
+-rwxr-xr-x 1 root root  238072 Jul 22 05:52 libblkid.so.1.1.0
+-rwxr-xr-x 1 root root 1288088 Jul 22 05:52 libc-2.29.so
+lrwxrwxrwx 1 root root      12 Jul 22 04:08 libc.so.6 -> libc-2.29.so
+-rwxr-xr-x 1 root root   30752 Jul 22 05:52 libcrypt-2.29.so
+lrwxrwxrwx 1 root root      16 Jul 22 04:08 libcrypt.so.1 -> libcrypt-2.29.so
+-rwxr-xr-x 1 root root   14328 Jul 22 05:52 libdl-2.29.so
+lrwxrwxrwx 1 root root      13 Jul 22 04:08 libdl.so.2 -> libdl-2.29.so
+lrwxrwxrwx 1 root root      13 Jul 22 04:14 libgcc_s.so -> libgcc_s.so.1
+-rw-r--r-- 1 root root   63656 Jul 22 05:52 libgcc_s.so.1
+-rwxr-xr-x 1 root root  587712 Jul 22 05:52 libm-2.29.so
+lrwxrwxrwx 1 root root      12 Jul 22 04:08 libm.so.6 -> libm-2.29.so
+lrwxrwxrwx 1 root root      17 Jul 22 04:20 libmount.so.1 -> libmount.so.1.1.0
+-rwxr-xr-x 1 root root  263616 Jul 22 05:52 libmount.so.1.1.0
+-rwxr-xr-x 1 root root   18488 Jul 22 05:52 libnss_dns-2.29.so
+lrwxrwxrwx 1 root root      18 Jul 22 04:08 libnss_dns.so.2 -> libnss_dns-2.29.so
+-rwxr-xr-x 1 root root   43216 Jul 22 05:52 libnss_files-2.29.so
+lrwxrwxrwx 1 root root      20 Jul 22 04:08 libnss_files.so.2 -> libnss_files-2.29.so
+-rwxr-xr-x 1 root root  139800 Jul 22 05:52 libpthread-2.29.so
+lrwxrwxrwx 1 root root      18 Jul 22 04:08 libpthread.so.0 -> libpthread-2.29.so
+-rwxr-xr-x 1 root root   72192 Jul 22 05:52 libresolv-2.29.so
+lrwxrwxrwx 1 root root      17 Jul 22 04:08 libresolv.so.2 -> libresolv-2.29.so
+-rwxr-xr-x 1 root root   27328 Jul 22 05:52 librt-2.29.so
+lrwxrwxrwx 1 root root      13 Jul 22 04:08 librt.so.1 -> librt-2.29.so
+lrwxrwxrwx 1 root root      16 Jul 22 04:26 libudev.so.1 -> libudev.so.1.6.3
+-rwxr-xr-x 1 root root  109808 Jul 22 05:52 libudev.so.1.6.3
+-rwxr-xr-x 1 root root   10344 Jul 22 05:52 libutil-2.29.so
+lrwxrwxrwx 1 root root      15 Jul 22 04:08 libutil.so.1 -> libutil-2.29.so
+lrwxrwxrwx 1 root root      16 Jul 22 04:20 libuuid.so.1 -> libuuid.so.1.3.0
+-rwxr-xr-x 1 root root   22752 Jul 22 05:52 libuuid.so.1.3.0
+drwxr-xr-x 2 root root    4096 Jul 21 21:58 lsb
+drwxr-xr-x 2 root root    4096 Jul 22 05:37 modules
+drwxr-xr-x 2 root root    4096 Jul 22 04:17 pkgconfig
+drwxr-xr-x 2 root root    4096 Jul 21 21:58 resolvconf
+drwxr-xr-x 3 root root    4096 Jul 22 05:52 udev
+[root@rk1808:/usr]# ls lib
+alsa-lib			    libfontconfig.so.1			    libnl-idiag-3.so.200
+bluetooth			    libfontconfig.so.1.12.0		    libnl-idiag-3.so.200.26.0
+cl_viv_vx_ext.h			    libform.so				    libnl-nf-3.so
+dri				    libform.so.6			    libnl-nf-3.so.200
+fonts				    libform.so.6.0			    libnl-nf-3.so.200.26.0
+gio				    libfreetype.so			    libnl-route-3.so
+gstreamer-1.0			    libfreetype.so.6			    libnl-route-3.so.200
+libBasicUsageEnvironment.so	    libfreetype.so.6.15.0		    libnl-route-3.so.200.26.0
+libBasicUsageEnvironment.so.1	    libgbm.so				    libnl-xfrm-3.so
+libBasicUsageEnvironment.so.1.0.0   libgbm.so.1				    libnl-xfrm-3.so.200
+libCLC.so			    libgbm.so.1.0.0			    libnl-xfrm-3.so.200.26.0
+libEGL.so			    libgio-2.0.so			    libogg.so
+libEGL.so.1			    libgio-2.0.so.0			    libogg.so.0
+libEGL.so.1.0.0			    libgio-2.0.so.0.5400.2		    libogg.so.0.8.3
+libGAL.so			    libglapi.so				    libopencv_core.so
+libGLESv1_CM.so			    libglapi.so.0			    libopencv_core.so.3.3
+libGLESv1_CM.so.1		    libglapi.so.0.0.0			    libopencv_core.so.3.3.0
+libGLESv1_CM.so.1.1.0		    libglib-2.0.so			    libopencv_dnn.so
+libGLESv2.so			    libglib-2.0.so.0			    libopencv_dnn.so.3.3
+libGLESv2.so.2			    libglib-2.0.so.0.5400.2		    libopencv_dnn.so.3.3.0
+libGLESv2.so.2.0.0		    libgmodule-2.0.so			    libopencv_imgcodecs.so
+libNNGPUBinary.so		    libgmodule-2.0.so.0			    libopencv_imgcodecs.so.3.3
+libNNVXCBinary.so		    libgmodule-2.0.so.0.5400.2		    libopencv_imgcodecs.so.3.3.0
+libOpenCL.so			    libgobject-2.0.so			    libopencv_imgproc.so
+libOpenVX.so			    libgobject-2.0.so.0			    libopencv_imgproc.so.3.3
+libOpenVXU.so			    libgobject-2.0.so.0.5400.2		    libopencv_imgproc.so.3.3.0
+libOvx12VXCBinary.so		    libgomp.so				    libout123.so
+libQt5Bluetooth.so.5		    libgomp.so.1			    libout123.so.0
+libQt5Bluetooth.so.5.12		    libgomp.so.1.0.0			    libout123.so.0.2.1
+libQt5Bluetooth.so.5.12.2	    libgroupsock.so			    libpanel.so
+libQt5Concurrent.so.5		    libgroupsock.so.8			    libpanel.so.6
+libQt5Concurrent.so.5.12	    libgroupsock.so.8.1.1		    libpanel.so.6.0
+libQt5Concurrent.so.5.12.2	    libgstadaptivedemux-1.0.so		    libpcap.so
+libQt5Core.so.5			    libgstadaptivedemux-1.0.so.0	    libpcap.so.1
+libQt5Core.so.5.12		    libgstadaptivedemux-1.0.so.0.1404.0     libpcap.so.1.8.1
+libQt5Core.so.5.12.2		    libgstallocators-1.0.so		    libpcre.so
+libQt5DBus.so.5			    libgstallocators-1.0.so.0		    libpcre.so.1
+libQt5DBus.so.5.12		    libgstallocators-1.0.so.0.1404.0	    libpcre.so.1.2.9
+libQt5DBus.so.5.12.2		    libgstapp-1.0.so			    libpcre2-16.so
+libQt5Gui.so.5			    libgstapp-1.0.so.0			    libpcre2-16.so.0
+libQt5Gui.so.5.12		    libgstapp-1.0.so.0.1404.0		    libpcre2-16.so.0.6.0
+libQt5Gui.so.5.12.2		    libgstaudio-1.0.so			    libpcre2-8.so
+libQt5Multimedia.so.5		    libgstaudio-1.0.so.0		    libpcre2-8.so.0
+libQt5Multimedia.so.5.12	    libgstaudio-1.0.so.0.1404.0		    libpcre2-8.so.0.6.0
+libQt5Multimedia.so.5.12.2	    libgstbadaudio-1.0.so		    libpcre2-posix.so
+libQt5MultimediaGstTools.so.5	    libgstbadaudio-1.0.so.0		    libpcre2-posix.so.2
+libQt5MultimediaGstTools.so.5.12    libgstbadaudio-1.0.so.0.1404.0	    libpcre2-posix.so.2.0.0
+libQt5MultimediaGstTools.so.5.12.2  libgstbadvideo-1.0.so		    libpcrecpp.so
+libQt5MultimediaQuick.so.5	    libgstbadvideo-1.0.so.0		    libpcrecpp.so.0
+libQt5MultimediaQuick.so.5.12	    libgstbadvideo-1.0.so.0.1404.0	    libpcrecpp.so.0.0.1
+libQt5MultimediaQuick.so.5.12.2     libgstbase-1.0.so			    libpcreposix.so
+libQt5MultimediaWidgets.so.5	    libgstbase-1.0.so.0			    libpcreposix.so.0
+libQt5MultimediaWidgets.so.5.12     libgstbase-1.0.so.0.1404.0		    libpcreposix.so.0.0.5
+libQt5MultimediaWidgets.so.5.12.2   libgstbasecamerabinsrc-1.0.so	    libpixman-1.so
+libQt5Network.so.5		    libgstbasecamerabinsrc-1.0.so.0	    libpixman-1.so.0
+libQt5Network.so.5.12		    libgstbasecamerabinsrc-1.0.so.0.1404.0  libpixman-1.so.0.34.0
+libQt5Network.so.5.12.2		    libgstcodecparsers-1.0.so		    libpng.so
+libQt5OpenGL.so.5		    libgstcodecparsers-1.0.so.0		    libpng.so.3
+libQt5OpenGL.so.5.12		    libgstcodecparsers-1.0.so.0.1404.0	    libpng.so.3.59.0
+libQt5OpenGL.so.5.12.2		    libgstcontroller-1.0.so		    libpng12.so
+libQt5PrintSupport.so.5		    libgstcontroller-1.0.so.0		    libpng12.so.0
+libQt5PrintSupport.so.5.12	    libgstcontroller-1.0.so.0.1404.0	    libpng12.so.0.59.0
+libQt5PrintSupport.so.5.12.2	    libgstfft-1.0.so			    libpng16.so
+libQt5Qml.so.5			    libgstfft-1.0.so.0			    libpng16.so.16
+libQt5Qml.so.5.12		    libgstfft-1.0.so.0.1404.0		    libpng16.so.16.34.0
+libQt5Qml.so.5.12.2		    libgstinsertbin-1.0.so		    libpython2.7.so
+libQt5Quick.so.5		    libgstinsertbin-1.0.so.0		    libpython2.7.so.1.0
+libQt5Quick.so.5.12		    libgstinsertbin-1.0.so.0.1404.0	    libreadline.so
+libQt5Quick.so.5.12.2		    libgstisoff-1.0.so			    libreadline.so.7
+libQt5QuickParticles.so.5	    libgstisoff-1.0.so.0		    libreadline.so.7.0
+libQt5QuickParticles.so.5.12	    libgstisoff-1.0.so.0.1404.0		    librga.so
+libQt5QuickParticles.so.5.12.2	    libgstmpegts-1.0.so			    librkisp.so
+libQt5QuickShapes.so.5		    libgstmpegts-1.0.so.0		    librkisp_api.so
+libQt5QuickShapes.so.5.12	    libgstmpegts-1.0.so.0.1404.0	    librknn_runtime.so
+libQt5QuickShapes.so.5.12.2	    libgstnet-1.0.so			    librkuvc.so
+libQt5QuickTest.so.5		    libgstnet-1.0.so.0			    librockchip_mpp.so
+libQt5QuickTest.so.5.12		    libgstnet-1.0.so.0.1404.0		    librockchip_mpp.so.0
+libQt5QuickTest.so.5.12.2	    libgstpbutils-1.0.so		    librockchip_mpp.so.1
+libQt5QuickWidgets.so.5		    libgstpbutils-1.0.so.0		    librockchip_vpu.so
+libQt5QuickWidgets.so.5.12	    libgstpbutils-1.0.so.0.1404.0	    librockchip_vpu.so.0
+libQt5QuickWidgets.so.5.12.2	    libgstphotography-1.0.so		    librockchip_vpu.so.1
+libQt5Sql.so.5			    libgstphotography-1.0.so.0		    librtmp.so
+libQt5Sql.so.5.12		    libgstphotography-1.0.so.0.1404.0	    librtmp.so.1
+libQt5Sql.so.5.12.2		    libgstplayer-1.0.so			    libsbc.so
+libQt5Svg.so.5			    libgstplayer-1.0.so.0		    libsbc.so.1
+libQt5Svg.so.5.12		    libgstplayer-1.0.so.0.1404.0	    libsbc.so.1.2.1
+libQt5Svg.so.5.12.2		    libgstreamer-1.0.so			    libsndfile.so
+libQt5Test.so.5			    libgstreamer-1.0.so.0		    libsndfile.so.1
+libQt5Test.so.5.12		    libgstreamer-1.0.so.0.1404.0	    libsndfile.so.1.0.28
+libQt5Test.so.5.12.2		    libgstriff-1.0.so			    libsox.so
+libQt5WaylandClient.so		    libgstriff-1.0.so.0			    libsox.so.3
+libQt5WaylandClient.so.5	    libgstriff-1.0.so.0.1404.0		    libsox.so.3.0.0
+libQt5WaylandClient.so.5.12	    libgstrtp-1.0.so			    libsqlite3.so
+libQt5WaylandClient.so.5.12.2	    libgstrtp-1.0.so.0			    libsqlite3.so.0
+libQt5Widgets.so.5		    libgstrtp-1.0.so.0.1404.0		    libsqlite3.so.0.8.6
+libQt5Widgets.so.5.12		    libgstrtsp-1.0.so			    libss.so
+libQt5Widgets.so.5.12.2		    libgstrtsp-1.0.so.0			    libss.so.2
+libQt5Xml.so.5			    libgstrtsp-1.0.so.0.1404.0		    libss.so.2.0
+libQt5Xml.so.5.12		    libgstsdp-1.0.so			    libssl.so
+libQt5Xml.so.5.12.2		    libgstsdp-1.0.so.0			    libssl.so.1.0.0
+libQt5XmlPatterns.so.5		    libgstsdp-1.0.so.0.1404.0		    libstdc++.so
+libQt5XmlPatterns.so.5.12	    libgsttag-1.0.so			    libstdc++.so.6
+libQt5XmlPatterns.so.5.12.2	    libgsttag-1.0.so.0			    libstdc++.so.6.0.22
+libRKOpenCL.so			    libgsttag-1.0.so.0.1404.0		    libstdc++.so.6.0.22-gdb.py
+libSDL2-2.0.so.0		    libgsturidownloader-1.0.so		    libtheora.so
+libSDL2-2.0.so.0.7.0		    libgsturidownloader-1.0.so.0	    libtheora.so.0
+libSDL2.so			    libgsturidownloader-1.0.so.0.1404.0     libtheora.so.0.3.10
+libSDL2_gfx-1.0.so.0		    libgstvideo-1.0.so			    libtheoradec.so
+libSDL2_gfx-1.0.so.0.0.1	    libgstvideo-1.0.so.0		    libtheoradec.so.1
+libSDL2_gfx.so			    libgstvideo-1.0.so.0.1404.0		    libtheoradec.so.1.1.4
+libSDL2_ttf-2.0.so.0		    libgstwayland-1.0.so		    libtheoraenc.so
+libSDL2_ttf-2.0.so.0.14.0	    libgstwayland-1.0.so.0		    libtheoraenc.so.1
+libSDL2_ttf.so			    libgstwayland-1.0.so.0.1404.0	    libtheoraenc.so.1.1.2
+libUsageEnvironment.so		    libgstwebrtc-1.0.so			    libturbojpeg.so
+libUsageEnvironment.so.3	    libgstwebrtc-1.0.so.0		    libturbojpeg.so.0
+libUsageEnvironment.so.3.1.0	    libgstwebrtc-1.0.so.0.1404.0	    libturbojpeg.so.0.2.0
+libVSC.so			    libgthread-2.0.so			    libudev.so
+libasound.so			    libgthread-2.0.so.0			    libupower-glib.so
+libasound.so.2			    libgthread-2.0.so.0.5400.2		    libupower-glib.so.3
+libasound.so.2.0.0		    libgudev-1.0.so			    libupower-glib.so.3.0.1
+libblkid.so			    libgudev-1.0.so.0			    libusb-1.0.so
+libbluetooth.so			    libgudev-1.0.so.0.2.0		    libusb-1.0.so.0
+libbluetooth.so.3		    libhistory.so			    libusb-1.0.so.0.1.0
+libbluetooth.so.3.18.16		    libhistory.so.7			    libuuid.so
+libbsd.so			    libhistory.so.7.0			    libv4l
+libbsd.so.0			    libi2c.so				    libv4l1.so
+libbsd.so.0.8.7			    libi2c.so.0				    libv4l1.so.0
+libcairo-gobject.so		    libi2c.so.0.1.0			    libv4l1.so.0.0.0
+libcairo-gobject.so.2		    libical.so				    libv4l2.so
+libcairo-gobject.so.2.11400.10	    libical.so.1			    libv4l2.so.0
+libcairo.so			    libical.so.1.0.1			    libv4l2.so.0.0.0
+libcairo.so.2			    libicalss.so			    libv4l2rds.so
+libcairo.so.2.11400.10		    libicalss.so.1			    libv4l2rds.so.0
+libcom_err.so			    libicalss.so.1.0.1			    libv4l2rds.so.0.0.0
+libcom_err.so.2			    libicalvcal.so			    libv4lconvert.so
+libcom_err.so.2.1		    libicalvcal.so.1			    libv4lconvert.so.0
+libcrypto.so			    libicalvcal.so.1.0.1		    libv4lconvert.so.0.0.0
+libcrypto.so.1.0.0		    libinput.so				    libvorbis.so
+libcurl.so			    libinput.so.10			    libvorbis.so.0
+libcurl.so.4			    libinput.so.10.13.0			    libvorbis.so.0.4.8
+libcurl.so.4.5.0		    libjpeg.so				    libvorbisenc.so
+libcurses.so			    libjpeg.so.62			    libvorbisenc.so.2
+libdbus-1.so			    libjpeg.so.62.3.0			    libvorbisenc.so.2.0.11
+libdbus-1.so.3			    libjpeg.so.8			    libvorbisfile.so
+libdbus-1.so.3.19.4		    libjpeg.so.8.1.2			    libvorbisfile.so.3
+libdrm.so			    libkmod.so				    libvorbisfile.so.3.3.7
+libdrm.so.2			    libkmod.so.2			    libwayland-client.so
+libdrm.so.2.4.0			    libkmod.so.2.3.2			    libwayland-client.so.0
+libdrm_rockchip.so		    libkms.so				    libwayland-client.so.0.3.0
+libdrm_rockchip.so.1		    libkms.so.1				    libwayland-cursor.so
+libdrm_rockchip.so.1.0.0	    libkms.so.1.0.0			    libwayland-cursor.so.0
+libdvbv5.so			    libliveMedia.so			    libwayland-cursor.so.0.0.0
+libdvbv5.so.0			    libliveMedia.so.61			    libwayland-egl.so
+libdvbv5.so.0.0.0		    libliveMedia.so.61.0.0		    libwayland-egl.so.1
+libe2p.so			    liblockfile.so			    libwayland-egl.so.1.0.0
+libe2p.so.2			    liblockfile.so.1			    libwayland-server.so
+libe2p.so.2.3			    liblockfile.so.1.0			    libwayland-server.so.0
+libeasymedia.so			    liblog4cpp.so			    libwayland-server.so.0.1.0
+libeasymedia.so.1.0.1		    liblog4cpp.so.5			    libweston-3
+libevdev.so			    liblog4cpp.so.5.0.6			    libweston-3.so
+libevdev.so.2			    libmad.so				    libweston-3.so.0
+libevdev.so.2.1.20		    libmad.so.0				    libweston-3.so.0.0.0
+libevent-2.1.so.6		    libmad.so.0.2.1			    libweston-desktop-3.so
+libevent-2.1.so.6.0.2		    libmenu.so				    libweston-desktop-3.so.0
+libevent.so			    libmenu.so.6			    libweston-desktop-3.so.0.0.0
+libevent_core-2.1.so.6		    libmenu.so.6.0			    libwfFR.so
+libevent_core-2.1.so.6.0.2	    libminigui_ths-3.2.so.0		    libwpa_client.so
+libevent_core.so		    libminigui_ths-3.2.so.0.0.0		    libxkbcommon.so
+libevent_extra-2.1.so.6		    libminigui_ths.so			    libxkbcommon.so.0
+libevent_extra-2.1.so.6.0.2	    libmount.so				    libxkbcommon.so.0.0.0
+libevent_extra.so		    libmpeg2.so				    libxml2.so
+libevent_openssl-2.1.so.6	    libmpeg2.so.0			    libxml2.so.2
+libevent_openssl-2.1.so.6.0.2	    libmpeg2.so.0.1.0			    libxml2.so.2.9.7
+libevent_openssl.so		    libmpeg2convert.so			    libz.so
+libevent_pthreads-2.1.so.6	    libmpeg2convert.so.0		    libz.so.1
+libevent_pthreads-2.1.so.6.0.2	    libmpeg2convert.so.0.0.0		    libz.so.1.2.11
+libevent_pthreads.so		    libmpg123.so			    modules
+libexpat.so			    libmpg123.so.0			    mpg123
+libexpat.so.1			    libmpg123.so.0.44.2			    npu
+libexpat.so.1.6.7		    libmtdev.so				    os-release
+libext2fs.so			    libmtdev.so.1			    pm-utils
+libext2fs.so.2			    libmtdev.so.1.0.0			    pppd
+libext2fs.so.2.4		    libncurses.so			    python2.7
+libfaad.so			    libncurses.so.6			    qt
+libfaad.so.2			    libncurses.so.6.0			    rkisp
+libfaad.so.2.0.0		    libneuralnetworks.so		    terminfo
+libfaad_drm.so			    libnl-3.so				    traceevent
+libfaad_drm.so.2		    libnl-3.so.200			    udev
+libfaad_drm.so.2.0.0		    libnl-3.so.200.26.0			    v4l1compat.so
+libffi.so			    libnl-genl-3.so			    v4l2convert.so
+libffi.so.6			    libnl-genl-3.so.200			    webui
+libffi.so.6.0.4			    libnl-genl-3.so.200.26.0		    weston
+libfontconfig.so		    libnl-idiag-3.so			    xml2Conf.sh
+[root@rk1808:/usr]# ls -1 lib | wc
+    579     579   10842
+[root@rk1808:/usr]# ls etc
+MiniGUI.cfg
+[root@rk1808:/usr]# ls libexec
+bluetooth		   libinput	ssh-pkcs11-helper		 weston-keyboard
+coreutils		   perf-core	upowerd				 weston-screenshooter
+dbus-daemon-launch-helper  sftp-server	weston-desktop-shell		 weston-simple-im
+gstreamer-1.0		   ssh-keysign	weston-ivi-shell-user-interface
+[root@rk1808:/usr]# ls libexec/bluetooth/
+bluetoothd  obexd
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# ls local
+share
+[root@rk1808:/usr]# ls local/share
+minigui  rknn_demo
+[root@rk1808:/usr]# ls local/share/minigui
+MiniGUI-1280x720.cfg  MiniGUI-2048x1536.cfg  MiniGUI-480x854.cfg  MiniGUI-720x1280.cfg	res
+[root@rk1808:/usr]# ls -l local/share/minigh[Jui
+total 52
+-rw-r--r-- 1 root root 9097 Jul 21 21:59 MiniGUI-1280x720.cfg
+-rw-r--r-- 1 root root 9098 Jul 21 21:59 MiniGUI-2048x1536.cfg
+-rw-r--r-- 1 root root 9099 Jul 21 21:59 MiniGUI-480x854.cfg
+-rw-r--r-- 1 root root 9100 Jul 21 21:59 MiniGUI-720x1280.cfg
+drwxr-xr-x 7 root root 4096 Jul 22 05:41 res
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# ls -l qml
+total 88
+drwxr-xr-x  3 root root  4096 Jul 22 05:27 Qt
+drwxr-xr-x  2 root root  4096 Jul 22 05:52 QtBluetooth
+drwxr-xr-x  2 root root  4096 Jul 22 05:52 QtMultimedia
+drwxr-xr-x  4 root root  4096 Jul 22 05:27 QtQml
+drwxr-xr-x 11 root root  4096 Jul 22 05:32 QtQuick
+drwxr-xr-x  2 root root  4096 Jul 22 05:52 QtQuick.2
+drwxr-xr-x  2 root root  4096 Jul 22 05:52 QtTest
+-rw-r--r--  1 root root 58228 Feb 25  2019 builtins.qmltypes
+[root@rk1808:/usr]# du -sh qml
+7.5M	qml
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# uptime
+ 20:19:43  up  20:38,  1 user,  load average: 1.11, 0.00, 1.08
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# date
+Thu Aug  6 20:19:48 UTC 2020
+[root@rk1808:/usr]# 
+[root@rk1808:/usr]# exit
+Connection to 192.168.17.104 closed.
+exit
+
+Script done on 2020-08-06 13:19:55-0700

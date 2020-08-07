@@ -1,0 +1,798 @@
+Script started on 2020-08-06 13:22:10-0700
+
+/ # 
+/ # 
+/ # uname -a
+Linux rk1808 4.4.185 #1 SMP PREEMPT Wed Aug 7 17:39:51 HKT 2019 aarch64 GNU/Linux
+/ # cat /proc/cmdline
+storagemedia=emmc androidboot.storagemedia=emmc androidboot.mode=normal  androidboot.slot_suffix= androidboot.serialno=c3d9b8674f4b94f6  rootwait earlycon=uart8250,mmio32,0xff550000 console=ttyFIQ0 root=PARTUUID=614e0000-0000 rootfstype=ext4 swiotlb=1 kpti=0 snd_aloop.index=7
+/ # cat /proc/p[Jcpuinfo
+processor	: 0
+BogoMIPS	: 48.00
+Features	: fp asimd aes pmull sha1 sha2 crc32
+CPU implementer	: 0x41
+CPU architecture: 8
+CPU variant	: 0x0
+CPU part	: 0xd04
+CPU revision	: 2
+
+processor	: 1
+BogoMIPS	: 48.00
+Features	: fp asimd aes pmull sha1 sha2 crc32
+CPU implementer	: 0x41
+CPU architecture: 8
+CPU variant	: 0x0
+CPU part	: 0xd04
+CPU revision	: 2
+
+Serial		: ae71a740b7d73152
+/ # 
+/ # 
+/ # pwd
+/
+/ # ls -l
+total 109
+drwxr-xr-x   2 root root  4096 Aug  8  2019 bin
+-rw-r--r--   1 root root 30195 May 27  2019 busybox.config
+lrwxrwxrwx   1 root root     8 Aug  8  2019 data -> userdata
+drwxr-xr-x  13 root root  1440 Aug  5  2017 dev
+drwxr-xr-x  17 root root  4096 Aug  5  2017 etc
+-rwxr-xr-x   1 root root   178 Aug  8  2019 init
+drwxr-xr-x   6 root root  4096 Aug  8  2019 lib
+lrwxrwxrwx   1 root root     3 Aug  7  2019 lib64 -> lib
+lrwxrwxrwx   1 root root    11 Aug  7  2019 linuxrc -> bin/busybox
+drwx------   2 root root 16384 Aug  8  2019 lost+found
+drwxr-xr-x  10 root root  4096 Aug  8  2019 media
+lrwxrwxrwx   1 root root    23 May 27  2019 misc -> /dev/block/by-name/misc
+drwxr-xr-x   3 root root  4096 Aug  8  2019 mnt
+drwxr-xr-x   3 root root  1024 Aug  8  2019 oem
+drwxr-xr-x   2 root root  4096 May 27  2019 opt
+dr-xr-xr-x 109 root root     0 Jan  1  1970 proc
+drwxr-xr-x  15 root root  4096 Aug  8  2019 rockchip_test
+drwx------   2 root root  4096 May 27  2019 root
+drwxr-xr-x   6 root root   320 Aug  5  2017 run
+drwxr-xr-x   2 root root  4096 Aug  8  2019 sbin
+lrwxrwxrwx   1 root root    10 Aug  8  2019 sdcard -> mnt/sdcard
+dr-xr-xr-x  15 root root     0 Aug  5  2017 sys
+drwxr-xr-x   4 root root  4096 Aug  8  2019 system
+-rw-r--r--   1 root root    62 Aug  8  2019 timestamp
+drwxrwxrwt   4 root root   200 Aug  5  2017 tmp
+lrwxrwxrwx   1 root root    10 Aug  8  2019 udisk -> media/usb0
+drwxr-xr-x   6 root root  4096 Aug  5  2017 userdata
+drwxr-xr-x  10 root root  4096 May 27  2019 usr
+drwxr-xr-x   6 root root  4096 Aug  8  2019 var
+/ # 
+/ # 
+/ # ls oem
+200frames_count.h264	    SampleVideo_1280x720_5mb.mp4    lost+found
+SampleJPGImage_500kbmb.jpg  belle-nuit-testchart-1080p.png  piano2-CoolEdit.mp3
+/ # ls media
+usb0  usb1  usb2  usb3	usb4  usb5  usb6  usb7
+/ # ls rockchip_test
+audio	     bluetooth	cpu  flash_test  npu		rockchip_test.sh  video
+auto_reboot  camera	ddr  gpu	 recovery_test	suspend_resume	  wifi
+/ # cd rockch/ # cd rockchip_test/[J
+/rockchip_test # cd video/rockchip_test # cd video/[J
+/rockchip_test/video # ls -l
+total 28
+-rwxr-xr-x 1 root root  1141 Aug  8  2019 test_app_demo_multivideo.sh
+-rwxr-xr-x 1 root root   719 Aug  8  2019 test_gst_multivideo.sh
+-rwxr-xr-x 1 root root   211 Aug  8  2019 test_gst_video.sh
+-rwxr-xr-x 1 root root  1014 Aug  8  2019 video_test.sh
+-rwxr-xr-x 1 root root 10416 Aug  8  2019 videowidget
+/rockchip_test/video # cd ..
+/rockchip_test # ls -l
+total 56
+drwxr-xr-x 3 root root 4096 Aug  8  2019 audio
+drwxr-xr-x 2 root root 4096 Aug  8  2019 auto_reboot
+drwxr-xr-x 2 root root 4096 Aug  8  2019 bluetooth
+drwxr-xr-x 2 root root 4096 Aug  8  2019 camera
+drwxr-xr-x 2 root root 4096 Aug  8  2019 cpu
+drwxr-xr-x 2 root root 4096 Aug  8  2019 ddr
+drwxr-xr-x 2 root root 4096 Aug  8  2019 flash_test
+drwxr-xr-x 2 root root 4096 Aug  8  2019 gpu
+drwxr-xr-x 3 root root 4096 Aug  8  2019 npu
+drwxr-xr-x 2 root root 4096 Aug  8  2019 recovery_test
+-rwxr-xr-x 1 root root 3606 Aug  8  2019 rockchip_test.sh
+drwxr-xr-x 2 root root 4096 Aug  8  2019 suspend_resume
+drwxr-xr-x 2 root root 4096 Aug  8  2019 video
+drwxr-xr-x 2 root root 4096 Aug  8  2019 wifi
+/rockchip_test # cd camera/rockchip_test # cd camera/[J
+/rockchip_test/camera # ls
+camera_rkisp_test.sh  camera_stresstest.sh  camera_test.sh  camera_usb_test.sh
+/rockchip_test/camera # ls -l
+total 16
+-rwxr-xr-x 1 root root  373 Aug  8  2019 camera_rkisp_test.sh
+-rwxr-xr-x 1 root root 1972 Aug  8  2019 camera_stresstest.sh
+-rwxr-xr-x 1 root root 1077 Aug  8  2019 camera_test.sh
+-rwxr-xr-x 1 root root  239 Aug  8  2019 camera_usb_test.sh
+/rockchip_test/camera # 
+/rockchip_test/camera # 
+/rockchip_test/camera # cd ..
+/rockchip_test # cd ..
+/ # ls -l
+total 109
+drwxr-xr-x   2 root root  4096 Aug  8  2019 bin
+-rw-r--r--   1 root root 30195 May 27  2019 busybox.config
+lrwxrwxrwx   1 root root     8 Aug  8  2019 data -> userdata
+drwxr-xr-x  13 root root  1440 Aug  5  2017 dev
+drwxr-xr-x  17 root root  4096 Aug  5  2017 etc
+-rwxr-xr-x   1 root root   178 Aug  8  2019 init
+drwxr-xr-x   6 root root  4096 Aug  8  2019 lib
+lrwxrwxrwx   1 root root     3 Aug  7  2019 lib64 -> lib
+lrwxrwxrwx   1 root root    11 Aug  7  2019 linuxrc -> bin/busybox
+drwx------   2 root root 16384 Aug  8  2019 lost+found
+drwxr-xr-x  10 root root  4096 Aug  8  2019 media
+lrwxrwxrwx   1 root root    23 May 27  2019 misc -> /dev/block/by-name/misc
+drwxr-xr-x   3 root root  4096 Aug  8  2019 mnt
+drwxr-xr-x   3 root root  1024 Aug  8  2019 oem
+drwxr-xr-x   2 root root  4096 May 27  2019 opt
+dr-xr-xr-x 109 root root     0 Jan  1  1970 proc
+drwxr-xr-x  15 root root  4096 Aug  8  2019 rockchip_test
+drwx------   2 root root  4096 May 27  2019 root
+drwxr-xr-x   6 root root   320 Aug  5  2017 run
+drwxr-xr-x   2 root root  4096 Aug  8  2019 sbin
+lrwxrwxrwx   1 root root    10 Aug  8  2019 sdcard -> mnt/sdcard
+dr-xr-xr-x  15 root root     0 Aug  5  2017 sys
+drwxr-xr-x   4 root root  4096 Aug  8  2019 system
+-rw-r--r--   1 root root    62 Aug  8  2019 timestamp
+drwxrwxrwt   4 root root   200 Aug  5  2017 tmp
+lrwxrwxrwx   1 root root    10 Aug  8  2019 udisk -> media/usb0
+drwxr-xr-x   6 root root  4096 Aug  5  2017 userdata
+drwxr-xr-x  10 root root  4096 May 27  2019 usr
+drwxr-xr-x   6 root root  4096 Aug  8  2019 var
+/ # 
+/ # 
+/ # ls system
+etc  lib
+/ # ls system/etc
+firmware
+/ # ls system/lib
+modules
+/ # 
+/ # 
+/ # cd etc
+/etc # ls -l
+total 288
+-rw-r--r-- 1 root root  9097 May 27  2019 MiniGUI.cfg
+drwxr-xr-x 2 root root  4096 Aug  8  2019 UPower
+drwxr-xr-x 2 root root  4096 Aug  8  2019 bash_completion.d
+drwxr-xr-x 3 root root  4096 Aug  7  2019 dbus-1
+-rw-r--r-- 1 root root  1182 Aug  7  2019 dhcpcd.conf
+-rw-r--r-- 1 root root    42 Aug  5  2017 dhcpcd.duid
+-r-------- 1 root root   192 Aug  5  2017 dhcpcd.secret
+-rwxr-xr-x 1 root root   101 May 27  2019 dnsmasq.conf
+-rw-r--r-- 1 root root   619 Aug  8  2019 fstab
+-rw-r--r-- 1 root root   351 Aug  8  2019 group
+-rw-r--r-- 1 root root 82358 Aug  7  2019 hostapd.conf
+-rw-r--r-- 1 root root     7 Aug  8  2019 hostname
+-rw-r--r-- 1 root root    37 Aug  8  2019 hosts
+drwxr-xr-x 2 root root  4096 Jul  1 00:00 init.d
+-rw-r--r-- 1 root root  1061 May 27  2019 inittab
+-rw-r--r-- 1 root root   245 Jun 28  2019 input-event-daemon.conf
+-rw-r--r-- 1 root root  1180 Aug  7  2019 inputrc
+drwxr-xr-x 2 root root  4096 Aug  8  2019 iqfiles
+-rw-r--r-- 1 root root    28 Aug  8  2019 issue
+-rw-r--r-- 1 root root 14297 Aug  8  2019 ld.so.cache
+drwxr-xr-x 2 root root  4096 Aug  7  2019 libnl
+lrwxrwxrwx 1 root root    29 Aug  8  2019 localtime -> ../usr/share/zoneinfo/Etc/UTC
+-rw-r--r-- 1 root root   808 Aug  7  2019 mke2fs.conf
+lrwxrwxrwx 1 root root    19 May 27  2019 mtab -> ../proc/self/mounts
+drwxr-xr-x 6 root root  4096 Aug  7  2019 network
+-rw-r--r-- 1 root root   230 Aug  8  2019 nsswitch.conf
+lrwxrwxrwx 1 root root    21 Aug  8  2019 os-release -> ../usr/lib/os-release
+-rw-r--r-- 1 root root   452 Aug  8  2019 passwd
+drwxr-xr-x 5 root root  4096 Aug  7  2019 pm
+-rwxr-xr-x 1 root root   522 May 29  2019 power-key.sh
+-rw-r--r-- 1 root root   344 May 27  2019 profile
+drwxr-xr-x 2 root root  4096 May 27  2019 profile.d
+-rw-r--r-- 1 root root  2744 May 27  2019 protocols
+-rw------- 1 root root   512 Aug  5  2017 random-seed
+drwxr-xr-x 2 root root  4096 Aug  7  2019 rc_keymaps
+-rw-r--r-- 1 root root  7013 Aug  7  2019 rc_maps.cfg
+lrwxrwxrwx 1 root root    18 May 27  2019 resolv.conf -> ../tmp/resolv.conf
+-rw-r--r-- 1 root root 10873 May 27  2019 services
+-rw------- 1 root root   305 Aug  8  2019 shadow
+-rw-r--r-- 1 root root    10 Aug  7  2019 shells
+drwxr-xr-x 2 root root  4096 Aug  5  2017 ssh
+drwxr-xr-x 6 root root  4096 Aug  7  2019 ssl
+-rw-r--r-- 1 root root     8 Aug  8  2019 timezone
+drwxr-xr-x 4 root root  4096 Aug  7  2019 udev
+drwxr-xr-x 4 root root  4096 Aug  8  2019 usbmount
+-rw-r--r-- 1 root root    75 Aug  8  2019 version
+-rw-r--r-- 1 root root    66 May 29  2019 wpa_supplicant.conf
+drwxr-xr-x 3 root root  4096 May 27  2019 xdg
+/etc # cat os-release
+NAME=Buildroot
+VERSION=2018.02-rc3-01416-g48c9b20
+ID=buildroot
+VERSION_ID=2018.02-rc3
+PRETTY_NAME="Buildroot 2018.02-rc3"
+/etc # 
+/etc # 
+/etc # cat hosts
+127.0.0.1	localhost
+127.0.1.1	rk1808
+/etc # 
+/etc # 
+/etc # cat hostname
+rk1808
+/etc # 
+/etc # cat fstab
+# <file system>			<mount pt>		<type>		<options>		<dump>	<pass>
+/dev/root			/			ext2		rw,noauto		0	1
+proc				/proc			proc		defaults		0	0
+devpts				/dev/pts		devpts		defaults,gid=5,mode=620	0	0
+tmpfs				/dev/shm		tmpfs		mode=0777		0	0
+tmpfs				/tmp			tmpfs		mode=1777		0	0
+tmpfs				/run			tmpfs		mode=0755,nosuid,nodev	0	0
+sysfs				/sys			sysfs		defaults		0	0
+debug				/sys/kernel/debug	debugfs		defaults		0	0
+pstore				/sys/fs/pstore		pstore		defaults		0	0
+/dev/block/by-name/misc		/misc			emmc		defaults		0	0
+/dev/block/by-name/oem		/oem			ext2		defaults		0	2
+/dev/block/by-name/userdata	/userdata		ext2		defaults		0	2
+/etc # 
+/etc # 
+/etc # ls -l inittab
+-rw-r--r-- 1 root root 1061 May 27  2019 inittab
+/etc # cat inittab
+# /etc/inittab
+#
+# Copyright (C) 2001 Erik Andersen <andersen@codepoet.org>
+#
+# Note: BusyBox init doesn't support runlevels.  The runlevels field is
+# completely ignored by BusyBox init. If you want runlevels, use
+# sysvinit.
+#
+# Format for each entry: <id>:<runlevels>:<action>:<process>
+#
+# id        == tty to run on, or empty for /dev/console
+# runlevels == ignored
+# action    == one of sysinit, respawn, askfirst, wait, and once
+# process   == program to run
+
+# Startup the system
+::sysinit:/bin/mount -t proc proc /proc
+::sysinit:/bin/mount -o remount,rw /
+::sysinit:/bin/mkdir -p /dev/pts
+::sysinit:/bin/mkdir -p /dev/shm
+::sysinit:/bin/mount -a 2>/dev/null
+::sysinit:/bin/hostname -F /etc/hostname
+# now run any rc scripts
+::respawn:-/bin/sh
+::sysinit:/etc/init.d/rcS
+
+# Put a getty on the serial port
+#ttyFIQ0::respawn:/sbin/getty -L  ttyFIQ0 0 vt100 # GENERIC_SERIAL
+
+# Stuff to do for the 3-finger salute
+#::ctrlaltdel:/sbin/reboot
+
+# Stuff to do before rebooting
+::shutdown:/etc/init.d/rcK
+::shutdown:/sbin/swapoff -a
+::shutdown:/bin/umount -a -r
+/etc # 
+/etc # 
+/etc # cd init.d
+/etc/init.d # ls -l
+total 84
+-rwxr-xr-x 1 root root   649 Aug  7  2019 S01logging
+-rwxr-xr-x 1 root root   193 May 27  2019 S10init
+-rwxr-xr-x 1 root root  1594 Aug  7  2019 S10udev
+-rwxr-xr-x 1 root root  1272 Aug  7  2019 S20urandom
+-rwxr-xr-x 1 root root 10211 Aug  8  2019 S21mountall.sh
+-rwxr-xr-x 1 root root  1691 Aug  7  2019 S30dbus
+-rwxr-xr-x 1 root root   438 Aug  7  2019 S40network
+-rwxr-xr-x 1 root root   368 Aug  8  2019 S40rkisp_3A
+-rwxr-xr-x 1 root root   642 Aug  7  2019 S41dhcpcd
+-rwxr-xr-x 1 root root   532 Aug  7  2019 S50sshd
+-rwxr-xr-x 1 root root  3611 Aug  8  2019 S50usbdevice
+-rwxr-xr-x 1 root root   719 Jul  1 00:00 S66load_wifi_modules
+-rwxr-xr-x 1 root root   462 Aug  7  2019 S80dnsmasq
+-rwxr-xr-x 1 root root   461 Aug  8  2019 S99NPU_init
+-rwxr-xr-x 1 root root   523 Aug  7  2019 S99_QLauncher_init
+-rwxr-xr-x 1 root root   468 Aug  7  2019 S99input-event-daemon
+-rwxr-xr-x 1 root root   423 Aug  7  2019 rcK
+-rwxr-xr-x 1 root root   408 Aug  7  2019 rcS
+-rwxr-xr-x 1 root root   719 Aug  8  2019 xx-S66load_wifi_modules-original
+/etc/init.d # 
+/etc/init.d # 
+/etc/init.d # cat S10init
+#!/bin/sh
+#
+# Do some initialzation for Rockchip Linux SDK....
+#
+
+case "$1" in
+start)
+	echo "Welcome to Rockchip Linux SDK"
+	;;
+stop)
+	;;
+*)
+	echo "Usage: $0 {start|stop}"
+	exit 1
+esac
+
+exit 0
+/etc/init.d # 
+/etc/init.d # ls -l
+total 84
+-rwxr-xr-x 1 root root   649 Aug  7  2019 S01logging
+-rwxr-xr-x 1 root root   193 May 27  2019 S10init
+-rwxr-xr-x 1 root root  1594 Aug  7  2019 S10udev
+-rwxr-xr-x 1 root root  1272 Aug  7  2019 S20urandom
+-rwxr-xr-x 1 root root 10211 Aug  8  2019 S21mountall.sh
+-rwxr-xr-x 1 root root  1691 Aug  7  2019 S30dbus
+-rwxr-xr-x 1 root root   438 Aug  7  2019 S40network
+-rwxr-xr-x 1 root root   368 Aug  8  2019 S40rkisp_3A
+-rwxr-xr-x 1 root root   642 Aug  7  2019 S41dhcpcd
+-rwxr-xr-x 1 root root   532 Aug  7  2019 S50sshd
+-rwxr-xr-x 1 root root  3611 Aug  8  2019 S50usbdevice
+-rwxr-xr-x 1 root root   719 Jul  1 00:00 S66load_wifi_modules
+-rwxr-xr-x 1 root root   462 Aug  7  2019 S80dnsmasq
+-rwxr-xr-x 1 root root   461 Aug  8  2019 S99NPU_init
+-rwxr-xr-x 1 root root   523 Aug  7  2019 S99_QLauncher_init
+-rwxr-xr-x 1 root root   468 Aug  7  2019 S99input-event-daemon
+-rwxr-xr-x 1 root root   423 Aug  7  2019 rcK
+-rwxr-xr-x 1 root root   408 Aug  7  2019 rcS
+-rwxr-xr-x 1 root root   719 Aug  8  2019 xx-S66load_wifi_modules-original
+/etc/init.d # 
+/etc/init.d # 
+/etc/init.d # cat S66load-[J_wifi_modules
+#!/bin/sh
+
+case "$1" in
+	start)
+		if [ ! -d "/userdata/" ];then
+			echo "userdata is not mounted!!!"
+			exit 1
+		fi
+
+		mkdir -p /userdata/cfg
+		mkdir -p /userdata/bin
+
+		if [ ! -f "/userdata/cfg/wpa_supplicant.conf" ];then
+			echo "wpa_supplicant.conf init"
+			cp /etc/wpa_supplicant.conf /userdata/cfg/
+		fi
+
+		if [ ! -f "/userdata/bin/dnsmasq.conf" ];then
+			echo "wpa_supplicant.conf init"
+			cp /etc/dnsmasq.conf /userdata/bin/
+		fi
+
+		printf "load wifi modules: "
+		rk_wifi_init /dev/ttyS4
+		[ $? = 0 ] && echo "OK" || echo "FAIL"
+
+		wl PM 0
+
+		;;
+	stop)
+
+		echo 0 > /sys/class/rfkill/rfkill0/state
+
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart}"
+		exit 1
+esac
+
+exit 0
+/etc/init.d # 
+/etc/init.d # 
+/etc/init.d # which rk_wifi_init
+/usr/bin/rk_wifi_init
+/etc/init.d # 
+/etc/init.d # 
+/etc/init.d # ls -l /usr/bin/rk_wifi_init
+-rwxr-xr-x 1 root root 27824 Aug  8  2019 /usr/bin/rk_wifi_init
+/etc/init.d # 
+/etc/init.d # 
+/etc/init.d # cd /bin
+/bin # ls
+ash	   dd		  gunzip    mknod	   ps	      sync
+base64	   df		  gzip	    mktemp	   pwd	      tar
+bash	   dir		  hostname  more	   rm	      touch
+busybox    dmesg	  join	    mount	   rmdir      tracepath
+cat	   dnsdomainname  kill	    mountpoint	   run-parts  traceroute6
+chattr	   dumpkmap	  link	    mt		   sed	      true
+chgrp	   echo		  linux32   mv		   setarch    umount
+chmod	   egrep	  linux64   netstat	   setpriv    uname
+chown	   false	  ln	    nice	   setserial  usleep
+clockdiff  fdflush	  login     pidof	   sh	      vdir
+cp	   fgrep	  ls	    ping	   sleep      vi
+cpio	   getopt	  lsattr    pipe_progress  stty       watch
+date	   grep		  mkdir     printenv	   su	      zcat
+/bin # ls -1 | wc
+     78      78     477
+/bin # cd ../sbin
+/sbin # ls
+arp	    freeramdisk  insmod    loadkmap    mklost+found  start-stop-daemon
+arping	    fsck	 ip	   logsave     mkswap	     sulogin
+badblocks   fsck.ext2	 ipaddr    losetup     modprobe      swapoff
+blkid	    fsck.ext3	 iplink    lsmod       nameif	     swapon
+devmem	    fsck.ext4	 ipneigh   makedevs    pivot_root    switch_root
+dhcpcd	    fstrim	 iproute   mdev        poweroff      sysctl
+dumpe2fs    getty	 iprule    mkdosfs     rarpd	     syslogd
+e2freefrag  halt	 iptunnel  mke2fs      rdisc	     tune2fs
+e2fsck	    hdparm	 iwconfig  mkfs.ext2   reboot	     udevadm
+e2label     hwclock	 iwgetid   mkfs.ext3   resize2fs     udevd
+e2undo	    ifconfig	 iwlist    mkfs.ext4   rmmod	     udhcpc
+e4crypt     ifdown	 iwpriv    mkfs.fat    route	     uevent
+fdisk	    ifup	 iwspy	   mkfs.msdos  runlevel      vconfig
+filefrag    init	 klogd	   mkfs.vfat   setconsole    watchdog
+/sbin # ls -1 | wc
+     84      84     669
+/sbin # cd ../usr/bin
+/usr/bin # ls
+ CMakeFiles			      hcidump		     rfcomm
+ QLauncher			      hcitool		     rk_airkiss
+'['				      hcitop		     rk_wifi_init
+'[['				      head		     rkisp_3A_server
+ adbd				      hex2hcd		     rkisp_demo
+ alsamixer			      hexdump		     rknn_demo
+ amixer				      hostapd_cli	     rknn_server
+ aplay				      hostid		     runcon
+ ar				      id		     rz
+ arecord			      input-event-daemon     sbcdec
+ aserver			      install		     sbcenc
+ awk				      io		     sbcinfo
+ b2sum				      ipcrm		     scp
+ base32				      ipcs		     sdptool
+ basename			      iperf		     seq
+ bccmd				      ir-ctl		     setkeycodes
+ bluealsa			      ir-keytable	     setsid
+ bluealsa-aplay			      ivtv-ctl		     sftp
+ bluealsa-rfcomm		      killall		     sha1sum
+ bluemoon			      kms-steal-crtc	     sha224sum
+ bluetoothctl			      kms-universal-planes   sha256sum
+ bluez5_utils_wifi_config.sh	      kmstest		     sha384sum
+ brcm_patchram_plus1		      l2ping		     sha3sum
+ bt_pcba_test			      l2test		     sha512sum
+ btattach			      last		     shred
+ btmon				      less		     shuf
+ bunzip2			      lockfile-check	     sort
+ bzcat				      lockfile-create	     sox
+ cec-compliance			      lockfile-remove	     soxi
+ cec-ctl			      lockfile-touch	     split
+ cec-follower			      logger		     ssh
+ chcon				      logname		     ssh-add
+ chrt				      lrz		     ssh-agent
+ chvt				      lsof		     ssh-keygen
+ ciptool			      lspci		     ssh-keyscan
+ cksum				      lsscsi		     ssl_client
+ clear				      lsusb		     start_rknn.sh
+ cmp				      lsz		     start_usb.sh
+ comm				      lzcat		     stat
+ coreutils			      lzma		     stdbuf
+ crontab			      mail-lock		     strace
+ csplit				      mail-touchlock	     strace-log-merge
+ cut				      mail-unlock	     stressapptest
+ cx18-ctl			      md5sum		     strings
+ dbus-cleanup-sockets		      media-ctl		     sum
+ dbus-daemon			      memtester		     svc
+ dbus-launch			      mesg		     sz
+ dbus-monitor			      microcom		     tac
+ dbus-run-session		      minimad		     tail
+ dbus-send			      mkfifo		     taskset
+ dbus-test-tool			      modeprint		     tee
+ dbus-update-activation-environment   modetest		     telnet
+ dbus-uuidgen			      mp3play.sh	     test
+ dc				      mpi_dec_mt_test	     tftp
+ ddcmon				      mpi_dec_multi_test     time
+ deallocvt			      mpi_dec_test	     timeout
+ decode-dimms			      mpi_enc_multi_test     top
+ decode-edid			      mpi_enc_test	     tr
+ decode-vaio			      mpi_rc2_test	     trace
+ decode_tm6000			      mpi_rc_test	     traceroute
+ dhrystone			      mpi_test		     truncate
+ diff				      mpp_info_test	     tsort
+ dircolors			      mpris-proxy	     tty
+ dirname			      nl		     udevadm
+ dos2unix			      nohup		     unexpand
+ du				      nproc		     uniq
+ dvb-fe-tool			      nslookup		     unix2dos
+ dvb-format-convert		      numfmt		     unlink
+ dvbv5-daemon			      od		     unlzma
+ dvbv5-scan			      on_ac_power	     unxz
+ dvbv5-zap			      openvt		     unzip
+ eject				      passwd		     update
+ env				      paste		     upower
+ evtest				      patch		     uptime
+ expand				      pathchk		     usbdevice
+ expr				      pcre2grep		     users
+ factor				      pcre2test		     uudecode
+ fallocate			      pcregrep		     uuencode
+ find				      pcretest		     uvc
+ flock				      perf		     uvc_MJPEG.sh
+ fmt				      pinky		     uvc_app
+ fold				      play		     v4l2-compliance
+ free				      pm-is-supported	     v4l2-ctl
+ fuser				      pr		     v4l2-sysfs-path
+ gapplication			      printf		     vbltest
+ gatt-service			      procrank		     vendor_storage
+ gatttool			      proptest		     vpu_api_test
+ gdbus				      ptx		     w
+ gio				      qml		     waylandtest.sh
+ gio-querymodules		      qmlscene		     wc
+ glmarktest.sh			      qmltestrunner	     wget
+ gresource			      qv4l2		     which
+ groups				      rctest		     who
+ gsettings			      rds-ctl		     whoami
+ gstaudiotest.sh		      readlink		     xargs
+ gstmp3play.sh			      realpath		     xmlwf
+ gstmp4play.sh			      rec		     xxd
+ gstvideoplay.sh		      renice		     xz
+ gstvideotest.sh		      reset		     xzcat
+ gstwavplay.sh			      resize		     yes
+ hciattach			      resize-helper
+ hciconfig			      restart_rknn.sh
+/usr/bin # ls -1 | wc
+    304     304    2666
+/usr/bin # cd ../sbin
+/usr/sbin # ls
+alsaconf  ether-wake	      i2cget	   partprobe	      sshd
+alsactl   fbset		      i2cset	   pm-hibernate       ubirename
+arping	  fdformat	      i2ctransfer  pm-powersave       v4l2-dbg
+chroot	  fsfreeze	      in.tftpd	   pm-suspend	      wpa_cli
+crond	  hostapd	      inetd	   pm-suspend-hybrid  wpa_passphrase
+dnsd	  i2c-stub-from-dump  iw	   rdate	      wpa_supplicant
+dnsmasq   i2cdetect	      killall5	   readprofile
+eeprog	  i2cdump	      loadfont	   setlogcons
+/usr/sbin # ls -1 | wc
+     38      38     355
+/usr/sbin # cd ..
+/usr # ls -l
+total 40
+drwxr-xr-x  4 root root 8192 Aug  7  2019 bin
+drwxr-xr-x  2 root root 4096 Aug  8  2019 etc
+drwxr-xr-x 15 root root 8192 May 27  2019 lib
+lrwxrwxrwx  1 root root    3 Aug  7  2019 lib64 -> lib
+drwxr-xr-x  5 root root 4096 Aug  8  2019 libexec
+drwxr-xr-x  3 root root 4096 Aug  8  2019 local
+drwxr-xr-x  7 root root 4096 Aug  7  2019 qml
+drwxr-xr-x  2 root root 4096 Aug  8  2019 sbin
+drwxr-xr-x 20 root root 4096 Aug  8  2019 share
+/usr # ls share
+alsa		 dbus-1   glib-2.0  locale   rknn_demo	usbmount
+applications	 dhcpcd   icons     minigui  terminfo	xml
+bash-completion  gettext  libdrm    npu      udhcpc	zoneinfo
+/usr # ls -l ../lib
+total 3088
+drwxr-xr-x 2 root root    4096 Aug  8  2019 bash
+drwxr-xr-x 4 root root    4096 Aug  8  2019 dhcpcd
+-rwxr-xr-x 1 root root  145688 Aug  8  2019 ld-2.29.so
+lrwxrwxrwx 1 root root      10 Aug  7  2019 ld-linux-aarch64.so.1 -> ld-2.29.so
+-rwxr-xr-x 1 root root   14616 Aug  8  2019 libanl-2.29.so
+lrwxrwxrwx 1 root root      14 Aug  7  2019 libanl.so.1 -> libanl-2.29.so
+lrwxrwxrwx 1 root root      18 Aug  7  2019 libatomic.so -> libatomic.so.1.2.0
+lrwxrwxrwx 1 root root      18 Aug  7  2019 libatomic.so.1 -> libatomic.so.1.2.0
+-rwxr-xr-x 1 root root   18176 Aug  8  2019 libatomic.so.1.2.0
+lrwxrwxrwx 1 root root      17 Aug  7  2019 libblkid.so.1 -> libblkid.so.1.1.0
+-rwxr-xr-x 1 root root  238072 Aug  8  2019 libblkid.so.1.1.0
+-rwxr-xr-x 1 root root 1288088 Aug  8  2019 libc-2.29.so
+lrwxrwxrwx 1 root root      12 Aug  7  2019 libc.so.6 -> libc-2.29.so
+-rwxr-xr-x 1 root root   30752 Aug  8  2019 libcrypt-2.29.so
+lrwxrwxrwx 1 root root      16 Aug  7  2019 libcrypt.so.1 -> libcrypt-2.29.so
+-rwxr-xr-x 1 root root   14328 Aug  8  2019 libdl-2.29.so
+lrwxrwxrwx 1 root root      13 Aug  7  2019 libdl.so.2 -> libdl-2.29.so
+lrwxrwxrwx 1 root root      13 Aug  7  2019 libgcc_s.so -> libgcc_s.so.1
+-rw-r--r-- 1 root root   63656 Aug  8  2019 libgcc_s.so.1
+-rwxr-xr-x 1 root root  587712 Aug  8  2019 libm-2.29.so
+lrwxrwxrwx 1 root root      12 Aug  7  2019 libm.so.6 -> libm-2.29.so
+lrwxrwxrwx 1 root root      17 Aug  7  2019 libmount.so.1 -> libmount.so.1.1.0
+-rwxr-xr-x 1 root root  263616 Aug  8  2019 libmount.so.1.1.0
+-rwxr-xr-x 1 root root   18488 Aug  8  2019 libnss_dns-2.29.so
+lrwxrwxrwx 1 root root      18 Aug  7  2019 libnss_dns.so.2 -> libnss_dns-2.29.so
+-rwxr-xr-x 1 root root   43216 Aug  8  2019 libnss_files-2.29.so
+lrwxrwxrwx 1 root root      20 Aug  7  2019 libnss_files.so.2 -> libnss_files-2.29.so
+-rwxr-xr-x 1 root root  139800 Aug  8  2019 libpthread-2.29.so
+lrwxrwxrwx 1 root root      18 Aug  7  2019 libpthread.so.0 -> libpthread-2.29.so
+-rwxr-xr-x 1 root root   72192 Aug  8  2019 libresolv-2.29.so
+lrwxrwxrwx 1 root root      17 Aug  7  2019 libresolv.so.2 -> libresolv-2.29.so
+-rwxr-xr-x 1 root root   27328 Aug  8  2019 librt-2.29.so
+lrwxrwxrwx 1 root root      13 Aug  7  2019 librt.so.1 -> librt-2.29.so
+lrwxrwxrwx 1 root root      16 Aug  7  2019 libudev.so.1 -> libudev.so.1.6.3
+-rwxr-xr-x 1 root root  109808 Aug  8  2019 libudev.so.1.6.3
+-rwxr-xr-x 1 root root   10344 Aug  8  2019 libutil-2.29.so
+lrwxrwxrwx 1 root root      15 Aug  7  2019 libutil.so.1 -> libutil-2.29.so
+lrwxrwxrwx 1 root root      16 Aug  7  2019 libuuid.so.1 -> libuuid.so.1.3.0
+-rwxr-xr-x 1 root root   22752 Aug  8  2019 libuuid.so.1.3.0
+drwxr-xr-x 2 root root    4096 Aug  7  2019 pkgconfig
+drwxr-xr-x 3 root root    4096 Aug  8  2019 udev
+/usr # ls lib
+alsa-lib			libkmod.so
+bluetooth			libkmod.so.2
+cl_viv_vx_ext.h			libkmod.so.2.3.2
+fonts				libkms.so
+gio				libkms.so.1
+gstreamer-1.0			libkms.so.1.0.0
+libCLC.so			liblockfile.so
+libGAL.so			liblockfile.so.1
+libLLVM_viv.so			liblockfile.so.1.0
+libNNGPUBinary.so		libmad.so
+libNNVXCBinary.so		libmad.so.0
+libOpenCL.so			libmad.so.0.2.1
+libOpenVX.so			libmenu.so
+libOpenVXU.so			libmenu.so.6
+libOvx12VXCBinary.so		libmenu.so.6.0
+libQt5Core.so.5			libminigui_ths-3.2.so.0
+libQt5Core.so.5.9		libminigui_ths-3.2.so.0.0.0
+libQt5Core.so.5.9.4		libminigui_ths.so
+libQt5Gui.so.5			libmount.so
+libQt5Gui.so.5.9		libncurses.so
+libQt5Gui.so.5.9.4		libncurses.so.6
+libQt5Network.so.5		libncurses.so.6.0
+libQt5Network.so.5.9		libneuralnetworks.so
+libQt5Network.so.5.9.4		libnl-3.so
+libQt5PrintSupport.so.5		libnl-3.so.200
+libQt5PrintSupport.so.5.9	libnl-3.so.200.26.0
+libQt5PrintSupport.so.5.9.4	libnl-genl-3.so
+libQt5Qml.so.5			libnl-genl-3.so.200
+libQt5Qml.so.5.9		libnl-genl-3.so.200.26.0
+libQt5Qml.so.5.9.4		libnl-idiag-3.so
+libQt5Quick.so.5		libnl-idiag-3.so.200
+libQt5Quick.so.5.9		libnl-idiag-3.so.200.26.0
+libQt5Quick.so.5.9.4		libnl-nf-3.so
+libQt5QuickControls2.so.5	libnl-nf-3.so.200
+libQt5QuickControls2.so.5.9	libnl-nf-3.so.200.26.0
+libQt5QuickControls2.so.5.9.4	libnl-route-3.so
+libQt5QuickTemplates2.so.5	libnl-route-3.so.200
+libQt5QuickTemplates2.so.5.9	libnl-route-3.so.200.26.0
+libQt5QuickTemplates2.so.5.9.4	libnl-xfrm-3.so
+libQt5QuickTest.so.5		libnl-xfrm-3.so.200
+libQt5QuickTest.so.5.9		libnl-xfrm-3.so.200.26.0
+libQt5QuickTest.so.5.9.4	libpanel.so
+libQt5QuickWidgets.so.5		libpanel.so.6
+libQt5QuickWidgets.so.5.9	libpanel.so.6.0
+libQt5QuickWidgets.so.5.9.4	libpcre.so
+libQt5Sql.so.5			libpcre.so.1
+libQt5Sql.so.5.9		libpcre.so.1.2.9
+libQt5Sql.so.5.9.4		libpcre2-16.so
+libQt5Test.so.5			libpcre2-16.so.0
+libQt5Test.so.5.9		libpcre2-16.so.0.6.0
+libQt5Test.so.5.9.4		libpcre2-8.so
+libQt5Widgets.so.5		libpcre2-8.so.0
+libQt5Widgets.so.5.9		libpcre2-8.so.0.6.0
+libQt5Widgets.so.5.9.4		libpcre2-posix.so
+libQt5Xml.so.5			libpcre2-posix.so.2
+libQt5Xml.so.5.9		libpcre2-posix.so.2.0.0
+libQt5Xml.so.5.9.4		libpcrecpp.so
+libQt5XmlPatterns.so.5		libpcrecpp.so.0
+libQt5XmlPatterns.so.5.9	libpcrecpp.so.0.0.1
+libQt5XmlPatterns.so.5.9.4	libpcreposix.so
+libRKOpenCL.so			libpcreposix.so.0
+libVSC.so			libpcreposix.so.0.0.5
+libVSC_Lite.so			libpixman-1.so
+libasound.so			libpixman-1.so.0
+libasound.so.2			libpixman-1.so.0.34.0
+libasound.so.2.0.0		libpng.so
+libblkid.so			libpng.so.3
+libbluetooth.so			libpng.so.3.59.0
+libbluetooth.so.3		libpng12.so
+libbluetooth.so.3.18.16		libpng12.so.0
+libbsd.so			libpng12.so.0.59.0
+libbsd.so.0			libpng16.so
+libbsd.so.0.8.7			libpng16.so.16
+libcom_err.so			libpng16.so.16.34.0
+libcom_err.so.2			libreadline.so
+libcom_err.so.2.1		libreadline.so.7
+libcrypto.so			libreadline.so.7.0
+libcrypto.so.1.0.0		librga.so
+libcurses.so			librkisp.so
+libdbus-1.so			librknn_runtime.so
+libdbus-1.so.3			librkuvc.so
+libdbus-1.so.3.19.4		librockchip_mpp.so
+libdrm.so			librockchip_mpp.so.0
+libdrm.so.2			librockchip_mpp.so.1
+libdrm.so.2.4.0			librockchip_vpu.so
+libdrm_rockchip.so		librockchip_vpu.so.0
+libdrm_rockchip.so.1		librockchip_vpu.so.1
+libdrm_rockchip.so.1.0.0	libsbc.so
+libdvbv5.so			libsbc.so.1
+libdvbv5.so.0			libsbc.so.1.2.1
+libdvbv5.so.0.0.0		libsndfile.so
+libe2p.so			libsndfile.so.1
+libe2p.so.2			libsndfile.so.1.0.28
+libe2p.so.2.3			libsox.so
+libexpat.so			libsox.so.3
+libexpat.so.1			libsox.so.3.0.0
+libexpat.so.1.6.7		libss.so
+libext2fs.so			libss.so.2
+libext2fs.so.2			libss.so.2.0
+libext2fs.so.2.4		libssl.so
+libffi.so			libssl.so.1.0.0
+libffi.so.6			libstdc++.so
+libffi.so.6.0.4			libstdc++.so.6
+libform.so			libstdc++.so.6.0.22
+libform.so.6			libstdc++.so.6.0.22-gdb.py
+libform.so.6.0			libturbojpeg.so
+libfreetype.so			libturbojpeg.so.0
+libfreetype.so.6		libturbojpeg.so.0.2.0
+libfreetype.so.6.15.0		libudev.so
+libgio-2.0.so			libupower-glib.so
+libgio-2.0.so.0			libupower-glib.so.3
+libgio-2.0.so.0.5400.2		libupower-glib.so.3.0.1
+libglib-2.0.so			libusb-1.0.so
+libglib-2.0.so.0		libusb-1.0.so.0
+libglib-2.0.so.0.5400.2		libusb-1.0.so.0.1.0
+libgmodule-2.0.so		libuuid.so
+libgmodule-2.0.so.0		libv4l
+libgmodule-2.0.so.0.5400.2	libv4l1.so
+libgobject-2.0.so		libv4l1.so.0
+libgobject-2.0.so.0		libv4l1.so.0.0.0
+libgobject-2.0.so.0.5400.2	libv4l2.so
+libgthread-2.0.so		libv4l2.so.0
+libgthread-2.0.so.0		libv4l2.so.0.0.0
+libgthread-2.0.so.0.5400.2	libv4l2rds.so
+libgudev-1.0.so			libv4l2rds.so.0
+libgudev-1.0.so.0		libv4l2rds.so.0.0.0
+libgudev-1.0.so.0.2.0		libv4lconvert.so
+libhistory.so			libv4lconvert.so.0
+libhistory.so.7			libv4lconvert.so.0.0.0
+libhistory.so.7.0		libwpa_client.so
+libi2c.so			libz.so
+libi2c.so.0			libz.so.1
+libi2c.so.0.1.0			libz.so.1.2.11
+libical.so			modules
+libical.so.1			npu
+libical.so.1.0.1		os-release
+libicalss.so			pm-utils
+libicalss.so.1			qt
+libicalss.so.1.0.1		rkisp
+libicalvcal.so			terminfo
+libicalvcal.so.1		traceevent
+libicalvcal.so.1.0.1		udev
+libjpeg.so			v4l1compat.so
+libjpeg.so.62			v4l2convert.so
+libjpeg.so.62.3.0
+/usr # ls -1 lib  | wc
+    289     289    4794
+/usr # ls etc
+MiniGUI.cfg
+/usr # ls libexec
+bluetooth  dbus-daemon-launch-helper  sftp-server  ssh-pkcs11-helper
+coreutils  perf-core		      ssh-keysign  upowerd
+/usr # ls libexec/bluetooth
+bluetoothd  obexd
+/usr # 
+/usr # 
+/usr # 
+/usr # ls local
+share
+/usr # ls local/share
+minigui  rknn_demo
+/usr # ls local/share/minigui
+MiniGUI-1280x720.cfg  MiniGUI-2048x1536.cfg  res
+/usr # 
+/usr # 
+/usr # ls -l qml
+total 76
+drwxr-xr-x  3 root root  4096 Aug  7  2019 Qt
+drwxr-xr-x  4 root root  4096 Aug  7  2019 QtQml
+drwxr-xr-x 12 root root  4096 Aug  7  2019 QtQuick
+drwxr-xr-x  2 root root  4096 Aug  8  2019 QtQuick.2
+drwxr-xr-x  2 root root  4096 Aug  8  2019 QtTest
+-rw-r--r--  1 root root 56367 Jan 17  2018 builtins.qmltypes
+/usr # du -sh qml
+14M	qml
+/usr # 
+/usr # 
+/usr # uptime
+ 00:48:59  up   1:05,  0 users,  load average: 0.05, 0.00, 0.04
+/usr # 
+/usr # 
+/usr # :x
+/bin/sh: :x: not found
+/usr # exit
+exit
+
+Script done on 2020-08-06 13:37:51-0700

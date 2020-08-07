@@ -1,0 +1,45 @@
+
+ls -lrt
+
+-rw-r--r--     60716 Aug  6 19:28 log-2-evb-boot
+-rw-r--r--     67220 Aug  6 19:28 log-1-tb-96aiot-boot
+-rw-r--r--     41086 Aug  6 20:33 log-1-tb-96aiot-shell
+-rw-r--r--     31239 Aug  6 20:38 log-2-evb-shell
+-rw-r--r--      1915 Aug  6 22:24 log-err-1
+-rw-r--r--      2148 Aug  7 00:02 log-3-2-rebooted
+-rw-rw-r--+        0 Aug  7 00:36 list-files
+-rw-r--r--      2148 Aug  7  2020 log-3-1-media-ctl
+-rw-r--r--      8167 Aug  7  2020 log-3-3-err-1
+-rw-r--r--     92909 Aug  7  2020 log-3-3-boot-cra-fixed
+-rw-r--r--      2567 Aug  7  2020 log-3-4-media-ctl
+-rw-r--r--        55 Aug  7  2020 t4
+-rw-r--r--       644 Aug  7  2020 t1-1
+-rw-r--r--       612 Aug  7  2020 t2-1
+-rw-r--r--       637 Aug  7  2020 log-3-4-run-t4
+-rw-r--r--     59710 Aug  7  2020 log-3-4-console-t4
+-rw-r--r--       716 Aug  7  2020 log-3-5-media-ctl-t2
+-rw-r--r--       246 Aug  7  2020 t3-1
+
+
+ls -lrt
+
+-rw-r--r--      1915 Aug  6 22:24 log-err-1
+-rw-r--r--      2148 Aug  7 00:02 log-3-2-rebooted
+-rw-rw-r--+      882 Aug  7 00:37 list-files
+-rw-r--r--     67108 Aug  7 00:38 log-1-tb-96aiot-boot
+-rw-r--r--     40974 Aug  7 00:38 log-1-tb-96aiot-shell
+-rw-r--r--     60604 Aug  7 00:39 log-2-evb-boot
+-rw-r--r--     31127 Aug  7 00:39 log-2-evb-shell
+-rw-r--r--     92458 Aug  7 00:40 log-3-3-boot-cra-fixed
+-rw-r--r--     59468 Aug  7 00:41 log-3-4-console-t4
+-rw-r--r--      2148 Aug  7  2020 log-3-1-media-ctl
+-rw-r--r--      8167 Aug  7  2020 log-3-3-err-1
+-rw-r--r--      2567 Aug  7  2020 log-3-4-media-ctl
+-rw-r--r--        55 Aug  7  2020 t4
+-rw-r--r--       644 Aug  7  2020 t1-1
+-rw-r--r--       612 Aug  7  2020 t2-1
+-rw-r--r--       637 Aug  7  2020 log-3-4-run-t4
+-rw-r--r--       716 Aug  7  2020 log-3-5-media-ctl-t2
+-rw-r--r--       246 Aug  7  2020 t3-1
+
+

@@ -1,0 +1,1085 @@
+
+
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# reboot
+[root@rk1808:/]# Stopping input-event-daemon: 
+input-event-daemon: Exiting...
+done
+stop QLauncherStopping dnsmasq: OK
+[ 3940.246461] [BT_RFKILL]: bt shut off power
+[ 3940.252284] android_work: sent uevent USB_STATE=DISCONNECTED
+[ 3940.252687] dw-mipi-dsi ffb30000.dsi: final DSI-Link bandwidth: 426 x 4 Mbps
+[ 3940.253615] configfs-gadget gadget: unbind function 'Function FS Gadget'/ffffffc07c692838
+[ 3940.254199] read descriptors
+[ 3940.254229] read strings
+Stopping sshd: OK
+Stopping dhcpcd...
+stopped /sbin/dhcpcd (pid 503)
+no rkisp_3A_server found; none killed
+Stopping network: OK
+Stopping system message bus: done
+[ 3940.347554] rockchip-vop ffb00000.vop: [drm:vop_crtc_enable] Update mode to 720x1280p60, type: 16
+[ 3940.347707] dw-mipi-dsi ffb30000.dsi: final DSI-Link bandwidth: 426 x 4 Mbps
+Saving random seed... done.
+Stopping logging: OK
+umount: can't remount adb read-only
+umount: tmpfs busy - remounted read-only
+umount: devtmpfs busy - remounted read-only
+[ 3940.497614] EXT4-fs (mmcblk2p8): re-mounted. Opts: (null)
+The system is going down NOW!
+Sent SIGTERM to all processes
+[ 3940.503859] udevd[130]: could not touch /run/udev/queue: Read-only file system
+[ 3940.509377] udevd[737]: '/usr/bin/usbdevice /devices/platform/usb/fd000000.dwc3/udc/fd000000.dwc3' [740] terminated by signal 15 (Terminated)
+[ 3940.510732] udevd[130]: could not unlink /run/udev/queue: Read-only file system
+Sent SIGKILL to all processes
+Requesting system reboot
+[ 3942.504743] cpu cpu0: min=816000, max=816000
+[ 3942.564627] rk-vcodec ffb80000.vpu_service: shutdown
+[ 3942.566603] reboot: Restarting system
+
+
+DDR Version V1.03 20190524
+LPDDR3
+933MHz
+BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=32 Size=2048MB
+out
+Boot1 Release Time: Jul 19 2019 18:22:57, version: 1.04
+ChipType = 0x14, 168
+sfc_ver 3
+sfc nor id: ff ff ff
+sfc_nand_init
+sfc_ver 3
+sfc_nand id: ff ff ff
+NeedKHz=200KHz,clock=12000KHz
+NeedKHz=200KHz,clock=12000KHz
+NeedKHz=200KHz,clock=12000KHz
+NeedKHz=18000KHz,clock=192000KHz
+NeedKHz=48000KHz,clock=192000KHz
+mmc2:cmd19,100
+SdmmcInit=2 0
+BootCapSize=2000
+UserCapSize=14910MB
+FwPartOffset=2000 , 2000
+SdmmcInit=0 NOT PRESENT
+StorageInit ok = 10739
+SecureMode = 0
+Secure read PBA: 0x4
+Secure read PBA: 0x404
+Secure read PBA: 0x804
+Secure read PBA: 0xc04
+Secure read PBA: 0x1004
+SecureInit ret = 0, SecureMode = 0
+atags_set_bootdev: ret:(0)
+GPT part:  0, name:            uboot, start:0x4000, size:0x2000
+GPT part:  1, name:            trust, start:0x6000, size:0x2000
+GPT part:  2, name:             misc, start:0x8000, size:0x2000
+GPT part:  3, name:             boot, start:0xa000, size:0x10000
+GPT part:  4, name:         recovery, start:0x1a000, size:0x10000
+GPT part:  5, name:           backup, start:0x2a000, size:0x10000
+GPT part:  6, name:              oem, start:0x3a000, size:0x20000
+GPT part:  7, name:           rootfs, start:0x5a000, size:0x200000
+GPT part:  8, name:         userdata, start:0x25a000, size:0x1ac4fdf
+find part:uboot OK. first_lba:0x4000.
+find part:trust OK. first_lba:0x6000.
+LoadTrust Addr:0x6000
+No find bl30.bin
+No find bl32.bin
+Load uboot, ReadLba = 4000
+Load OK, addr=0x600000, size=0xbda30
+RunBL31 0x10000
+INFO:    Preloader serial: 2
+NOTICE:  BL31: v1.3(debug):41c1a7d
+NOTICE:  BL31: Built : 09:28:06, Aug  1 2019
+NOTICE:  BL31: Rockchip release version: v1.0
+INFO:    GICv3 with legacy support detected. ARM GICV3 driver initialized in EL3
+INFO:    not boot from ram
+INFO:    Using opteed sec cpu_context!
+INFO:    boot cpu mask: 0
+INFO:    plat_rockchip_pmu_init(1802): pd status 8002
+INFO:    BL31: Initializing runtime services
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:   Error initializing runtime service opteed_fast
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x600000
+INFO:    SPSR = 0x3c9
+
+
+U-Boot 2017.09-03479-g90a8d44 (Aug 08 2019 - 09:02:43 +0800)
+
+Model: Rockchip RK1808 EVB
+PreSerial: 2
+DRAM:  2 GiB
+Sysmem: init
+Relocation Offset is: 7d805000
+Using default environment
+
+dwmmc@ffcf0000: 1, dwmmc@ffd00000: 0
+Bootdev(atags): mmc 0
+MMC0: High Speed, 52Mhz
+PartType: EFI
+boot mode: normal
+Load FDT from boot part
+DTB: rk-kernel.dtb
+I2c speed: 400000Hz
+tcs4525@1c init 880000 uV
+PMIC:  RK8090 (on=0x40, off=0x00)
+vdd_log 750000 uV
+vdd_cpu 800000 uV
+Can't get crtc id, default set to id = 0
+Model: Rockchip RK1808 EVB V10 Board
+Rockchip UBOOT DRM driver version: v1.0.1
+Using display timing dts
+Detailed mode clock 64000 kHz, flags[a]
+    H: 0720 0760 0770 0810
+    V: 1280 1302 1306 1317
+bus_format: 100e
+final DSI-Link bandwidth: 426 Mbps x 4
+CLK: (sync kernel. arm: enter 1200000 KHz, init 1200000 KHz, kernel 0N/A)
+  apll 1200000 KHz
+  dpll 462000 KHz
+  cpll 1000000 KHz
+  gpll 1188000 KHz
+  npll 640000 KHz
+  ppll 100000 KHz
+  hsclk_bus 297000 KHz
+  msclk_bus 198000 KHz
+  lsclk_bus 99000 KHz
+  msclk_peri 198000 KHz
+  lsclk_peri 99000 KHz
+Net:   No ethernet found.
+Hit key to stop autoboot('CTRL+C'):  0 
+ANDROID: reboot reason: "(none)"
+Fdt Ramdisk skip relocation
+Booting IMAGE kernel at 0x00280000 with fdt at 0x1f00000...
+
+
+Sysmem Warn: kernel 'reserved-memory' "region@110000"(0x00110000 - 0x00200000) is overlap with [invisible] "SHM" (0x00100000 - 0x00200000)
+## Booting Android Image at 0x0027f800 ...
+Kernel load addr 0x00280000 size 9289 KiB
+## Flattened Device Tree blob at 01f00000
+   Booting using the fdt blob at 0x1f00000
+   XIP Kernel Image ... OK
+  'reserved-memory' region@110000: addr=110000 size=f0000
+   Using Device Tree in place at 0000000001f00000, end 0000000001f1b728
+Adding bank: 0x00200000 - 0x80000000 (size: 0x7fe00000)
+Total: 757.455 ms
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.4.185 (hl@hl-HP-ProDesk-600-G2-MT) (gcc version 6.3.1 20170404 (Linaro GCC 6.3-2017.05) ) #1 SMP PREEMPT Wed Aug 7 17:39:51 HKT 2019
+[    0.000000] Boot CPU: AArch64 Processor [410fd042]
+[    0.000000] earlycon: Early serial console at MMIO32 0xff550000 (options '')
+[    0.000000] bootconsole [uart0] enabled
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv1.0 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: MIGRATE_INFO_TYPE not supported.
+[    0.000000] PERCPU: Embedded 19 pages/cpu @ffffffc07ff4a000 s40152 r8192 d29480 u77824
+[    0.000000] Detected VIPT I-cache on CPU0
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 515592
+[    0.000000] Kernel command line: storagemedia=emmc androidboot.storagemedia=emmc androidboot.mode=normal  androidboot.slot_suffix= androidboot.serialno=c3d9b8674f4b94f6  rootwait earlycon=uart8250,mmio32,0xff550000 console=ttyFIQ0 root=PARTUUID=614e0000-0000 rootfstype=ext4 swiotlb=1 kpti=0 snd_aloop.index=7
+[    0.000000] PID hash table entries: 4096 (order: 3, 32768 bytes)
+[    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes)
+[    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes)
+[    0.000000] software IO TLB: mapped [mem 0x7fe02000-0x7fe42000] (0MB)
+[    0.000000] Memory: 2046400K/2095104K available (6078K kernel code, 584K rwdata, 2216K rodata, 384K init, 1701K bss, 48704K reserved, 0K cma-reserved)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     modules : 0xffffff8000000000 - 0xffffff8008000000   (   128 MB)
+[    0.000000]     vmalloc : 0xffffff8008000000 - 0xffffffbdbfff0000   (   246 GB)
+[    0.000000]       .init : 0xffffff80088a0000 - 0xffffff8008900000   (   384 KB)
+[    0.000000]       .text : 0xffffff8008080000 - 0xffffff8008670000   (  6080 KB)
+[    0.000000]     .rodata : 0xffffff8008670000 - 0xffffff80088a0000   (  2240 KB)
+[    0.000000]       .data : 0xffffff8008900000 - 0xffffff8008992008   (   585 KB)
+[    0.000000]     fixed   : 0xffffffbffe7fd000 - 0xffffffbffec00000   (  4108 KB)
+[    0.000000]     PCI I/O : 0xffffffbffee00000 - 0xffffffbfffe00000   (    16 MB)
+[    0.000000]     memory  : 0xffffffc000200000 - 0xffffffc080000000   (  2046 MB)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000]  Build-time adjustment of leaf fanout to 64.
+[    0.000000] NR_IRQS:64 nr_irqs:64 0
+[    0.000000] GIC: Using split EOI/Deactivate mode
+[    0.000000] ITS: /interrupt-controller@ff100000/interrupt-controller@ff120000
+[    0.000000] ITS: allocated 65536 Devices @7e400000 (psz 64K, shr 0)
+[    0.000000] ITS: using cache flushing for cmd queue
+[    0.000000] GIC: using LPI property table @0x0000000000220000
+[    0.000000] ITS: Allocated 1792 chunks for LPIs
+[    0.000000] CPU0: found redistributor 0 region 0:0x00000000ff140000
+[    0.000000] CPU0: using LPI pending table @0x0000000000230000
+[    0.000000] GIC: using cache flushing for LPI property table
+[    0.000000] Architected cp15 timer(s) running at 24.00MHz (phys).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x588fe9dc0, max_idle_ns: 440795202592 ns
+[    0.000006] sched_clock: 56 bits at 24MHz, resolution 41ns, wraps every 4398046511097ns
+[    0.002103] Calibrating delay loop (skipped), value calculated using timer frequency.. 48.00 BogoMIPS (lpj=24000)
+[    0.003062] pid_max: default: 32768 minimum: 301
+[    0.003618] Mount-cache hash table entries: 4096 (order: 3, 32768 bytes)
+[    0.004241] Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes)
+[    0.005660] sched-energy: CPU device node has no sched-energy-costs
+[    0.006286] Invalid sched_group_energy for CPU0
+[    0.006708] CPU0: update cpu_capacity 1024
+[    0.007127] ASID allocator initialised with 65536 entries
+[    0.012864] PCI/MSI: /interrupt-controller@ff100000/interrupt-controller@ff120000 domain created
+[    0.014139] Platform MSI: /interrupt-controller@ff100000/interrupt-controller@ff120000 domain created
+[    0.019517] Detected VIPT I-cache on CPU1
+[    0.019547] CPU1: found redistributor 1 region 0:0x00000000ff160000
+[    0.019571] CPU1: using LPI pending table @0x000000007e560000
+[    0.019607] Invalid sched_group_energy for CPU1
+[    0.019612] CPU1: update cpu_capacity 1024
+[    0.019616] CPU1: Booted secondary processor [410fd042]
+[    0.019704] Brought up 2 CPUs
+[    0.022760] SMP: Total of 2 processors activated.
+[    0.023208] CPU features: detected feature: GIC system register CPU interface
+[    0.023866] CPU features: detected feature: 32-bit EL0 Support
+[    0.024418] CPU: All CPU(s) started at EL2
+[    0.024912] Invalid sched_group_energy for CPU1
+[    0.025335] Invalid sched_group_energy for Cluster1
+[    0.025801] Invalid sched_group_energy for CPU0
+[    0.026221] Invalid sched_group_energy for Cluster0
+[    0.027089] devtmpfs: initialized
+[    0.051847] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.052790] futex hash table entries: 512 (order: 3, 32768 bytes)
+[    0.053690] pinctrl core: initialized pinctrl subsystem
+[    0.055281] NET: Registered protocol family 16
+[    0.062681] cpuidle: using governor menu
+[    0.063079] Registered FIQ tty driver
+[    0.063824] vdso: 2 pages (1 code @ ffffff8008676000, 1 data @ ffffff8008904000)
+[    0.064538] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+[    0.065296] DMA: preallocated 256 KiB pool for atomic allocations
+[    0.094289] console [pstore-1] enabled
+[    0.094644] pstore: Registered ramoops as persistent store backend
+[    0.095234] ramoops: attached 0xf0000@0x110000, ecc: 0/0
+[    0.097577] fiq debugger fiq mode enabled
+[[    0.098314] console [ttyFIQ0] enabled
+    0.098314] console [ttyFIQ0] enabled
+[    0.099015] bootconsole [uart0] disabled
+[    0.099015] bootconsole [uart0] disabled
+[    0.099655] Registered fiq debugger ttyFIQ0
+[    0.111395] rockchip-pm rockchip-suspend: not set pwm-regulator-config
+[    0.114939] iommu: Adding device ffb00000.vop to group 0
+[    0.115103] iommu: Adding device ffb50000.rkisp1 to group 1
+[    0.115218] iommu: Adding device ffb80000.vpu_service to group 2
+[    0.115803] rk_iommu ffb00f00.iommu: can't get sclk
+[    0.116368] rk_iommu ffb80800.iommu: can't get sclk
+[    0.116955] SCSI subsystem initialized
+[    0.117247] usbcore: registered new interface driver usbfs
+[    0.117313] usbcore: registered new interface driver hub
+[    0.117402] usbcore: registered new device driver usb
+[    0.117793] media: Linux media interface: v0.10
+[    0.117877] Linux video capture interface: v2.00
+[    0.117964] pps_core: LinuxPPS API ver. 1 registered
+[    0.117976] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.118010] PTP clock support registered
+[    0.120092] Advanced Linux Sound Architecture Driver Initialized.
+[    0.120768] Bluetooth: Core ver 2.21
+[    0.120847] NET: Registered protocol family 31
+[    0.120865] Bluetooth: HCI device and connection manager initialized
+[    0.120886] Bluetooth: HCI socket layer initialized
+[    0.120901] Bluetooth: L2CAP socket layer initialized
+[    0.120943] Bluetooth: SCO socket layer initialized
+[    0.122121] rockchip-cpuinfo cpuinfo: Serial [8C: ae71a740b7d73152
+[    0.122818] clocksource: Switched to clocksource arch_sys_counter
+[    0.125548] NET: Registered protocol family 2
+[    0.126209] TCP established hash table entries: 16384 (order: 5, 131072 bytes)
+[    0.126451] TCP bind hash table entries: 16384 (order: 6, 262144 bytes)
+[    0.126802] TCP: Hash tables configured (established 16384 bind 16384)
+[    0.126935] UDP hash table entries: 1024 (order: 3, 32768 bytes)
+[    0.127013] UDP-Lite hash table entries: 1024 (order: 3, 32768 bytes)
+[    0.127301] NET: Registered protocol family 1
+[    0.128325] hw perfevents: enabled with armv8_cortex_a53 PMU driver, 7 counters available
+[    0.142212] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.142490] ntfs: driver 2.1.32 [Flags: R/O].
+[    0.146214] io scheduler noop registered (default)
+[    0.153903] backlight supply power not found, using dummy regulator
+[    0.154767] rk-vcodec ffb80000.vpu_service: no regulator for vcodec
+[    0.156000] rk_vcodec: vcodec_read_property:3290: can't find vpu grf property
+[    0.156112] rk-vcodec ffb80000.vpu_service: probe device
+[    0.156477] rk-vcodec ffb80000.vpu_service: drm allocator with mmu enabled
+[    0.157328] rk-vcodec ffb80000.vpu_service: could not find power_model node
+[    0.157362] rk-vcodec ffb80000.vpu_service: init success
+[    0.160911] dma-pl330 ff4e0000.dmac: Loaded driver for PL330 DMAC-241330
+[    0.160952] dma-pl330 ff4e0000.dmac: [8CDBUFF-128x8bytes Num_Chans-8 Num_Peri-32 Num_Events-16
+[    0.161300] rockchip-pvtm fe000000.syscon:npu-pvtm: failed to get rst 0 npu
+[    0.161456] rockchip-pvtm fe020000.syscon:pmu-pvtm: failed to get rst 0 pmu
+[    0.161614] rockchip-pvtm fe050000.syscon:pvtm: failed to get rst 0 core
+[    0.162605] rockchip-system-monitor rockchip-system-monitor: system monitor probe
+[    0.163361] Serial: 8250/16550 driver, 8 ports, IRQ sharing disabled
+[    0.164447] ff570000.serial: ttyS4 at MMIO 0xff570000 (irq = 16, base_baud = 1500000) is a 16550A
+[    0.166226] [drm] Initialized drm 1.1.0 20060810
+[    0.167154] random: nonblocking pool is initialized
+[    0.170029] [drm] Rockchip DRM driver version: v1.0.1
+[    0.170369] rockchip-drm display-subsystem: devfreq is not set
+[    0.170796] rockchip-vop ffb00000.vop: missing rockchip,grf property
+[    0.171034] rockchip-drm display-subsystem: bound ffb00000.vop (ops 0xffffff80086d0638)
+[    0.171076] rockchip-drm display-subsystem: failed to bind ffb30000.dsi (ops 0xffffff80086c6fd8): -517
+[    0.171370] rockchip-drm display-subsystem: master bind failed: -517
+[    0.174401] Unable to detect cache hierarchy for CPU 0
+[    0.174773] SCSI Media Changer driver v0.25 
+[    0.176793] usbcore: registered new interface driver rndis_wlan
+[    0.177002] Rockchip WiFi SYS interface (V1.00) ... 
+[    0.177152] usbcore: registered new interface driver rtl8150
+[    0.177223] usbcore: registered new interface driver r8152
+[    0.177299] usbcore: registered new interface driver asix
+[    0.177368] usbcore: registered new interface driver ax88179_178a
+[    0.177427] usbcore: registered new interface driver cdc_ether
+[    0.177498] usbcore: registered new interface driver rndis_host
+[    0.177610] usbcore: registered new interface driver cdc_ncm
+[    0.177668] usbcore: registered new interface driver cdc_mbim
+[    0.183455] rockchip-dwc3 usb: fail to get drvdata hcd
+[    0.408294] phy phy-fe010000.syscon:usb2-phy@100.2: charger = USB_SDP_CHARGER
+[    0.409121] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.409203] ehci-pci: EHCI PCI platform driver
+[    0.409473] ehci-platform: EHCI generic platform driver
+[    0.413673] ehci-platform ffd80000.usb: EHCI Host Controller
+[    0.413775] ehci-platform ffd80000.usb: new USB bus registered, assigned bus number 1
+[    0.414066] ehci-platform ffd80000.usb: irq 34, io mem 0xffd80000
+[    0.419846] ehci-platform ffd80000.usb: USB 2.0 started, EHCI 1.00
+[    0.420075] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.420123] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.420335] usb usb1: Product: EHCI Host Controller
+[    0.420546] usb usb1: Manufacturer: Linux 4.4.185 ehci_hcd
+[    0.420758] usb usb1: SerialNumber: ffd80000.usb
+[    0.421706] hub 1-0:1.0: USB hub found
+[    0.421952] hub 1-0:1.0: 1 port detected
+[    0.422762] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    0.422890] ohci-platform: OHCI generic platform driver
+[    0.423645] ohci-platform ffd90000.usb: Generic Platform OHCI controller
+[    0.423840] ohci-platform ffd90000.usb: new USB bus registered, assigned bus number 2
+[    0.424121] ohci-platform ffd90000.usb: irq 35, io mem 0xffd90000
+[    0.479016] usb usb2: New USB device found, idVendor=1d6b, idProduct=0001
+[    0.479046] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.479063] usb usb2: Product: Generic Platform OHCI controller
+[    0.479077] usb usb2: Manufacturer: Linux 4.4.185 ohci_hcd
+[    0.479096] usb usb2: SerialNumber: ffd90000.usb
+[    0.479925] hub 2-0:1.0: USB hub found
+[    0.480003] hub 2-0:1.0: 1 port detected
+[    0.481217] usbcore: registered new interface driver cdc_wdm
+[    0.481358] usbcore: registered new interface driver usb-storage
+[    0.482339] i2c /dev entries driver
+[    0.484474] fan53555-regulator 0-001c: FAN53555 Option[12] Rev[15] Detected!
+[    0.484683] fan53555-reg: supplied by vcc5v0_sys
+[    0.487391] rk808 0-0020: Pmic Chip id: 0x8090
+[    0.487780] rk808 0-0020: source: on=0x40, off=0x00
+[    0.488534] rk808 0-0020: support dcdc3 fb mode:-22, 2091131904
+[    0.488822] rk808 0-0020: support pmic reset mode:0,0
+[    0.492102] rk808-regulator rk808-regulator: there is no dvs0 gpio
+[    0.492210] rk808-regulator rk808-regulator: there is no dvs1 gpio
+[    0.492431] DCDC_REG1: supplied by vcc5v0_sys
+[    0.494392] DCDC_REG2: supplied by vcc5v0_sys
+[    0.496344] DCDC_REG3: supplied by vcc5v0_sys
+[    0.497999] DCDC_REG4: supplied by vcc5v0_sys
+[    0.499700] DCDC_REG5: supplied by vcc5v0_sys
+[    0.501065] LDO_REG1: supplied by vcc_buck5
+[    0.503068] LDO_REG2: supplied by vcc_buck5
+[    0.505103] LDO_REG3: supplied by vcc_buck5
+[    0.507179] LDO_REG4: supplied by vcc_buck5
+[    0.509240] LDO_REG5: supplied by vcc_buck5
+[    0.511317] LDO_REG6: supplied by vcc_buck5
+[    0.512659] LDO_REG7: supplied by vcc5v0_sys
+[    0.514741] LDO_REG8: supplied by vcc5v0_sys
+[    0.516994] LDO_REG9: supplied by vcc5v0_sys
+[    0.518114] SWITCH_REG1: supplied by vcc5v0_sys
+[    0.519244] SWITCH_REG2: supplied by vcc_3v3
+[    0.523375] input: rk8xx_pwrkey as /devices/platform/ff410000.i2c/i2c-0/0-0020/input/input0
+[    0.527605] rk808-rtc rk808-rtc: rtc core: registered rk808-rtc as rtc0
+[    0.529235] rk3x-i2c ff410000.i2c: Initialized RK3xxx I2C bus at ffffff8008cdc000
+[    0.530261] <<GTP-INF>>[gt1x_ts_probe:509] GTP Driver Version: V1.4<2015/07/10>
+[    0.530340] <<GTP-INF>>[gt1x_ts_probe:510] GTP I2C Address: 0x14
+[    0.530716] <<GTP-ERR>>[gt1x_parse_dt:317] vdd_ana not specified, fallback to power-supply
+[    0.531084] <<GTP-INF>>[gt1x_reset_guitar:779] GTP RESET!
+[    0.619838] <<GTP-INF>>[gt1x_get_chip_type:898] Chip Type: GT2X
+[    0.629051] <<GTP-INF>>[gt1x_read_version:854] IC VERSION:GT5688_000119(Patch)_0100(Mask)_01(SensorID)
+[    0.629114] <<GTP-INF>>[gt1x_init_panel:599] Config group1 used, length:239
+[    0.629327] <<GTP-INF>>[gt1x_init_panel:650] X_MAX=720,Y_MAX=1280,TRIGGER=0x00,WAKEUP_LEVEL=1
+[    0.852364] input: goodix-ts as /devices/virtual/input/input1
+[    0.852769] rk3x-i2c ff500000.i2c: Initialized RK3xxx I2C bus at ffffff8008cde000
+[    0.853974] rk3x-i2c ff508000.i2c: Initialized RK3xxx I2C bus at ffffff8008cf2000
+[    0.855339] rk3x-i2c ff50c000.i2c: Initialized RK3xxx I2C bus at ffffff8008cf4000
+[    0.856923] IR NEC protocol handler initialized
+[    0.856994] IR RC5(x/sz) protocol handler initialized
+[    0.857192] IR RC6 protocol handler initialized
+[    0.857423] IR JVC protocol handler initialized
+[    0.857637] IR Sony protocol handler initialized
+[    0.857855] IR SANYO protocol handler initialized
+[    0.858068] IR Sharp protocol handler initialized
+[    0.858283] IR MCE Keyboard/mouse protocol handler initialized
+[    0.858496] IR XMP protocol handler initialized
+[    0.860388] rkisp1 ffb50000.rkisp1: rkisp1 driver version: v00.01.05
+[    0.863261] usbcore: registered new interface driver uvcvideo
+[    0.863335] USB Video Class driver (1.1.1)
+[    0.864914] Boot mode: normal
+[    0.866709] rockchip-thermal ff3a0000.tsadc: tsadc is probed successfully!
+[    0.867671] dw_wdt ff720000.watchdog: Should better to setup a 'resets' property in dt, that must been named with reset
+[    0.868172] Bluetooth: HCI UART driver ver 2.3
+[    0.868237] Bluetooth: HCI UART protocol H4 registered
+[    0.868447] Bluetooth: HCI UART protocol LL registered
+[    0.869043] cpu cpu0: leakage=0
+[    0.881877] cpu cpu0: temp=37500, pvtm=76079 (76391 + -312)
+[    0.882125] cpu cpu0: pvtm-volt-sel=2
+[    0.884125] cpu cpu0: avs=0
+[    0.884231] cpu cpu0: l=0 h=2147483647 hyst=5000 l_limit=0 h_limit=0
+[    0.886103] Synopsys Designware Multimedia Card Interface Driver
+[    0.887395] dwmmc_rockchip ffc60000.dwmmc: num-slots property not found, assuming 1 slot is available
+[    0.887522] dwmmc_rockchip ffc60000.dwmmc: IDMAC supports 32-bit address mode.
+[    0.887572] dwmmc_rockchip ffc60000.dwmmc: Using internal DMA controller.
+[    0.887604] dwmmc_rockchip ffc60000.dwmmc: Version ID is 270a
+[    0.887668] dwmmc_rockchip ffc60000.dwmmc: DW MMC controller at irq 30,32 bit host data width,256 deep fifo
+[    0.887742] dwmmc_rockchip ffc60000.dwmmc: No vmmc regulator found
+[    0.887759] dwmmc_rockchip ffc60000.dwmmc: No vqmmc regulator found
+[    0.888288] dwmmc_rockchip ffc60000.dwmmc: allocated mmc-pwrseq
+[    0.898978] mmc_host mmc0: Bus speed (slot 0) = 400000Hz (slot req 400000Hz, actual 400000HZ div = 0)
+[    0.909994] dwmmc_rockchip ffc60000.dwmmc: 1 slots initialized
+[    0.910773] dwmmc_rockchip ffcf0000.dwmmc: num-slots property not found, assuming 1 slot is available
+[    0.911054] dwmmc_rockchip ffcf0000.dwmmc: IDMAC supports 32-bit address mode.
+[    0.911131] dwmmc_rockchip ffcf0000.dwmmc: Using internal DMA controller.
+[    0.911162] dwmmc_rockchip ffcf0000.dwmmc: Version ID is 270a
+[    0.911230] dwmmc_rockchip ffcf0000.dwmmc: DW MMC controller at irq 32,32 bit host data width,256 deep fifo
+[    0.923875] mmc_host mmc1: Bus speed (slot 0) = 400000Hz (slot req 400000Hz, actual 400000HZ div = 0)
+[    0.929057] mmc0: queuing unknown CIS tuple 0x80 (2 bytes)
+[    0.930666] mmc0: queuing unknown CIS tuple 0x80 (3 bytes)
+[    0.932266] mmc0: queuing unknown CIS tuple 0x80 (3 bytes)
+[    0.934970] dwmmc_rockchip ffcf0000.dwmmc: 1 slots initialized
+[    0.935125] mmc0: queuing unknown CIS tuple 0x80 (7 bytes)
+[    0.935937] dwmmc_rockchip ffd00000.dwmmc: IDMAC supports 32-bit address mode.
+[    0.936004] dwmmc_rockchip ffd00000.dwmmc: Using internal DMA controller.
+[    0.936034] dwmmc_rockchip ffd00000.dwmmc: Version ID is 270a
+[    0.936105] dwmmc_rockchip ffd00000.dwmmc: DW MMC controller at irq 33,32 bit host data width,256 deep fifo
+[    0.936226] dwmmc_rockchip ffd00000.dwmmc: No vmmc regulator found
+[    0.936252] dwmmc_rockchip ffd00000.dwmmc: No vqmmc regulator found
+[    0.938773] mmc0: queuing unknown CIS tuple 0x81 (9 bytes)
+[    0.946908] mmc_host mmc2: Bus speed (slot 0) = 400000Hz (slot req 400000Hz, actual 400000HZ div = 0)
+[    0.957935] dwmmc_rockchip ffd00000.dwmmc: 1 slots initialized
+[    0.959049] is31fl32xx 4-003c: register write to 0x00 failed (error -6),val=0
+[    1.020051] mmc_host mmc2: Bus speed (slot 0) = 198000000Hz (slot req 200000000Hz, actual 198000000HZ div = 0)
+[    1.029105] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 50000000Hz, actual 50000000HZ div = 0)
+[    1.033613] mmc0: new high speed SDIO card at address 0001
+[    1.034268] dwmmc_rockchip ffd00000.dwmmc: Successfully tuned phase to 70
+[    1.034500] mmc2: new HS200 MMC card at address 0001
+[    1.035691] mmcblk2: mmc2:0001 AJTD4R 14.6 GiB 
+[    1.037422] mmcblk2boot0: mmc2:0001 AJTD4R partition 1 4.00 MiB
+[    1.039178] mmcblk2boot1: mmc2:0001 AJTD4R partition 2 4.00 MiB
+[    1.041003] mmcblk2rpmb: mmc2:0001 AJTD4R partition 3 4.00 MiB
+[    1.047237]  mmcblk2: p1 p2 p3 p4 p5 p6 p7 p8 p9
+[    1.060234] is31fl32xx 4-003c: register write to 0x00 failed (error -6),val=0
+[    1.161090] is31fl32xx 4-003c: register write to 0x00 failed (error -6),val=0
+[    1.262244] is31fl32xx_init_regs, write to shutdown register failed
+[    1.262492] is31fl32xx 4-003c: register write to 0x26 failed (error -6),val=1
+[    1.363247] is31fl32xx 4-003c: register write to 0x26 failed (error -6),val=1
+[    1.464244] is31fl32xx 4-003c: register write to 0x26 failed (error -6),val=1
+[    1.565652] usbcore: registered new interface driver usbhid
+[    1.565703] usbhid: USB HID core driver
+[    1.567274] rockchip-dmc dmc: current ATF version 0x101!
+[    1.573563] rockchip-dmc dmc: leakage=0
+[    1.573976] rockchip-dmc dmc: Failed to get pvtm
+[    1.575425] rockchip-dmc dmc: avs=0
+[    1.575565] rockchip-dmc dmc: failed to get vop bandwidth to dmc rate
+[    1.575731] rockchip-dmc dmc: failed to get vop pn to msch rl
+[    1.576571] rockchip-dmc dmc: l=-2147483648 h=2147483647 hyst=0 l_limit=0 h_limit=0
+[    1.576732] rockchip-dmc dmc: could not find power_model node
+[    1.582650] rknandc_base v1.1 2017-01-11
+[    1.583474] rksfc_base v1.1 2016-01-08
+[    1.603545] rk-multicodecs vad-sound: vad <-> ff800000.pdm mapping ok
+[    1.606194] NET: Registered protocol family 10
+[    1.607592] NET: Registered protocol family 17
+[    1.607722] NET: Registered protocol family 15
+[    1.608044] Bluetooth: RFCOMM TTY layer initialized
+[    1.608105] Bluetooth: RFCOMM socket layer initialized
+[    1.608146] Bluetooth: RFCOMM ver 1.11
+[    1.608189] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    1.608221] Bluetooth: HIDP socket layer initialized
+[    1.608243] [WLAN_RFKILL]: Enter rfkill_wlan_init
+[    1.608996] [WLAN_RFKILL]: Enter rfkill_wlan_probe
+[    1.609053] [WLAN_RFKILL]: wlan_platdata_parse_dt: wifi_chip_type = ap6212
+[    1.609069] [WLAN_RFKILL]: wlan_platdata_parse_dt: enable wifi power control.
+[    1.609084] [WLAN_RFKILL]: wlan_platdata_parse_dt: wifi power controled by gpio.
+[    1.609252] [WLAN_RFKILL]: wlan_platdata_parse_dt: get property: WIFI,host_wake_irq = 145, flags = 0.
+[    1.609283] [WLAN_RFKILL]: wlan_platdata_parse_dt: The ref_wifi_clk not found !
+[    1.609297] [WLAN_RFKILL]: rfkill_wlan_probe: init gpio
+[    1.609314] [WLAN_RFKILL]: Exit rfkill_wlan_probe
+[    1.609445] [BT_RFKILL]: Enter rfkill_rk_init
+[    1.610567] [BT_RFKILL]: bluetooth_platdata_parse_dt: get property: uart_rts_gpios = 143.
+[    1.610665] [BT_RFKILL]: bluetooth_platdata_parse_dt: get property: BT,power_gpio = 147.
+[    1.610758] [BT_RFKILL]: bluetooth_platdata_parse_dt: get property: BT,wake_host_irq = 146.
+[    1.610780] [BT_RFKILL]: bluetooth_platdata_parse_dt: clk_get failed!!!.
+[    1.610926] [BT_RFKILL]: Request irq for bt wakeup host
+[    1.611027] [BT_RFKILL]: ** disable irq
+[    1.611288] [BT_RFKILL]: bt_default device registered.
+[    1.611718] flash vendor_init_thread!
+[    1.611779] flash vendor storage:20170308 ret = -1
+[    1.612640] vendor storage:20190527 ret = 0
+[    1.612992] imx327 3-001a: driver version: 00.01.01
+[    1.613217] imx327 3-001a: Failed to get reset-gpios
+[    1.617067] imx327 3-001a: Unexpected sensor id(000000), ret(-5)
+[    1.621091] rga2: Driver loaded successfully ver:4.00
+[    1.621458] rga2: Module initialized.
+[    1.622436] [drm] Rockchip DRM driver version: v1.0.1
+[    1.622903] rockchip-drm display-subsystem: devfreq is not set
+[    1.623508] rockchip-vop ffb00000.vop: missing rockchip,grf property
+[    1.623719] rockchip-drm display-subsystem: bound ffb00000.vop (ops 0xffffff80086d0638)
+[    1.623950] rockchip-drm display-subsystem: bound ffb30000.dsi (ops 0xffffff80086c6fd8)
+[    1.623975] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[    1.623988] [drm] No driver support for vblank timestamp query.
+[    1.653907] rockchip-drm display-subsystem: fb0:  frame buffer device
+[    1.663492] xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+[    1.663558] xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 3
+[    1.663707] xhci-hcd xhci-hcd.3.auto: hcc params 0x0220fe64 hci version 0x110 quirks 0x04010010
+[    1.663766] xhci-hcd xhci-hcd.3.auto: irq 207, io mem 0xfd000000
+[    1.664061] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+[    1.664087] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.664099] usb usb3: Product: xHCI Host Controller
+[    1.664111] usb usb3: Manufacturer: Linux 4.4.185 xhci-hcd
+[    1.664122] usb usb3: SerialNumber: xhci-hcd.3.auto
+[    1.664905] hub 3-0:1.0: USB hub found
+[    1.664973] hub 3-0:1.0: 1 port detected
+[    1.665316] xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+[    1.665349] xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 4
+[    1.665429] usb usb4: We don't know the algorithms for LPM for this host, disabling LPM.
+[    1.665546] usb usb4: New USB device found, idVendor=1d6b, idProduct=0003
+[    1.665560] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.665571] usb usb4: Product: xHCI Host Controller
+[    1.665583] usb usb4: Manufacturer: Linux 4.4.185 xhci-hcd
+[    1.665598] usb usb4: SerialNumber: xhci-hcd.3.auto
+[    1.666387] hub 4-0:1.0: USB hub found
+[    1.666448] hub 4-0:1.0: 1 port detected
+[    1.668606] input: adc-keys as /devices/platform/adc-keys/input/input2
+[    1.669191] xhci-hcd xhci-hcd.3.auto: remove, state 1
+[    1.669240] usb usb4: USB disconnect, device number 1
+[    1.685916] xhci-hcd xhci-hcd.3.auto: Host not halted after 16000 microseconds.
+[    1.685948] xhci-hcd xhci-hcd.3.auto: Host controller not halted, aborting reset.
+[    1.686169] xhci-hcd xhci-hcd.3.auto: USB bus 4 deregistered
+[    1.686200] xhci-hcd xhci-hcd.3.auto: remove, state 1
+[    1.686230] usb usb3: USB disconnect, device number 1
+[    1.687273] xhci-hcd xhci-hcd.3.auto: USB bus 3 deregistered
+[    1.689044] asoc-simple-card rk809-sound: rk817-hifi <-> ff7f0000.i2s mapping ok
+[    1.689086] asoc-simple-card rk809-sound: ASoC: no source widget found for MICBIAS1
+[    1.689098] asoc-simple-card rk809-sound: ASoC: Failed to add route MICBIAS1 -> direct -> Mic Jack
+[    1.689108] asoc-simple-card rk809-sound: ASoC: no sink widget found for IN1P
+[    1.689118] asoc-simple-card rk809-sound: ASoC: Failed to add route Mic Jack -> direct -> IN1P
+[    1.689128] asoc-simple-card rk809-sound: ASoC: no source widget found for HPOL
+[    1.689138] asoc-simple-card rk809-sound: ASoC: Failed to add route HPOL -> direct -> Headphone Jack
+[    1.689149] asoc-simple-card rk809-sound: ASoC: no source widget found for HPOR
+[    1.689158] asoc-simple-card rk809-sound: ASoC: Failed to add route HPOR -> direct -> Headphone Jack
+[    1.690452] rockchip-dwc3 usb: USB peripheral connected
+[    1.691308] rk808-rtc rk808-rtc: setting system clock to 2017-08-05 10:11:33 UTC (1501927893)
+[    1.703367] vcc_otg_vbus: disabling
+[    1.703408] vdd_npu: disabling
+[    1.703945] rkisp1 ffb50000.rkisp1: clear unready subdev num: 1
+[    1.704414] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[    1.704441] rkisp1 ffb50000.rkisp1: failed to get fmt for rockchip-mipi-dphy-rx
+[    1.704746] ALSA device list:
+[    1.704758]   #0: rockchip,rk1808-vad
+[    1.704765]   #1: rockchip,rk809-codec
+[    1.704780]   #7: Loopback 1
+[    1.708751] EXT4-fs (mmcblk2p8): mounted filesystem with ordered data mode. Opts: (null)
+[    1.708910] VFS: Mounted root (ext4 filesystem) readonly on device 179:8.
+[    1.709449] devtmpfs: mounted
+[    1.709656] Freeing unused kernel memory: 384K
+[    1.744884] EXT4-fs (mmcblk2p8): re-mounted. Opts: data=ordered
+Starting logging: OK
+Welcome to Rockchip Linux SDK
+Populating /dev using udev: [    1.826360] udevd[128]: starting version 3.2.7
+[    1.836204] udevd[128]: specified group 'kvm' unknown
+[    1.856386] udevd[129]: starting eudev-3.2.7
+done
+Initializing random number generator... done.
+Will now mount all partitions in /etc/fstab
+Note: Create /.skip_fsck to skip fsck
+ - The check might take a while if didn't shutdown properly!
+Handling /dev/mmcblk2p8 / ext2 rw,noauto 1
+Checking /dev/mmcblk2p8(ext2)
+[    2.457285] EXT4-fs (mmcblk2p8): re-mounted. Opts: data=ordered
+e2fsck 1.43.9 (8-Feb-2018)
+rootfs: clean, 3936/65536 files, 88882/262144 blocks
+[    2.486937] EXT4-fs (mmcblk2p8): re-mounted. Opts: data=ordered
+Handling /dev/mmcblk2p3 /misc emmc defaults 0
+Unsupported file system emmc for /dev/mmcblk2p3
+Handling /dev/mmcblk2p7 /oem ext2 defaults 2
+Checking /dev/mmcblk2p7(ext2)
+e2fsck 1.43.9 (8-Feb-2018)
+oem: clean, 16/10240 files, 7441/65536 blocks
+Mounting /dev/mmcblk2p7(ext2) on /oem 
+[    2.801196] EXT4-fs (mmcblk2p7): couldn't mount as ext3 due to feature incompatibilities
+[    2.801370] EXT4-fs (mmcblk2p7): mounting ext2 file system using the ext4 subsystem
+[    2.805271] EXT4-fs (mmcblk2p7): mounted filesystem without journal. Opts: (null)
+Handling /dev/mmcblk2p9 /userdata ext2 defaults 2
+Checking /dev/mmcblk2p9(ext2)
+e2fsck 1.43.9 (8-Feb-2018)
+userdata: clean, 214/860544 files, 493082/3508731 blocks
+Mounting /dev/mmcblk2p9(ext2) on /userdata 
+[    2.979187] EXT4-fs (mmcblk2p9): couldn't mount as ext3 due to feature incompatibilities
+[    2.979377] EXT4-fs (mmcblk2p9): mounting ext2 file system using the ext4 subsystem
+[    2.991330] EXT4-fs (mmcblk2p9): mounted filesystem without journal. Opts: (null)
+Log saved to /tmp/mountall.log
+Starting system message bus: done
+Starting network: OK
+Starting dhcpcd...
+dev: loaded udev
+no valid interfaces found
+no interfaces have a carrier
+forked to background, child pid 502
+Starting sshd: OK
+[    3.260472] file system registered
+install_listener('tcp:5037','*smartsocket*')
+[    3.281160] read descriptors
+[    3.281207] read strings
+load wifi modules: Rockchip Linux WifiBt init 
+BT TTY: /dev/ttyS4 
+Wifi driver is not ready.
+wifibt_load_driver 
+uevent path:/sys/bus/sdio/devices/./uevent 
+uevent path:/sys/bus/sdio/devices/../uevent 
+uevent path:/sys/bus/sdio/devices/mmc0:0001:1/uevent 
+line: SDIO_CLASS=00
+, prefix: SDIO_ID=.
+line: SDIO_ID=02D0:A9A6
+, prefix: SDIO_ID=.
+pid:vid : 02d0:a9a6 
+found device pid:vid : 02d0:a9a6 
+wifi detectd return ret:0 
+SDIO WIFI identify sucess 
+check_wifi_chip_type_string: AP6212A 
+/data/wifi_chip is exit 
+wifibt_load_driver matched ko file path  /system/lib/modules/bcmdhd.ko 
+wifibt_load_driver insmod /system/lib/modules/bcmdhd.ko 
+[    4.465856] dhd_module_init: in Dongle Host Driver, version 1.579.77.41.10 (r)
+[    4.465896] ======== dhd_wlan_init_plat_data ========
+[    4.465907] [WLAN_RFKILL]: rockchip_wifi_get_oob_irq: Enter
+[    4.465923] dhd_wlan_iniWifi driver is not ready.
+t_gpio: WL_HOST_WAKE=-1, oob_irq=186, oob_irq_flags=0x414
+[    4.465936] dhd_wlan_init_gpio: WL_REG_ON=-1
+[    4.465944] dhd_wifi_platform_load: Enter
+[    4.465969] Power-up adapter 'DHD generic adapter'
+[    4.466305] wifi_platform_set_power = 1
+[    4.466329] ======== PULL WL_REG_ON(-1) HIGH! ========
+[    4.466339] [WLAN_RFKILL]: rockchip_wifi_power: 1
+[    4.466348] [WLAN_RFKILL]: wifi turn on power. -1
+[    4.666719] android_work: did not send uevent (0 0           (null))
+Wifi driver is not ready.
+[    4.766972] wifi_platform_bus_enumerate device present 1
+[    4.767079] ======== Card detection to detect SDIO card! ========
+[    4.767280] mmc0:mmc host rescan start!
+[    4.784362] bcmsdh_register: register client driver
+[    4.785054] bcmsdh_sdmmc_probe: Enter num=1
+[    4.785339] bcmsdh_sdmmc_probe: Enter num=2
+[    4.785374] bus num (host idx)=0, slot num (rca)=1
+[    4.785395] found adapter info 'DHD generic adapter'
+[    4.785481] sdioh_attach: set sd_f2_blocksize 256
+[    4.785550] sdioh_attach: sd clock rate = 0
+[    4.786398] dhdsdio_probe : no mutex held. set lock
+[    4.786578] F1 signature read @0x18000000=0x1541a9a6
+[    4.791562] F1 signature OK, socitype:0x1 chip:0xa9a6 rev:0x1 pkg:0x4
+[    4.793462] DHD: dongle ram size is set to 524288(orig 524288) at 0x0
+[    4.793771] dhd_conf_set_chiprev: chip=0xa9a6, chiprev=1
+[    4.794785] CFG80211-ERROR) wl_setup_wiphy : Registering Vendor80211
+[    4.799269] CFG80211-ERROR) wl_init_prof : wl_init_prof: No profile
+[    4.801135] wl_escan_attach: Enter
+[    4.801275] wl_escan_init: Enter
+[    4.801610] wl_create_event_handler(): thread:wl_escan_handler:21f started
+[    4.802478] tsk Enter, tsk = 0xffffffc07beb0180
+[    4.802779] dhd_attach(): thread:dhd_watchdog_thread:220 started
+[    4.803100] dhd_attach(): thread:dhd_dpc:221 started
+[    4.803326] dhd_attach(): thread:dhd_rxf:222 started
+[    4.803379] dhd_deferred_work_init: work queue initialized
+[    4.803406] dhd_tcpack_suppress_set: TCP ACK Suppress mode 0 -> mode 2
+[    4.803484] dhd_bus_set_default_min_res_mask: Unhandled chip id
+[    4.803783] sdioh_cis_read: func_cis_ptr[0]=0x1070
+[    4.811909] android_work: sent uevent USB_STATE=CONNECTED
+[    4.813235] configfs-gadget gadget: high-speed config #1: b
+[    4.813660] android_work: sent uevent USB_STATE=CONFIGURED
+[    4.816991] Dongle Host Driver, version 1.579.77.41.10 (r)
+[    4.818150] wl_ext_iapsta_attach_netdev: ifidx=0, bssidx=0
+[    4.818193] Register interface [wlan0]  MAC: 8c:f7:10:90:b6:14
+[    4.818193] 
+[    4.818365] dhd_tcpack_suppress_set: TCP ACK Suppress mode 2 -> mode 0
+[    4.818394] dhd_wl_ioctl: returning as busstate=0
+[    4.818410] dhd_dbg_detach_pkt_monitor, 2204
+[    4.818423] dhd_bus_devreset: == Power OFF ==
+[    4.818741] bcmsdh_oob_intr_unregister: Enter
+[    4.818762] bcmsdh_oob_intr_unregister: irq is not registered
+[    4.818784] dhd_txglom_enable: enable 0
+[    4.818798] dhd_conf_set_txglom_params: txglom_mode=copy
+[    4.818915] dhd_conf_set_txglom_params: txglomsize=0, deferred_tx_len=0
+[    4.818930] dhd_conf_set_txglom_params: txinrx_thres=-1, dhd_txminmax=1
+[    4.818944] dhd_conf_set_txglom_params: tx_max_offset=0, txctl_tmo_fix=300
+[    4.818958] dhd_bus_devreset:  WLAN OFF DONE
+[    4.819038] wifi_platform_set_power = 0
+[    4.819073] ======== PULL WL_REG_ON(-1) LOW! ========
+[    4.819103] [WLAN_RFKILL]: rockchip_wifi_power: 0
+[    4.819128] [WLAN_RFKILL]: wifi shut off power.
+[    4.819142] dhdsdio_probe : the lock is released.
+[    4.819298] dhd_module_init: Exit err=0
+[    4.824656] dhd_ioctl_entry: Interface is down 
+[    4.824690] Error getting the SSID
+Wifi driver is ready for now... 
+[    4.874471] dhd_open: Enter ffffffc07cbde800
+[    4.874508] dhd_open : no mutex held. set lock
+[    4.874522] 
+[    4.874522] Dongle Host Driver, version 1.579.77.41.10 (r)
+[    4.874533] wl_ext_iapsta_attach_netdev: ifidx=0, bssidx=0
+[    4.874541] wl_android_wifi_on in 1
+[    4.874548] wl_android_wifi_on in 2: g_wifi_on=0
+[    4.874556] wifi_platform_set_power = 1
+[    4.874564] ======== PULL WL_REG_ON(-1) HIGH! ========
+[    4.874572] [WLAN_RFKILL]: rockchip_wifi_power: 1
+[    4.874580] [WLAN_RFKILL]: wifi turn on power. -1
+[    4.884098] [BT_RFKILL]: bt shut off power
+[    4.927888] [BT_RFKILL]: ENABLE UART_RTS
+[    5.028874] [BT_RFKILL]: DISABLE UART_RTS
+[    5.028965] [BT_RFKILL]: bt turn on power
+wifibt_load_driver brcm_patchram_plus1 --bd_addr_rand --enable_hci --no2bytes --use_baudrate_for_download  --tosleep  200000 --baudrate 1500000 --patchram  /system/etc/firmware/bcm43438a1.hcd /dev/ttyS4 &
+OK
+/etc/init.d/S66load_wifi_modules: line 42: wl: not found
+Starting dnsmasq: cp: cannot stat '/data/cfg/device_info.txt': No such file or directory
+proc_reset[    5.053620] of_dma_request_slave_channel: dma-names property of node '/serial@ff570000' missing or empty
+[    5.053658] ttyS4 - failed to request DMA, use interrupt mode
+[    5.174885] sdio_reset_comm():
+[    5.190077] mmc_host mmc0: Bus speed (slot 0) = 400000Hz (slot req 400000Hz, actual 400000HZ div = 0)
+[    5.207016] mmc_host mmc0: Bus speed (slot 0) = 100000Hz (slot req 100000Hz, actual 100000HZ div = 0)
+[    5.246197] mmc0: queuing unknown CIS tuple 0x80 (2 bytes)
+[    5.252304] mmc0: queuing unknown CIS tuple 0x80 (3 bytes)
+[    5.258866] mmc0: queuing unknown CIS tuple 0x80 (3 bytes)
+send hci_download_minidriver[    5.270277] mmc0: queuing unknown CIS tuple 0x80 (7 bytes)
+[    5.283986] mmc0: queuing unknown CIS tuple 0x81 (9 bytes)
+[    5.622645] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 50000000Hz, actual 50000000HZ div = 0)
+[    5.623070] sdioh_start: set sd_f2_blocksize 256
+[    5.624255] 
+[    5.624255] 
+[    5.624255] dhd_bus_devreset: == WLAN ON ==
+[    5.624550] F1 signature read @0x18000000=0x1541a9a6
+[    5.629307] F1 signature OK, socitype:0x1 chip:0xa9a6 rev:0x1 pkg:0x4
+[    5.631283] DHD: dongle ram size is set to 524288(orig 524288) at 0x0
+[    5.631584] dhd_bus_set_default_min_res_mask: Unhandled chip id
+[    5.632703] dhd_conf_read_config: Ignore config file /system/etc/firmware/config.txt
+[    5.633277] Final fw_path=/system/etc/firmware/fw_bcm43438a1.bin
+[    5.633500] Final nv_path=/system/etc/firmware/nvram_ap6212a.txt
+[    5.633697] Final clm_path=/system/etc/firmware/clm.blob
+[    5.634531] Final conf_path=/system/etc/firmware/config.txt
+[    5.636581] dhd_os_open_image: /system/etc/firmware/fw_bcm43438a1.bin (414579 bytes) open success
+[    5.706652] dhd_os_open_image: /system/etc/firmware/nvram_ap6212a.txt (1003 bytes) open success
+[    5.707217] NVRAM version: AP6212A_NVRAM_V1.0.1_20160606
+[    5.708028] dhdsdio_write_vars: Download, Upload and compare of NVRAM succeeded.
+[    5.781088] dhd_bus_init: enable 0x06, ready 0x06 (waited 0us)
+[    5.781227] bcmsdh_oob_intr_register: HW_OOB irq=186 flags=0x4
+[    5.782479] dhd_get_memdump_info: File [/data/misc/wifi/.memdump.info] doesn't exist
+[    5.782512] dhd_get_memdump_info: MEMDUMP ENABLED = 2
+[    5.782865] Disable tdls_auto_op failed. -1
+[    5.782885] dhd_tcpack_suppress_set 362: already set to 0
+[    5.783356] dhd_apply_default_clm: Ignore clm file /system/etc/firmware/clm.blob
+[    5.786477] Firmware up: op_mode=0x0005, MAC=8c:f7:10:90:b6:14
+[    5.790895] dhd_preinit_ioctls Set scancache failed -23
+[    5.803599]   Driver: 1.579.77.41.10 (r)
+[    5.803599]   Firmware: wl0: Jun 13 2018 13:18:38 version 7.45.96.24 (7ffe8b7@shgit) (r) FWID 01-40f9deb0 es7.c5.n4.a3
+[    5.803599]   CLM: 7.11.15 
+[    5.804122] dhd_txglom_enable: enable 1
+[    5.804151] dhd_conf_set_txglom_params: txglom_mode=copy
+[    5.804159] dhd_conf_set_txglom_params: txglomsize=36, deferred_tx_len=0
+[    5.804167] dhd_conf_set_txglom_params: txinrx_thres=-1, dhd_txminmax=1
+[    5.804174] dhd_conf_set_txglom_params: tx_max_offset=0, txctl_tmo_fix=300
+[    5.804189] dhd_conf_get_disable_proptx: fw_proptx=1, disable_proptx=-1
+[    5.805603] dhd_wlfc_hostreorder_init(): successful bdcv2 tlv signaling, 64
+[    5.807586] dhd_pno_init: Support Android Location Service
+[    5.838424] CFG80211-ERROR) wl_cfg80211_event : Event handler is not created
+[    5.839905] rtt_do_get_ioctl: failed to send getbuf proxd iovar (CMD ID : 1), status=-23
+[    5.839958] dhd_rtt_init : FTM is not supported
+[    5.839983] dhd_preinit_ioctls: SensorHub diabled 0
+[    5.841318] dhd_preinit_ioctls failed to set ShubHub disable
+[    5.844417] dhd_wl_ioctl_get_intiovar: get int iovar wnm_bsstrans_resp failed, ERR -23
+[    5.844525] failed to get wnm_bsstrans_resp
+[    5.845747] failed to set WNM capabilities
+[    5.846752] CFG80211-ERROR) wl_cfg80211_event : Event handler is not created
+[    5.846958] dhd_conf_set_country: set country CN, revision 0
+[    5.850598] Country code: CN (CN/0)
+[    5.854171] wl_android_wifi_on: Success
+[    5.860109] CFG80211-ERROR) __wl_update_wiphybands : error reading vhtmode (-23)
+[    5.876055] dhd_open : the lock is released.
+[    5.876159] dhd_open: Exit ret=0
+OK
+insmod NPU modules: [    5.966616] galcore: loading out-of-tree module taints kernel.
+[    5.976355] galcore: npu init.
+[    5.978933] galcore: start npu probe.
+[    5.979470] npu: platform_get_irq irq = 31
+[    5.979568] npu: platform_get_resource registerMemBase = ffbc0000, registerMemSize = 1000
+[    5.979765] Galcore version 6.proc_reset4.0.213404
+[    5.980321] Galcore options:
+[    5.980527]   irqLine           = 31
+[    5.980745]   registerMemBase   = 0xFFBC0000
+[    5.981272]   registerMemSize   = 0x00001000
+[    5.981478]   contiguousSize    = 0x00400000
+[    5.981691]   contiguousBase    = 0x00000000
+[    5.982271]   externalSize      = 0x00000000
+[    5.982305]   externalBase      = 0x00000000
+[    5.982324]   bankSize          = 0x00000000
+[    5.982341]   fastClear         = -1
+[    5.982358]   compression       = 15
+[    5.982400]   powerManagement   = 1
+[    5.982430]   baseAddress       = 0x00000000
+[    5.982447]   physSize          = 0x00000000
+[    5.982464]   recovery          = 1
+[    5.982480]   stuckDump         = 0
+[    5.982496]   gpuProfiler       = 1
+[    5.982513]   userClusterMask   = 0x0
+[    5.982529]   smallBatch        = 1
+[    5.982544]   irqs              = 31, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+[    5.982634]   registerBases     = 0xFFBC0000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
+[    5.982799]   registerSizes     = 0x00001000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
+[    5.982967]   chipIDs           = 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 
+[    5.983066]   core 0 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFEC10000, 0xFFFFFFFFFFFFFFFF, 
+[    5.983112]   core 1 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983158]   core 2 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983203]   core 3 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983249]   core 4 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983295]   core 5 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983340]   core 6 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983384]   core 7 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983429]   core 8 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983474]   core 9 sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.983518] Build options:
+[    5.983536]   gcdGPU_TIMEOUT    = 20000
+[    5.983553]   gcdGPU_2D_TIMEOUT = 4000
+[    5.983570]   gcdINTERRUPT_STATISTIC = 1
+[    5.987935] Galcore Info: ContiguousBase=0x7a400000 ContiguousSize=0x400000
+[    5.992597] Galcore Info: MMU mapped core 0 SRAM[1] CPU base=0xfec10000 size=0x1f0000
+[    5.992708] Galcore Info: MMU mapped core 0 SRAM[1] hardware virtual address=0xfec10000 size=0x1f0000
+[    6.001728] galcore ffbc0000.npu: Init npu devfreq
+[    6.002097] galcorOK
+e ffbc0000.npu: leakage=0
+[    6.002307] galcore ffbc0000.npu: pvtm-volt-sel=2
+[    6.003444] galcore ffbc0000.npu: avs=0
+[    6.005300] galcore ffbc0000.npu: l=0 h=2147483647 hyst=5000 l_limit=0 h_limit=0
+Start QT Launcher: Starting input-event-daemon: input-event-daemon: Start parsing /etc/input-event-daemon.conf...
+input-event-daemon: Adding device: /dev/input/event0...
+input-event-daemon: Adding device: /dev/input/event1...
+input-event-daemon: Adding device: /dev/input/event2...
+input-event-daemon: Start listening on 3 devices...
+done
+[root@rk1808:/]# Done setting line discpline
+[    6.250253] Freeing drm_logo memory: 696K
+[?25lQLauncher available size : 1280 x 720
+start rknn server, version:0.9.9 (8509ec7 build: 2019-08-05 10:54:34)
+QLauncher add application: 0 "Qt V4L2 test Utility"
+I NPUTransfer: Starting NPU Transfer Server, Transfer version 1.9.7 (17de7ce@2019-08-02T17:45:43)
+QLauncher add application: 1 "rknn_demo"
+
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# ps
+    1 root      2408 S    init
+    2 root         0 SW   [kthreadd]
+    3 root         0 SW   [ksoftirqd/0]
+    4 root         0 SW   [kworker/0:0]
+    5 root         0 SW<  [kworker/0:0H]
+    6 root         0 SW   [kworker/u4:0]
+    7 root         0 SW   [rcu_preempt]
+    8 root         0 SW   [rcu_sched]
+    9 root         0 SW   [rcu_bh]
+   10 root         0 SW   [migration/0]
+   11 root         0 SW   [watchdog/0]
+   12 root         0 SW   [watchdog/1]
+   13 root         0 SW   [migration/1]
+   14 root         0 SW   [ksoftirqd/1]
+   15 root         0 SW   [kworker/1:0]
+   16 root         0 SW<  [kworker/1:0H]
+   17 root         0 SW   [kdevtmpfs]
+   18 root         0 SW<  [perf]
+   19 root         0 SW   [kconsole]
+   20 root         0 SW   [khungtaskd]
+   21 root         0 SW<  [writeback]
+   22 root         0 SW<  [crypto]
+   23 root         0 SW<  [bioset]
+   24 root         0 SW<  [kblockd]
+   25 root         0 SW   [kworker/0:1]
+   26 root         0 SW<  [devfreq_wq]
+   27 root         0 SW<  [cfg80211]
+   28 root         0 SW   [cfinteractive]
+   29 root         0 SW   [kworker/u4:1]
+   55 root         0 SW   [kswapd0]
+   56 root         0 SW<  [vmstat]
+   57 root         0 SW   [fsnotify_mark]
+   58 root         0 SW<  [SquashFS read w]
+   79 root         0 SW   [irq/203-rockchi]
+   80 root         0 SW   [irq/204-rockchi]
+   81 root         0 SW   [irq/205-rockchi]
+   82 root         0 SW   [irq/206-rockchi]
+   83 root         0 SW<  [vcodec]
+   84 root         0 SW   [irq/27-ffb80000]
+   85 root         0 SW   [irq/28-ffb80000]
+   86 root         0 SW   [hwrng]
+   87 root         0 SW   [kworker/1:1]
+   88 root         0 SW<  [libertastf]
+   89 root         0 SW   [irq/42-rk817]
+   90 root         0 SW<  [gt1x_workthread]
+   91 root         0 SW<  [gt1x_wq]
+   92 root         0 SW   [irq/9-rockchip_]
+   93 root         0 SW   [kworker/0:2]
+   94 root         0 SW<  [bioset]
+   95 root         0 SW   [mmcqd/2]
+   96 root         0 SW<  [bioset]
+   97 root         0 SW   [mmcqd/2boot0]
+   98 root         0 SW<  [bioset]
+   99 root         0 SW   [mmcqd/2boot1]
+  100 root         0 SW<  [bioset]
+  101 root         0 SW   [mmcqd/2rpmb]
+  102 root         0 SW<  [ipv6_addrconf]
+  103 root         0 SW<  [krfcommd]
+  106 root         0 SW   [irq/21-rga]
+  107 root         0 SW<  [deferwq]
+  108 root         0 SW   [kworker/u4:2]
+  109 root         0 SW   [kworker/u4:3]
+  110 root         0 SW   [jbd2/mmcblk2p8-]
+  111 root         0 SW<  [ext4-rsv-conver]
+  123 root      2408 S    /sbin/syslogd -n
+  125 root      2408 S    /sbin/klogd -n
+  129 root      2892 S    /sbin/udevd -d
+  253 root         0 SW<  [kworker/1:1H]
+  408 root         0 SW<  [ext4-rsv-conver]
+  474 root         0 SW<  [ext4-rsv-conver]
+  481 dbus      2728 S    dbus-daemon --system
+  502 root      2492 S    /sbin/dhcpcd -f /etc/dhcpcd.conf
+  506 root      4772 S    /usr/sbin/sshd
+  524 root      156m S    adbd
+  532 root         0 SW   [irq/207-dwc3]
+  543 root         0 SW   [wl_escan_handle]
+  544 root         0 SW   [dhd_watchdog_th]
+  545 root         0 SW   [dhd_dpc]
+  546 root         0 SW   [dhd_rxf]
+  562 root      1764 S    brcm_patchram_plus1 --bd_addr_rand --enable_hci --no
+  579 root         0 SW<  [dhd_eventd]
+  581 root      2616 S    /usr/sbin/dnsmasq
+  586 root         0 SW<  [npu_power_off_w]
+  587 root         0 SW<  [galcore workque]
+  588 root         0 SW   [galcore_deamon/]
+  589 root      2408 S    {start_rknn.sh} /bin/sh /usr/bin/start_rknn.sh
+  592 root      120m S    /usr/bin/QLauncher
+  595 root      1776 S    input-event-daemon -v /dev/input/event0 /dev/input/e
+  596 root      2408 S    -/bin/sh
+  598 root         0 SW<  [kworker/u5:0]
+  599 root         0 SW<  [hci0]
+  600 root         0 SW<  [hci0]
+  601 root         0 SW<  [kworker/u5:1]
+  602 root         0 SW<  [kworker/u5:2]
+  604 root      295m S    rknn_server
+  628 root      2408 R    ps
+[root@rk1808:/]# 
+[root@rk1808:/]# cat /proc/562/cmdline
+brcm_patchram_plus1--bd_addr_rand--enable_hci--no2bytes--use_baudrate_for_download--tosleep200000--baudrate1500000--patchram/system/etc/firmware/bcm43438a1.hcd/dev/ttyS4[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# cat /proc/562/cmdline | hexdump -C
+00000000  62 72 63 6d 5f 70 61 74  63 68 72 61 6d 5f 70 6c  |brcm_patchram_pl|
+00000010  75 73 31 00 2d 2d 62 64  5f 61 64 64 72 5f 72 61  |us1.--bd_addr_ra|
+00000020  6e 64 00 2d 2d 65 6e 61  62 6c 65 5f 68 63 69 00  |nd.--enable_hci.|
+00000030  2d 2d 6e 6f 32 62 79 74  65 73 00 2d 2d 75 73 65  |--no2bytes.--use|
+00000040  5f 62 61 75 64 72 61 74  65 5f 66 6f 72 5f 64 6f  |_baudrate_for_do|
+00000050  77 6e 6c 6f 61 64 00 2d  2d 74 6f 73 6c 65 65 70  |wnload.--tosleep|
+00000060  00 32 30 30 30 30 30 00  2d 2d 62 61 75 64 72 61  |.200000.--baudra|
+00000070  74 65 00 31 35 30 30 30  30 30 00 2d 2d 70 61 74  |te.1500000.--pat|
+00000080  63 68 72 61 6d 00 2f 73  79 73 74 65 6d 2f 65 74  |chram./system/et|
+00000090  63 2f 66 69 72 6d 77 61  72 65 2f 62 63 6d 34 33  |c/firmware/bcm43|
+000000a0  34 33 38 61 31 2e 68 63  64 00 2f 64 65 76 2f 74  |438a1.hcd./dev/t|
+000000b0  74 79 53 34 00                                    |tyS4.|
+000000b5
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# cat /userdata/wifi_chip
+AP6212A[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# ls -l
+total 109
+drwxr-xr-x   2 root root  4096 Aug  8  2019 bin
+-rw-r--r--   1 root root 30195 May 27  2019 busybox.config
+lrwxrwxrwx   1 root root     8 Aug  8  2019 data -> userdata
+drwxr-xr-x  13 root root  1440 Aug  5 10:11 dev
+drwxr-xr-x  17 root root  4096 Aug  5 10:11 etc
+-rwxr-xr-x   1 root root   178 Aug  8  2019 init
+drwxr-xr-x   6 root root  4096 Aug  8  2019 lib
+lrwxrwxrwx   1 root root     3 Aug  7  2019 lib64 -> lib
+lrwxrwxrwx   1 root root    11 Aug  7  2019 linuxrc -> bin/busybox
+drwx------   2 root root 16384 Aug  8  2019 lost+found
+drwxr-xr-x  10 root root  4096 Aug  8  2019 media
+lrwxrwxrwx   1 root root    23 May 27  2019 misc -> /dev/block/by-name/misc
+drwxr-xr-x   3 root root  4096 Aug  8  2019 mnt
+drwxr-xr-x   3 root root  1024 Aug  8  2019 oem
+drwxr-xr-x   2 root root  4096 May 27  2019 opt
+dr-xr-xr-x 109 root root     0 Jan  1  1970 proc
+drwxr-xr-x  15 root root  4096 Aug  8  2019 rockchip_test
+drwx------   2 root root  4096 May 27  2019 root
+drwxr-xr-x   6 root root   320 Aug  5 10:11 run
+drwxr-xr-x   2 root root  4096 Aug  8  2019 sbin
+lrwxrwxrwx   1 root root    10 Aug  8  2019 sdcard -> mnt/sdcard
+dr-xr-xr-x  15 root root     0 Aug  5 10:11 sys
+drwxr-xr-x   4 root root  4096 Aug  8  2019 system
+-rw-r--r--   1 root root    62 Aug  8  2019 timestamp
+drwxrwxrwt   4 root root   200 Aug  5 10:11 tmp
+lrwxrwxrwx   1 root root    10 Aug  8  2019 udisk -> media/usb0
+drwxr-xr-x   6 root root  4096 Aug  5 09:08 userdata
+drwxr-xr-x  10 root root  4096 May 27  2019 usr
+drwxr-xr-x   6 root root  4096 Aug  8  2019 var
+[root@rk1808:/]# cd userdata
+[root@rk1808:/userdata]# 
+[root@rk1808:/userdata]# 
+[root@rk1808:/userdata]# ifconfig
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+wlan0     Link encap:Ethernet  HWaddr 8C:F7:10:90:B6:14  
+          inet addr:169.254.89.102  Bcast:169.254.255.255  Mask:255.255.0.0
+          inet6 addr: fe80::227f:a6c9:f82:e565/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:26 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:5056 (4.9 KiB)
+
+[root@rk1808:/userdata]# 
+[root@rk1808:/userdata]# iw wlan sc[K[K[K0 scan | grep -i ssid
+[  581.503751] wl_run_escan: LEGACY_SCAN sync ID: 0, bssidx: 0
+[8CSSID: 
+[8CSSID: SitaraPCHub-aj-102030111111
+[8CSSID: TELUS4958
+[root@rk1808:/userdata]# 
+[root@rk1808:/userdata]# cd
+[root@rk1808:/]# ls -l
+total 109
+drwxr-xr-x   2 root root  4096 Aug  8  2019 bin
+-rw-r--r--   1 root root 30195 May 27  2019 busybox.config
+lrwxrwxrwx   1 root root     8 Aug  8  2019 data -> userdata
+drwxr-xr-x  13 root root  1440 Aug  5 10:11 dev
+drwxr-xr-x  17 root root  4096 Aug  5 10:11 etc
+-rwxr-xr-x   1 root root   178 Aug  8  2019 init
+drwxr-xr-x   6 root root  4096 Aug  8  2019 lib
+lrwxrwxrwx   1 root root     3 Aug  7  2019 lib64 -> lib
+lrwxrwxrwx   1 root root    11 Aug  7  2019 linuxrc -> bin/busybox
+drwx------   2 root root 16384 Aug  8  2019 lost+found
+drwxr-xr-x  10 root root  4096 Aug  8  2019 media
+lrwxrwxrwx   1 root root    23 May 27  2019 misc -> /dev/block/by-name/misc
+drwxr-xr-x   3 root root  4096 Aug  8  2019 mnt
+drwxr-xr-x   3 root root  1024 Aug  8  2019 oem
+drwxr-xr-x   2 root root  4096 May 27  2019 opt
+dr-xr-xr-x 105 root root     0 Jan  1  1970 proc
+drwxr-xr-x  15 root root  4096 Aug  8  2019 rockchip_test
+drwx------   2 root root  4096 May 27  2019 root
+drwxr-xr-x   6 root root   320 Aug  5 10:11 run
+drwxr-xr-x   2 root root  4096 Aug  8  2019 sbin
+lrwxrwxrwx   1 root root    10 Aug  8  2019 sdcard -> mnt/sdcard
+dr-xr-xr-x  15 root root     0 Aug  5 10:11 sys
+drwxr-xr-x   4 root root  4096 Aug  8  2019 system
+-rw-r--r--   1 root root    62 Aug  8  2019 timestamp
+drwxrwxrwt   4 root root   200 Aug  5 10:11 tmp
+lrwxrwxrwx   1 root root    10 Aug  8  2019 udisk -> media/usb0
+drwxr-xr-x   6 root root  4096 Aug  5 09:08 userdata
+drwxr-xr-x  10 root root  4096 May 27  2019 usr
+drwxr-xr-x   6 root root  4096 Aug  8  2019 var
+[root@rk1808:/]# 
+[root@rk1808:/]# [?12l[?25h[7mReally quit and kill all your windows [y/n][27m[K[root@rk1808:/]#                                                                                                              [?25l[32;18H[?12l[?25h[?1l>[32;1H
+[?1049l[23;0;0t[screen is terminating]
+exit
+
+Script done on 2020-08-05 16:56:38-0700

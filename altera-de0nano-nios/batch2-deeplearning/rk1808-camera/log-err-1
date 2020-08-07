@@ -1,0 +1,25 @@
+
+[root@rk1808:/usr/bin]# ./gstvideotest.sh 
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x1f3f130,ctx->rgaFd=6 
+Rga built version:version:+2017-09-28 10:12:42 
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x3c59570,ctx->rgaFd=3 
+Rga built version:version:+2017-09-28 10:12:42 
+Setting pipeline to PAUSED ...
+Pipeline is PREROLLING ...
+/GstPipeline:pipeline0/GstKMSSink:kmssink0: display-width = 720
+/GstPipeline:pipeline0/GstKMSSink:kmssink0: display-height = 1280
+/GstPipeline:pipeline0/GstVideoTestSrc:videotestsrc0.GstPad:src: caps = video/x-raw, format=(string)RGBx, width=(int)1280, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, heigh=(int)720, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive
+/GstPipeline:pipeline0/GstCapsFilter:capsfilter0.GstPad:src: caps = video/x-raw, format=(string)RGBx, width=(int)1280, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, heigh=(int)720, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive
+/GstPipeline:pipeline0/GstKMSSink:kmssink0.GstPad:sink: caps = video/x-raw, format=(string)RGBx, width=(int)1280, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, heigh=(int)720, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive
+/GstPipeline:pipeline0/GstCapsFilter:capsfilter0.GstPad:sink: caps = video/x-raw, format=(string)RGBx, width=(int)1280, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, heigh=(int)720, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive
+ERROR: from element /GstPipeline:pipeline0/GstVideoTestSrc:videotestsrc0: Internal data stream error.
+Additional debug info:
+gstbasesrc.c(3055): gst_base_src_loop (): /GstPipeline:pipeline0/GstVideoTestSrc:videotestsrc0:
+streaming stopped, reason error (-5)
+ERROR: pipeline doesn't want to preroll.
+Setting pipeline to NULL ...
+Freeing pipeline ...
+
+

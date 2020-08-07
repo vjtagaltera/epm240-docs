@@ -1,0 +1,1554 @@
+Script started on 2020-08-06 19:08:43-0700
+Stopping input-event-daemon: 
+input-event-daemon: Exiting...
+done
+stop auto-reboot finished
+Stopping pppd: killall: pppd: no process killed
+Stopping dnsmasq: OK
+[  152.124123] [BT_RFKILL]: bt shut off power
+[  152.131534] android_work: sent uevent USB_STATE=DISCONNECTED
+[  152.131619] configfs-gadget gadget: unbind function 'Function FS Gadget'/ffffffc03e3c2c38
+[  152.132878] read descriptors
+[  152.132986] read strings
+Stopping sshd: OK
+[02:09:05.748] caught signal 15
+[02:09:05.748] panel surface gone
+stop finished[02:09:05.749] background surface gone
+Stopping ntpd and watch_ntpd.sh: [02:09:05.757] event2  - [02:09:05.757] adc-keys: [02:09:05.757] device removed
+[02:09:05.770] event0  - [02:09:05.770] rk8xx_pwrkey: [02:09:05.770] device removed
+[02:09:05.782] event1  - [02:09:05.782] goodix-ts: [02:09:05.782] device removed
+[02:09:05.794] destroy output while page flip pending
+OK
+[  153.214157] android_work: did not send uevent (0 0           (null))
+Stopping web server : OK
+Stopping dhcpcd...
+stopped /sbin/dhcpcd (pid 530)
+killall: rkisp_3A_server: no process killed
+Stopping network: OK
+Stopping system message bus: [  153.325723] android_work: did not send uevent (0 0           (null))
+done
+Saving random seed... done.
+Stopping logging: OK
+umount: can't remount adb read-only
+[  153.474472] android_work: sent uevent USB_STATE=CONNECTED
+[  153.475457] configfs-gadget gadget: super-speed config #1: b
+[  153.476209] android_work: sent uevent USB_STATE=CONFIGURED
+umount: devtmpfs busy - remounted read-only
+[  153.524498] EXT4-fs (mmcblk2p8): re-mounted. Opts: (null)
+The system is going down NOW!
+Sent SIGTERM to all processes
+[  153.534273] configfs-gadget gadget: unbind function 'Function FS Gadget'/ffffffc03e3c2c38
+[  153.534522] android_work: sent uevent USB_STATE=DISCONNECTED
+Sent SIGKILL to all processes
+Requesting system reboot
+[  155.534396] cpu cpu0: min=816000, max=816000
+[  155.538833] pericom_31213a 4-000d: interrupt .reg=8,c6,0,0
+[  155.540338] pericom_31213a 4-000d: 2.reg=8,c7,0,0
+[  155.541655] pericom_31213a 4-000d: interrupt .reg=8,46,0,0
+[  155.543149] pericom_31213a 4-000d: 2.reg=8,47,2,0
+[  155.543582] pericom_31213a 4-000d: TypeC Unpluged.
+[  155.604733] rk-vcodec ffb80000.vpu_service: shutdown
+[  155.606556] reboot: Restarting system
+[  155.607637] rk3x-i2c ff500000.i2c: unexpected irq in STOP: 0x10
+[  157.065778] rk3x-i2c ff500000.i2c: restart timeout, ipd: 0x00, state: 4
+DDR Version V1.04 20191121
+LPDDR3
+933MHz
+BW=32 Col=10 Bk=8 CS0 Row=15 CS=1 Die BW=32 Size=1024MB
+out
+Boot1 Release Time: Dec  9 2019 18:18:13, version: 1.05
+chip_id:524b188,0
+ChipType = 0x14, 10271
+sfc nor id: ff ff ff
+sfc_nand id: ff ff ff
+NeedKHz=200KHz,clock=12000KHz
+NeedKHz=200KHz,clock=12000KHz
+NeedKHz=200KHz,clock=12000KHz
+NeedKHz=18000KHz,clock=192000KHz
+NeedKHz=48000KHz,clock=192000KHz
+mmc2:cmd19,100
+SdmmcInit=2 0
+BootCapSize=2000
+UserCapSize=7456MB
+FwPartOffset=2000 , 2000
+SdmmcInit=0 NOT PRESENT
+StorageInit ok = 20590
+SecureMode = 0
+Secure read PBA: 0x4
+Secure read PBA: 0x404
+Secure read PBA: 0x804
+Secure read PBA: 0xc04
+Secure read PBA: 0x1004
+SecureInit ret = 0, SecureMode = 0
+atags_set_bootdev: ret:(0)
+GPT part:  0, name:            uboot, start:0x4000, size:0x2000
+GPT part:  1, name:            trust, start:0x6000, size:0x2000
+GPT part:  2, name:             misc, start:0x8000, size:0x2000
+GPT part:  3, name:             boot, start:0xa000, size:0x10000
+GPT part:  4, name:         recovery, start:0x1a000, size:0x10000
+GPT part:  5, name:           backup, start:0x2a000, size:0x10000
+GPT part:  6, name:              oem, start:0x3a000, size:0x20000
+GPT part:  7, name:           rootfs, start:0x5a000, size:0x200000
+GPT part:  8, name:         userdata, start:0x25a000, size:0xc35fdf
+find part:uboot OK. first_lba:0x4000.
+find part:trust OK. first_lba:0x6000.
+LoadTrust Addr:0x6000
+No find bl30.bin
+No find bl32.bin
+Load uboot, ReadLba = 4000
+Load OK, addr=0x600000, size=0xc6868
+RunBL31 0x40000 @ 70717 us
+INFO:    Preloader serial: 2
+NOTICE:  BL31: v1.3(debug):2a138bbaa
+NOTICE:  BL31: Built : 19:41:05, Dec  9 2019
+NOTICE:  BL31: Rockchip release version: v1.0
+INFO:    GICv3 with legacy support detected. ARM GICV3 driver initialized in EL3
+INFO:    not boot from ram
+INFO:    Using opteed sec cpu_context!
+INFO:    boot cpu mask: 0
+INFO:    plat_rockchip_pmu_init(1807): pd status 8002
+INFO:    BL31: Initializing runtime services
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:   Error initializing runtime service opteed_fast
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x600000
+INFO:    SPSR = 0x3c9
+
+
+U-Boot 2017.09-g56b07d0fc0 (Jul 22 2020 - 03:35:36 +0000)
+
+Model: Rockchip RK1808 EVB
+PreSerial: 2
+DRAM:  1022 MiB
+Sysmem: init
+Relocation Offset: 3d7fc000, fdt: 3bdf0f20
+Using default environment
+
+dwmmc@ffcf0000: 1, dwmmc@ffd00000: 0
+Bootdev(atags): mmc 0
+MMC0: HS200, 150Mhz
+PartType: EFI
+boot mode: normal
+Found DTB in boot part
+DTB: rk-kernel.dtb
+HASH: OK(c)
+I2c0 speed: 400000Hz
+vdd_npu init 880000 uV
+PMIC:  RK8090 (on=0x10, off=0x00)
+vdd_log 800000 uV
+vdd_cpu 800000 uV
+Can't get crtc id, default set to id = 0
+Model: Rockchip RK1808 EVB V10 Board
+Rockchip UBOOT DRM driver version: v1.0.1
+Using display timing dts
+Detailed mode clock 64000 kHz, flags[a]
+    H: 0720 0760 0770 0810
+    V: 1280 1302 1306 1317
+bus_format: 100e
+final DSI-Link bandwidth: 426 Mbps x 4
+CLK: (sync kernel. arm: enter 1200000 KHz, init 1200000 KHz, kernel 0N/A)
+  apll 1200000 KHz
+  dpll 462000 KHz
+  cpll 1000000 KHz
+  gpll 1188000 KHz
+  npll 640000 KHz
+  ppll 100000 KHz
+  hsclk_bus 297000 KHz
+  msclk_bus 198000 KHz
+  lsclk_bus 99000 KHz
+  msclk_peri 198000 KHz
+  lsclk_peri 99000 KHz
+Net:   eth0: ethernet@ffdd0000
+Hit key to stop autoboot('CTRL+C'):  0 
+ANDROID: reboot reason: "(none)"
+Fdt Ramdisk skip relocation
+Booting IMAGE kernel at 0x00280000 with fdt at 0x1f00000...
+
+
+Sysmem Warn: kernel 'reserved-memory' "region@110000"(0x00110000 - 0x00200000) is overlap with [invisible] "SHM" (0x00100000 - 0x00200000)
+## Booting Android Image at 0x0027f800 ...
+Kernel load addr 0x00280000 size 9565 KiB
+## Flattened Device Tree blob at 01f00000
+   Booting using the fdt blob at 0x1f00000
+   XIP Kernel Image ... OK
+  'reserved-memory' region@110000: addr=110000 size=f0000
+   Using Device Tree in place at 0000000001f00000, end 0000000001f1b900
+Adding bank: 0x00200000 - 0x40000000 (size: 0x3fe00000)
+Total: 965.218 ms
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.4.194 (user1@) (gcc version 6.3.1 20170404 (Linaro GCC 6.3-2017.05) ) #2 SMP PREEMPT Thu Aug 6 18:58:32 PDT 2020
+[    0.000000] Boot CPU: AArch64 Processor [410fd042]
+[    0.000000] earlycon: Early serial console at MMIO32 0xff550000 (options '')
+[    0.000000] bootconsole [uart0] enabled
+[    0.000000] Reserved memory: failed to allocate memory for node 'linux,cma'
+[    0.000000] cma: Reserved 64 MiB at 0x0000000039c00000
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv1.0 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: MIGRATE_INFO_TYPE not supported.
+[    0.000000] PERCPU: Embedded 19 pages/cpu @ffffffc03ff50000 s40216 r8192 d29416 u77824
+[    0.000000] Detected VIPT I-cache on CPU0
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 257544
+[    0.000000] Kernel command line: storagemedia=emmc androidboot.storagemedia=emmc androidboot.mode=normal  androidboot.slot_suffix= androidboot.serialno=1110202010000147  rootwait earlycon=uart8250,mmio32,0xff550000 console=ttyFIQ0 root=PARTUUID=614e0000-0000 rootfstype=ext4 swiotlb=1 kpti=0 snd_aloop.index=7
+[    0.000000] PID hash table entries: 4096 (order: 3, 32768 bytes)
+[    0.000000] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes)
+[    0.000000] software IO TLB: mapped [mem 0x3fe08000-0x3fe48000] (0MB)
+[    0.000000] Memory: 949916K/1046528K available (6270K kernel code, 604K rwdata, 2252K rodata, 384K init, 1706K bss, 31076K reserved, 65536K cma-reserved)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     modules : 0xffffff8000000000 - 0xffffff8008000000   (   128 MB)
+[    0.000000]     vmalloc : 0xffffff8008000000 - 0xffffffbdbfff0000   (   246 GB)
+[    0.000000]       .init : 0xffffff80088e0000 - 0xffffff8008940000   (   384 KB)
+[    0.000000]       .text : 0xffffff8008080000 - 0xffffff80086a0000   (  6272 KB)
+[    0.000000]     .rodata : 0xffffff80086a0000 - 0xffffff80088e0000   (  2304 KB)
+[    0.000000]       .data : 0xffffff8008940000 - 0xffffff80089d7008   (   605 KB)
+[    0.000000]     fixed   : 0xffffffbffe7fd000 - 0xffffffbffec00000   (  4108 KB)
+[    0.000000]     PCI I/O : 0xffffffbffee00000 - 0xffffffbfffe00000   (    16 MB)
+[    0.000000]     memory  : 0xffffffc000200000 - 0xffffffc040000000   (  1022 MB)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000]  Build-time adjustment of leaf fanout to 64.
+[    0.000000] NR_IRQS:64 nr_irqs:64 0
+[    0.000000] GIC: Using split EOI/Deactivate mode
+[    0.000000] ITS: /interrupt-controller@ff100000/interrupt-controller@ff120000
+[    0.000000] ITS: allocated 65536 Devices @3e800000 (psz 64K, shr 0)
+[    0.000000] ITS: using cache flushing for cmd queue
+[    0.000000] GIC: using LPI property table @0x0000000000220000
+[    0.000000] ITS: Allocated 1792 chunks for LPIs
+[    0.000000] CPU0: found redistributor 0 region 0:0x00000000ff140000
+[    0.000000] CPU0: using LPI pending table @0x0000000000230000
+[    0.000000] GIC: using cache flushing for LPI property table
+[    0.000000] Architected cp15 timer(s) running at 24.00MHz (phys).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x588fe9dc0, max_idle_ns: 440795202592 ns
+[    0.000006] sched_clock: 56 bits at 24MHz, resolution 41ns, wraps every 4398046511097ns
+[    0.002116] Console: colour dummy device 80x25
+[    0.002547] Calibrating delay loop (skipped), value calculated using timer frequency.. 48.00 BogoMIPS (lpj=24000)
+[    0.003513] pid_max: default: 32768 minimum: 301
+[    0.004058] Mount-cache hash table entries: 2048 (order: 2, 16384 bytes)
+[    0.004696] Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes)
+[    0.006108] sched-energy: CPU device node has no sched-energy-costs
+[    0.006698] Invalid sched_group_energy for CPU0
+[    0.007154] CPU0: update cpu_capacity 1024
+[    0.007576] ASID allocator initialised with 65536 entries
+[    0.013401] PCI/MSI: /interrupt-controller@ff100000/interrupt-controller@ff120000 domain created
+[    0.014682] Platform MSI: /interrupt-controller@ff100000/interrupt-controller@ff120000 domain created
+[    0.020064] Detected VIPT I-cache on CPU1
+[    0.020095] CPU1: found redistributor 1 region 0:0x00000000ff160000
+[    0.020120] CPU1: using LPI pending table @0x000000003e950000
+[    0.020155] Invalid sched_group_energy for CPU1
+[    0.020160] CPU1: update cpu_capacity 1024
+[    0.020164] CPU1: Booted secondary processor [410fd042]
+[    0.020254] Brought up 2 CPUs
+[    0.023312] SMP: Total of 2 processors activated.
+[    0.023760] CPU features: detected feature: GIC system register CPU interface
+[    0.024419] CPU features: detected feature: 32-bit EL0 Support
+[    0.024972] CPU: All CPU(s) started at EL2
+[    0.025466] Invalid sched_group_energy for CPU1
+[    0.025890] Invalid sched_group_energy for Cluster1
+[    0.026358] Invalid sched_group_energy for CPU0
+[    0.026778] Invalid sched_group_energy for Cluster0
+[    0.027658] devtmpfs: initialized
+[    0.052446] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.053391] futex hash table entries: 512 (order: 3, 32768 bytes)
+[    0.057339] pinctrl core: initialized pinctrl subsystem
+[    0.058967] NET: Registered protocol family 16
+[    0.066337] cpuidle: using governor menu
+[    0.066739] Registered FIQ tty driver
+[    0.067507] vdso: 2 pages (1 code @ ffffff80086a6000, 1 data @ ffffff8008944000)
+[    0.068219] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+[    0.069716] DMA: preallocated 256 KiB pool for atomic allocations
+[    0.098512] console [pstore-1] enabled
+[    0.098865] pstore: Registered ramoops as persistent store backend
+[    0.099455] ramoops: attached 0xf0000@0x110000, ecc: 0/0
+[    0.101799] fiq debugger fiq mode enabled
+[[    0.102544] console [ttyFIQ0] enabled
+    0.102544] console [ttyFIQ0] enabled
+[    0.103247] bootconsole [uart0] disabled
+[    0.103247] bootconsole [uart0] disabled
+[    0.103895] Registered fiq debugger ttyFIQ0
+[    0.116705] rockchip-pm rockchip-suspend: not set pwm-regulator-config
+[    0.120216] iommu: Adding device ffb00000.vop to group 0
+[    0.120375] iommu: Adding device ffb50000.rkisp1 to group 1
+[    0.120494] iommu: Adding device ffb80000.vpu_service to group 2
+[    0.121068] rk_iommu ffb00f00.iommu: can't get sclk
+[    0.121721] rk_iommu ffb80800.iommu: can't get sclk
+[    0.122274] SCSI subsystem initialized
+[    0.122558] usbcore: registered new interface driver usbfs
+[    0.122628] usbcore: registered new interface driver hub
+[    0.122751] usbcore: registered new device driver usb
+[    0.123120] media: Linux media interface: v0.10
+[    0.123181] Linux video capture interface: v2.00
+[    0.123268] pps_core: LinuxPPS API ver. 1 registered
+[    0.123280] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.123313] PTP clock support registered
+[    0.125235] Advanced Linux Sound Architecture Driver Initialized.
+[    0.125914] Bluetooth: Core ver 2.21
+[    0.125999] NET: Registered protocol family 31
+[    0.126011] Bluetooth: HCI device and connection manager initialized
+[    0.126031] Bluetooth: HCI socket layer initialized
+[    0.126050] Bluetooth: L2CAP socket layer initialized
+[    0.126088] Bluetooth: SCO socket layer initialized
+[    0.127299] rockchip-cpuinfo cpuinfo: Serial [8C: 791ef7d65200f1bb
+[    0.128033] clocksource: Switched to clocksource arch_sys_counter
+[    0.140720] NET: Registered protocol family 2
+[    0.141378] TCP established hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.141517] TCP bind hash table entries: 8192 (order: 5, 131072 bytes)
+[    0.141702] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.141791] UDP hash table entries: 512 (order: 2, 16384 bytes)
+[    0.141840] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+[    0.142136] NET: Registered protocol family 1
+[    0.143201] hw perfevents: enabled with armv8_cortex_a53 PMU driver, 7 counters available
+[    0.157905] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.158246] ntfs: driver 2.1.32 [Flags: R/O].
+[    0.162124] io scheduler noop registered (default)
+[    0.169895] backlight supply power not found, using dummy regulator
+[    0.170804] rk-vcodec ffb80000.vpu_service: no regulator for vcodec
+[    0.172003] rk_vcodec: vcodec_read_property:3312: can't find vpu grf property
+[    0.172145] rk-vcodec ffb80000.vpu_service: probe device
+[    0.172524] rk-vcodec ffb80000.vpu_service: drm allocator with mmu enabled
+[    0.173406] rk-vcodec ffb80000.vpu_service: could not find power_model node
+[    0.173438] rk-vcodec ffb80000.vpu_service: init success
+[    0.177219] dma-pl330 ff4e0000.dmac: Loaded driver for PL330 DMAC-241330
+[    0.177259] dma-pl330 ff4e0000.dmac: [8CDBUFF-128x8bytes Num_Chans-8 Num_Peri-32 Num_Events-16
+[    0.177621] rockchip-pvtm fe000000.syscon:npu-pvtm: failed to get rst 0 npu
+[    0.177778] rockchip-pvtm fe020000.syscon:pmu-pvtm: failed to get rst 0 pmu
+[    0.177954] rockchip-pvtm fe050000.syscon:pvtm: failed to get rst 0 core
+[    0.178914] rockchip-system-monitor rockchip-system-monitor: system monitor probe
+[    0.179679] Serial: 8250/16550 driver, 8 ports, IRQ sharing disabled
+[    0.180775] ff570000.serial: ttyS4 at MMIO 0xff570000 (irq = 16, base_baud = 1500000) is a 16550A
+[    0.182437] [drm] Initialized drm 1.1.0 20060810
+[    0.182515] random: nonblocking pool is initialized
+[    0.186168] [drm] Rockchip DRM driver version: v1.0.1
+[    0.186501] rockchip-drm display-subsystem: devfreq is not set
+[    0.186937] rockchip-vop ffb00000.vop: missing rockchip,grf property
+[    0.187174] rockchip-drm display-subsystem: bound ffb00000.vop (ops 0xffffff8008701210)
+[    0.187216] rockchip-drm display-subsystem: failed to bind ffb30000.dsi (ops 0xffffff80086f7b98): -517
+[    0.187525] rockchip-drm display-subsystem: master bind failed: -517
+[    0.190453] Unable to detect cache hierarchy for CPU 0
+[    0.190864] SCSI Media Changer driver v0.25 
+[    0.193311] rk_gmac-dwmac ffdd0000.ethernet: clock input or output? (output).
+[    0.193359] rk_gmac-dwmac ffdd0000.ethernet: TX delay(0x50).
+[    0.193377] rk_gmac-dwmac ffdd0000.ethernet: RX delay(0x3a).
+[    0.193403] rk_gmac-dwmac ffdd0000.ethernet: integrated PHY? (no).
+[    0.198561] rk_gmac-dwmac ffdd0000.ethernet: init for RGMII
+[    0.198692] stmmac - user ID: 0x10, Synopsys ID: 0x35
+[    0.198713]  Ring mode enabled
+[    0.198723]  DMA HW capability register supported
+[    0.198731]  Normal descriptors
+[    0.198742]  RX Checksum Offload Engine supported (type 2)
+[    0.198751]  TX Checksum insertion supported
+[    0.198759]  Wake-Up On Lan supported
+[    0.198831] rk_gmac-dwmac ffdd0000.ethernet: rk_get_eth_addr: mac address: 34:ba:9a:6f:26:ed
+[    0.198850] eth%d: device MAC address 34:ba:9a:6f:26:ed
+[    0.198860]  Enable RX Mitigation via HW Watchdog Timer
+[    0.323612] libphy: stmmac: probed
+[    0.323649] eth%d: PHY ID 001cc915 at 0 IRQ POLL (stmmac-0:00) active
+[    0.323664] eth%d: PHY ID 001cc915 at 1 IRQ POLL (stmmac-0:01)
+[    0.324522] usbcore: registered new interface driver rndis_wlan
+[    0.324722] Rockchip WiFi SYS interface (V1.00) ... 
+[    0.324883] usbcore: registered new interface driver rtl8150
+[    0.324947] usbcore: registered new interface driver r8152
+[    0.325072] usbcore: registered new interface driver asix
+[    0.325142] usbcore: registered new interface driver ax88179_178a
+[    0.325204] usbcore: registered new interface driver cdc_ether
+[    0.325275] usbcore: registered new interface driver rndis_host
+[    0.325457] usbcore: registered new interface driver cdc_ncm
+[    0.325530] usbcore: registered new interface driver cdc_mbim
+[    0.332175] rockchip-dwc3 usb: fail to get drvdata hcd
+[    0.556516] phy phy-fe010000.syscon:usb2-phy@100.2: charger = USB_SDP_CHARGER
+[    0.557365] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.557453] ehci-pci: EHCI PCI platform driver
+[    0.557727] ehci-platform: EHCI generic platform driver
+[    0.561927] ehci-platform ffd80000.usb: EHCI Host Controller
+[    0.562060] ehci-platform ffd80000.usb: new USB bus registered, assigned bus number 1
+[    0.562517] ehci-platform ffd80000.usb: irq 33, io mem 0xffd80000
+[    0.568073] ehci-platform ffd80000.usb: USB 2.0 started, EHCI 1.00
+[    0.568320] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.568376] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.568588] usb usb1: Product: EHCI Host Controller
+[    0.568805] usb usb1: Manufacturer: Linux 4.4.194 ehci_hcd
+[    0.569015] usb usb1: SerialNumber: ffd80000.usb
+[    0.569977] hub 1-0:1.0: USB hub found
+[    0.570219] hub 1-0:1.0: 1 port detected
+[    0.571068] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    0.571160] ohci-platform: OHCI generic platform driver
+[    0.571923] ohci-platform ffd90000.usb: Generic Platform OHCI controller
+[    0.572108] ohci-platform ffd90000.usb: new USB bus registered, assigned bus number 2
+[    0.572562] ohci-platform ffd90000.usb: irq 34, io mem 0xffd90000
+[    0.627241] usb usb2: New USB device found, idVendor=1d6b, idProduct=0001
+[    0.627273] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.627289] usb usb2: Product: Generic Platform OHCI controller
+[    0.627304] usb usb2: Manufacturer: Linux 4.4.194 ohci_hcd
+[    0.627323] usb usb2: SerialNumber: ffd90000.usb
+[    0.628166] hub 2-0:1.0: USB hub found
+[    0.628243] hub 2-0:1.0: 1 port detected
+[    0.629493] usbcore: registered new interface driver cdc_wdm
+[    0.629640] usbcore: registered new interface driver usb-storage
+[    0.631128] i2c /dev entries driver
+[    0.633479] fan53555-regulator 0-001c: FAN53555 Option[12] Rev[15] Detected!
+[    0.633692] fan53555-reg: supplied by vcc5v0_sys
+[    0.636418] rk808 0-0020: Pmic Chip id: 0x8090
+[    0.636862] rk808 0-0020: source: on=0x10, off=0x00
+[    0.637652] rk808 0-0020: support dcdc3 fb mode:-22, 1042615296
+[    0.637975] rk808 0-0020: support pmic reset mode:0,0
+[    0.641500] rk808-regulator rk808-regulator: there is no dvs0 gpio
+[    0.641668] rk808-regulator rk808-regulator: there is no dvs1 gpio
+[    0.642086] DCDC_REG1: supplied by vcc5v0_sys
+[    0.644297] DCDC_REG2: supplied by vcc5v0_sys
+[    0.646308] DCDC_REG3: supplied by vcc5v0_sys
+[    0.648066] DCDC_REG4: supplied by vcc5v0_sys
+[    0.649786] DCDC_REG5: supplied by vcc5v0_sys
+[    0.651236] LDO_REG1: supplied by vcc_buck5
+[    0.653300] LDO_REG2: supplied by vcc_buck5
+[    0.655403] LDO_REG3: supplied by vcc_buck5
+[    0.657551] LDO_REG4: supplied by vcc_buck5
+[    0.659634] LDO_REG5: supplied by vcc_buck5
+[    0.661761] LDO_REG6: supplied by vcc_buck5
+[    0.663234] LDO_REG7: supplied by vcc5v0_sys
+[    0.665371] LDO_REG8: supplied by vcc5v0_sys
+[    0.667665] LDO_REG9: supplied by vcc5v0_sys
+[    0.668861] SWITCH_REG1: supplied by vcc5v0_sys
+[    0.670066] SWITCH_REG2: supplied by vcc_3v3
+[    0.674012] input: rk8xx_pwrkey as /devices/platform/ff410000.i2c/i2c-0/0-0020/input/input0
+[    0.678167] rk808-rtc rk808-rtc: rtc core: registered rk808-rtc as rtc0
+[    0.679685] rk3x-i2c ff410000.i2c: Initialized RK3xxx I2C bus at ffffff8008d22000
+[    0.680690] rk3x-i2c ff500000.i2c: Initialized RK3xxx I2C bus at ffffff8008d24000
+[    0.680842] <<GTP-INF>>[gt1x_ts_probe:526] GTP Driver Version: V1.4<2015/07/10>
+[    0.680862] <<GTP-INF>>[gt1x_ts_probe:527] GTP I2C Address: 0x14
+[    0.681002] <<GTP-ERR>>[gt1x_parse_dt:324] vdd_ana not specified, fallback to power-supply
+[    0.681310] <<GTP-INF>>[gt1x_reset_guitar:779] GTP RESET!
+[    0.681840] rk3x-i2c ff504000.i2c: Initialized RK3xxx I2C bus at ffffff8008d26000
+[    0.683876] Pericom 31213A Type C Connector ChipID: 08 
+[    0.685876] rk3x-i2c ff50c000.i2c: Initialized RK3xxx I2C bus at ffffff8008d28000
+[    0.687310] IR NEC protocol handler initialized
+[    0.687348] IR RC5(x/sz) protocol handler initialized
+[    0.687367] IR RC6 protocol handler initialized
+[    0.687389] IR JVC protocol handler initialized
+[    0.687406] IR Sony protocol handler initialized
+[    0.687423] IR SANYO protocol handler initialized
+[    0.687441] IR Sharp protocol handler initialized
+[    0.687458] IR MCE Keyboard/mouse protocol handler initialized
+[    0.687476] IR XMP protocol handler initialized
+[    0.688853] rkisp1 ffb50000.rkisp1: rkisp1 driver version: v00.01.05
+[    0.691413] usbcore: registered new interface driver uvcvideo
+[    0.691433] USB Video Class driver (1.1.1)
+[    0.692657] Boot mode: normal
+[    0.694367] rockchip-thermal ff3a0000.tsadc: tsadc is probed successfully!
+[    0.695196] dw_wdt ff720000.watchdog: Should better to setup a 'resets' property in dt, that must been named with reset
+[    0.695592] Bluetooth: HCI UART driver ver 2.3
+[    0.695621] Bluetooth: HCI UART protocol H4 registered
+[    0.695632] Bluetooth: HCI UART protocol LL registered
+[    0.695922] cpu cpu0: leakage=27
+[    0.708658] cpu cpu0: temp=51666, pvtm=74507 (75183 + -676)
+[    0.708784] cpu cpu0: pvtm-volt-sel=2
+[    0.710611] cpu cpu0: avs=0
+[    0.710717] cpu cpu0: l=0 h=2147483647 hyst=5000 l_limit=0 h_limit=0
+[    0.712613] Synopsys Designware Multimedia Card Interface Driver
+[    0.713909] dwmmc_rockchip ffc60000.dwmmc: num-slots property not found, assuming 1 slot is available
+[    0.714083] dwmmc_rockchip ffc60000.dwmmc: IDMAC supports 32-bit address mode.
+[    0.714269] dwmmc_rockchip ffc60000.dwmmc: Using internal DMA controller.
+[    0.714307] dwmmc_rockchip ffc60000.dwmmc: Version ID is 270a
+[    0.714375] dwmmc_rockchip ffc60000.dwmmc: DW MMC controller at irq 29,32 bit host data width,256 deep fifo
+[    0.714460] dwmmc_rockchip ffc60000.dwmmc: No vmmc regulator found
+[    0.714475] dwmmc_rockchip ffc60000.dwmmc: No vqmmc regulator found
+[    0.714963] dwmmc_rockchip ffc60000.dwmmc: allocated mmc-pwrseq
+[    0.727831] mmc_host mmc0: Bus speed (slot 0) = 400000Hz (slot req 400000Hz, actual 400000HZ div = 0)
+[    0.740495] dwmmc_rockchip ffc60000.dwmmc: 1 slots initialized
+[    0.741287] dwmmc_rockchip ffcf0000.dwmmc: num-slots property not found, assuming 1 slot is available
+[    0.741402] dwmmc_rockchip ffcf0000.dwmmc: IDMAC supports 32-bit address mode.
+[    0.741519] dwmmc_rockchip ffcf0000.dwmmc: Using internal DMA controller.
+[    0.741542] dwmmc_rockchip ffcf0000.dwmmc: Version ID is 270a
+[    0.741606] dwmmc_rockchip ffcf0000.dwmmc: DW MMC controller at irq 31,32 bit host data width,256 deep fifo
+[    0.756071] mmc_host mmc1: Bus speed (slot 0) = 400000Hz (slot req 400000Hz, actual 400000HZ div = 0)
+[    0.768208] dwmmc_rockchip ffcf0000.dwmmc: 1 slots initialized
+[    0.768836] <<GTP-INF>>[gt1x_get_chip_type:898] Chip Type: GT2X
+[    0.769252] dwmmc_rockchip ffd00000.dwmmc: IDMAC supports 32-bit address mode.
+[    0.769399] dwmmc_rockchip ffd00000.dwmmc: Using internal DMA controller.
+[    0.769430] dwmmc_rockchip ffd00000.dwmmc: Version ID is 270a
+[    0.769496] dwmmc_rockchip ffd00000.dwmmc: DW MMC controller at irq 32,32 bit host data width,256 deep fifo
+[    0.769644] dwmmc_rockchip ffd00000.dwmmc: No vmmc regulator found
+[    0.769670] dwmmc_rockchip ffd00000.dwmmc: No vqmmc regulator found
+[    0.775139] mmc0: queuing unknown CIS tuple 0x80 (2 bytes)
+[    0.776766] mmc0: queuing unknown CIS tuple 0x80 (3 bytes)
+[    0.777210] <<GTP-INF>>[gt1x_read_version:854] IC VERSION:GT5688_000119(Patch)_0100(Mask)_01(SensorID)
+[    0.777234] <<GTP-INF>>[gt1x_init_panel:599] Config group1 used, length:239
+[    0.777250] <<GTP-INF>>[gt1x_init_panel:650] X_MAX=720,Y_MAX=1280,TRIGGER=0x00,WAKEUP_LEVEL=1
+[    0.778416] mmc0: queuing unknown CIS tuple 0x80 (3 bytes)
+[    0.781307] mmc0: queuing unknown CIS tuple 0x80 (7 bytes)
+[    0.782712] mmc_host mmc2: Bus speed (slot 0) = 400000Hz (slot req 400000Hz, actual 400000HZ div = 0)
+[    0.785193] mmc0: queuing unknown CIS tuple 0x81 (9 bytes)
+[    0.795422] dwmmc_rockchip ffd00000.dwmmc: 1 slots initialized
+[    0.796608] is31fl32xx 4-003c: register write to 0x00 failed (error -6),val=0
+[    0.829594] mmc_host mmc2: Bus speed (slot 0) = 148500000Hz (slot req 150000000Hz, actual 148500000HZ div = 0)
+[    0.840626] mmc_host mmc0: Bus speed (slot 0) = 50000000Hz (slot req 50000000Hz, actual 50000000HZ div = 0)
+[    0.853543] dwmmc_rockchip ffc60000.dwmmc: Successfully tuned phase to 313
+[    0.856744] mmc0: queuing unknown CIS tuple 0x91 (3 bytes)
+[    0.856835] mmc0: new ultra high speed SDR104 SDIO card at address 0001
+[    0.865643] pericom_31213a 4-000d: interrupt .reg=8,66,0,0
+[    0.866676] pericom_31213a 4-000d: 2.reg=8,67,1,a9
+[    0.866723] pericom_31213a 4-000d: TypeC Plugin.
+[    0.866749] pericom_31213a 4-000d: CC1 connected.
+[    0.866777] pericom_31213a 4-000d: Host plug in.
+[    0.872126] usb 1-1: new high-speed USB device number 2 using ehci-platform
+[    0.897399] is31fl32xx 4-003c: register write to 0x00 failed (error -6),val=0
+[    0.988751] usb 1-1: New USB device found, idVendor=05e3, idProduct=0610
+[    0.988817] usb 1-1: New USB device strings: Mfr=0, Product=1, SerialNumber=0
+[    0.988847] usb 1-1: Product: USB2.0 Hub
+[    0.990620] hub 1-1:1.0: USB hub found
+[    0.991186] hub 1-1:1.0: 4 ports detected
+[    0.998350] is31fl32xx 4-003c: register write to 0x00 failed (error -6),val=0
+[    1.001214] input: goodix-ts as /devices/virtual/input/input1
+[    1.095138] dwmmc_rockchip ffd00000.dwmmc: Successfully tuned phase to 245
+[    1.095402] mmc2: new HS200 MMC card at address 0001
+[    1.097665] mmcblk2: mmc2:0001 8GTF4R 7.28 GiB 
+[    1.098281] mmcblk2boot0: mmc2:0001 8GTF4R partition 1 4.00 MiB
+[    1.098815] mmcblk2boot1: mmc2:0001 8GTF4R partition 2 4.00 MiB
+[    1.099315] is31fl32xx_init_regs, write to shutdown register failed
+[    1.099563] is31fl32xx 4-003c: register write to 0x26 failed (error -6),val=1
+[    1.100448] mmcblk2rpmb: mmc2:0001 8GTF4R partition 3 512 KiB
+[    1.105731]  mmcblk2: p1 p2 p3 p4 p5 p6 p7 p8 p9
+[    1.200538] is31fl32xx 4-003c: register write to 0x26 failed (error -6),val=1
+[    1.260214] usb 1-1.3: new full-speed USB device number 3 using ehci-platform
+[    1.301466] is31fl32xx 4-003c: register write to 0x26 failed (error -6),val=1
+[    1.348358] usb 1-1.3: New USB device found, idVendor=04e2, idProduct=1414
+[    1.348420] usb 1-1.3: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[    1.403092] usbcore: registered new interface driver usbhid
+[    1.403145] usbhid: USB HID core driver
+[    1.408547] rknandc_base v1.1 2017-01-11
+[    1.409360] rksfc_base v1.1 2016-01-08
+[    1.424135] rockchip-pinctrl pinctrl: pin gpio3-12 already requested by ff504000.i2c; cannot claim for ff7e0000.i2s
+[    1.424196] rockchip-pinctrl pinctrl: pin-108 (ff7e0000.i2s) status -22
+[    1.424221] rockchip-pinctrl pinctrl: could not request pin 108 (gpio3-12) from group i2s0-8ch-sdo1  on device rockchip-pinctrl
+[    1.424241] rockchip-i2s-tdm ff7e0000.i2s: Error applying setting, reverse things back
+[    1.426866] rk-multicodecs vad-sound: card: 0 has not been locked, re-probe again
+[    1.426914] rk-multicodecs vad-sound: check_lock_card failed: -517
+[    1.428338] NET: Registered protocol family 10
+[    1.430146] NET: Registered protocol family 17
+[    1.430293] NET: Registered protocol family 15
+[    1.430512] bridge: automatic filtering via arp/ip/ip6tables has been deprecated. Update your scripts to load br_netfilter if you need this.
+[    1.430947] Bluetooth: RFCOMM TTY layer initialized
+[    1.431149] Bluetooth: RFCOMM socket layer initialized
+[    1.431368] Bluetooth: RFCOMM ver 1.11
+[    1.431589] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    1.431785] Bluetooth: HIDP socket layer initialized
+[    1.432001] [WLAN_RFKILL]: Enter rfkill_wlan_init
+[    1.433112] [WLAN_RFKILL]: Enter rfkill_wlan_probe
+[    1.433319] [WLAN_RFKILL]: wlan_platdata_parse_dt: wifi_chip_type = ap6356s
+[    1.433518] [WLAN_RFKILL]: wlan_platdata_parse_dt: enable wifi power control.
+[    1.433732] [WLAN_RFKILL]: wlan_platdata_parse_dt: wifi power controled by gpio.
+[    1.434208] [WLAN_RFKILL]: wlan_platdata_parse_dt: get property: WIFI,host_wake_irq = 145, flags = 0.
+[    1.434427] [WLAN_RFKILL]: wlan_platdata_parse_dt: The ref_wifi_clk not found !
+[    1.434637] [WLAN_RFKILL]: rfkill_wlan_probe: init gpio
+[    1.434856] [WLAN_RFKILL]: Exit rfkill_wlan_probe
+[    1.435206] [BT_RFKILL]: Enter rfkill_rk_init
+[    1.436663] [BT_RFKILL]: bluetooth_platdata_parse_dt: get property: uart_rts_gpios = 143.
+[    1.436914] [BT_RFKILL]: bluetooth_platdata_parse_dt: get property: BT,power_gpio = 147.
+[    1.437196] [BT_RFKILL]: bluetooth_platdata_parse_dt: get property: BT,wake_host_irq = 146.
+[    1.437321] [BT_RFKILL]: bluetooth_platdata_parse_dt: clk_get failed!!!.
+[    1.437610] [BT_RFKILL]: Request irq for bt wakeup host
+[    1.437807] [BT_RFKILL]: ** disable irq
+[    1.438280] [BT_RFKILL]: bt_default device registered.
+[    1.439556] imx327 2-001a: driver version: 00.01.03
+[    1.439939] imx327 2-001a: Failed to get reset-gpios
+[    1.440515] flash vendor_init_thread!
+[    1.440914] flash vendor storage:20170308 ret = -1
+[    1.441340] imx327 2-001a: linear mode
+[    1.455645] imx327 2-001a: Unexpected sensor id(000000), ret(-5)
+[    1.459844] rga2: Driver loaded successfully ver:4.00
+[    1.460279] rga2: Module initialized.
+[    1.460988] [drm] Rockchip DRM driver version: v1.0.1
+[    1.461483] rockchip-drm display-subsystem: devfreq is not set
+[    1.462146] rockchip-vop ffb00000.vop: missing rockchip,grf property
+[    1.462363] rockchip-drm display-subsystem: bound ffb00000.vop (ops 0xffffff8008701210)
+[    1.462545] rockchip-drm display-subsystem: bound ffb30000.dsi (ops 0xffffff80086f7b98)
+[    1.462578] [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+[    1.462593] [drm] No driver support for vblank timestamp query.
+[    1.470737] vendor storage:20190527 ret = 0
+[    1.495457] rockchip-drm display-subsystem: fb0:  frame buffer device
+[    1.505419] xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+[    1.505582] xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 3
+[    1.506270] xhci-hcd xhci-hcd.3.auto: hcc params 0x0220fe64 hci version 0x110 quirks 0x04010010
+[    1.506470] xhci-hcd xhci-hcd.3.auto: irq 207, io mem 0xfd000000
+[    1.506963] usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+[    1.507094] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.507304] usb usb3: Product: xHCI Host Controller
+[    1.507517] usb usb3: Manufacturer: Linux 4.4.194 xhci-hcd
+[    1.507734] usb usb3: SerialNumber: xhci-hcd.3.auto
+[    1.508843] hub 3-0:1.0: USB hub found
+[    1.508938] hub 3-0:1.0: 1 port detected
+[    1.509621] xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+[    1.509839] xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 4
+[    1.510175] usb usb4: We don't know the algorithms for LPM for this host, disabling LPM.
+[    1.510419] usb usb4: New USB device found, idVendor=1d6b, idProduct=0003
+[    1.510507] usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.510718] usb usb4: Product: xHCI Host Controller
+[    1.510931] usb usb4: Manufacturer: Linux 4.4.194 xhci-hcd
+[    1.511168] usb usb4: SerialNumber: xhci-hcd.3.auto
+[    1.512299] hub 4-0:1.0: USB hub found
+[    1.512391] hub 4-0:1.0: 1 port detected
+[    1.515870] xhci-hcd xhci-hcd.3.auto: remove, state 1
+[    1.515939] usb usb4: USB disconnect, device number 1
+[    1.516858] input: adc-keys as /devices/platform/adc-keys/input/input2
+[    1.532816] xhci-hcd xhci-hcd.3.auto: Host not halted after 16000 microseconds.
+[    1.532852] xhci-hcd xhci-hcd.3.auto: Host controller not halted, aborting reset.
+[    1.533010] xhci-hcd xhci-hcd.3.auto: USB bus 4 deregistered
+[    1.533169] xhci-hcd xhci-hcd.3.auto: remove, state 1
+[    1.533393] usb usb3: USB disconnect, device number 1
+[    1.535641] xhci-hcd xhci-hcd.3.auto: USB bus 3 deregistered
+[    1.537102] asoc-simple-card rk809-sound: rk817-hifi <-> ff7f0000.i2s mapping ok
+[    1.537185] asoc-simple-card rk809-sound: ASoC: no source widget found for MICBIAS1
+[    1.537210] asoc-simple-card rk809-sound: ASoC: Failed to add route MICBIAS1 -> direct -> Mic Jack
+[    1.537230] asoc-simple-card rk809-sound: ASoC: no sink widget found for IN1P
+[    1.537252] asoc-simple-card rk809-sound: ASoC: Failed to add route Mic Jack -> direct -> IN1P
+[    1.537273] asoc-simple-card rk809-sound: ASoC: no source widget found for HPOL
+[    1.537293] asoc-simple-card rk809-sound: ASoC: Failed to add route HPOL -> direct -> Headphone Jack
+[    1.537314] asoc-simple-card rk809-sound: ASoC: no source widget found for HPOR
+[    1.537335] asoc-simple-card rk809-sound: ASoC: Failed to add route HPOR -> direct -> Headphone Jack
+[    1.538610] rockchip-dwc3 usb: USB peripheral connected
+[    1.542484] rk808-rtc rk808-rtc: setting system clock to 2020-08-07 02:09:12 UTC (1596766152)
+[    1.564276] vcc_otg_vbus: disabling
+[    1.564368] vdd_npu: disabling
+[    1.564958] rkisp1 ffb50000.rkisp1: clear unready subdev num: 1
+[    1.565615] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[    1.565728] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[    1.565959] rkisp1: update sensor failed
+[    1.566569] ALSA device list:
+[    1.566599]   #0: rockchip,rk809-codec
+[    1.566609]   #7: Loopback 1
+[    1.572257] EXT4-fs (mmcblk2p8): mounted filesystem with ordered data mode. Opts: (null)
+[    1.572374] VFS: Mounted root (ext4 filesystem) readonly on device 179:8.
+[    1.572997] devtmpfs: mounted
+[    1.573272] Freeing unused kernel memory: 384K
+[    1.622108] EXT4-fs (mmcblk2p8): re-mounted. Opts: data=ordered
+NAME=Buildroot
+VERSION=2018.02-rc3-g716f9866f6
+ID=buildroot
+VERSION_ID=2018.02-rc3
+PRETTY_NAME="Buildroot 2018.02-rc3"
+Starting logging: OK
+Welcome to Rockchip Linux SDK
+Populating /dev using udev: [    1.744735] udevd[139]: starting version 3.2.7
+[    1.753564] udevd[139]: specified group 'kvm' unknown
+[    1.775440] udevd[140]: starting eudev-3.2.7
+done
+Initializing random number generator... done.
+Will now mount all partitions in /etc/fstab
+Note: Create /.skip_fsck to skip fsck
+ - The check might take a while if didn't shutdown properly!
+Handling /dev/mmcblk2p8 / ext2 rw,noauto 1
+Checking /dev/mmcblk2p8(ext2)
+[    2.489862] EXT4-fs (mmcblk2p8): re-mounted. Opts: data=ordered
+e2fsck 1.43.9 (8-Feb-2018)
+rootfs: clean, 13764/65536 files, 128455/262144 blocks
+[    2.518713] EXT4-fs (mmcblk2p8): re-mounted. Opts: data=ordered
+Handling /dev/mmcblk2p3 /misc emmc defaults 0
+Unsupported file system emmc for /dev/mmcblk2p3
+Handling /dev/mmcblk2p7 /oem ext2 defaults 2
+Checking /dev/mmcblk2p7(ext2)
+e2fsck 1.43.9 (8-Feb-2018)
+oem: clean, 19/10240 files, 7445/65536 blocks
+Mounting /dev/mmcblk2p7(ext2) on /oem 
+[    2.825468] EXT4-fs (mmcblk2p7): couldn't mount as ext3 due to feature incompatibilities
+[    2.825637] EXT4-fs (mmcblk2p7): mounting ext2 file system using the ext4 subsystem
+[    2.832388] EXT4-fs (mmcblk2p7): mounted filesystem without journal. Opts: (null)
+Handling /dev/mmcblk2p9 /userdata ext2 rw,auto 2
+Checking /dev/mmcblk2p9(ext2)
+e2fsck 1.43.9 (8-Feb-2018)
+userdata: clean, 44/400384 files, 117394/6402028 blocks
+[    3.020426] udevd[140]: specified group 'kvm' unknown
+Mounting /dev/mmcblk2p9(ext2) on /userdata 
+[    3.030514] EXT4-fs (mmcblk2p9): couldn't mount as ext3 due to feature incompatibilities
+[    3.030873] EXT4-fs (mmcblk2p9): mounting ext2 file system using the ext4 subsystem
+[    3.039479] EXT4-fs (mmcblk2p9): mounted filesystem without journal. Opts: (null)
+Log saved to /tmp/mountall.log
+Starting system message bus: done
+Starting network: OK
+Starting dhcpcd...
+dev: loaded udev
+no interfaces have a carrier
+forked to background, child pid 531
+Starting web server: OK
+/
+Starting watch_ntpd.sh: OK
+Starting launcher: run ntpd once and watch it every 86400 seconds
+ 7 Aug 02:09:14 ntpd[549]: ntpd 4.2.8p10@1.3728-o Wed Jul 22 04:57:23 UTC 2020 (1): Starting
+ 7 Aug 02:09:14 ntpd[549]: Command line: ntpd -gq
+ 7 Aug 02:09:14 ntpd[549]: proto: precision = 0.291 usec (-22)
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0xefc7c20,ctx->rgaFd=3 
+Rga built version:version:+2017-09-28 10:12:42 
+ 7 Aug 02:09:14 ntpd[549]: Listen and drop on 0 v6wildcard [::]:123
+ 7 Aug 02:09:14 ntpd[549]: Listen and drop on 1 v4wildcard 0.0.0.0:123
+ 7 Aug 02:09:14 ntpd[549]: Listen normally on 2 lo 127.0.0.1:123
+ 7 Aug 02:09:14 ntpd[549]: Listen normally on 3 eth0 192.168.168.168:123
+ 7 Aug 02:09:14 ntpd[549]: Listen normally on 4 lo [::1]:123
+Date: 2020-08-07 UTC
+[02:09:14.667] weston 3.0.0
+               http://wayland.freedesktop.org
+               Bug reports to: https://bugs.freedesktop.org/enter_bug.cgi?product=Wayland&component=weston&version=3.0.0
+               Build: unknown (not built from git or tarball)
+[02:09:14.668] Command line: weston --tty=2 -B=drm-backend.so --idle-time=0 --use-pixman
+[02:09:14.669] OS: Linux, 4.4.194, #2 SMP PREEMPT Thu Aug 6 18:58:32 PDT 2020, aarch64
+ 7 Aug 02:09:14 ntpd[549]: bind(21) AF_INET6 fe80::5ac8:c1fb:17aa:b9b4%2#123 flags 0x11 failed: Cannot assign requested address
+ 7 Aug 02:09:14 ntpd[549]: unable to create socket on eth0 (5) for fe80::5ac8:c1fb:17aa:b9b4%2#123
+ 7 Aug 02:09:14 ntpd[549]: failed to init interface for address fe80::5ac8:c1fb:17aa:b9b4%2
+ 7 Aug 02:09:14 ntpd[549]: Listening on routing socket on fd #21 for interface updates
+[02:09:14.674] Using config file '/etc/xdg/weston/weston.ini'
+[02:09:14.677] Output repaint window is 15 ms maximum.
+[02:09:14.681] Loading module '/usr/lib/libweston-3/drm-backend.so'
+[02:09:14.689] initializing drm backend
+[02:09:14.693] using /dev/dri/card0
+[02:09:14.696] event2  - [02:09:14.697] adc-keys: [02:09:14.697] is tagged by udev as: Keyboard
+[02:09:14.697] event2  - [02:09:14.697] adc-keys: [02:09:14.697] device is a keyboard
+[02:09:14.699] event0  - [02:09:14.699] rk8xx_pwrkey: [02:09:14.699] is tagged by udev as: Keyboard
+[02:09:14.699] event0  - [02:09:14.699] rk8xx_pwrkey: [02:09:14.699] device is a keyboard
+[02:09:14.701] event1  - [02:09:14.701] goodix-ts: [02:09:14.701] is tagged by udev as: Keyboard Touchscreen
+[02:09:14.702] event1  - [02:09:14.702] goodix-ts: [02:09:14.702] device is a keyboard
+[02:09:14.702] event1  - [02:09:14.702] goodix-ts: [02:09:14.702] device is a touch device
+[02:09:14.759] Registered plugin API 'weston_drm_output_api_v1' of size 24
+[02:09:14.766] Failed to initialize backlight
+[02:09:14.766] Output DSI-1, (connector 61, crtc 59)
+               mode 720x1280@60.0, preferred, current
+[02:09:14.767] Compositor capabilities:
+               arbitrary surface rotation: yes
+               screen capture uses y-flip: yes
+               presentation clock: CLOCK_MONOTONIC, id 1
+               presentation clock resolution: 0.000000001 s
+[02:09:14.770] Loading module '/usr/lib/weston/desktop-shell.so'
+[02:09:14.775] launching '/usr/libexec/weston-keyboard'
+[02:09:14.777] launching '/usr/libexec/weston-desktop-shell'
+[    3.522586] Freeing drm_logo memory: 732K
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x20d82c20,ctx->rgaFd=0 
+Rga built version:version:+2017-09-28 10:12:42 
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x29e61c20,ctx->rgaFd=0 
+Rga built version:version:+2017-09-28 10:12:42 
+could not load cursor 'dnd-move'
+could not load cursor 'dnd-copy'
+could not load cursor 'dnd-none'
+could not load cursor 'dnd-move'
+could not load cursor 'dnd-copy'
+could not load cursor 'dnd-none'
+libpng warning: Application built with libpng-1.2.59 but running with 1.6.34
+/usr/share/weston/pattern.png: error reading image
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+could not create XKB compose table for locale 'zh_CN.utf8'.  Disabiling compose
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+could not create XKB compose table for locale 'zh_CN.utf8'.  Disabiling compose
+Starting sshd: OK
+[    4.569354] file system registered
+install_listener('tcp:5037','*smartsocket*')
+[    4.629460] read descriptors
+[    4.629503] read strings
+QLauncher available size : 720 x 1280
+Failed to load client buffer integration: wayland
+
+Using the 'xdg-shell-v6' shell integration
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+insmod NPU modules: [    5.654413] galcore: loading out-of-tree module taints kernel.
+[    5.658129] galcore: npu init.
+[    5.660279] galcore: start npu probe.
+[    5.661721] npu: platform_get_irq irq = 30
+[    5.661772] npu: platform_get_resource registerMemBase = ffbc0000, registerMemSize = 1000
+[    5.661969] Galcore version 6.4.0.227915
+[    5.661978] Galcore options:
+[    5.661983]   irqLine           = 30
+[    5.661988]   registerMemBase   = 0xFFBC0000
+[    5.661993]   registerMemSize   = 0x00001000
+[    5.661998]   contiguousSize    = 0x00400000
+[    5.662003]   contiguousBase    = 0x0
+[    5.662008]   externalSize      = 0x00000000
+[    5.662012]   externalBase      = 0x0
+[    5.662600]   bankSize          = 0x000000/etc/init.d/S60NPU_init: line 23: can't open /sys/class/devfreq/ffbc0000.npu/max_freq: no such file
+/etc/init.d/S60NPU_init: line 23: can't create /sys/class/devfreq/ffbc0000.npu/userspace/set_freq: nonexistent directory
+FAIL
+00
+[    5.662619]   fastClear         = -1
+[    5.662625]   compression       = 15
+[    5.662629]   powerManagement   = 1
+[    5.662634]   baseAddress       = 0x00000000
+[    5.662639]   physSize          = 0x00000000
+[    5.662644]   recovery          = 1
+[    5.662649]   stuckDump         = 0
+[    5.662653]   gpuProfiler       = 1
+[    5.662658]   userClusterMask   = 0x0
+[    5.662663]   smallBatch        = 1
+[    5.662667]   irqs              = 30, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+[    5.662694]   registerBases     = 0xFFBC0000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
+[    5.662723]   registerSizes     = 0x00001000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
+[    5.662751]   chipIDs           = 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 
+[    5.662780]   core 0 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662791]   core 1 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662808]   core 2 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662819]   core 3 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662830]   core 4 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662841]   core 5 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662852]   core 6 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662863]   core 7 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662874]   core 8 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662885]   core 9 internal sRAMBases = 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 
+[    5.662896]   External sRAMBases = 0xfec10000, 0xffffffffffffffff, 
+[    5.662906] Build options:
+[    5.662911]   gcdGPU_TIMEOUT    = 20000
+[    5.662916]   gcdGPU_2D_TIMEOUT = 4000
+[    5.662921]   gcdINTERRUPT_STATISTIC = 1
+[    5.666163] galcore ffbc0000.npu: Term npu devfreq
+[    5.666277] galcore: probe of ffbc0000.npu failed with error -22
+load wifi modules: [    5.778227] android_work: did not send uevent (0 0           (null))
+/etc/init.d/S66load_wifi_modules: line 45: rk_wifi_init: not found
+FAIL
+[    5.833290] dhd_module_init: in Dongle Host Driver, version 1.579.77.41.10 (r)
+[    5.833358] ======== dhd_wlan_init_plat_data ========
+[    5.833564] [WLAN_RFKILL]: rockchip_wifi_get_oob_irq: Enter
+[    5.833778] dhd_wlan_init_gpio: WL_HOST_WAKE=-1, oob_irq=186, oob_irq_flags=0x414
+[    5.833986] dhd_wlan_init_gpio: WL_REG_ON=-1
+[    5.834399] dhd_wifi_platform_load: Enter
+[    5.834618] Power-up adapter 'DHD generic adapter'
+[    5.836466] wifi_platform_set_power = 1
+[    5.836658] ======== PULL WL_REG_ON(-1) HIGH! ========
+[    5.836871] [WLAN_RFKILL]: rockchip_wifi_power: 1
+[    5.837505] [WLAN_RFKILL]: wifi turn on power. -1
+wl: wl driver adapter not found
+Starting dnsmasq: OK
+Starting pppd: [    5.926900] android_work: sent uevent USB_STATE=CONNECTED
+[    5.927610] configfs-gadget gadget: super-speed config #1: b
+[    5.928267] android_work: sent uevent USB_STATE=CONFIGURED
+Starting input-event-daemon: input-event-daemon: Start parsing /etc/input-event-daemon.conf...
+input-event-daemon: Adding device: /dev/input/event0...
+input-event-daemon: Adding device: /dev/input/event1...
+input-event-daemon: Adding device: /dev/input/event2...
+input-event-daemon: Start listening on 3 devices...
+done
+[root@rk1808:/]# [    6.177109] wifi_platform_bus_enumerate device present 1
+[    6.177135] ======== Card detection to detect SDIO card! ========
+[    6.177142] mmc0:mmc host rescan start!
+ 7 Aug 02:09:17 ntpd[549]: Deleting interface #3 eth0, 192.168.168.168#123, interface stats: received=0, sent=0, dropped=0, active_time=3 secs
+start rknn server, version:1.3.1 (6ebb4d7 build: 2020-01-02 09:37:58)
+I NPUTransfer: Starting NPU Transfer Server, Transfer version 1.9.8 (40e4a8a@2020-01-02T09:16:20)
+[    8.177120] failed to power up DHD generic adapter, 1 retry left
+[    8.193207] wifi_platform_set_power = 0
+[    8.193233] ======== PULL WL_REG_ON(-1) LOW! ========
+[    8.193241] [WLAN_RFKILL]: rockchip_wifi_power: 0
+[    8.193257] [WLAN_RFKILL]: wifi shut off power.
+[    8.193263] wifi_platform_bus_enumerate device present 0
+[    8.193269] ======== Card detection to remove SDIO card! ========
+[    8.193275] mmc0:mmc host rescan start!
+[    8.194629] dummy_sdmmc: probe of mmc0:0001:1 failed with error -110
+[    8.194946] dummy_sdmmc: probe of mmc0:0001:2 failed with error -110
+[    8.195123] wifi_platform_set_power = 1
+[    8.195137] ======== PULL WL_REG_ON(-1) HIGH! ========
+[    8.195144] [WLAN_RFKILL]: rockchip_wifi_power: 1
+[    8.195151] [WLAN_RFKILL]: wifi turn on power. -1
+[    8.235373] rk_gmac-dwmac ffdd0000.ethernet eth0: Link is Up - 100Mbps/Full - flow control rx/tx
+[    8.511084] wifi_platform_bus_enumerate device present 1
+[    8.511111] ======== Card detection to detect SDIO card! ========
+[    8.511119] mmc0:mmc host rescan start!
+ 7 Aug 02:09:20 ntpd[549]: Listen normally on 6 eth0 192.168.168.168:123
+ 7 Aug 02:09:20 ntpd[549]: bind(24) AF_INET6 fe80::5ac8:c1fb:17aa:b9b4%2#123 flags 0x11 failed: Cannot assign requested address
+ 7 Aug 02:09:20 ntpd[549]: unable to create socket on eth0 (7) for fe80::5ac8:c1fb:17aa:b9b4%2#123
+ 7 Aug 02:09:20 ntpd[549]: failed to init interface for address fe80::5ac8:c1fb:17aa:b9b4%2
+[   10.511312] failed to power up DHD generic adapter, 0 retry left
+[   10.527422] wifi_platform_set_power = 0
+[   10.527444] ======== PULL WL_REG_ON(-1) LOW! ========
+[   10.527451] [WLAN_RFKILL]: rockchip_wifi_power: 0
+[   10.527466] [WLAN_RFKILL]: wifi shut off power.
+[   10.527472] wifi_platform_bus_enumerate device present 0
+[   10.527478] ======== Card detection to remove SDIO card! ========
+[   10.527484] mmc0:mmc host rescan start!
+[   10.527489] failed to power up DHD generic adapter, max retry reached**
+[   10.527520] unregister wifi platform drivers
+[   10.527527] wifi_platform_bus_enumerate device present 0
+[   10.527531] ======== Card detection to remove SDIO card! ========
+[   10.527537] mmc0:mmc host rescan start!
+[   10.527542] ======== dhd_wlan_deinit_plat_data ========
+[   10.527549] dhd_module_init: Failed to load the driver, try cnt 0
+[   10.527591] dhd_module_init: Failed to load driver max retry reached**
+[   10.527596] dhd_module_init: Exit err=-19
+ 7 Aug 02:09:22 ntpd[549]: Listen normally on 8 eth0 [fe80::5ac8:c1fb:17aa:b9b4%2]:123
+ 7 Aug 02:09:26 ntpd[549]: Listen normally on 9 eth0 192.168.17.104:123
+
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]#  7 Aug 02:09:37 ntpd[549]: ntpd: time set +0.557549 s
+ntpd: time set +0.557549s
+
+[root@rk1808:/]# QLauncher start "qcamera"
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x3da06190,ctx->rgaFd=5 
+Rga built version:version:+2017-09-28 10:12:42 
+"rkisp1_mainpath"
+"rkisp1_selfpath"
+"rkisp1_rawpath"
+Failed to load client buffer integration: wayland
+
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x3ce9e820,ctx->rgaFd=6 
+Rga built version:version:+2017-09-28 10:12:42 
+mpi: mpp version: Without VCS info
+mpp_rt: NOT found ion allocator
+mpp_rt: found drm allocator
+[   29.242499] rk_vcodec: vpu_service_ioctl:2138: error: unknown vpu service ioctl cmd 40086c01
+[   29.294411] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294520] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294564] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294596] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294625] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294705] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294756] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294786] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294813] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294842] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+[H[2J[   29.294870] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294897] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294934] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.294961] rkisp1: rkisp_enum_frameintervals Not active sensor
+mpi: mpp version: Without VCS info
+xkbcommon: ERROR: couldn't find a Compose file for locale "zh_CN.utf8"
+Using the 'xdg-shell-v6' shell integration
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+Unable to query the parameter info: "Invalid argument"
+[   29.662349] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.662903] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663822] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.663999] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.664709] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665429] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.665586] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.666785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.667425] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# [ 2145.239368] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239470] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239521] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239552] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239579] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239607] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239635] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239671] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239699] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239728] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239756] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239784] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.244314] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[ 2145.244348] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[ 2145.244356] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]# 
+[root@rk1808:/]# 
+[root@rk1808:/]# [H[2J[   29.668480] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.668654] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.669488] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670465] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.670597] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   29.873021] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   29.873096] rockchip-mipi-dphy-rx: No link between dphy and sCameraBin error: "Failed to allocate required memory."
+ensor
+[   29.873104] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [  106.265659] adbd (7031): /proc/7031/oom_adj is deprecated, please use /proc/7031/oom_score_adj instead.
+[  129.049618] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.050693] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051694] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051845] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.051987] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052283] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052504] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052721] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.052929] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053662] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053785] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.053965] rkisp1: rkisp_enum_frameintervals Not active sensor
+[  129.060988] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061355] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[  129.061553] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# [ 2145.239368] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239470] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239521] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239552] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239579] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239607] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239635] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239671] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239699] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239728] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239756] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.239784] rkisp1: rkisp_enum_frameintervals Not active sensor
+[ 2145.244314] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[ 2145.244348] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[ 2145.244356] rkisp1: update sensor info failed -19
+
+[root@rk1808:/]#
+[root@rk1808:/]#
+[root@rk1808:/]# cat [K[K[K[Kca tt[K[K[Kt t2
+cat: t2: No such file or directory
+[root@rk1808:/]# [7mReally quit and kill all your windows [y/n][27m[K[root@rk1808:/]#                                                                                                             [54;18H[?1l>[54;1H
+[?1049l[23;0;0t[screen is terminating]
+exit
+
+Script done on 2020-08-06 21:18:28-0700

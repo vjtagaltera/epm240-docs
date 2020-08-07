@@ -1,0 +1,225 @@
+
+
+link pointed to by @loic on tb-96aiot forum:
+http://opensource.rock-chips.com/wiki_Camera_driver
+
+/rockchip_test/camera # cat /sys/class/video4linux/video*/name
+rkisp1_mainpath
+rkisp1_selfpath
+rkisp1_rawpath
+rkisp1_dmapath
+rkisp1-statistics
+rkisp1-input-params
+/rockchip_test/camera # 
+/rockchip_test/camera # ls /dev/video*
+/dev/video0  /dev/video1  /dev/video2  /dev/video3  /dev/video4  /dev/video5
+
+
+
+search  media-ctl unable to parse link: invalid argument
+https://stackoverflow.com/questions/56145237/media-ctl-ipu-binding-unable-to-setup-link
+
+
+
+/rockchip_test # cd camera/
+/rockchip_test/camera # ls
+camera_rkisp_test.sh  camera_stresstest.sh  camera_test.sh  camera_usb_test.sh
+/rockchip_test/camera # cat camera_rkisp_test.sh 
+#!/bin/bash
+#export GST_DEBUG=*:5
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/gstreamer-1.0
+export XDG_RUNTIME_DIR=/tnp/.xdg
+gst-launch-1.0 v4l2src device=/dev/video1 ! video/x-raw,format=NV12,width=640,height=480, framerate=30/1 ! waylandsink
+#gst-launch-1.0 v4l2src device=/dev/video1 ! video/x-raw, format=NV12, width=640, height=480, framerate=30/1 ! kmssink
+
+
+/rockchip_test/camera # gst-launch-1.0 v4l2src device=/dev/video1 ! fakesink
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x5ae7820,ctx->rgaFd=6 
+Rga built version:version:+2017-09-28 10:12:42 
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x2c60dfe0,ctx->rgaFd=3 
+Rga built version:version:+2017-09-28 10:12:42 
+Setting pipeline to PAUSED ...
+Pipeline is live and does not need PREROLL ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+ERROR: from element /GstPipeline:pipeline0/GstV4l2Src:v4l2src0: Failed to allocate required memory.
+Additional debug info:
+gstv4l2src.c(658): gst_v4l2src_decide_allocation (): /GstPipeline:pipeline0/GstV4l2Src:v4l2src0:
+Buffer pool activation failed
+Execution ended after 0:00:00.009077250
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+Setting pipeline to NULL ...
+Freeing pipeline ...
+
+
+search  gstv4l2src.c(658): gst_v4l2src_decide_allocation (): /GstPipeline:pipeline0/GstV4l2Src:v4l2src0:Buffer pool activation failed
+https://forums.xilinx.com/t5/Video-and-Audio/v4l2src0-Failed-to-allocate-required-memory-when-streaming-two/td-p/1021607
+
+- Set suitable cma value on Linux kernl argument.
+
+- Describe reserved memory area and size on VCU and memory section in device tree blob file.
+
+
+
+search  set cma on kernel
+https://community.nxp.com/thread/525972
+where to configure cma memory
+
+https://community.nxp.com/thread/523951
+          /* global autoconfigured region for contiguous allocations */
+          linux,cma {
+               compatible = "shared-dma-pool";
+               reusable;
+               size = <0 0x28000000>;
+               alloc-ranges = <0 0x40000000 0 0x60000000>;
+               linux,cma-default;
+          };
+
+
+
+~/rkbuildroot/linux/kernel/arch/arm64/boot/dts/rockchip$ ls -l *rk1808*
+-rw-r--r-- 1 tuser1 tuser1   4320 Jul 12 08:30 rk1808-compute.dtsi
+-rw-r--r-- 1 tuser1 tuser1    536 Jul 12 08:30 rk1808-compute-stick-emmc.dts
+-rw-r--r-- 1 tuser1 tuser1    395 Jul 12 08:30 rk1808-compute-v10.dts
+-rw-r--r-- 1 tuser1 tuser1   8827 Jul 12 08:30 rk1808-dram-default-timing.dtsi
+-rw-r--r-- 1 tuser1 tuser1  74341 Jul 12 08:30 rk1808.dtsi
+-rwxr-xr-x 1 tuser1 tuser1  16620 Jul 12 08:30 rk1808-evb.dtsi
+-rw-r--r-- 1 tuser1 tuser1 100449 Jul 12 08:45 rk1808-evb-v10.dtb
+-rwxr-xr-x 1 tuser1 tuser1  13738 Jul 12 08:30 rk1808-evb-v10.dts
+-rw-r--r-- 1 tuser1 tuser1   5265 Jul 12 08:30 rk1808-evb-x4.dts
+-rw-r--r-- 1 tuser1 tuser1   4750 Jul 12 08:30 rk1808-evb-x4-second.dts
+-rw-r--r-- 1 tuser1 tuser1   1300 Jul 12 08:30 rk1808-fpga.dts
+-rw-r--r-- 1 tuser1 tuser1    920 Jul 12 08:30 rk1808k.dtsi
+-rw-r--r-- 1 tuser1 tuser1   9056 Jul 12 08:30 rk3399-sapphire-excavator-linux-for-rk1808-cascade.dts
+
+
+~/rkbuildroot/linux/kernel/arch/arm64/boot/dts/rockchip$ diff -u backup-original/rk1808-evb.dtsi rk1808-evb.dtsi 
+--- backup-original/rk1808-evb.dtsi	2020-07-12 08:30:42.785671961 -0700
++++ rk1808-evb.dtsi	2020-08-06 18:08:09.980558042 -0700
+@@ -120,6 +120,15 @@
+ 		ramoops_mem: region@110000 {
+ 			reg = <0x0 0x110000 0x0 0xf0000>;
+ 		};
++
++                /* global autoconfigured region for contiguous allocations */
++                linux,cma {
++                     compatible = "shared-dma-pool";
++                     reusable;
++                     size = <0 0x4000000>;
++                     alloc-ranges = <0 0x40000000 0 0x60000000>;
++                     linux,cma-default;
++                };
+ 	};
+ 
+ 	ramoops: ramoops {
+
+
+~/rkbuildroot/linux/kernel$ adb push boot.img /userdata
+boot.img: 1 file pushed. 8.8 MB/s (9869312 bytes in 1.067s)
+
+~/rkbuildroot/linux/kernel$ adb shell 
+/ # cd /userdata
+/userdata # ls -l
+total 9696
+drwxr-xr-x 2 root root    1024 Jul 22 23:03 bin
+drwxr-xr-x 2 root root    1024 Jul 27 20:00 blued
+-rw-rw-rw- 1 root root 9869312 Aug  7 01:09 boot.img
+drwxrwxrwx 2 root root    1024 Aug  7 00:30 camtrial
+drwxr-xr-x 2 root root    1024 Jul 23 21:15 cfg
+drwxrwxrwx 3 root root    1024 Jul 25 00:41 devios
+drwxr-xr-x 3 root root    1024 Jul 25 02:36 logs
+drwx------ 2 root root   12288 Jul 22 23:03 lost+found
+drwxr-xr-x 2 root root    1024 Jul 22 23:03 recovery
+
+/userdata # ls -l /dev/mmc*
+brw-rw---- 1 root disk 179,  0 Aug  7 00:01 /dev/mmcblk2
+brw-rw---- 1 root disk 179, 32 Aug  7 00:01 /dev/mmcblk2boot0
+brw-rw---- 1 root disk 179, 64 Aug  7 00:01 /dev/mmcblk2boot1
+brw-rw---- 1 root disk 179,  1 Aug  7 00:01 /dev/mmcblk2p1
+brw-rw---- 1 root disk 179,  2 Aug  7 00:01 /dev/mmcblk2p2
+brw-rw---- 1 root disk 179,  3 Aug  7 00:01 /dev/mmcblk2p3
+brw-rw---- 1 root disk 179,  4 Aug  7 00:01 /dev/mmcblk2p4
+brw-rw---- 1 root disk 179,  5 Aug  7 00:01 /dev/mmcblk2p5
+brw-rw---- 1 root disk 179,  6 Aug  7 00:01 /dev/mmcblk2p6
+brw-rw---- 1 root disk 179,  7 Aug  7 00:01 /dev/mmcblk2p7
+brw-rw---- 1 root disk 179,  8 Aug  7 00:01 /dev/mmcblk2p8
+brw-rw---- 1 root disk 179,  9 Aug  7 00:01 /dev/mmcblk2p9
+brw-rw---- 1 root disk 179, 96 Aug  7 00:01 /dev/mmcblk2rpmb
+
+/userdata # dd if=boot.img of=/dev/mmcblk2p4
+19276+0 records in
+19276+0 records out
+9869312 bytes (9.9 MB, 9.4 MiB) copied, 1.08367 s, 9.1 MB/s
+
+
+
+/ # gst-launch-1.0 v4l2src device=/dev/video1 ! fakesink
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x2bbdf820,ctx->rgaFd=6 
+Rga built version:version:+2017-09-28 10:12:42 
+librga:RGA_GET_VERSION:4.00,4.000000 
+ctx=0x42d50e0,ctx->rgaFd=3 
+Rga built version:version:+2017-09-28 10:12:42 
+Setting pipeline to PAUSED ...
+Pipeline is live and does not need PREROLL ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+ERROR: from element /GstPipeline:pipeline0/GstV4l2Src:v4l2src0: Failed to allocate required memory.
+Additional debug info:
+gstv4l2src.c(658): gst_v4l2src_decide_allocation (): /GstPipeline:pipeline0/GstV4l2Src:v4l2src0:
+Buffer pool activation failed
+Execution ended after 0:00:00.008654042
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+Setting pipeline to NULL ...
+Freeing pipeline ...
+
+
+console: 
+[   63.625772] rkisp1: rkisp_enum_frameintervals Not active sensor
+....<10 more errors as above line>
+[   63.626421] rkisp1: rkisp_enum_frameintervals Not active sensor
+[   63.631853] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   63.631886] rockchip-mipi-dphy-rx: No link between dphy and sensor
+[   63.631893] rkisp1: update sensor info failed -19
+
+
+
+~/rkbuildroot/linux/kernel$ diff -u conf-1-jul12 conf-2-pre-cma 
+--- conf-1-jul12	2020-08-06 17:53:22.664782783 -0700
++++ conf-2-pre-cma	2020-08-06 18:46:34.690197427 -0700
+@@ -4293,3 +4293,9 @@
+ CONFIG_LIBFDT=y
+ # CONFIG_SG_SPLIT is not set
+ CONFIG_ARCH_HAS_SG_CHAIN=y
++
++CONFIG_CMA=y
++CONFIG_CMA_DEBUG=y
++CONFIG_CMA_SIZE_MBYTES=64
++
++
+
+
+~/rkbuildroot/linux/kernel$ scripts/diffconfig conf-2-pre-cma conf-2-post-oldconfig 
++CMA_ALIGNMENT 8
++CMA_AREAS 7
++CMA_DEBUGFS n
++CMA_SIZE_SEL_MAX n
++CMA_SIZE_SEL_MBYTES y
++CMA_SIZE_SEL_MIN n
++CMA_SIZE_SEL_PERCENTAGE n
++DMA_CMA y
++MEMORY_ISOLATION y
++MIGRATION y
+
+
+
+search  media-ctl enable sensor
+https://discuss.96boards.org/t/how-to-configure-rkisp-and-camera-sensor/8742/6
+https://dl.vamrs.com/products/rock960/docs/sw/Rockchip%C2%A0Linux%20Camera%C2%A0Developer%20Guide%20V1.1.pdf
+
+
+
