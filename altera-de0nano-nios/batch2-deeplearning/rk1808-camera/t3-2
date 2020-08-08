@@ -1,0 +1,9 @@
+
+## sensor source pad format
+media-ctl --set-v4l2 '"m00_b_imx327 2-001a":0[fmt:SRGGB12/800x600]'
+
+# Set link(Assume there are two sensors in one mipi-phy)
+## Enable sensor1
+media-ctl -l '"m00_b_imx327 2-001a":0->"rockchip-mipi-dphy-rx":0[1]'
+
+

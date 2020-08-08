@@ -1,0 +1,24 @@
+
+# Set pad formats
+## rkisp1 source pad : format\selection
+echo; echo cmd 1; 
+media-ctl --set-v4l2 '"rkisp1-isp-subdev":2[fmt:YUYV2X8/1920x1080]'
+rc1=$?
+
+echo; echo cmd 2; 
+media-ctl --set-v4l2 '"rkisp1-isp-subdev":2[fmt:YUYV2X8/1920x1080]' --set-v4l2 '"rkisp1-isp-subdev":0[crop:(0,0)/1920x1080]'
+rc2=$?
+
+## rkisp1 sink pad : format\selection
+echo; echo cmd 3; 
+media-ctl --set-v4l2 '"rkisp1-isp-subdev":0[fmt:SRGGB12/1920x1080]'
+rc3=$?
+
+echo; echo cmd 4; 
+media-ctl --set-v4l2 '"rkisp1-isp-subdev":0[fmt:SBGGR12/1920x1080]' --set-v4l2 '"rkisp1-isp-subdev":0[crop:(0,0)/1920x1080]'
+rc4=$?
+
+
+echo rcs: $rc1 $rc2 $rc3 $rc4
+
+

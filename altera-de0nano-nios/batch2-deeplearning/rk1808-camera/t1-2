@@ -1,0 +1,22 @@
+
+echo; echo cmd 1; 
+media-ctl -l '"rockchip-mipi-dphy-rx":1->"rkisp1-isp-subdev":0[1]'
+if [ $? -ne 0 ]; then echo error with rc; fi
+
+echo; echo cmd 2; 
+media-ctl -l '"rkisp1-input-params":0->"rkisp1-isp-subdev":1[1]'
+if [ $? -ne 0 ]; then echo error with rc; fi
+
+echo; echo cmd 3; 
+media-ctl -l '"rkisp1-isp-subdev":2->"rkisp1_selfpath":0[1]'
+if [ $? -ne 0 ]; then echo error with rc; fi
+
+echo; echo cmd 4; 
+media-ctl -l '"rkisp1-isp-subdev":2->"rkisp1_mainpath":0[1]'
+if [ $? -ne 0 ]; then echo error with rc; fi
+
+echo; echo cmd 5; 
+media-ctl -l '"rkisp1-isp-subdev":3->"rkisp1-statistics":0[1]'
+if [ $? -ne 0 ]; then echo error with rc; fi
+
+
