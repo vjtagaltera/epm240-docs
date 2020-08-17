@@ -1,0 +1,16 @@
+
+
+open stm32cubemx
+
+  Go to "board selector" and set "type of board" to nucleo-32. Find the nucleo-l432kc board. 
+  Click activate...
+  Open the configuration tab and click on TIM1. Set prescaler to 10, counter-peroid to 200, 
+        and the internal-clock-division to division-by-2. 
+  Go to core nvic settings, and set TIM1 capture compare interrupt to "enabled". 
+  Go to project settings. Change the "Toolchain/IDE" to "othertoolchain". 
+  Go to "code-generator-settings" and change the "firmware library package" to "copy only the necessary library files.
+  Generate code. 
+
+  It downloads stm32cube_f2_l4_v1160.zip because it does not exist yet.
+
+

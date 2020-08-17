@@ -1,0 +1,60 @@
+
+search stm32 l432kc eclipse 
+
+
+https://www.digikey.com/eewiki/display/microcontroller/Getting+Started+with+the+STM32L432+Nucleo-32+using+Eclipse+and+the+GNU+ARM+Toolchain
+
+
+  [1] download toolchain from https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
+      https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-win32.exe
+      install, keep "show readme" and "add registry information", but uncheck "launch gccvar.bat" and 
+              "add path to environment variable"
+      the gcc version is 9.3.1
+
+      ref: https://gnu-mcu-eclipse.github.io/toolchain/arm/install/
+
+  [2] install build tools from https://gnu-mcu-eclipse.github.io/windows-build-tools/install/
+      https://github.com/xpack-dev-tools/windows-build-tools-xpack/releases/download/v2.12.2/xpack-windows-build-tools-2.12.2-win32-x64.zip
+      Unpack the archive and copy it into the %userprofile%\AppData\Roaming\GNU MCU Eclipse 
+              (for example C:\Users\ilg\AppData\Roaming\GNU MCU Eclipse) folder.
+
+      ref: https://gnu-mcu-eclipse.github.io/windows-build-tools/install/
+
+  [3] install debug tool segger j-link or openocd
+      download jlink and install.
+      already had 6.80a
+
+      ref: https://gnu-mcu-eclipse.github.io/debug/jlink/install/
+
+  [4] install st-link/v2 usb driver from http://www.st.com/en/embedded-software/stsw-link009.html
+      download the zip, extract, and run the .bat file per the readme file. 
+      this is required for either j-link or openocd
+
+      ref: https://gnu-mcu-eclipse.github.io/openocd/install/
+
+  [5] install st-link to j-link converter https://www.segger.com/products/debug-probes/j-link/models/other-j-links/st-link-on-board/
+      download, and run. the led near usb cable shall change from red to green after the conversion. 
+
+  [6] install java jdk se from http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+      ref: https://gnu-mcu-eclipse.github.io/plugins/install/
+      
+  [7] install eclipse from https://github.com/gnu-mcu-eclipse/org.eclipse.epp.packages/releases/
+      download and extract: https://github.com/gnu-mcu-eclipse/org.eclipse.epp.packages/releases/download/v4.7.2-20200127-2019-12/20200127-1311-gnumcueclipse-4.7.2-2019-12-R-win32.win32.x86_64.zip
+
+  [8] install eclipse plugins
+      launch eclipse, go to help>>eclipse marketplace, then type "gnu mcu eclipse" to find. 
+      install "Eclipse Embedded CDT 5.1.1" formerly "GNU MCU/ARM Eclipse". it shows installed. 
+      go to help>>install new software ... click manage ... you should see "GNU MCU Eclipse Plug-ins".  
+      on the "work with" drop-down, select this software, in the main area, expand, update all components
+
+  [9] install ST's drivers and hal code
+      search  st drivers and HAL code for the stm32l4 download
+      download from https://www.st.com/en/embedded-software/stm32cubel4.html titled STM32CubeL4
+      downloaded en.stm32cubel4_v1-15-0.zip . extract.
+      downloaded Pathc_CubeL4 en.patch_cubel4.zip . extract. 
+
+  [10] install ST CubeMX peripheral configuration tool from http://www.st.com/en/development-tools/stm32cubemx.html
+       download the zip file en.stm32cubemx_v6-0-1.zip . extract. 
+
+
