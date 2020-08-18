@@ -1,0 +1,8 @@
+
+https://github.com/solokeys/solo/issues/353
+
+if you use stlink to program, you must not connect the vin to 5v. 
+
+see pic1- to pic5- for usb, led, buttons. 
+
+
