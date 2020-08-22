@@ -1,0 +1,159 @@
+
+
+$ git remote -v
+origin  https://github.com/jrowberg/bglib (fetch)
+origin  https://github.com/jrowberg/bglib (push)
+
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+
+        modified:   Python/Examples/bglib_test_hr_collector.py
+        modified:   Python/Examples/bglib_test_scanner.py
+        modified:   Python/Examples/bled112_scanner.py
+
+
+
+$ git diff
+diff --git a/Python/Examples/bglib_test_hr_collector.py b/Python/Examples/bglib_test_hr_collector.py
+old mode 100644
+new mode 100755
+index bd76cce..f620887
+--- a/Python/Examples/bglib_test_hr_collector.py
++++ b/Python/Examples/bglib_test_hr_collector.py
+@@ -146,6 +146,11 @@ STATE_FINDING_ATTRIBUTES = 3
+ STATE_LISTENING_MEASUREMENTS = 4
+ state = STATE_STANDBY
+
++g_senders = [ ] # [ mac, mac, ... ]
++g_uuids = { } # { mac:uuid, ... }
++g_init_adv_count = 0 # adv received before init_ok
++g_init_ok = False
++
+ # handler to notify of an API parser timeout condition
+ def my_timeout(sender, args):
+     # might want to try the following lines to reset, though it probably
+@@ -180,6 +185,40 @@ def my_ble_evt_gap_scan_response(sender, args):
+                     for i in xrange((len(this_field) - 1) / 16):
+                         ad_services.append(this_field[-1 - i*16 : -17 - i*16 : -1])
+
++    if not g_init_ok:
++        global g_init_adv_count
++        g_init_adv_count += 1
++
++    ## sender bdaddr
++    sdr = args["sender"]
++    senderstr = "%02X:%02X:%02X:%02X:%02X:%02X" % (sdr[5], sdr[4], sdr[3],
++                                                   sdr[2], sdr[1], sdr[0] )
++    ## keep sender bdaddr
++    if not senderstr in g_senders and g_init_ok:
++        g_senders.append(senderstr)
++        print(" len %d sender %s" % (len(g_senders), senderstr))
++
++    for i,s in enumerate(ad_services):
++        sz = len(s)
++        if sz != 2 and sz != 4 and sz != 16:
++            print("  Error: uuid size not 2, 4, or 16")
++        uuid_prt = ""
++        for idx,v in enumerate(s):
++            if idx == 4 or idx == 6 or idx == 8 or idx == 10:
++                uuid_prt += "-"
++            uuid_prt += "%02X" % v
++        older = g_uuids.get(senderstr, "")
++        if older != uuid_prt:
++            if g_init_ok:
++                g_uuids[senderstr] = uuid_prt
++                print("  %s %d adv %s service %s" % (" " * 32, i+1, senderstr, uuid_prt))
++            else:
++                print("  %s %d adv %s service %s dropped %d" % (
++                        " " * 32, i+1, senderstr, uuid_prt, g_init_adv_count))
++
++    if not g_init_ok:
++        return
++
+     # check for 0x180A (official heart rate service UUID)
+     if uuid_hr_service in ad_services:
+         if not args['sender'] in peripheral_list:
+@@ -334,6 +373,8 @@ def main():
+
+     # start scanning now
+     print "Scanning for BLE peripherals..."
++    global g_init_ok
++    g_init_ok = True
+     ble.send_command(ser, ble.ble_cmd_gap_discover(1))
+     ble.check_activity(ser, 1)
+
+diff --git a/Python/Examples/bglib_test_scanner.py b/Python/Examples/bglib_test_scanner.py
+old mode 100644
+new mode 100755
+index aadb0f7..669da88
+--- a/Python/Examples/bglib_test_scanner.py
++++ b/Python/Examples/bglib_test_scanner.py
+@@ -67,8 +67,8 @@ def my_ble_evt_gap_scan_response(sender, args):
+
+ def main():
+     # NOTE: CHANGE THESE TO FIT YOUR TEST SYSTEM
+-    port_name = "com5"
+-    baud_rate = 38400
++    port_name = "com4" #"com5"
++    baud_rate = 115200 #38400
+     packet_mode = True
+
+     # create BGLib object
+@@ -98,6 +98,10 @@ def main():
+     ble.send_command(ser, ble.ble_cmd_gap_end_procedure())
+     ble.check_activity(ser, 1)
+
++    # get system address
++    ble.send_command(ser, ble.ble_cmd_system_address_get())
++    ble.check_activity(ser, 1)
++
+     # set scan parameters
+     ble.send_command(ser, ble.ble_cmd_gap_set_scan_parameters(0xC8, 0xC8, 1))
+     ble.check_activity(ser, 1)
+diff --git a/Python/Examples/bled112_scanner.py b/Python/Examples/bled112_scanner.py
+index 8da2b03..000c827 100755
+--- a/Python/Examples/bled112_scanner.py
++++ b/Python/Examples/bled112_scanner.py
+@@ -342,6 +342,9 @@ def ble_cmd_gap_discover(p, mode):
+ # define basic BGAPI parser
+ bgapi_rx_buffer = []
+ bgapi_rx_expected_length = 0
++avg_pwr, avg_tm0, avg_count = 0.0, 0.0, 0
++avg_min, avg_max = 0, 0
++avg_2s, avg_10s = 0.0, 0.0
+ def bgapi_parse(b):
+     global bgapi_rx_buffer, bgapi_rx_expected_length
+     if len(bgapi_rx_buffer) == 0 and (b == 0x00 or b == 0x80):
+@@ -442,9 +445,25 @@ def bgapi_parse(b):
+                             elif c == 'b':
+                                 disp_list.append("%d" % bond)
+                             elif c == 'd':
+-                                disp_list.append("%s" % ''.join(['%02X' % b for b in data_data]))
++                                disp_list.append("%-52s" % ''.join(['%02X' % b for b in data_data]))
++                        global avg_pwr, avg_tm0, avg_count, avg_2s, avg_10s, avg_min, avg_max
++                        avg_tm = 0.0
++                        avg_count += 1
++                        if avg_count == 1:
++                            avg_pwr, avg_tm0 = rssi, time.time()
++                            avg_min, avg_max = rssi, rssi
++                        else:
++                            avg_pwr = avg_pwr * 0.98 + rssi * 0.02
++                            avg_tm = time.time() - avg_tm0
++                            if avg_min > rssi: avg_min = rssi
++                            if avg_max < rssi: avg_max = rssi
++                            if avg_tm < 2: avg_2s = avg_pwr
++                            if avg_tm < 10: avg_10s = avg_pwr
++                        disp_list.append("%-8.2f %d %.2f  2s:%.2f 10s:%.2f  min-max:%d %d" % (
++                            avg_pwr, avg_count, avg_tm, avg_2s, avg_10s, avg_min, avg_max))
+
+                         print ' '.join(disp_list)
++                        if avg_tm > 10.1: sys.exit(0)
+
+         bgapi_rx_buffer = []
+
+
+
