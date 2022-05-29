@@ -1,0 +1,106 @@
+
+notes-links-1.txt
+2022-5-29
+
+
+search open source camera hardware
+
+  https://en.wikipedia.org/wiki/AXIOM_(camera)
+      AXIOM Micro
+
+  https://eu.axiom-camera.com/
+
+  https://www.youtube.com/watch?v=XRC4A1l4q1I
+      An Open Source, Self Hosted Home Security Camera with Raspberry Pi, Linux, and a little elbow grease
+      RaspberryZero, 
+
+    https://www.youtube.com/watch?v=kDBrOIGud0I part 2 MotionEyeOS
+
+  Youtube suggests:
+    https://www.youtube.com/watch?v=mq7n_0Xs1Kg
+        Vaultwarden - Open Source, self hosted backend for the Bitwarden password manager.
+
+
+search open ipcam
+
+
+search open source camera
+
+
+search open source camera firmware 
+
+  https://github.com/openmiko/openmiko
+      Ingenic T20 chip - Wyzecam V2 and Xiaomi Xiaofang
+    https://community.octoprint.org/t/wyze-cam-v2-and-octoprint-as-of-30nov2021/27081
+
+  https://www.reddit.com/r/opensource/comments/n1splh/openipc_opensource_linuxbased_firmware_for_ip/
+      OpneIPC -- https://openipc.org/about/
+                 https://github.com/OpenIPC/
+             -2.0  https://github.com/OpenIPC/firmware
+             -1.0  https://github.com/OpenIPC/chaos_calmer
+
+  https://iot.stackexchange.com/questions/2793/is-there-any-open-source-firmware-or-os-for-ip-camera-like-openwrt-for-routers
+      https://www.elphel.com/ -- open hardware free software
+
+
+search wyze camera open source
+
+  https://support.wyze.com/hc/en-us/articles/360012546832-Open-Source-Software
+
+  https://www.reddit.com/r/wyzecam/comments/7w4kx4/openipc_open_source_firmware_with_rtsp_for/
+    subreddit: r/openipc/ -- dead link
+    web:       openip.cam -- dead link
+    wiki:      github.com/openipcamera/openipc-firmware/wiki
+    revert firmware: https://forums.wyzecam.com/t/flashing-your-wyzecam-v2-firmware/4185
+      source: https://github.com/openipcamera/openipc-firmware
+
+    follow reddit: 
+    https://www.reddit.com/r/selfhosted/comments/gy0fj3/ip_camera_or_security_camera_software/
+    https://github.com/samtap/fang-hacks/issues/268
+        use fang-hacks to wyze firmware
+
+  https://www.libhunt.com/t/wyzecam  --dead link, info from google cache
+      top 3 wyzecam open-source peojects
+    docker-wyze-bridge mentioned on 2022-5-14 by 
+        https://www.reddit.com/r/wyzecam/comments/upnjn9/rtsp_firmware_no_longer_on_website/
+    homebridge-dafang mentioned on 2022-02-04 by 
+        https://www.reddit.com/r/HomeKit/comments/skfk76/do_any_cameras_have_the_ability_to_rotate_within/
+    wyzecam-hls
+
+  https://community.home-assistant.io/t/fully-open-source-security-camera/318967
+      wyzecam v2 and wyze pan can load dafang firmware, then to motioneye add-on on homeassistant.
+
+
+search opensource libcam
+
+  https://libcamera.org/
+
+  https://www.raspberrypi.com/news/an-open-source-camera-stack-for-raspberry-pi-using-libcamera/
+      An open source camera stack for Raspberry Pi using libcamera
+          Pi pipeline handler with Pi control algorithms
+          V4L2 driver, version 1 camera OV5647, version 2 IMX219, unicam broadcom CSI-2 receiver
+          Camera tuning tool
+
+
+search wyze v3 custom firmware
+
+  https://www.reddit.com/r/wyzecam/comments/kvg3tc/dafang_for_v3/
+      Dafang for V3
+      Dafang already supports V3
+        https://github.com/EliasKotlyar/Xiaomi-Dafang-Hacks/blob/master/hacks/install_cfw.md
+    https://github.com/EliasKotlyar/Xiaomi-Dafang-Hacks
+        https://github.com/EliasKotlyar/Xiaomi-Dafang-Hacks/issues/1802
+            this issue links to wz_mini_hacks
+
+    https://github.com/gtxaspec/wz_mini_hacks
+      https://github.com/HclX/WyzeHacks/       -- reference
+      https://github.com/mnakada/atomcam_tools -- build from source
+
+    https://github.com/HclX/WyzeHacks/issues/134 -- wyze v3 uart pins
+    https://github.com/HclX/WyzeHacks/issues/102 -- toolchain
+    https://github.com/HclX/WyzeHacks/issues/146 -- wyze v3 initial without internet possible?
+    https://github.com/gtxaspec/wz_mini_hacks/issues/38  -- internet required?
+
+  https://www.consumerreports.org/home-security-cameras/wyze-didnt-completely-fix-security-camera-flaws-for-3-years-a3726294358/
+      Wyze Didn't completely fix flaws in security cameras for 3 years
+
