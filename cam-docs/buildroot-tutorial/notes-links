@@ -1,1 +1,114 @@
 
+https://bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-tutorial/petazzoni-buildroot-tutorial.pdf
+
+
+https://bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-tutorial/src/usb-stick/
+
+    $ wget -np -r <.../usb-stick/>
+    $ mv <.../usb-stick> .
+
+    $ mv bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-tutorial/src/usb-stick .
+
+    $ tree --charset=ascii usb-stick
+    usb-stick
+    |-- ede-gpio-app
+    |   |-- ede-gpio-app.c
+    |   |-- index.html
+    |   |-- index.html@C=M;O=A
+    |   |-- index.html@C=M;O=D
+    |   |-- index.html@C=N;O=A
+    |   |-- index.html@C=N;O=D
+    |   |-- index.html@C=S;O=A
+    |   |-- index.html@C=S;O=D
+    |   `-- Makefile
+    |-- genimage.cfg
+    |-- index.html
+    |-- index.html@C=M;O=A
+    |-- index.html@C=M;O=D
+    |-- index.html@C=N;O=A
+    |-- index.html@C=N;O=D
+    |-- index.html@C=S;O=A
+    |-- index.html@C=S;O=D
+    |-- overlay
+    |   |-- etc
+    |   |   |-- index.html
+    |   |   |-- index.html@C=M;O=A
+    |   |   |-- index.html@C=M;O=D
+    |   |   |-- index.html@C=N;O=A
+    |   |   |-- index.html@C=N;O=D
+    |   |   |-- index.html@C=S;O=A
+    |   |   |-- index.html@C=S;O=D
+    |   |   |-- init.d
+    |   |   |   |-- index.html
+    |   |   |   |-- index.html@C=M;O=A
+    |   |   |   |-- index.html@C=M;O=D
+    |   |   |   |-- index.html@C=N;O=A
+    |   |   |   |-- index.html@C=N;O=D
+    |   |   |   |-- index.html@C=S;O=A
+    |   |   |   |-- index.html@C=S;O=D
+    |   |   |   `-- S30usbgadget
+    |   |   `-- network
+    |   |       |-- index.html
+    |   |       |-- index.html@C=M;O=A
+    |   |       |-- index.html@C=M;O=D
+    |   |       |-- index.html@C=N;O=A
+    |   |       |-- index.html@C=N;O=D
+    |   |       |-- index.html@C=S;O=A
+    |   |       |-- index.html@C=S;O=D
+    |   |       `-- interfaces
+    |   |-- index.html
+    |   |-- index.html@C=M;O=A
+    |   |-- index.html@C=M;O=D
+    |   |-- index.html@C=N;O=A
+    |   |-- index.html@C=N;O=D
+    |   |-- index.html@C=S;O=A
+    |   `-- index.html@C=S;O=D
+    |-- patches
+    |   |-- index.html
+    |   |-- index.html@C=M;O=A
+    |   |-- index.html@C=M;O=D
+    |   |-- index.html@C=N;O=A
+    |   |-- index.html@C=N;O=D
+    |   |-- index.html@C=S;O=A
+    |   |-- index.html@C=S;O=D
+    |   `-- linux
+    |       |-- 0001-ARM-dts-describe-the-MCP23S18-connected-on-Pocket-Be.patch
+    |       |-- index.html
+    |       |-- index.html@C=M;O=A
+    |       |-- index.html@C=M;O=D
+    |       |-- index.html@C=N;O=A
+    |       |-- index.html@C=N;O=D
+    |       |-- index.html@C=S;O=A
+    |       `-- index.html@C=S;O=D
+    |-- post-image.sh
+    `-- uEnv.txt
+
+    $ find usb-stick -name 'index.html@*' | xargs rm
+
+    $ tree --charset=ascii usb-stick/
+    usb-stick/
+    |-- ede-gpio-app
+    |   |-- ede-gpio-app.c
+    |   |-- index.html
+    |   `-- Makefile
+    |-- genimage.cfg
+    |-- index.html
+    |-- overlay
+    |   |-- etc
+    |   |   |-- index.html
+    |   |   |-- init.d
+    |   |   |   |-- index.html
+    |   |   |   `-- S30usbgadget
+    |   |   `-- network
+    |   |       |-- index.html
+    |   |       `-- interfaces
+    |   `-- index.html
+    |-- patches
+    |   |-- index.html
+    |   `-- linux
+    |       |-- 0001-ARM-dts-describe-the-MCP23S18-connected-on-Pocket-Be.patch
+    |       `-- index.html
+    |-- post-image.sh
+    `-- uEnv.txt
+
+
