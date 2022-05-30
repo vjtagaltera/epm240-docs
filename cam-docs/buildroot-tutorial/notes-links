@@ -1,12 +1,13 @@
 
+
+search buildroot tutorial
+
+
 https://bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-tutorial/petazzoni-buildroot-tutorial.pdf
 
-
-https://bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-tutorial/src/usb-stick/
+  https://bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-tutorial/src/usb-stick/
 
     $ wget -np -r <.../usb-stick/>
-    $ mv <.../usb-stick> .
-
     $ mv bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-tutorial/src/usb-stick .
 
     $ tree --charset=ascii usb-stick
@@ -110,5 +111,16 @@ https://bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-tutorial/src/u
     |       `-- index.html
     |-- post-image.sh
     `-- uEnv.txt
+
+  https://bootlin.com/pub/conferences/2019/elce/petazzoni-buildroot-whats-new/petazzoni-buildroot-whats-new.pdf
+  https://bootlin.com/pub/conferences/2019/elce/opdenacker-timing-boot-time-reduction-techniques/opdenacker-timing-boot-time-reduction-techniques.pdf
+  https://bootlin.com/pub/conferences/2019/elce/opdenacker-kernel-programming-device-model/opdenacker-kernel-programming-device-model.pdf
+  https://bootlin.com/pub/conferences/2019/elce/kocialkowski-integrating-hardware-accelerated-video-decoding-display-stack/kocialkowski-integrating-hardware-accelerated-video-decoding-display-stack.pdf
+  https://bootlin.com/pub/conferences/2019/elce/chevallier-network-classification-offload/chevallier-network-classification-offload.pdf
+  https://bootlin.com/pub/conferences/2019/elce/belloni-rtc/belloni-rtc.pdf
+
+
+https://elinux.org/images/2/2a/Using-buildroot-real-project.pdf
+
 
 
