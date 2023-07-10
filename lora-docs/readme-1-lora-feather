@@ -1,0 +1,48 @@
+
+lora-docs/readme-1-lora-feather
+2023-7-10
+
+
+search lora messenger
+https://www.instructables.com/LoRa-Messenger-for-Two-Devices-for-Distances-Up-to/
+
+search rylr896 example
+https://mschoeffler.com/2020/12/19/lora-sender-receiver-communication-with-reyax-rylr896-breakout-boards-rylr890-modules/
+
+search which lora module is simplest to use
+dfr1276: https://www.instructables.com/Make-Lora-Node-and-Lora-Gateway-by-Using-DORJI-DRF/
+rn2483
+
+digikey lorawan
+seeed technology pn 113990939 Lora-E5 with SMA connector
+seeed technology pn 113020091 Lora-E5 with antenna
+
+amazon lora 915m
+RFM95W
+RYLR689
+
+mouser lora spi
+microchip pn WLR089U0-I/RM
+microchip pn ...rn2483... for 433 868 mhz
+microchip pn RN2903A-I/RM105 915mhz uart
+
+search rfm95w tutorial
+https://www.instructables.com/Introduction-LoRa-Module-RFM95-RFM95W-Hoperf/
+
+search rn2303 example
+https://github.com/craigpeacock/RN2903-Demo
+https://www.beyondlogic.org/rn2903-using-the-lorawan-library-plug-in-for-mplab-code-configurator-and-customising-for-the-au915-frequency-plan/
+
+search rn2903 windows 10 example
+https://www.chipcad.hu/letoltes/19065_IoT4_FinalSlides.pdf
+
+digikey rfm95
+adafruit pn 3072 https://www.adafruit.com/product/3072
+adafruit feather m0 basic proto
+learn: https://learn.adafruit.com/adafruit-rfm69hcw-and-rfm96-rfm95-rfm98-lora-packet-padio-breakouts
+
+search adafruit feather m0 circuitpython
+https://learn.adafruit.com/adafruit-feather/circuitpython   list of boards
+https://www.adafruit.com/product/3403   feather m0 express
+https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython
+
